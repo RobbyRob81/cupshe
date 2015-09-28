@@ -12,6 +12,8 @@
 		050DB35F1B83F707006D05FC /* GuestCheckoutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 050DB35D1B83F707006D05FC /* GuestCheckoutViewController.m */; };
 		050DB3601B83F707006D05FC /* GuestCheckoutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 050DB35E1B83F707006D05FC /* GuestCheckoutViewController.xib */; };
 		0569EE021B7674C200EB37BF /* WholesaleModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 0569EE011B7674C200EB37BF /* WholesaleModule.m */; };
+		056D9D781BB9DF710046D0DA /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 056D9D771BB9DF710046D0DA /* Accelerate.framework */; };
+		056D9D7A1BB9DF770046D0DA /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 056D9D791BB9DF770046D0DA /* SafariServices.framework */; };
 		05988BD01B90F4C70064CBA1 /* StoreLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05988BCF1B90F4C70064CBA1 /* StoreLocationViewController.m */; };
 		05988BD21B916CB00064CBA1 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05988BD11B916CB00064CBA1 /* MapKit.framework */; };
 		05DDE1341BB5E22B0059D147 /* NewRelicAgent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05DDE1331BB5E22B0059D147 /* NewRelicAgent.framework */; };
@@ -180,6 +182,8 @@
 		050DB35E1B83F707006D05FC /* GuestCheckoutViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = GuestCheckoutViewController.xib; path = ecommerce/GuestCheckoutViewController.xib; sourceTree = SOURCE_ROOT; };
 		0569EE001B7674C200EB37BF /* WholesaleModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WholesaleModule.h; sourceTree = "<group>"; };
 		0569EE011B7674C200EB37BF /* WholesaleModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WholesaleModule.m; sourceTree = "<group>"; };
+		056D9D771BB9DF710046D0DA /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		056D9D791BB9DF770046D0DA /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
 		05988BCE1B90F4C70064CBA1 /* StoreLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreLocationViewController.h; sourceTree = "<group>"; };
 		05988BCF1B90F4C70064CBA1 /* StoreLocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreLocationViewController.m; sourceTree = "<group>"; };
 		05988BD11B916CB00064CBA1 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -486,6 +490,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				056D9D7A1BB9DF770046D0DA /* SafariServices.framework in Frameworks */,
+				056D9D781BB9DF710046D0DA /* Accelerate.framework in Frameworks */,
 				05DDE13A1BB5E2570059D147 /* libz.tbd in Frameworks */,
 				05DDE1381BB5E24F0059D147 /* libc++.tbd in Frameworks */,
 				05DDE1361BB5E2410059D147 /* CoreTelephony.framework in Frameworks */,
@@ -652,6 +658,8 @@
 		0C4B6CB819325D8D00EFBD27 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				056D9D791BB9DF770046D0DA /* SafariServices.framework */,
+				056D9D771BB9DF710046D0DA /* Accelerate.framework */,
 				05DDE1391BB5E2570059D147 /* libz.tbd */,
 				05DDE1371BB5E24F0059D147 /* libc++.tbd */,
 				05DDE1351BB5E2410059D147 /* CoreTelephony.framework */,

@@ -195,13 +195,13 @@ const int FILTER = 2;
     
     [Design product_search_bar:searchbar config:self.config];
     
-    CGRect frame = CGRectMake(0, searchbar.frame.origin.y+searchbar.frame.size.height, screenWidth, screenHeight-searchbar.frame.origin.y-searchbar.frame.size.height+200);
+    CGRect frame = CGRectMake(0, searchbar.frame.size.height-0.5, screenWidth, screenHeight-searchbar.frame.origin.y-searchbar.frame.size.height-64);
     search_display = [[UITableView alloc] initWithFrame:frame];
     search_display.separatorColor = [UIColor colorWithRed:217/255.0 green:217/255.0 blue:217/255.0 alpha:1];
     search_display.dataSource = self;
     search_display.delegate = self;
     search_display.hidden = YES;
-    [scroll addSubview:search_display];
+    [self.view addSubview:search_display];
     
     
     frame = CGRectMake(0, -0.5, self.config.screenWidth, 44);
@@ -951,6 +951,8 @@ const int FILTER = 2;
                 [filters setObject:attrd forKey:name];
             }
         }
+        
+        [search_display reloadData];
         /* NSDictionary *sd = [dic objectForKey:@"size_with_category"];
          NSMutableDictionary *size = [[NSMutableDictionary alloc] init];
          for (NSString *key in [sd allKeys]){
@@ -1299,12 +1301,13 @@ const int FILTER = 2;
     search_display.hidden = YES;
     titlelabel.text = [NSString stringWithFormat:@"\"%@\"", str];
     [searchbar resignFirstResponder];
-    search_display.hidden = YES;
+    //scroll.scrollEnabled = YES;
 }
 
 -(void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar{
     [searchbar setShowsCancelButton:YES animated:YES];
     search_display.hidden = NO;
+    //scroll.scrollEnabled = NO;
 }
 
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
@@ -1319,7 +1322,7 @@ const int FILTER = 2;
     [searchbar setShowsCancelButton:NO animated:YES];
     search_display.hidden = YES;
     titlelabel.text = [NSString stringWithFormat:@"\"%@\"", self.searchTerm];
-    
+    //scroll.scrollEnabled = YES;
     //  }
     
     
@@ -1332,6 +1335,7 @@ const int FILTER = 2;
     searchbar.text = @"";
     search_display.hidden = YES;
     [searchbar setShowsCancelButton:NO animated:YES];
+    //scroll.scrollEnabled = YES;
 }
 
 -(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
