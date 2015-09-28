@@ -246,7 +246,7 @@ const int FILTER = 2;
     
     indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     indicator.hidesWhenStopped = YES;
-    indicator.frame = CGRectMake(self.config.screenWidth/2, (self.config.screenHeight-64)/2-indicator.frame.size.height/2, indicator.frame.size.width, indicator.frame.size.height);
+    indicator.frame = CGRectMake(self.config.screenWidth/2-indicator.frame.size.width/2, (self.config.screenHeight-64)/2-indicator.frame.size.height/2, indicator.frame.size.width, indicator.frame.size.height);
     //[loadingView addSubview:indicator];
     [scroll addSubview:indicator];
     
@@ -781,6 +781,9 @@ const int FILTER = 2;
             
             [Config getCachedImage:[v.url absoluteString] toImageView:v trim:YES sizeMultiplyer:1 completion:^(UIImage *image) {
                 if (image == nil) [uncached addObject:v];
+                else {
+                    [v.indicator stopAnimating];
+                }
                 count++;
                 if (count == array.count){
                     
