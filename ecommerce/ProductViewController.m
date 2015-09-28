@@ -625,10 +625,12 @@ const int FILTER = 2;
         if (last.origin.y+last.size.height <= screenHeight){
             indicator.frame = CGRectMake(self.config.screenWidth/2-indicator.frame.size.width/2, last.origin.y+last.size.height+15, indicator.frame.size.width, indicator.frame.size.height);
             [scroll setContentSize:CGSizeMake(screenWidth, screenHeight)];
-        } else {
+        } else if (hasmore == 1) {
             indicator.frame = CGRectMake(self.config.screenWidth/2-indicator.frame.size.width/2, last.origin.y+last.size.height+15, indicator.frame.size.width, indicator.frame.size.height);
             
-            [scroll setContentSize:CGSizeMake(screenWidth, last.origin.y+last.size.height+30)];
+            [scroll setContentSize:CGSizeMake(screenWidth, last.origin.y+last.size.height+50)];
+        } else {
+            [scroll setContentSize:CGSizeMake(screenWidth, last.origin.y+last.size.height)];
         }
     }
     // dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
@@ -1166,8 +1168,10 @@ const int FILTER = 2;
         //[scroll setContentSize:CGSizeMake(320, (120.0 * 1.255+20)*(line+1)+49)];
         if (last.origin.y+last.size.height <= screenHeight){
             [scroll setContentSize:CGSizeMake(screenWidth, screenHeight)];
-        } else {
+        } else if (hasmore == 1) {
             indicator.frame = CGRectMake(self.config.screenWidth/2-indicator.frame.size.width/2, last.origin.y+last.size.height+15, indicator.frame.size.width, indicator.frame.size.height);
+            [scroll setContentSize:CGSizeMake(screenWidth, last.origin.y+last.size.height+50)];
+        } else {
             [scroll setContentSize:CGSizeMake(screenWidth, last.origin.y+last.size.height)];
         }
     }
