@@ -1281,6 +1281,10 @@ const int FILTER = 2;
     cell.textLabel.text = str;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
+    
+    if (indexPath.row == searchResult.count - 1){
+        tableView.contentSize = CGSizeMake(tableView.contentSize.width, tableView.contentSize.height+300);
+    }
     return cell;
     
     
