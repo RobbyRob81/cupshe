@@ -1,0 +1,478 @@
+//
+//  BillingAddressViewController.m
+//  Vanessa Gade
+//
+//  Created by Hanqing Hu on 10/2/14.
+//  Copyright (c) 2014 Twixxies. All rights reserved.
+//
+
+#import "BillingAddressViewController.h"
+#import "IonIcons.h"
+#import "ionicons-codes.h"
+#import "Design.h"
+#import "NSURLConnectionWithTag.h"
+#import "AddressInfoTableViewCell.h"
+@interface BillingAddressViewController ()
+
+@end
+
+@implementation BillingAddressViewController
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Custom initialization
+    }
+    return self;
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 140, 44)] ;
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont boldSystemFontOfSize:17.3];
+    
+    label.textAlignment = NSTextAlignmentCenter;
+    // ^-Use UITextAlignmentCenter for older SDKs.
+    label.textColor = [UIColor colorWithRed:0.302 green:0.302 blue:0.318 alpha:1]; // change this color
+    self.navigationItem.titleView = label;
+    label.text = [self.config localisedString:@"Billing Info"];
+    //[label sizeToFit];
+    [Design navigationbar_title:label config:self.config];
+    // Do any additional setup after loading the view from its nib.
+    states = [NSArray arrayWithObjects: [self.config localisedString:@"Non U.S. (Please type)"],@"Alabama", @"Alaska", @"Arizona", @"Arkansas", @"California", @"Colorado", @"Connecticut", @"Delaware", @"Florida", @"Georgia", @"Hawaii", @"Idaho", @"Illinois", @"Indiana", @"Iowa", @"Kansas", @"Kentucky", @"Louisiana", @"Maine", @"Maryland", @"Massachusetts", @"Michigan", @"Minnesota", @"Mississippi", @"Missouri", @"Montana", @"Nebraska", @"Nevada", @"New Hampshire", @"New Jersey", @"New Mexico", @"New York", @"North Carolina", @"North Dakota", @"Ohio", @"Oklahoma", @"Oregon", @"Pennsylvania", @"Rhode Island", @"South Carolina", @"South Dakota", @"Tennessee", @"Texas", @"Utah", @"Vermont", @"Virginia", @"Washington", @"West Virginia", @"Wisconsin", @"Wyoming", nil];
+    
+    
+    
+    /*UILabel *cartbtn = [[UILabel alloc] init];
+     //cartbtn.transform = CGAffineTransformMakeScale(-1.0, 1.0);
+     cartbtn.text = [self.config localisedString:@"Save"];
+     cartbtn.textAlignment = NSTextAlignmentRight;
+     cartbtn.frame = CGRectMake(0, 0, 100, 44);
+     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(save:)];
+     [cartbtn addGestureRecognizer:tap];
+     cartbtn.userInteractionEnabled = YES;
+     UIBarButtonItem *menuBtn2 = [[UIBarButtonItem alloc] initWithCustomView:cartbtn];
+     self.navigationItem.rightBarButtonItem = menuBtn2;
+     [Design style:[[DOM alloc] initWithView:cartbtn parent:nil] design:[[self.config.design objectForKey:@"design"] objectForKey:@"navigation_icon"] config:self.config];*/
+    
+    
+    UIView *cartView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 80, 44)];
+    cartView.userInteractionEnabled = YES;
+    cartView.clipsToBounds = NO;
+    
+    UILabel *cartbtn = [[UILabel alloc] init];
+    //cartbtn.transform = CGAffineTransformMakeScale(-1.0, 1.0);
+    cartbtn.text = [self.config localisedString:@"Save"];
+    cartbtn.textAlignment = NSTextAlignmentRight;
+    cartbtn.frame = CGRectMake(80-140, 0, 140, 44);
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(save:)];
+    [cartbtn addGestureRecognizer:tap];
+    cartbtn.userInteractionEnabled = YES;
+    [Design style:[[DOM alloc] initWithView:cartbtn parent:nil] design:[[self.config.design objectForKey:@"design"] objectForKey:@"navigation_icon"] config:self.config];
+    [cartView addSubview:cartbtn];
+    
+    UIBarButtonItem *menuBtn2 = [[UIBarButtonItem alloc] initWithCustomView:cartView];
+    self.navigationItem.rightBarButtonItem = menuBtn2;
+    
+    
+    
+    
+    
+    
+    UILabel *menubtn = [IonIcons labelWithIcon:icon_ios7_arrow_back size:22 color:[UIColor blackColor]];;
+    
+    
+    menubtn.frame = CGRectMake(0, 0, 60, 44);
+    // menubtn.font = [UIFont fontWithName:kFontAwesomeFamilyName size:22.f];
+    // menubtn.text =[NSString fontAwesomeIconStringForIconIdentifier:@"fa-bars"];
+    [Design navigationbar_ion_icon:menubtn config:self.config];
+    [Design style:[[DOM alloc] initWithView:menubtn parent:nil] design:[[self.config.design objectForKey:@"design"] objectForKey:@"left_navigation_ion_icon"] config:self.config];
+    
+    UITapGestureRecognizer *menutap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(back)];
+    [menubtn addGestureRecognizer:menutap];
+    menubtn.userInteractionEnabled = YES;
+    
+    
+    UIBarButtonItem *barbtn = [[UIBarButtonItem alloc] initWithCustomView:menubtn];
+    
+    self.navigationItem.leftBarButtonItem = barbtn;
+    
+    indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    indicator.hidesWhenStopped = YES;
+    indicator.frame = CGRectMake(self.config.screenWidth/2-indicator.frame.size.width/2, self.config.screenHeight/2-indicator.frame.size.height/2, indicator.frame.size.width, indicator.frame.size.height);
+    [indicator stopAnimating];
+    [self.view addSubview:indicator];
+    
+    scroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.config.screenWidth, self.config.screenHeight)];
+    scroll.contentSize = CGSizeMake(self.config.screenWidth, self.config.screenHeight+150);
+    scroll.backgroundColor = [UIColor clearColor];
+    [self.view insertSubview:scroll belowSubview:indicator];
+    
+    table = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.config.screenWidth, self.config.screenHeight) style:UITableViewStylePlain];
+    table.separatorColor = [UIColor colorWithRed:173/255.0 green:173/255.0 blue:173/255.0 alpha:1];
+    table.rowHeight = 57.3;
+    table.delegate = self;
+    table.dataSource = self;
+    [scroll addSubview:table];
+    
+    picker_view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.config.screenWidth, 40)];
+    picker_view.backgroundColor = [UIColor whiteColor];
+    CALayer *layer = [CALayer layer];
+    layer.frame = CGRectMake(0, 0, self.config.screenWidth, 0.5);
+    layer.backgroundColor = [[UIColor colorWithRed:196.0/255.0 green:196.0/255.0 blue:196.0/255.0 alpha:1] CGColor];
+    [picker_view.layer addSublayer:layer];
+    
+    UIButton *cancel = [[UIButton alloc] initWithFrame:CGRectMake(10, 5, 100, 30)];
+    cancel.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    [cancel setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+    [cancel setTitle:[self.config localisedString:@"Cancel"] forState:UIControlStateNormal];
+    [cancel addTarget:self action:@selector(cancel:) forControlEvents:UIControlEventTouchUpInside];
+    [picker_view addSubview:cancel];
+    
+    UIButton *select = [[UIButton alloc] initWithFrame:CGRectMake(self.config.screenWidth-110, 5, 100, 30)];
+    select.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+    [select setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+    [select setTitle:[self.config localisedString:@"Select"] forState:UIControlStateNormal];
+    [select addTarget:self action:@selector(done:) forControlEvents:UIControlEventTouchUpInside];
+    [picker_view addSubview:select];
+    
+    if (self.is_setting){
+        samerow = 0;
+        saveasrow = -1;
+        namerow = 1;
+        addrrow = 2;
+        cityrow = 3;
+        staterow = 4;
+        ziprow = 5;
+        countryrow = 6;
+        
+    } else {
+        samerow = 0;
+        saveasrow = 1;
+        namerow = 2;
+        addrrow = 3;
+        cityrow = 4;
+        staterow = 5;
+        ziprow = 6;
+        countryrow = 7;
+        
+    }
+    
+}
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField{
+    if (name != nil) [name resignFirstResponder];
+    if (address != nil)[address resignFirstResponder];
+    if (state != nil)[state resignFirstResponder];
+    if (zip != nil)[zip resignFirstResponder];
+    if (city != nil)[city resignFirstResponder];
+    if (country != nil)[country resignFirstResponder];
+    if (phone != nil)[phone resignFirstResponder];
+    return YES;
+}
+
+-(void)textFieldDidEndEditing:(UITextField *)textField{
+    if (textField == state) {
+        state.inputView = statepicker;
+        state.inputAccessoryView = picker_view;
+        [statepicker selectRow:0 inComponent:0 animated:NO];
+    }
+    if (textField == country) {
+        country.inputView = statepicker;
+        country.inputAccessoryView = picker_view;
+        [countrypicker selectRow:0 inComponent:0 animated:NO];
+    }
+}
+
+-(void)textFieldDidBeginEditing:(UITextField *)textField{
+    if (textField == country && scroll.contentOffset.y < 70){
+        [scroll setContentOffset:CGPointMake(scroll.contentOffset.x, 70) animated:YES];
+    }if (textField == phone && scroll.contentOffset.y < 140){
+        [scroll setContentOffset:CGPointMake(scroll.contentOffset.x, 140) animated:YES];
+    }
+}
+
+
+
+-(IBAction)samesel:(id)sender {
+    UISwitch *sw = (UISwitch *)sender;
+    if (!sw.isOn) return;
+    if (self.config.name.length == 0 || self.config.address.length == 0 || self.config.state.length == 0 || self.config.city.length == 0 || self.config.zip.length == 0){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[self.config localisedString:@"Shipping address is incomplete."] message:nil delegate:nil cancelButtonTitle:[self.config localisedString:@"Close"] otherButtonTitles: nil];
+        [alert show];
+        return;
+    }
+    
+    //  self.config.billingname = self.config.name;
+    
+    // self.config.billingaddress = self.config.address;
+    // self.config.billingcity =  self.config.city;
+    // self.config.billingstate = self.config.state;
+    //  self.config.billingzip = self.config.zip;
+    //  self.config.billingcountry = self.config.country;
+    
+    name.text = self.config.name;
+    address.text = self.config.address;
+    city.text = self.config.city;
+    state.text = self.config.state;
+    zip.text = self.config.zip;
+    country.text = [self.config.codetocountry objectForKey:self.config.country];
+    
+    
+}
+
+-(IBAction)save:(id)sender{
+    if (name.text.length == 0) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[self.config localisedString:@"Name is required."] message:nil delegate:nil cancelButtonTitle:[self.config localisedString:@"Close"] otherButtonTitles: nil];
+        [alert show];
+        return;
+    }
+    if (address.text.length == 0){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[self.config localisedString:@"Address is required."] message:nil delegate:nil cancelButtonTitle:[self.config localisedString:@"Close"] otherButtonTitles: nil];
+        [alert show];
+        return;
+    }
+    if (state.text.length == 0){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[self.config localisedString:@"State is required."] message:nil delegate:nil cancelButtonTitle:[self.config localisedString:@"Close"] otherButtonTitles: nil];
+        [alert show];
+        return;
+    }
+    if (city.text.length == 0){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[self.config localisedString:@"City is required."] message:nil delegate:nil cancelButtonTitle:[self.config localisedString:@"Close"] otherButtonTitles: nil];
+        [alert show];
+        return;
+    }
+    if (zip.text.length == 0){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[self.config localisedString:@"Zip is required."] message:nil delegate:nil cancelButtonTitle:[self.config localisedString:@"Close"] otherButtonTitles: nil];
+        [alert show];
+        return;
+    }
+    if (country.text.length == 0 && [self.config.countrytocode objectForKey:country.text] == nil){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[self.config localisedString:@"Country is required."] message:nil delegate:nil cancelButtonTitle:[self.config localisedString:@"Close"] otherButtonTitles: nil];
+        [alert show];
+        return;
+    }
+    self.config.billingname = name.text;
+    self.config.billingstate = state.text;
+    self.config.billingcity = city.text;
+    self.config.billingaddress = address.text;
+    self.config.billingzip = zip.text;
+    self.config.billingcountry = [self.config.countrytocode objectForKey:country.text];
+    
+    if (save.isOn || self.is_setting ){
+        self.config.save_address = 1;
+        [self save_address];
+    } else self.config.save_address = 0;
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+-(void)save_address{
+    NSString *myRequestString = [NSString stringWithFormat:@"app_uuid=%@&user_id=%@&access_token=%@&name=%@&address=%@&city=%@&state=%@&country=%@&zip=%@&address_type=%@", self.config.APP_UUID, self.config.user_id, self.config.token, self.config.billingname, self.config.billingaddress, self.config.billingcity, self.config.billingstate, self.config.billingcountry, self.config.billingzip, @"billing"];
+    
+    NSLog(@"%@", myRequestString);
+    
+    // Create Data from request
+    NSData *myRequestData = [NSData dataWithBytes: [myRequestString UTF8String] length: [myRequestString length]];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL: [NSURL URLWithString: [NSString stringWithFormat:@"%@%@", self.config.API_ROOT, self.config.API_SAVE_ADDRESS]]];
+    
+    
+    
+    // set Request Type
+    [request setHTTPMethod: @"POST"];
+    // Set content-type
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"content-type"];
+    // Set Request Body
+    [request setHTTPBody: myRequestData];
+    
+    NSURLConnectionWithTag *urlConnection = [[NSURLConnectionWithTag alloc] initWithRequest:request delegate:self tag:1];
+}
+
+-(IBAction)cancel:(id)sender {
+    [state resignFirstResponder];
+    [country resignFirstResponder];
+}
+
+-(IBAction)done:(id)sender{
+    if ([state isFirstResponder]){
+        if ([statepicker selectedRowInComponent:0] > 0){
+            NSString *s = [states objectAtIndex:[statepicker selectedRowInComponent:0]];
+            state.text = s;
+            [state resignFirstResponder];
+        } else if ([statepicker selectedRowInComponent:0] == 0){
+            [state resignFirstResponder];
+            state.inputView = nil;
+            state.inputAccessoryView = nil;
+            [state becomeFirstResponder];
+        }
+    } else if ([country isFirstResponder]){
+        NSString *s = [self.config.countries objectAtIndex:[countrypicker selectedRowInComponent:0]];
+        country.text = s;
+        [country resignFirstResponder];
+    }
+}
+
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+{
+    /* if (pickerView == picker){
+     if (row == 0) return;
+     else if (row > 1){
+     NSString *s = [states objectAtIndex:row];
+     state.text = s;
+     [state resignFirstResponder];
+     } else if (row == 1){
+     [state resignFirstResponder];
+     state.inputView = nil;
+     [state becomeFirstResponder];
+     }
+     }
+     if (pickerView == countrypicker){
+     if (row == 0) return;
+     NSString *s = [self.config.countries objectAtIndex:row];
+     country.text = s;
+     [country resignFirstResponder];
+     }*/
+}
+
+
+
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    if (pickerView == statepicker) return [states objectAtIndex:row];
+    else return [self.config.countries objectAtIndex:row];
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    if (pickerView == statepicker) return states.count;
+    else return self.config.countries.count;
+}
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 1;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
+    
+    if (self.is_setting)
+        return 7;
+    else return 8;
+    
+    
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    AddressInfoTableViewCell *cell = [[AddressInfoTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"] ;
+    cell.sw.hidden = YES;
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    if (indexPath.row == samerow){
+        cell.bigTitle.text = [self.config localisedString:@"Same as Shipping Address?"];
+        cell.value.hidden = YES;
+        [cell.sw addTarget:self action:@selector(samesel:) forControlEvents:UIControlEventValueChanged];
+        [cell.sw setOn:NO];
+        cell.sw.hidden = NO;
+    }if (indexPath.row == saveasrow){
+        cell.bigTitle.text = [self.config localisedString:@"Save as Default"];
+        cell.value.hidden = YES;
+        [cell.sw setOn:NO];
+        save = cell.sw;
+        cell.sw.hidden = NO;
+    }if (indexPath.row == namerow){
+        cell.smallTitle.text = [self.config localisedString:@"Name"];
+        cell.value.delegate = self;
+        cell.value.text = self.config.billingname;
+        name = cell.value;
+        cell.sw.hidden = YES;
+    }if (indexPath.row == addrrow){
+        cell.smallTitle.text = [self.config localisedString:@"Address"];
+        cell.value.delegate = self;
+        cell.value.text = self.config.billingaddress;
+        address = cell.value;
+        cell.sw.hidden = YES;
+    }if (indexPath.row == cityrow){
+        cell.smallTitle.text = [self.config localisedString:@"City"];
+        cell.value.delegate = self;
+        cell.value.text = self.config.billingcity;
+        city = cell.value;
+        cell.sw.hidden = YES;
+    }if (indexPath.row == staterow){
+        cell.smallTitle.text = [self.config localisedString:@"State"];
+        cell.value.delegate = self;
+        cell.value.text = self.config.billingstate;
+        state = cell.value;
+        state.inputView = statepicker;
+        state.inputAccessoryView = picker_view;
+        cell.sw.hidden = YES;
+        
+    }if (indexPath.row == ziprow){
+        cell.smallTitle.text = [self.config localisedString:@"Zip"];
+        cell.value.delegate = self;
+        cell.value.text = self.config.billingzip;
+        zip = cell.value;
+        zip.keyboardType = UIKeyboardTypeDecimalPad;
+        cell.sw.hidden = YES;
+        
+    }if (indexPath.row == countryrow){
+        cell.smallTitle.text = [self.config localisedString:@"Country"];
+        cell.value.delegate = self;
+        cell.value.text = [self.config.codetocountry objectForKey:self.config.billingcountry];
+        country = cell.value;
+        country.inputView = countrypicker;
+        country.inputAccessoryView = picker_view;
+        cell.sw.hidden = YES;
+        
+    }
+    
+    
+    return cell;
+    
+    
+    
+}
+
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    
+}
+
+-(void)back{
+    /* self.config.name = name.text;
+     self.config.state = state.text;
+     self.config.city = city.text;
+     self.config.address = address.text;
+     self.config.zip = zip.text;
+     self.config.country = [self.config.countrytocode objectForKey:country.text];
+     if (sw.isOn){
+     self.config.save_address = 1;
+     } else self.config.save_address = 0;*/
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+-(void)indicatorStart{
+    [indicator startAnimating];
+}
+
+@end

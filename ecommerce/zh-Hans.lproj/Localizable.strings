@@ -1,0 +1,15 @@
+/* 
+  Localizable.strings
+  Moooh
+
+  Created by Hanqing Hu on 3/5/15.
+  Copyright (c) 2015 Twixxies. All rights reserved.
+*/
+
+
+"Contact Us" = "联系我们";
+"Bug Report" = "错误报告";
+"Shop" = "商品";
+"Account" = "用户";
+"Share" = "分享";
+"Rate Us" = "App 评分";
