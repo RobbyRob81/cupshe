@@ -654,7 +654,7 @@ const int ADD_TO_CART = 0;
         
         UIView *varview = [[UIView alloc] init];
         varbtns = [[NSMutableArray alloc] init];
-        int count = 0;
+        int hasOneVar = 0;
         for (NSString *str in [attributes allKeys]){
             
             ButtonWithValues *bval = [[ButtonWithValues alloc] init];
@@ -676,6 +676,9 @@ const int ADD_TO_CART = 0;
                 carrot.tag = 1;
                 [bval addSubview:carrot];
                 
+                carrot.text = icon_checkmark;
+                bval.titleLabel.font = [UIFont boldSystemFontOfSize:17.3];
+                hasOneVar++;
                 [sel_attr setObject:attr forKey:bval.key];
                 
             } else {
@@ -693,8 +696,13 @@ const int ADD_TO_CART = 0;
             
             [varview addSubview:bval];
             [varbtns addObject:bval];
-            count++;
+            
         }
+        
+        if (hasOneVar == [[attributes allKeys] count] && self.product.variations.count > 0){
+            selvar = [self.product.variations objectAtIndex:0];
+        }
+        
         [vs setObject:varbtns forKey:@"var_btns"];
         [vs setObject:varview forKey:@"var_sel"];
         [scroll addSubview:varview];
@@ -1107,7 +1115,7 @@ const int ADD_TO_CART = 0;
         
         UIView *varview = [[UIView alloc] init];
         varbtns = [[NSMutableArray alloc] init];
-        int count = 0;
+        int hasOneVar = 0;
         for (NSString *str in [attributes allKeys]){
             
             ButtonWithValues *bval = [[ButtonWithValues alloc] init];
@@ -1129,6 +1137,9 @@ const int ADD_TO_CART = 0;
                 carrot.tag = 1;
                 [bval addSubview:carrot];
                 
+                carrot.text = icon_checkmark;
+                bval.titleLabel.font = [UIFont boldSystemFontOfSize:17.3];
+                hasOneVar++;
                 [sel_attr setObject:attr forKey:bval.key];
                 
             } else {
@@ -1146,8 +1157,13 @@ const int ADD_TO_CART = 0;
             
             [varview addSubview:bval];
             [varbtns addObject:bval];
-            count++;
+            
         }
+        
+        if (hasOneVar == [[attributes allKeys] count] && self.product.variations.count > 0){
+            selvar = [self.product.variations objectAtIndex:0];
+        }
+        
         [vs setObject:varbtns forKey:@"var_btns"];
         [vs setObject:varview forKey:@"var_sel"];
         [scroll addSubview:varview];
@@ -1838,6 +1854,15 @@ const int ADD_TO_CART = 0;
         if (hasvar && selvar == nil){
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[self.config localisedString:@"Please choose a product variation."] message:nil delegate:nil cancelButtonTitle:[self.config localisedString:@"Close"] otherButtonTitles: nil];
             [alert show];
+            if (varbtns.count > 0){
+                UIButton *varbtn = [varbtns objectAtIndex:0];
+                UIView *varview = [varbtn superview];
+                if (varview != nil){
+                    CGPoint to = CGPointMake(varview.frame.origin.x, varview.frame.origin.y-60);
+                    [scroll setContentOffset:to animated:YES];
+                }
+                
+            }
             //[hidden becomeFirstResponder];
             return;
         } else if (!hasvar) selvar = [self.product.variations objectAtIndex:0];
@@ -1860,6 +1885,15 @@ const int ADD_TO_CART = 0;
         if (hasvar && selvar == nil){
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[self.config localisedString:@"Please choose a product variation."] message:nil delegate:nil cancelButtonTitle:[self.config localisedString:@"Close"] otherButtonTitles: nil];
             [alert show];
+            if (varbtns.count > 0){
+                UIButton *varbtn = [varbtns objectAtIndex:0];
+                UIView *varview = [varbtn superview];
+                if (varview != nil){
+                    CGPoint to = CGPointMake(varview.frame.origin.x, varview.frame.origin.y-60);
+                    [scroll setContentOffset:to animated:YES];
+                }
+                
+            }
             //[hidden becomeFirstResponder];
             return;
         } else if (!hasvar) selvar = [self.product.variations objectAtIndex:0];
