@@ -40,6 +40,7 @@ const int FILTER = 2;
         self.attribute = [[NSMutableArray alloc] init];
         cachedContentOffset = 0;
         lastContentOffset = 0;
+        hasmore = 0;
         reloading = NO;
     }
     return self;
@@ -215,6 +216,18 @@ const int FILTER = 2;
     
     [self.view addSubview:searchbar];
     
+    UIView *sracc = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.config.screenWidth, 44)];
+    sracc.backgroundColor = [UIColor colorWithRed:227/255.0 green:227/255.0 blue:227/255.0 alpha:1];
+    
+    UIButton *var_sel_clear = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 44)];
+    [var_sel_clear setTitleColor:[UIColor colorWithRed:48/255.0 green:48/255.0 blue:48/255.0 alpha:1] forState:UIControlStateNormal];
+    [var_sel_clear setTitle:[self.config localisedString:@"Clear"] forState:UIControlStateNormal];
+    [var_sel_clear addTarget:self action:@selector(searchclear) forControlEvents:UIControlEventTouchUpInside];
+    [sracc addSubview:var_sel_clear];
+    
+    searchbar.inputAccessoryView = sracc;
+    
+    
     
     refresh = [[UIRefreshControl alloc] init];
     [refresh addTarget:self action:@selector(pageRefresh:) forControlEvents:UIControlEventValueChanged];
@@ -223,11 +236,7 @@ const int FILTER = 2;
     
     //[scroll addSubview:searchbar];
     
-    receivedData = [[NSMutableArray alloc] init];
-    for (int i = 0 ; i < 5; i++){
-        NSMutableData *rec = [[NSMutableData alloc] init];
-        [receivedData addObject:rec];
-    }
+    
     filters = [[NSMutableDictionary alloc] init];
     
     /*loadingView = [[UIView alloc] initWithFrame:CGRectMake(0, -55, self.config.screenWidth, 50)];
@@ -314,6 +323,7 @@ const int FILTER = 2;
 -(IBAction)back:(id)sender{
     [self.navigationController popViewControllerAnimated:YES];
 }
+
 -(void)showLoadingView:(BOOL)show{
     if (show){
         [UIView animateWithDuration:0.5f
@@ -348,7 +358,7 @@ const int FILTER = 2;
     if (self.searchTerm == nil) st = @"";
     NSString *myRequestString = [NSString stringWithFormat:@"app_uuid=%@&filter=%@&search_terms=%@&department_id=%@", self.config.APP_UUID, f, st, self.departmentid];
     
-    NSLog(@"%@", myRequestString);
+    
     
     // Create Data from request
     NSData *myRequestData = [NSData dataWithBytes: [myRequestString UTF8String] length: [myRequestString length]];
@@ -366,8 +376,7 @@ const int FILTER = 2;
     // Log Response
     // NSString *response = [[NSString alloc] initWithBytes:[returnData bytes] length:[returnData length] encoding:NSUTF8StringEncoding];
     // NSLog(@"%@",response);
-    NSMutableData *received = [receivedData objectAtIndex:FILTER];
-    [received setLength:0];
+    
     NSURLConnectionWithTag *urlConnection = [[NSURLConnectionWithTag alloc] initWithRequest:request delegate:self tag:FILTER];
 }
 
@@ -387,9 +396,9 @@ const int FILTER = 2;
         items = [[NSMutableArray alloc] init];
         [scroll setContentOffset:CGPointMake(0, 0)];
         scrollDirection = 0;
-        hasmore = 0;
-        lastContentOffset = 0;
         
+        lastContentOffset = 0;
+        currentScrollHeight = 0;
     }
     if (!reloading)
         loading = 1;
@@ -476,7 +485,7 @@ const int FILTER = 2;
     
     NSString *myRequestString = [NSString stringWithFormat:@"app_uuid=%@&start=%d&filter=%@&search_terms=%@&rank=%@&category=%@&attributes=%@&department_id=%@&wholesale_user_id=%@&location=%@&currency=%@", self.config.APP_UUID, start, f, st, self.rank, catjson, attrjson, self.departmentid, wid,self.config.location, self.config.currency];
     
-    NSLog(@"%@", myRequestString);
+    
     
     // Create Data from request
     NSData *myRequestData = [NSData dataWithBytes: [myRequestString UTF8String] length: [myRequestString length]];
@@ -494,12 +503,12 @@ const int FILTER = 2;
     // Log Response
     // NSString *response = [[NSString alloc] initWithBytes:[returnData bytes] length:[returnData length] encoding:NSUTF8StringEncoding];
     // NSLog(@"%@",response);
-    NSMutableData *received = [receivedData objectAtIndex:PRODUCT];
-    [received setLength:0];
-    //NSURLConnectionWithTag *urlConnection = [[NSURLConnectionWithTag alloc] initWithRequest:request delegate:self tag:PRODUCT];
+    
+    
     
     NSURLConnectionWithTag *urlConnection = [[NSURLConnectionWithTag alloc] initWithRequest:request
                                                                                    delegate:self startImmediately:NO];
+    urlConnection.receivedData = [[NSMutableData alloc] init];
     urlConnection.tag = PRODUCT;
     
     [urlConnection scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
@@ -608,7 +617,7 @@ const int FILTER = 2;
         pv.frame = frame;
         [Design style:[[DOM alloc] initWithView:pv parent:scroll] design:design.product_view config:self.config];
         
-        NSLog(@"%f", pv.frame.origin.y);
+        
         
         //  [vs setObject:image forKey:@"main"];
         
@@ -842,8 +851,8 @@ const int FILTER = 2;
     
     @try {
         NSURLConnectionWithTag *conn = (NSURLConnectionWithTag *)connection;
-        NSMutableData *received = [receivedData objectAtIndex:conn.tag];
-        [received appendData:data];
+        
+        [conn.receivedData appendData:data];
         
     }
     @catch (NSException *exception) {
@@ -871,7 +880,7 @@ const int FILTER = 2;
 }
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection{
     NSURLConnectionWithTag *conn = (NSURLConnectionWithTag *)connection;
-    NSMutableData *received = [receivedData objectAtIndex:conn.tag];
+    NSMutableData *received = conn.receivedData;
     
     // @try {
     if (conn.tag == PRODUCT ){
@@ -884,7 +893,9 @@ const int FILTER = 2;
         
         NSArray *a = [dic objectForKey:@"products"];
         
+        
         hasmore = [[dic objectForKey:@"hasmore"] intValue];
+        
         
         for (NSDictionary *d in a){
             Product *e = [[Product alloc] init];
@@ -1082,7 +1093,7 @@ const int FILTER = 2;
         //[scroll addSubview:loadmoreView];
         
         currentScrollHeight = scroll.contentSize.height;
-        NSLog(@"%f, %f", currentScrollHeight, scroll.contentSize.height);
+        
         
         [self load_product:(int)items.count];
         
@@ -1189,7 +1200,7 @@ const int FILTER = 2;
     NSMutableArray *tempimg = [[NSMutableArray alloc] init];
     NSDecimalNumber *pos = [timer.userInfo objectForKey:@"position"];
     CGFloat offset = [pos doubleValue];
-    NSLog(@"LOAD STARTED *************************");
+    
     for (int i = 0 ; i < itemViews.count; i++){
         ViewWithData *v = (ViewWithData *)[itemViews objectAtIndex:i];
         if (v.frame.origin.y+v.frame.size.height < offset - 10 * self.config.screenHeight){
@@ -1226,7 +1237,7 @@ const int FILTER = 2;
             v.load_status = 0;
         } else if ( (v.frame.origin.y < offset + v.frame.size.height/2 || v.frame.origin.y +v.frame.size.height  > offset - v.frame.size.height/2)  && v.load_status == 0){
             
-            NSLog(@"%@, %d, %d", v.itemID, v.frame.origin.y < offset + self.config.screenHeight/2, v.frame.origin.y +v.frame.size.height  > offset - self.config.screenHeight/2);
+            
             for (Product *p in items){
                 if ([p.product_id isEqualToString:v.itemID]){
                     [self build_productView:v withProduct:p imageQueue:tempimg];
@@ -1259,7 +1270,7 @@ const int FILTER = 2;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    
+    tableloaded = 0;
     return 1;
 }
 
@@ -1282,7 +1293,8 @@ const int FILTER = 2;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     
-    if (indexPath.row == searchResult.count - 1){
+    if (indexPath.row == searchResult.count - 1 && tableloaded == 0){
+        tableloaded = 1;
         tableView.contentSize = CGSizeMake(tableView.contentSize.width, tableView.contentSize.height+300);
     }
     return cell;
@@ -1300,7 +1312,7 @@ const int FILTER = 2;
     //if (searchbar.text.length > 0){
     self.searchTerm = str;
     [self load_product:0];
-    searchbar.text = @"";
+    searchbar.text = str;
     [searchbar setShowsCancelButton:NO animated:YES];
     search_display.hidden = YES;
     titlelabel.text = [NSString stringWithFormat:@"\"%@\"", str];
@@ -1322,10 +1334,13 @@ const int FILTER = 2;
     //if (searchbar.text.length > 0){
     self.searchTerm = searchbar.text;
     [self load_product:0];
-    searchbar.text = @"";
+    
     [searchbar setShowsCancelButton:NO animated:YES];
     search_display.hidden = YES;
     titlelabel.text = [NSString stringWithFormat:@"\"%@\"", self.searchTerm];
+    
+    [searchbar resignFirstResponder];
+    
     //scroll.scrollEnabled = YES;
     //  }
     
@@ -1336,7 +1351,7 @@ const int FILTER = 2;
 
 -(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar{
     [searchbar resignFirstResponder];
-    searchbar.text = @"";
+    //searchbar.text = @"";
     search_display.hidden = YES;
     [searchbar setShowsCancelButton:NO animated:YES];
     //scroll.scrollEnabled = YES;
@@ -1358,7 +1373,16 @@ const int FILTER = 2;
     [search_display reloadData];
 }
 
-
+-(void)searchclear{
+    searchbar.text = @"";
+    self.searchTerm = @"";
+    [self load_product:0];
+    [searchbar setShowsCancelButton:NO animated:YES];
+    search_display.hidden = YES;
+    titlelabel.text = self.titleText;
+    [searchbar resignFirstResponder];
+    [search_display reloadData];
+}
 
 
 

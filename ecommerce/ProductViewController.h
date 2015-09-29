@@ -33,7 +33,7 @@
     UIRefreshControl *refresh;
     
     CGFloat contentHeight;
-    NSMutableArray *receivedData;
+    
     NSMutableDictionary *filters;
     NSMutableArray *searchResult;
     NSMutableArray *searchWords;
@@ -55,6 +55,8 @@
     //scroll direction
     CGFloat lastScrollOffset;
     int search_is_toggling;
+    
+    int tableloaded; //for search suggestion keyboard issue
     
 }
 
