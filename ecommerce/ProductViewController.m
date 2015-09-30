@@ -527,7 +527,7 @@ const int FILTER = 2;
 
 -(void)load_product_count:(NSString *)reqStr{
     
-    cartCounter.text= [self.config localisedString:@"..."];
+    cartCounter.text= [self.config localisedString:@"Updating..."];
     NSData *myRequestData2 = [NSData dataWithBytes: [reqStr UTF8String] length: [reqStr length]];
     NSMutableURLRequest *request2 = [[NSMutableURLRequest alloc] initWithURL: [NSURL URLWithString: [NSString stringWithFormat:@"%@%@",self.config.API_ROOT, self.config.API_PRODUCT_COUNT]]];
     [request2 setHTTPMethod: @"POST"];

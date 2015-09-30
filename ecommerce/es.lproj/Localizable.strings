@@ -87,6 +87,7 @@
 "Shop"="Tienda";
 "Products"="Productos";
 "Loading More..."="Cargando...";
+"Updating..."="Cargando...";
 "Something went wrong..."="Algo salió mal";
 "Item(s)"="Artículo(s)";
 "No Product Found"="Ningún producto encontrado";
@@ -102,7 +103,6 @@
 "Check out this from"="Echa un vistazo a este formulario";
 "APPLY"="Aplicar";
 "Clear"="Limpiar";
-"Clear Search"="Limpiar";
 "Filter"="Filtro";
 "Featured"="Característica";
 "Low Price"="Bajo precio";

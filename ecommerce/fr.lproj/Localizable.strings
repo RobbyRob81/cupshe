@@ -95,6 +95,7 @@
 "Shop"="Boutique";
 "Products"="Produits";
 "Loading More..."="Charger plus...";
+"Updating..." = "Charger...";
 "Something went wrong..."="Quelque chose s'est mal passé ...";
 "Item(s)"="Article(s)";
 "No Product Found"="Aucun produit trouvé";
@@ -110,7 +111,6 @@
 "Check out this from"="Découvrez cela à partir de";
 "APPLY"="Appliquer";
 "Clear"="Effacer";
-"Clear Search" = "Effacer";
 "Filter"="Filtre";
 "Featured"="Sélection";
 "Low Price"="Prix ​​Bas";
