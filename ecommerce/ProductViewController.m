@@ -84,13 +84,17 @@ const int FILTER = 2;
     
     cartCounter = [[UILabel alloc] initWithFrame:CGRectMake(0, 24, carttitle.frame.size.width, 20)] ;
     cartCounter.backgroundColor = [UIColor clearColor];
-    cartCounter.font = [UIFont boldSystemFontOfSize:12.0];
+    cartCounter.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:12.0f];;
     cartCounter.textAlignment = NSTextAlignmentCenter;
     cartCounter.textColor = carttitle.textColor;
     //cartCounter.text = NSLocalizedString(@"0 Item", @"");
     //[cartCounter sizeToFit];
     [carttitle addSubview:cartCounter];
     self.navigationItem.titleView = carttitle;
+    
+    
+    
+    
     
     [searchCancelBtn setTitle:[self.config localisedString:@"Cancel"] forState:UIControlStateNormal];
     
@@ -522,6 +526,8 @@ const int FILTER = 2;
 }
 
 -(void)load_product_count:(NSString *)reqStr{
+    
+    cartCounter.text= [self.config localisedString:@"..."];
     NSData *myRequestData2 = [NSData dataWithBytes: [reqStr UTF8String] length: [reqStr length]];
     NSMutableURLRequest *request2 = [[NSMutableURLRequest alloc] initWithURL: [NSURL URLWithString: [NSString stringWithFormat:@"%@%@",self.config.API_ROOT, self.config.API_PRODUCT_COUNT]]];
     [request2 setHTTPMethod: @"POST"];
@@ -1389,6 +1395,8 @@ const int FILTER = 2;
 -(void)threadStartAnimating{
     [indicator startAnimating];
 }
+
+
 
 -(void)back{
     scroll = nil;

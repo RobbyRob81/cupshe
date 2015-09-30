@@ -1,10 +1,10 @@
-/* 
-  Localizable.strings
-  Moooh
-
-  Created by Hanqing Hu on 3/5/15.
-  Copyright (c) 2015 Twixxies. All rights reserved.
-*/
+/*
+ Localizable.strings
+ Moooh
+ 
+ Created by Hanqing Hu on 3/5/15.
+ Copyright (c) 2015 Twixxies. All rights reserved.
+ */
 
 
 "Save"="保存";
@@ -100,6 +100,7 @@
 "Check out this from"="";
 "APPLY"="申请";
 "Clear"="清除";
+"Clear Search"="清除搜索";
 "Filter"="搜索过滤";
 "Featured"="推荐";
 "Low Price"="低价先";
@@ -118,7 +119,7 @@
 "Payment Info"="付款信息";
 "Shipping Info"="送货信息";
 "Order Summary"="订单汇总";
-"Total Savings"="总节省";
+"Total Savings"="折扣";
 "Credit card is required."="请输入付款信息";
 "Shipping address is required."="请输入送货地址";
 "Shipping method is required."="请输入送货方式";
@@ -247,3 +248,5 @@
 "Minimum Redeemable Earning"="最低可取金额";
 "*Estimated amount. Payout will be based on USD."="*为估计金额。以美元结算。";
 "Inactive"="未注册";
+"Connect with Facebook"="Facebook登陆";
+"Hi there,"="您好";

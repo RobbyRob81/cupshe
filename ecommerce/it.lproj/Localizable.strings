@@ -1,10 +1,10 @@
 /*
-  Localizable.strings
-  Moooh
-
-  Created by Hanqing Hu on 3/5/15.
-  Copyright (c) 2015 Twixxies. All rights reserved.
-*/
+ Localizable.strings
+ Moooh
+ 
+ Created by Hanqing Hu on 3/5/15.
+ Copyright (c) 2015 Twixxies. All rights reserved.
+ */
 
 
 "Credit Card"="Carta di credito";
@@ -13,7 +13,7 @@
 "Ok"="Ok";
 "Affiliate Program"="Programma Di Affiliazione";
 "Join Our Affiliate Program"="Unisciti al nostra Programma Di Affiliazione";
-"Share products and earn cash whenever someone makes a purchase using your unique link"="Condividi i nostri prodotti e guadagna ogniqualvolta qualcuno compra tramite il tuo link.";
+"Share products and earn cash whenever someone makes a purchase using your unique link"="Guadagna quando qualcuno fa un acquisto utilizzando il tuo link unico";
 "Site URL http://www.mysite.com"="URL del sito http://www.mysite.com";
 "Phone number"="Numero di telefono";
 "Application submitted"="Richiesta inviata";
@@ -102,6 +102,7 @@
 "Check out this from"="Controlla questo su";
 "APPLY"="APPLICA";
 "Clear"="Ripulisci";
+"Clear Search"="Ripulisci";
 "Filter"="Filtra";
 "Featured"="Menzionato";
 "Low Price"="Prezzo basso";
@@ -249,3 +250,6 @@
 "All inputs are required"="Sono obbligatori Tutti gli ingressi";
 "Minimum Redeemable Balance"="";
 "*Estimated amount. Payout will be based on USD."="";
+"Inactive"="Inattivo";
+"Connect with Facebook"="Facebook";
+"Hi there,"="Ciao";

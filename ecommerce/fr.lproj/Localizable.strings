@@ -1,10 +1,10 @@
-/* 
-  Localizable.strings
-  Moooh
-
-  Created by Hanqing Hu on 3/5/15.
-  Copyright (c) 2015 Twixxies. All rights reserved.
-*/
+/*
+ Localizable.strings
+ Moooh
+ 
+ Created by Hanqing Hu on 3/5/15.
+ Copyright (c) 2015 Twixxies. All rights reserved.
+ */
 
 
 /*
@@ -110,6 +110,7 @@
 "Check out this from"="Découvrez cela à partir de";
 "APPLY"="Appliquer";
 "Clear"="Effacer";
+"Clear Search" = "Effacer";
 "Filter"="Filtre";
 "Featured"="Sélection";
 "Low Price"="Prix ​​Bas";
@@ -257,3 +258,6 @@
 "All inputs are required"="Toutes les entrées sont nécessaires";
 "Minimum Redeemable Balance"="";
 "*Estimated amount. Payout will be based on USD."="";
+"Inactive"="Inactif";
+"Connect with Facebook"="Facebook";
+"Hi there,"="Bonjour";
