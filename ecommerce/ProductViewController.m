@@ -400,7 +400,8 @@ const int FILTER = 2;
         items = [[NSMutableArray alloc] init];
         [scroll setContentOffset:CGPointMake(0, 0)];
         scrollDirection = 0;
-        
+        searchbar.frame = CGRectMake(0, -0.5, self.config.screenWidth, 44);
+        indicator.frame = CGRectMake(self.config.screenWidth/2-indicator.frame.size.width/2, (self.config.screenHeight-64)/2-indicator.frame.size.height/2, indicator.frame.size.width, indicator.frame.size.height);
         lastContentOffset = 0;
         currentScrollHeight = 0;
     }
