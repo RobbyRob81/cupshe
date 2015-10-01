@@ -48,7 +48,7 @@
 -(void)load_default{
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSDictionary *d = [defaults objectForKey:@"cached_data"];
-    self.cart = [d objectForKey:@"cart"];
+    self.cart = [[d objectForKey:@"cart"] mutableCopy];
     if (self.cart == nil) self.cart = [[NSMutableArray alloc] init];
 }
 @end
