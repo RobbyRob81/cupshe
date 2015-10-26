@@ -224,7 +224,6 @@
 @implementation AppPaymentMethod
 
 -(void)dictionary_to_method:(NSDictionary *)d{
-    
     self.payment_method_id = [d objectForKey:@"payment_method_id"];
     self.payment_gateway = [d objectForKey:@"payment_gateway"];
     self.payment_method = [d objectForKey:@"payment_method"];

@@ -86,7 +86,7 @@
         self.push_token = @"";
         self.refresh_cart = NO;
         self.cartnum = 0;
-        self.ituneID = @"";
+        self.ituneID = @"1018624570";
         //self.payment_method = @"";
         self.payment_method_option = @"";
         self.link_inventory = @"";
@@ -102,7 +102,7 @@
         self.codetocountry = [[NSMutableDictionary alloc] init];
         self.wholesale = [[WholesaleModule alloc] init];
         
-        self.guest_checkout = YES;
+        self.guest_checkout = NO;
         self.cache = [[CachedDataModule alloc] init];
         
         NSLocale *locale = [NSLocale currentLocale];

@@ -2365,7 +2365,7 @@ const int PAYMENT_ACCOUNT_CHANGED = 1;
             
             [PayPalMobile initializeWithClientIdsForEnvironments:@{PayPalEnvironmentProduction :self.appmethod.api_userid,
                                                                    PayPalEnvironmentSandbox : self.appmethod.sandbox_api_userid}];
-            if (self.config.selected_payment.appmethod.islive == 0) {
+            if (self.appmethod.islive == 0) {
                 [PayPalMobile preconnectWithEnvironment:PayPalEnvironmentSandbox];
             } else {
                 [PayPalMobile preconnectWithEnvironment:PayPalEnvironmentProduction];
@@ -2408,7 +2408,7 @@ const int PAYMENT_ACCOUNT_CHANGED = 1;
 
 - (void)payPalFuturePaymentDidCancel:(PayPalFuturePaymentViewController *)futurePaymentViewController {
     // User cancelled login. Dismiss the PayPalLoginViewController, breathe deeply.
-    
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)payPalFuturePaymentViewController:(PayPalFuturePaymentViewController *)futurePaymentViewController
