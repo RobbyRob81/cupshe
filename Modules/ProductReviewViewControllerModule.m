@@ -15,6 +15,7 @@
 #import "Design.h"
 #import "ViewWithData.h"
 #import "LoginViewController.h"
+#import "StringUtility.h"
 const int YOPTO_BOTTOM_LINE = 1;
 const int YOPTO_PRODUCT_REVIEW = 2;
 const int YOPTO_ADD_REVIEW = 3;
@@ -365,7 +366,7 @@ const NSString *CHECK_PRODUCT_PURCHASE = @"userappuser/checkProductPurchase";
         text.editable = NO;
         text.frame = CGRectMake(8, pretitle.frame.origin.y+pretitle.frame.size.height, recent.frame.size.width-16, 0);
         text.contentInset = UIEdgeInsetsMake(-4,-5, 0, 0);
-        text.text = [NSString stringWithFormat:@"%@", pr.text];
+        text.text = [[NSString stringWithFormat:@"%@", pr.text] stringByDecodingHTMLEntities];
         text.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:15.3f];
         size = [text sizeThatFits:CGSizeMake(text.frame.size.width, FLT_MAX)];
         frame = text.frame;
@@ -538,7 +539,7 @@ const NSString *CHECK_PRODUCT_PURCHASE = @"userappuser/checkProductPurchase";
         text.frame = CGRectMake(15, pretitle.frame.origin.y+pretitle.frame.size.height-3, rv.frame.size.width-30, 0);
         text.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:17.3f];;
         text.contentInset = UIEdgeInsetsMake(0,-5, 0, 0);
-        text.text = [NSString stringWithFormat:@"%@", pr.text];
+        text.text = [[NSString stringWithFormat:@"%@", pr.text] stringByDecodingHTMLEntities];
         size = [text sizeThatFits:CGSizeMake(text.frame.size.width, FLT_MAX)];
         frame = text.frame;
         frame.size.height = size.height+8;

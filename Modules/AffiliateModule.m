@@ -178,7 +178,7 @@ const NSString *AFF_GET_BANNER = @"https://www.twixxies.com/affiliateapi/app_get
             NSString *response = [[NSString alloc] initWithBytes:[d bytes] length:[d length] encoding:NSUTF8StringEncoding];
             //NSLog(@"%@", response);
             
-            
+                       
             
             
         } else {
@@ -350,7 +350,7 @@ const NSString *AFF_GET_BANNER = @"https://www.twixxies.com/affiliateapi/app_get
     phonelayer.backgroundColor = [darkg CGColor];
     [phonepane.layer addSublayer:phonelayer];
     [self.view addSubview:urlpane];
-    
+
     [self.view addSubview:phonepane];
     
     UILabel *cartbtn = [[UILabel alloc] init];
@@ -407,7 +407,7 @@ const NSString *AFF_GET_BANNER = @"https://www.twixxies.com/affiliateapi/app_get
             NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:d options:0 error:nil];
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[cf localisedString:@"Application failed."] message:[cf localisedString:@"All information required"] delegate:nil cancelButtonTitle:[cf localisedString:@"Close"] otherButtonTitles: nil];
             [alert show];
-            
+           
         }
         
     };
@@ -435,7 +435,7 @@ const NSString *AFF_GET_BANNER = @"https://www.twixxies.com/affiliateapi/app_get
 }
 -(void)load_view{
     Config *cf = (Config *)self.config;
-    
+
     NSString *myRequestString = [NSString stringWithFormat:@"appkey=%@&affiliate_id=%@&location=%@&currency=%@", cf.APP_UUID, cf.affiliate.aid, cf.location, cf.currency];
     
     NSData *myRequestData2 = [NSData dataWithBytes: [myRequestString UTF8String] length: [myRequestString length]];
@@ -468,6 +468,7 @@ const NSString *AFF_GET_BANNER = @"https://www.twixxies.com/affiliateapi/app_get
             
             if (self.status == 1) {
                 table = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, cf.screenWidth, cf.screenHeight-64) style:UITableViewStyleGrouped];
+                
                 table.separatorColor = [UIColor colorWithRed:217/255.0 green:217/255.0 blue:217/255.0 alpha:1];
                 table.dataSource = self;
                 table.delegate = self;
@@ -478,10 +479,10 @@ const NSString *AFF_GET_BANNER = @"https://www.twixxies.com/affiliateapi/app_get
             } else {
                 [self load_waiting_view];
             }
-            
+           
         } else {
             //There was an error
-            
+           
         }
         
     };
@@ -534,7 +535,7 @@ const NSString *AFF_GET_BANNER = @"https://www.twixxies.com/affiliateapi/app_get
         tv.userInteractionEnabled = NO;
         return tv;
     } else if (section == 1) {
-        
+    
         
         
         UITextView *tv = [[UITextView alloc] init];
@@ -566,19 +567,19 @@ const NSString *AFF_GET_BANNER = @"https://www.twixxies.com/affiliateapi/app_get
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     Config *cf = (Config *)self.config;
-    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:18.3f];
     if (indexPath.section == 0){
         if (indexPath.row == 0){
-            //cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+             //cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             /*UITextField *t = [[UITextField alloc] initWithFrame:CGRectMake(16, 0, cf.screenWidth, 44)];
-             t.enabled = YES;
-             t.delegate = self;
-             t.text = self.url;
-             t.inputView = [[UIView alloc] initWithFrame:CGRectZero];
-             [cell addSubview:t];*/
+            t.enabled = YES;
+            t.delegate = self;
+            t.text = self.url;
+            t.inputView = [[UIView alloc] initWithFrame:CGRectZero];
+            [cell addSubview:t];*/
             UILabel *sign = [[UILabel alloc] initWithFrame:CGRectMake(cf.screenWidth-44, 0, 44, table.rowHeight)];
             sign.textAlignment = NSTextAlignmentCenter;
             sign.font = [UIFont fontWithName:kFontAwesomeFamilyName size:18];
@@ -616,7 +617,7 @@ const NSString *AFF_GET_BANNER = @"https://www.twixxies.com/affiliateapi/app_get
             balance.text = [NSString stringWithFormat:@"%@ %0.2f",[self.config getCurrencySymbol], [self.total_earning floatValue]];
             [cell addSubview:balance];
             
-            
+
         }
         if (indexPath.row == 2){
             cell.textLabel.text = [NSString stringWithFormat:@"%@: %@", [self.config localisedString:@"Commission"], self.commission];
@@ -642,15 +643,15 @@ const NSString *AFF_GET_BANNER = @"https://www.twixxies.com/affiliateapi/app_get
             balance.layer.cornerRadius =12;
             balance.layer.borderWidth = 0.5;
             [cell addSubview:balance];
+
             
+           /* JSCustomBadge *badge = [JSCustomBadge customBadgeWithString:[NSString stringWithFormat:@"%d", self.promo_count]];
+            badge.tag = -11;
+            //badge.badgeInsetColor = [UIColor whiteColor];
+            badge.badgeFrameColor = cell.textLabel.textColor;
+            badge.frame = CGRectMake(cf.screenWidth-80, table.rowHeight/2-13, 40, 26);
             
-            /* JSCustomBadge *badge = [JSCustomBadge customBadgeWithString:[NSString stringWithFormat:@"%d", self.promo_count]];
-             badge.tag = -11;
-             //badge.badgeInsetColor = [UIColor whiteColor];
-             badge.badgeFrameColor = cell.textLabel.textColor;
-             badge.frame = CGRectMake(cf.screenWidth-80, table.rowHeight/2-13, 40, 26);
-             
-             [cell addSubview:badge];*/
+            [cell addSubview:badge];*/
         }
         if (indexPath.row == 1){
             cell.textLabel.text = [self.config localisedString:@"Banners"];
@@ -667,12 +668,12 @@ const NSString *AFF_GET_BANNER = @"https://www.twixxies.com/affiliateapi/app_get
             [cell addSubview:balance];
             
             
-            /*  JSCustomBadge *badge = [JSCustomBadge customBadgeWithString:[NSString stringWithFormat:@"%d", self.banner_count]];
-             badge.tag = -11;
-             
+          /*  JSCustomBadge *badge = [JSCustomBadge customBadgeWithString:[NSString stringWithFormat:@"%d", self.banner_count]];
+            badge.tag = -11;
+            
              badge.frame = CGRectMake(cf.screenWidth-80, 9, 40, 26);
-             
-             [cell addSubview:badge];*/
+            
+            [cell addSubview:badge];*/
         }
     }
     
@@ -861,7 +862,7 @@ const NSString *AFF_GET_AFFILIATE_PROMO = @"https://www.twixxies.com/affiliateap
             self.promo = [dic objectForKey:@"promotions"];
             
             [self display_promo];
-            
+           
             
         } else {
             //There was an error
@@ -876,7 +877,7 @@ const NSString *AFF_GET_AFFILIATE_PROMO = @"https://www.twixxies.com/affiliateap
     int count = 0;
     //int line = 0;
     Config *cf = (Config *)self.config;
-    
+   
     CGRect last = CGRectMake(0, 0, 0, 0);
     int column = 2;
     for (int i = (int)itemViews.count ; i < self.promo.count; i++){
@@ -907,31 +908,31 @@ const NSString *AFF_GET_AFFILIATE_PROMO = @"https://www.twixxies.com/affiliateap
         }
         //figure out column row and col spacing
         
-        float col_spacing = 4;
-        float row_spacing = 4;
-        float first_row = 4;
-        if (i/column > 0){
-            frame.origin.y += row_spacing;
-        } else {
-            frame.origin.y += first_row;
-        }
-        if (column <= 1){
-            frame.origin.x += col_spacing;
-            frame.size.width -= col_spacing*2;
-        } else {
-            if (i%column == 0){
+            float col_spacing = 4;
+            float row_spacing = 4;
+            float first_row = 4;
+            if (i/column > 0){
+                frame.origin.y += row_spacing;
+            } else {
+                frame.origin.y += first_row;
+            }
+            if (column <= 1){
                 frame.origin.x += col_spacing;
-                frame.size.width -= col_spacing/2+col_spacing;
+                frame.size.width -= col_spacing*2;
+            } else {
+                if (i%column == 0){
+                    frame.origin.x += col_spacing;
+                    frame.size.width -= col_spacing/2+col_spacing;
+                }
+                if (i%column == column - 1){
+                    frame.origin.x += col_spacing/2;
+                    frame.size.width -= col_spacing + col_spacing/2;
+                }
+                if (i%column != 0 && i%column != column - 1) {
+                    frame.origin.x += col_spacing/2;
+                    frame.size.width -= col_spacing/2 + col_spacing/2;
+                }
             }
-            if (i%column == column - 1){
-                frame.origin.x += col_spacing/2;
-                frame.size.width -= col_spacing + col_spacing/2;
-            }
-            if (i%column != 0 && i%column != column - 1) {
-                frame.origin.x += col_spacing/2;
-                frame.size.width -= col_spacing/2 + col_spacing/2;
-            }
-        }
         
         frame.size.height = frame.size.width * 1.255+60;
         
@@ -970,7 +971,7 @@ const NSString *AFF_GET_AFFILIATE_PROMO = @"https://www.twixxies.com/affiliateap
         
         
         
-        
+      
         
         UITextView *name = [[UITextView alloc] init];
         name.frame = CGRectMake(0, but.frame.size.height, frame.size.width, 40);
@@ -995,7 +996,7 @@ const NSString *AFF_GET_AFFILIATE_PROMO = @"https://www.twixxies.com/affiliateap
         exprice.font = [UIFont systemFontOfSize:13];
         [pv addSubview:exprice];
         
-        
+   
         
         [scroll addSubview:pv];
         [itemViews addObject:pv];
@@ -1028,81 +1029,81 @@ const NSString *AFF_GET_AFFILIATE_PROMO = @"https://www.twixxies.com/affiliateap
     }
 }
 /*-(void)display_promo{
- order_views = [[NSMutableArray alloc] init];
- Config *cf = (Config *)self.config;
- images = [[NSMutableDictionary alloc] init];
- for (long i = 0; i < self.promo.count;i++){
- NSDictionary *or = [self.promo objectAtIndex:i];
- UIView *order = [[UIView alloc] init];
- order.userInteractionEnabled = YES;
+    order_views = [[NSMutableArray alloc] init];
+    Config *cf = (Config *)self.config;
+    images = [[NSMutableDictionary alloc] init];
+    for (long i = 0; i < self.promo.count;i++){
+        NSDictionary *or = [self.promo objectAtIndex:i];
+        UIView *order = [[UIView alloc] init];
+        order.userInteractionEnabled = YES;
  
- 
- 
- float viewheight = 120;
- ViewWithData *productView = [[ViewWithData alloc] initWithFrame:CGRectMake(0, 0, cf.screenWidth, viewheight)];
- productView.itemID = [or objectForKey:@"product_id"];
- 
- 
- 
- UIImageView *img = [[UIImageView alloc] initWithFrame:CGRectMake(15, 7, (viewheight-10)/1.533, viewheight-10)];
- img.contentMode = UIViewContentModeScaleAspectFit;
- NSString *url = [[or objectForKey:@"image"] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
- [Config loadImageURL:url toImageView:img withCacheKey:url trim:YES];
- [images setObject:img forKey:productView.itemID];
- [productView addSubview:img];
- 
- UITextView *pname = [[UITextView alloc] initWithFrame:CGRectMake(img.frame.origin.x+img.frame.size.width+3, img.frame.origin.y-6, productView.frame.size.width-img.frame.origin.x-img.frame.size.width-30, viewheight/2)];
- pname.textColor = [UIColor colorWithRed:41.0/255.0 green:39.0/255.0 blue:39.0/255.0 alpha:1];
- pname.contentInset = UIEdgeInsetsMake(-2, 0, 0, 0);
- pname.text = [or objectForKey:@"name"];
- pname.editable = NO;
- pname.userInteractionEnabled = NO;
- [productView addSubview:pname];
- 
- UITextView *rate = [[UITextView alloc] initWithFrame:CGRectMake(img.frame.origin.x+img.frame.size.width+3, img.frame.origin.y+20, productView.frame.size.width-img.frame.origin.x-img.frame.size.width-30, viewheight/2)];
- rate.textColor = [UIColor colorWithRed:161.0/255.0 green:161.0/255.0 blue:161.0/255.0 alpha:1];
- rate.contentInset = UIEdgeInsetsMake(-2, 0, 0, 0);
- rate.text = [NSString stringWithFormat:@"Earn %@%%", [or objectForKey:@"rate"]];
- rate.editable = NO;
- rate.userInteractionEnabled = NO;
- [productView addSubview:rate];
- 
- 
- ButtonWithData *share = [[ButtonWithData alloc] initWithFrame:CGRectMake(img.frame.origin.x+img.frame.size.width+3, img.frame.origin.y+50, 40, 25)];
- share.item_id = productView.itemID;
- [share setTitleColor:[UIColor colorWithRed:61.0/255.0 green:61.0/255.0 blue:61.0/255.0 alpha:1] forState:UIControlStateNormal];
- [share setTitle:@"Share" forState:UIControlStateNormal];
- share.titleLabel.font = [UIFont systemFontOfSize:12];
- share.layer.borderWidth = 0.5;
- share.layer.borderColor = [UIColor colorWithRed:61.0/255.0 green:61.0/255.0 blue:61.0/255.0 alpha:1].CGColor;
- share.layer.cornerRadius = 5;
- [share addTarget:self action:@selector(share_item:) forControlEvents:UIControlEventTouchUpInside];
- [productView addSubview:share];
- 
- 
- [order addSubview:productView];
- 
- UIView *separater = [[UIView alloc] initWithFrame:CGRectMake(0, productView.frame.origin.y+productView.frame.size.height+3, cf.screenWidth, 0.5)];
- separater.backgroundColor = [UIColor colorWithRed:41.0/255.0 green:39.0/255.0 blue:39.0/255.0 alpha:1];
- [order addSubview:separater];
- 
- if (i == 0){
- order.frame = CGRectMake(0, 0, cf.screenWidth, separater.frame.origin.y+separater.frame.size.height);
- 
- } else {
- UIView *prev = [order_views objectAtIndex:i-1];
- order.frame = CGRectMake(0, prev.frame.origin.y+prev.frame.size.height, cf.screenWidth, separater.frame.origin.y+separater.frame.size.height);
- }
- 
- 
- scroll.contentSize = CGSizeMake(cf.screenWidth, order.frame.origin.y+order.frame.size.height);
- 
- [order_views addObject:order];
- [scroll addSubview:order];
- 
- 
- }
- }*/
+        
+       
+        float viewheight = 120;
+        ViewWithData *productView = [[ViewWithData alloc] initWithFrame:CGRectMake(0, 0, cf.screenWidth, viewheight)];
+        productView.itemID = [or objectForKey:@"product_id"];
+        
+        
+        
+        UIImageView *img = [[UIImageView alloc] initWithFrame:CGRectMake(15, 7, (viewheight-10)/1.533, viewheight-10)];
+        img.contentMode = UIViewContentModeScaleAspectFit;
+        NSString *url = [[or objectForKey:@"image"] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        [Config loadImageURL:url toImageView:img withCacheKey:url trim:YES];
+        [images setObject:img forKey:productView.itemID];
+        [productView addSubview:img];
+        
+        UITextView *pname = [[UITextView alloc] initWithFrame:CGRectMake(img.frame.origin.x+img.frame.size.width+3, img.frame.origin.y-6, productView.frame.size.width-img.frame.origin.x-img.frame.size.width-30, viewheight/2)];
+        pname.textColor = [UIColor colorWithRed:41.0/255.0 green:39.0/255.0 blue:39.0/255.0 alpha:1];
+        pname.contentInset = UIEdgeInsetsMake(-2, 0, 0, 0);
+        pname.text = [or objectForKey:@"name"];
+        pname.editable = NO;
+        pname.userInteractionEnabled = NO;
+        [productView addSubview:pname];
+        
+        UITextView *rate = [[UITextView alloc] initWithFrame:CGRectMake(img.frame.origin.x+img.frame.size.width+3, img.frame.origin.y+20, productView.frame.size.width-img.frame.origin.x-img.frame.size.width-30, viewheight/2)];
+        rate.textColor = [UIColor colorWithRed:161.0/255.0 green:161.0/255.0 blue:161.0/255.0 alpha:1];
+        rate.contentInset = UIEdgeInsetsMake(-2, 0, 0, 0);
+        rate.text = [NSString stringWithFormat:@"Earn %@%%", [or objectForKey:@"rate"]];
+        rate.editable = NO;
+        rate.userInteractionEnabled = NO;
+        [productView addSubview:rate];
+        
+        
+        ButtonWithData *share = [[ButtonWithData alloc] initWithFrame:CGRectMake(img.frame.origin.x+img.frame.size.width+3, img.frame.origin.y+50, 40, 25)];
+        share.item_id = productView.itemID;
+        [share setTitleColor:[UIColor colorWithRed:61.0/255.0 green:61.0/255.0 blue:61.0/255.0 alpha:1] forState:UIControlStateNormal];
+        [share setTitle:@"Share" forState:UIControlStateNormal];
+        share.titleLabel.font = [UIFont systemFontOfSize:12];
+        share.layer.borderWidth = 0.5;
+        share.layer.borderColor = [UIColor colorWithRed:61.0/255.0 green:61.0/255.0 blue:61.0/255.0 alpha:1].CGColor;
+        share.layer.cornerRadius = 5;
+        [share addTarget:self action:@selector(share_item:) forControlEvents:UIControlEventTouchUpInside];
+        [productView addSubview:share];
+        
+        
+        [order addSubview:productView];
+        
+        UIView *separater = [[UIView alloc] initWithFrame:CGRectMake(0, productView.frame.origin.y+productView.frame.size.height+3, cf.screenWidth, 0.5)];
+        separater.backgroundColor = [UIColor colorWithRed:41.0/255.0 green:39.0/255.0 blue:39.0/255.0 alpha:1];
+        [order addSubview:separater];
+        
+        if (i == 0){
+            order.frame = CGRectMake(0, 0, cf.screenWidth, separater.frame.origin.y+separater.frame.size.height);
+            
+        } else {
+            UIView *prev = [order_views objectAtIndex:i-1];
+            order.frame = CGRectMake(0, prev.frame.origin.y+prev.frame.size.height, cf.screenWidth, separater.frame.origin.y+separater.frame.size.height);
+        }
+        
+        
+        scroll.contentSize = CGSizeMake(cf.screenWidth, order.frame.origin.y+order.frame.size.height);
+        
+        [order_views addObject:order];
+        [scroll addSubview:order];
+        
+        
+    }
+}*/
 
 -(IBAction)share_item:(UITapGestureRecognizer *)sender{
     
@@ -1137,33 +1138,33 @@ const NSString *AFF_GET_AFFILIATE_PROMO = @"https://www.twixxies.com/affiliateap
     
     
     /*ViewWithData *but = (ViewWithData *)sender.view;
-     NSString *pid = but.itemID;
-     
-     NSString *name = @"";
-     for (NSDictionary *d in self.promo){
-     if ([[d objectForKey:@"product_id"] isEqualToString:pid]) name = [d objectForKey:@"name"];
-     }
-     
-     Config *cf = (Config *)self.config;
-     [AffiliateModule getLink:cf.APP_UUID affiliate:cf.affiliate.aid item:pid itemType:@"product" completion:^(NSString *url, NSError *error) {
-     
-     UIImageView *imgview = [images objectForKey:pid];
-     UIImage *img =imgview.image;
-     
-     NSArray *activityItems = [NSArray arrayWithObjects:[NSString stringWithFormat:@"%@, %@", name, url], img, nil];
-     ;
-     UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
-     activityViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-     
-     [activityViewController setCompletionHandler:^(NSString *activityType, BOOL completed){
-     if (completed){
-     // [NSThread detachNewThreadSelector:@selector(send_user_share) toTarget:self withObject:nil];
-     }
-     }];
-     
-     [self presentViewController:activityViewController animated:YES completion:nil];
-     
-     }];*/
+    NSString *pid = but.itemID;
+    
+    NSString *name = @"";
+    for (NSDictionary *d in self.promo){
+        if ([[d objectForKey:@"product_id"] isEqualToString:pid]) name = [d objectForKey:@"name"];
+    }
+    
+    Config *cf = (Config *)self.config;
+    [AffiliateModule getLink:cf.APP_UUID affiliate:cf.affiliate.aid item:pid itemType:@"product" completion:^(NSString *url, NSError *error) {
+        
+        UIImageView *imgview = [images objectForKey:pid];
+        UIImage *img =imgview.image;
+        
+        NSArray *activityItems = [NSArray arrayWithObjects:[NSString stringWithFormat:@"%@, %@", name, url], img, nil];
+        ;
+        UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
+        activityViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+        
+        [activityViewController setCompletionHandler:^(NSString *activityType, BOOL completed){
+            if (completed){
+                // [NSThread detachNewThreadSelector:@selector(send_user_share) toTarget:self withObject:nil];
+            }
+        }];
+        
+        [self presentViewController:activityViewController animated:YES completion:nil];
+        
+    }];*/
     
     
 }
@@ -1179,7 +1180,7 @@ const NSString *AFF_GET_AFFILIATE_PROMO = @"https://www.twixxies.com/affiliateap
     SocialShareModule *s = (SocialShareModule *)ss;
     [sv toggle_view:NO];
     
-    
+   
     
     NSString *aid = @"0";
     UIView *loadingView = [AffiliateModule getLoadingScreen:CGRectMake(0, 0, cf.screenWidth, cf.screenHeight) withMessage:[cf localisedString:@"Generating Your Affiliate Link."]];
@@ -1236,7 +1237,7 @@ const NSString *AFF_GET_AFFILIATE_PROMO = @"https://www.twixxies.com/affiliateap
     UIBarButtonItem *barbtn = [[UIBarButtonItem alloc] initWithCustomView:menubtn];
     self.navigationItem.leftBarButtonItem = barbtn;
     
-    
+
     
     //NSLog(@"%f", conf.screenHeight);
     scroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, conf.screenWidth, conf.screenHeight-64)];
@@ -1370,7 +1371,7 @@ const NSString *AFF_GET_AFFILIATE_PROMO = @"https://www.twixxies.com/affiliateap
         [order addSubview:productView];
         
         UIView *separater = [[UIView alloc] initWithFrame:CGRectMake(0, productView.frame.origin.y+productView.frame.size.height+3, cf.screenWidth, 0.5)];
-        // separater.backgroundColor = [UIColor colorWithRed:196.0/255.0 green:196.0/255.0 blue:196.0/255.0 alpha:1];
+       // separater.backgroundColor = [UIColor colorWithRed:196.0/255.0 green:196.0/255.0 blue:196.0/255.0 alpha:1];
         separater.backgroundColor = [UIColor clearColor];
         [order addSubview:separater];
         
@@ -1449,7 +1450,7 @@ const NSString *AFF_GET_AFFILIATE_PROMO = @"https://www.twixxies.com/affiliateap
         [s present_sharing_dialog_with_message:s.message image:s.image imageurl:s.imageURL url:s.url action_sender:sender action_parent:self];
         
     }];
-    
+
     
 }
 

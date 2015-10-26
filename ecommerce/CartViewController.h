@@ -32,6 +32,7 @@
     NSDecimalNumber *total;
     NSDecimalNumber *totalsaved;
     
+    
     int loading;
     int applied_credit;
     NSString * random;

@@ -47,13 +47,14 @@
     
     
     table = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, self.config.screenWidth, self.config.screenHeight-64)];
-    table.separatorColor = [UIColor colorWithRed:173/255.0 green:173/255.0 blue:173/255.0 alpha:1];
+    table.separatorColor = [UIColor colorWithRed:217/255.0 green:217/255.0 blue:217/255.0 alpha:1];
     table.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     table.delegate = self;
     table.dataSource = self;
     table.rowHeight = 68;
     table.bounces = NO;
     table.separatorStyle = UITableViewCellSeparatorStyleNone;
+
     [self.view addSubview:table];
     [Design menu_table:table config:self.config];
     [self.view setBackgroundColor:table.backgroundColor];
@@ -373,6 +374,7 @@
         [[UIApplication sharedApplication] //                                                                                                   Change to our AppleID...
          openURL:[NSURL URLWithString:str]];
     }
+    
     else if ([mtitle isEqualToString:@"contact"]){
         
         MFMailComposeViewController *mailCont = [[MFMailComposeViewController alloc] init];

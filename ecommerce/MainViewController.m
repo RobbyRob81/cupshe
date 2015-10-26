@@ -562,7 +562,7 @@ const int SHIPPING_TAX = 4;
             
             NSString *pay = [dic objectForKey:@"payment_method"];
             if (![pay isKindOfClass:[NSNull class]] && ![pay isEqualToString:@"Paypal"]){
-                self.config.payment_method = pay;
+                //self.config.payment_method = pay;
             }
             if ([pay isEqualToString:@"Paypal"]){
                 NSString *cid = [dic objectForKey:@"paypal_client_id"];
@@ -570,7 +570,7 @@ const int SHIPPING_TAX = 4;
                 self.config.paypal_live = [[dic objectForKey:@"paypal_live"] intValue];
                 [PayPalMobile initializeWithClientIdsForEnvironments:@{PayPalEnvironmentProduction :cid,
                                                                        PayPalEnvironmentSandbox : scid}];
-                self.config.payment_method = pay;
+                //self.config.payment_method = pay;
             }
             self.config.app_template = [dic objectForKey:@"app_template"];
             
@@ -587,7 +587,15 @@ const int SHIPPING_TAX = 4;
             NSLog(@"%@", myxml);
             NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:received options:0 error:nil];
             NSArray *shipping = [dic objectForKey:@"shipping"];
+            
             for (NSDictionary *d in shipping){
+                ShippingCountry *sc = [[ShippingCountry alloc] init];
+                [sc shipping_country_from_dictionary:d];
+                [self.config.shipping addObject:sc];
+            }
+            
+            
+            /*for (NSDictionary *d in shipping){
                 Shipping *s = [[Shipping alloc] init];
                 [s shipping_from_dictionary:d];
                 [self.config.shipping addObject:s];
@@ -598,7 +606,7 @@ const int SHIPPING_TAX = 4;
                 NSString *state= [d objectForKey:@"tax_state"];
                 NSDecimalNumber *tax = [NSDecimalNumber decimalNumberWithString:[d objectForKey:@"tax"]];
                 [self.config.tax setObject:tax forKey:state];
-            }
+            }*/
             
         }
         

@@ -27,6 +27,8 @@
 #import "JSCustomBadge.h"
 #import "LanguageViewController.h"
 #import "StoreLocationViewController.h"
+#import "WholesaleModule.h"
+#import "PaymentMethodViewController.h"
 @implementation UserAccountViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -110,6 +112,7 @@
     
 
     
+    table.separatorColor = [UIColor colorWithRed:217/255.0 green:217/255.0 blue:217/255.0 alpha:1];
     
     
    /* NSString *login = @"Login";
@@ -133,12 +136,9 @@
     menuItems = [[NSMutableDictionary alloc] init];
     sectionTitle = [[NSMutableArray alloc] init];
     
-    NSMutableArray *profile = [[NSMutableArray alloc] initWithObjects:@"Billing Info",@"Credit Card",@"My Favorites", @"Notifications", @"Order History", @"Settings", @"Shipping Info",nil];
+    NSMutableArray *profile = [[NSMutableArray alloc] initWithObjects:@"Payment Methods",@"My Favorites", @"Notifications", @"Order History", @"Settings", @"Shipping Info",nil];
     
-    //menuitems = [[NSArray alloc] initWithObjects:@"Profile",@"Credit Card", @"My Orders",@"Privacy Policy", @"Return Policy", @"Contact Us", login, @"Bug Report",nil];
-    if ([self.config.payment_method isEqualToString:@"Paypal"]){
-        //profile = [[NSMutableArray alloc] initWithObjects:@"Order History",@"My Favorites", @"Settings",@"Notifications", @"Billing Info", @"Shipping Info",nil];
-    }
+    
     
     if (self.config.affiliate != nil && self.config.affiliate.hasAffiliate == 1) {
         [profile insertObject:@"Affiliate" atIndex:0];
@@ -150,9 +150,9 @@
     
     NSArray *credit = [[NSArray alloc] initWithObjects:@"Credits Available", nil];
     
-    NSArray *lan = [[NSArray alloc] initWithObjects:@"Region", nil];
+    NSArray *lan = [[NSArray alloc] initWithObjects:@"Regions", nil];
     
-    NSMutableArray *about = [[NSMutableArray alloc] initWithObjects:@"About", @"Policy", nil];
+    NSMutableArray *about = [[NSMutableArray alloc] initWithObjects:@"About", @"Policy",/* @"Store Locations",*/ nil];
     
     
 
@@ -170,8 +170,8 @@
     } else hasLang = YES;
     
     if (hasLang){
-        [sectionTitle addObject:@"Region"];
-        [menuItems setObject:lan forKey:@"Region"];
+        [sectionTitle addObject:@"Regions"];
+        [menuItems setObject:lan forKey:@"Regions"];
     }
     
     
@@ -261,7 +261,7 @@
 }
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-    return [sectionTitle objectAtIndex:section];
+    return [self.config localisedString:[sectionTitle objectAtIndex:section]];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -270,8 +270,8 @@
         NSString *title = [self.config localisedString:[[menuItems objectForKey:@"Hi there,"] objectAtIndex:indexPath.row]];
         
         UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.textLabel.text = title;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.textLabel.textColor = [UIColor colorWithRed:41/255.0 green:39/255.0 blue:39/255.0 alpha:1];
         cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:18.3f];;
         
@@ -292,6 +292,7 @@
     }
     else{
         NSString *key = [sectionTitle objectAtIndex:indexPath.section];
+        NSString *titkekey = [[menuItems objectForKey:key] objectAtIndex:indexPath.row];
         NSString *title = [self.config localisedString:[[menuItems objectForKey:key] objectAtIndex:indexPath.row]];
     
         UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
@@ -302,7 +303,7 @@
         
         NSString *titletext = [[menuItems objectForKey:[NSString stringWithFormat:@"%d",(int)indexPath.section]] objectAtIndex:indexPath.row];
         
-        if ([title isEqualToString: @"Notifications"]){
+        if ([titkekey isEqualToString: @"Notifications"]){
             if (push_count > 0){
                 
                 UILabel *balance = [[UILabel alloc] initWithFrame:CGRectMake(self.config.screenWidth-80, table.rowHeight/2-12, 40, 24)];
@@ -324,7 +325,7 @@
                 [cell addSubview:badge];*/
             }
         }
-        if ([title isEqualToString:@"Region"]){
+        if ([titkekey isEqualToString:@"Regions"]){
             UILabel *reg = [[UILabel alloc] initWithFrame:CGRectMake(self.config.screenWidth-200, 0, 170, tableView.rowHeight)];
             reg.text = [self.config.codetolanguage objectForKey:self.config.language];
             reg.textColor = cell.textLabel.textColor;
@@ -333,7 +334,7 @@
             cell.textLabel.text = [self.config.codetocountry objectForKey:self.config.location];
             [cell addSubview:reg];
         }
-        if ([title isEqualToString:@"Affiliate"]){
+        if ([titkekey isEqualToString:@"Affiliate"]){
             if (self.config.affiliate == nil || self.config.affiliate.aid == nil || self.config.affiliate.aid.length == 0 || [self.config.affiliate.aid isEqualToString:@"0"]){
             UILabel *reg = [[UILabel alloc] initWithFrame:CGRectMake(self.config.screenWidth-200, 0, 170, tableView.rowHeight)];
                 reg.text = [self.config localisedString:@"Inactive"];
@@ -376,13 +377,18 @@
             [self.navigationController pushViewController:ch animated:YES];
         }
         
-    } else if ([title isEqualToString: @"Credit Card"]){
+    } else if ([title isEqualToString: @"Payment Methods"]){
         if ([self check_login]){
-            ChangeCardViewController *ch = [[ChangeCardViewController alloc] initWithNibName:@"ChangeCardViewController" bundle:nil];
+           /* ChangeCardViewController *ch = [[ChangeCardViewController alloc] initWithNibName:@"ChangeCardViewController" bundle:nil];
             ch.config=self.config;
-            [self.navigationController pushViewController:ch animated:YES];
+            [self.navigationController pushViewController:ch animated:YES];*/
+            
+            PaymentMethodViewController *pm = [[PaymentMethodViewController alloc] init];
+            pm.config = self.config;
+            pm.parent = self;
+            [self.navigationController pushViewController:pm animated:YES];
         }
-    } else if ([title isEqualToString: @"Region"]){
+    } else if ([title isEqualToString: @"Regions"]){
         LanguageViewController *lv = [[LanguageViewController alloc] initWithNibName:@"LanguageViewController" bundle:nil];
         lv.config = self.config;
         [self.navigationController pushViewController:lv animated:YES];
@@ -423,6 +429,10 @@
            
             [self.navigationController pushViewController:sv animated:YES];
         }
+    }else if ([title isEqualToString:@"Wholesale"]){
+        WholesaleViewController *po = [[WholesaleViewController alloc] init];
+        po.conf = self.config;
+        [self.navigationController pushViewController:po animated:YES];
     }else if ([title isEqualToString:@"Policy"]){
         PolicyViewController *po = [[PolicyViewController alloc] initWithNibName:@"PolicyViewController" bundle:nil];
         po.policytype = 1;

@@ -64,11 +64,34 @@
     
     table.separatorColor = [UIColor colorWithRed:157/255.0 green:157/255.0 blue:157/255.0 alpha:1];
     
-    [self load_shipping];
+    if (self.config.shipping.count == 0){
+        [self load_shipping];
+    }
 }
-- (UIStatusBarStyle)preferredStatusBarStyle
-{
-    return UIStatusBarStyleLightContent;
+
+-(void)viewDidAppear:(BOOL)animated{
+    if (self.config.country == nil || self.config.country.length == 0){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[self.config localisedString:@"Please provide shipping address"] message:@"" delegate:self cancelButtonTitle:[self.config localisedString:@"Back"] otherButtonTitles: nil];
+        [alert show];
+        return;
+    } else {
+        BOOL found = false;
+        
+        ShippingCountry *all = nil;
+        for (ShippingCountry *sc in self.config.shipping){
+            if ([sc.code isEqualToString:self.config.country]){
+                shipping = sc.shippings;
+                found = true;
+            }
+            if ([sc.code isEqualToString:@"*"]) {
+                all = sc;
+            }
+        }
+        if (!found && all!= nil){
+            shipping = all.shippings;
+        }
+    }
+    [table reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -153,13 +176,13 @@
     
     
     
-    return self.config.shipping.count;
+    return shipping.count;
     
     
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    Shipping *s = [self.config.shipping objectAtIndex:indexPath.row];
+    Shipping *s = [shipping objectAtIndex:indexPath.row];
     ShippingMethodTableViewCell *cell = [[ShippingMethodTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.primaryLabel.text = s.name;
@@ -176,7 +199,7 @@
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    Shipping *s = [self.config.shipping objectAtIndex:indexPath.row];
+    Shipping *s = [shipping objectAtIndex:indexPath.row];
     NSDecimalNumber * price = [s claculate_shipping:self.config.cart totalprice:self.totalprice];
     if (price == nil){
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[self.config localisedString:@"Shipping unavailable"] message:@"" delegate:nil cancelButtonTitle:[self.config localisedString:@"Close"] otherButtonTitles: nil];

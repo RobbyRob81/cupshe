@@ -268,13 +268,13 @@ const int FBLOGIN = 3;
     indicatorsignup = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     indicatorsignup.frame = CGRectMake(self.config.screenWidth/2-indicatorsignup.frame.size.width/2, signupPassPane.frame.origin.y+signupPassPane.frame.size.height+20, indicatorsignup.frame.size.width, indicatorsignup.frame.size.height);
     [signupView addSubview:indicatorsignup];
-    
+
     
     UIButton *signupBtn = [[UIButton alloc] initWithFrame:CGRectMake(10, signupPassPane.frame.origin.y+signupPassPane.frame.size.height+70, self.config.screenWidth-20, 51.3)];
     signupBtn.titleLabel.font = [UIFont boldSystemFontOfSize:17.3];
     [signupBtn setTitle:[self.config localisedString:@"Sign Up"] forState:UIControlStateNormal];
     [signupBtn addTarget:self action:@selector(signup:) forControlEvents:UIControlEventTouchUpInside];
-    // NSMutableDictionary *dr = [designs objectForKey:@"login_fill_button"];
+   // NSMutableDictionary *dr = [designs objectForKey:@"login_fill_button"];
     [Design style:[[DOM alloc] initWithView:signupBtn parent:nil] design:dr config:self.config];
     [signupView addSubview:signupBtn];
     
@@ -284,7 +284,7 @@ const int FBLOGIN = 3;
             UIButton *fbSignupButton=[[UIButton alloc] initWithFrame:CGRectMake(10, signupBtn.frame.origin.y+signupBtn.frame.size.height+10, self.config.screenWidth-20, 51.3)];
             fbSignupButton.backgroundColor=[UIColor colorWithRed:0/255.0 green:122/255.0 blue:255/255.0 alpha:1];
             
-            
+           
             
             UILabel *fbtitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, fbSignupButton.frame.size.width, fbSignupButton.frame.size.height)];
             fbtitle.font = [UIFont boldSystemFontOfSize:17.3];
@@ -467,44 +467,44 @@ const int FBLOGIN = 3;
 }
 
 /*- (void)loginViewFetchedUserInfo:(FBLoginView *)loginView
- user:(id<FBGraphUser>)user {
- 
- NSLog(@"%@", [user objectForKey:@"email"]);
- 
- [NSThread detachNewThreadSelector:@selector(threadStartAnimating) toTarget:self withObject:nil];
- NSString *myRequestString = [NSString stringWithFormat:@"email=%@&device_token=%@&push_token=%@&app_uuid=%@&cached_data=%@", [user objectForKey:@"email"], self.config.device_token, self.config.push_token, self.config.APP_UUID, [self.config.cache to_json]];
- 
- NSLog(@"%@", myRequestString);
- 
- // Create Data from request
- NSData *myRequestData = [NSData dataWithBytes: [myRequestString UTF8String] length: [myRequestString length]];
- NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL: [NSURL URLWithString: [NSString stringWithFormat:@"%@%@", self.config.API_ROOT, self.config.API_SOCIAL_SIGN_UP]]];
- 
- // set Request Type
- [request setHTTPMethod: @"POST"];
- // Set content-type
- [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"content-type"];
- // Set Request Body
- [request setHTTPBody: myRequestData];
- 
- 
- NSMutableData *received = [receivedData objectAtIndex:SIGNUP];
- [received setLength:0];
- NSURLConnectionWithTag *urlConnection = [[NSURLConnectionWithTag alloc] initWithRequest:request delegate:self tag:FBLOGIN];
- }*/
+                            user:(id<FBGraphUser>)user {
+    
+    NSLog(@"%@", [user objectForKey:@"email"]);
+    
+    [NSThread detachNewThreadSelector:@selector(threadStartAnimating) toTarget:self withObject:nil];
+    NSString *myRequestString = [NSString stringWithFormat:@"email=%@&device_token=%@&push_token=%@&app_uuid=%@&cached_data=%@", [user objectForKey:@"email"], self.config.device_token, self.config.push_token, self.config.APP_UUID, [self.config.cache to_json]];
+    
+    NSLog(@"%@", myRequestString);
+    
+    // Create Data from request
+    NSData *myRequestData = [NSData dataWithBytes: [myRequestString UTF8String] length: [myRequestString length]];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL: [NSURL URLWithString: [NSString stringWithFormat:@"%@%@", self.config.API_ROOT, self.config.API_SOCIAL_SIGN_UP]]];
+    
+    // set Request Type
+    [request setHTTPMethod: @"POST"];
+    // Set content-type
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"content-type"];
+    // Set Request Body
+    [request setHTTPBody: myRequestData];
+    
+    
+    NSMutableData *received = [receivedData objectAtIndex:SIGNUP];
+    [received setLength:0];
+    NSURLConnectionWithTag *urlConnection = [[NSURLConnectionWithTag alloc] initWithRequest:request delegate:self tag:FBLOGIN];
+}*/
 
 -(void)fblogin{
     FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
     /*[login
      logInWithReadPermissions: @[@"public_profile", @"email"]
      handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
-     if (error) {
-     NSLog(@"Process error");
-     } else if (result.isCancelled) {
-     [self getFacebookProfileInfos:result];
-     } else {
-     [self getFacebookProfileInfos:result];
-     }
+         if (error) {
+             NSLog(@"Process error");
+         } else if (result.isCancelled) {
+             [self getFacebookProfileInfos:result];
+         } else {
+             [self getFacebookProfileInfos:result];
+         }
      }];*/
     [login logInWithReadPermissions:@[@"public_profile", @"email"] fromViewController:self handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
         if (error) {
@@ -557,56 +557,56 @@ const int FBLOGIN = 3;
     }
 }
 /*
- - (void)loginViewShowingLoggedInUser:(FBLoginView *)loginView {
- 
- }
- 
- - (void)loginViewShowingLoggedOutUser:(FBLoginView *)loginView {
- 
- }
- 
- - (void)loginView:(FBLoginView *)loginView handleError:(NSError *)error {
- NSString *alertMessage, *alertTitle;
- 
- // If the user should perform an action outside of you app to recover,
- // the SDK will provide a message for the user, you just need to surface it.
- // This conveniently handles cases like Facebook password change or unverified Facebook accounts.
- if ([FBErrorUtility shouldNotifyUserForError:error]) {
- alertTitle = [self.config localisedString:@"Facebook Error"];
- alertMessage = [FBErrorUtility userMessageForError:error];
- 
- // This code will handle session closures that happen outside of the app
- // You can take a look at our error handling guide to know more about it
- // https://developers.facebook.com/docs/ios/errors
- } else if ([FBErrorUtility errorCategoryForError:error] == FBErrorCategoryAuthenticationReopenSession) {
- alertTitle = [self.config localisedString:@"Session Error"];
- alertMessage = [self.config localisedString:@"Your current session is no longer valid. Please log in again."];
- 
- // If the user has cancelled a login, we will do nothing.
- // You can also choose to show the user a message if cancelling login will result in
- // the user not being able to complete a task they had initiated in your app
- // (like accessing FB-stored information or posting to Facebook)
- } else if ([FBErrorUtility errorCategoryForError:error] == FBErrorCategoryUserCancelled) {
- NSLog(@"user cancelled login");
- 
- // For simplicity, this sample handles other errors with a generic message
- // You can checkout our error handling guide for more detailed information
- // https://developers.facebook.com/docs/ios/errors
- } else {
- alertTitle  = [self.config localisedString:@"Cannot connect to Facebook"];
- alertMessage = @"";
- 
- }
- 
- if (alertMessage) {
- [[[UIAlertView alloc] initWithTitle:alertTitle
- message:alertMessage
- delegate:nil
- cancelButtonTitle:[self.config localisedString:@"Close"]
- otherButtonTitles:nil] show];
- }
- }
- */
+- (void)loginViewShowingLoggedInUser:(FBLoginView *)loginView {
+    
+}
+
+- (void)loginViewShowingLoggedOutUser:(FBLoginView *)loginView {
+    
+}
+
+- (void)loginView:(FBLoginView *)loginView handleError:(NSError *)error {
+    NSString *alertMessage, *alertTitle;
+    
+    // If the user should perform an action outside of you app to recover,
+    // the SDK will provide a message for the user, you just need to surface it.
+    // This conveniently handles cases like Facebook password change or unverified Facebook accounts.
+    if ([FBErrorUtility shouldNotifyUserForError:error]) {
+        alertTitle = [self.config localisedString:@"Facebook Error"];
+        alertMessage = [FBErrorUtility userMessageForError:error];
+        
+        // This code will handle session closures that happen outside of the app
+        // You can take a look at our error handling guide to know more about it
+        // https://developers.facebook.com/docs/ios/errors
+    } else if ([FBErrorUtility errorCategoryForError:error] == FBErrorCategoryAuthenticationReopenSession) {
+        alertTitle = [self.config localisedString:@"Session Error"];
+        alertMessage = [self.config localisedString:@"Your current session is no longer valid. Please log in again."];
+        
+        // If the user has cancelled a login, we will do nothing.
+        // You can also choose to show the user a message if cancelling login will result in
+        // the user not being able to complete a task they had initiated in your app
+        // (like accessing FB-stored information or posting to Facebook)
+    } else if ([FBErrorUtility errorCategoryForError:error] == FBErrorCategoryUserCancelled) {
+        NSLog(@"user cancelled login");
+        
+        // For simplicity, this sample handles other errors with a generic message
+        // You can checkout our error handling guide for more detailed information
+        // https://developers.facebook.com/docs/ios/errors
+    } else {
+        alertTitle  = [self.config localisedString:@"Cannot connect to Facebook"];
+        alertMessage = @"";
+        
+    }
+    
+    if (alertMessage) {
+        [[[UIAlertView alloc] initWithTitle:alertTitle
+                                    message:alertMessage
+                                   delegate:nil
+                          cancelButtonTitle:[self.config localisedString:@"Close"]
+                          otherButtonTitles:nil] show];
+    }
+}
+*/
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response{
     
 }

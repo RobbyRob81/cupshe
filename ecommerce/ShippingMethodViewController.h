@@ -11,6 +11,7 @@
 #import "Config.h"
 @interface ShippingMethodViewController : UIViewController <UIAlertViewDelegate>{
     IBOutlet UITableView *table;
+    NSMutableArray *shipping;
 }
 
 @property (nonatomic, strong) NSDecimalNumber * totalprice;

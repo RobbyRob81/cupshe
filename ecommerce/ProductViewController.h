@@ -11,14 +11,16 @@
 #import "Product.h"
 #import "ProductVar.h"
 #import "ProductFilterViewController.h"
+
 @class ProductViewDesign;
 @interface ProductViewController : UIViewController <NSURLConnectionDelegate, UIScrollViewDelegate, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate>{
     IBOutlet UIScrollView *scroll;
     IBOutlet UIActivityIndicatorView *indicator;
+    
     IBOutlet UISearchBar *searchbar;
     IBOutlet UIButton *searchCancelBtn;
     //IBOutlet UITextField *searchText;
-    // IBOutlet UIButton *cancelbtn;
+   // IBOutlet UIButton *cancelbtn;
     
     UILabel *titlelabel;
     UILabel *cartCounter;

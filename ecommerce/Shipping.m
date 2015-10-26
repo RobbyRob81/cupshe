@@ -8,6 +8,49 @@
 
 #import "Shipping.h"
 #import "Cart.h"
+
+@implementation ShippingCountry
+
+-(void)shipping_country_from_dictionary:(NSDictionary *)d{
+    self.name = [d objectForKey:@"country"];
+    self.code = [d objectForKey:@"country_code"];
+    self.tax = [NSDecimalNumber decimalNumberWithString:[d objectForKey:@"tax"]];
+    self.states = [[NSMutableArray alloc] init];
+    NSArray *states = [d objectForKey:@"states"];
+    for (NSDictionary *dic in states){
+        ShippingState *ss = [[ShippingState alloc] init];
+        [ss shipping_state_from_dictionary:dic];
+        [self.states addObject:ss];
+    }
+    self.shippings = [[NSMutableArray alloc] init];
+    NSArray *ship = [d objectForKey:@"shippings"];
+    for (NSDictionary *dic in ship){
+        Shipping *s = [[Shipping alloc] init];
+        [s shipping_from_dictionary:dic];
+        [self.shippings addObject:s];
+    }
+    
+}
+
+-(NSDecimalNumber *)claculate_shipping:(NSArray *)cart totalprice:(NSDecimalNumber *)total{
+    return [[NSDecimalNumber alloc] initWithInt:0];
+}
+
+@end
+
+
+@implementation ShippingState
+
+-(void)shipping_state_from_dictionary:(NSDictionary *)d{
+    self.name = [d objectForKey:@"state"];
+    self.code = [d objectForKey:@"code"];
+    self.tax = [NSDecimalNumber decimalNumberWithString:[d objectForKey:@"tax"]];
+    
+}
+
+@end
+
+
 @implementation Shipping
 
 -(void) shipping_from_dictionary:(NSDictionary *)d{

@@ -132,7 +132,7 @@ const int DELETE_CART = 1;
     seg = [[UILabel alloc] init];
     seg.text = [self.config localisedString:@"Edit"];
     seg.textAlignment = NSTextAlignmentRight;
-    seg.frame = CGRectMake(80-120, 0, 120, 44);
+    seg.frame = CGRectMake(80-60, 0, 60, 44);
     UITapGestureRecognizer *tapseg = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(edit)];
     [seg addGestureRecognizer:tapseg];
     seg.userInteractionEnabled = YES;
@@ -147,15 +147,18 @@ const int DELETE_CART = 1;
     
     
     table = [[UITableView alloc] init];
-    table.separatorColor = [UIColor colorWithRed:173/255.0 green:173/255.0 blue:173/255.0 alpha:1];
+    table.separatorColor = [UIColor colorWithRed:217/255.0 green:217/255.0 blue:217/255.0 alpha:1];
     table.delegate = self;
     table.dataSource = self;
     table.rowHeight = 140;
     table.frame = CGRectMake(0, 0, self.config.screenWidth, self.config.screenHeight-64-101);
+    
     [self.view insertSubview:table belowSubview:indicator];
     
     
     [self load_cart:0];
+    [self load_payment];
+    
 }
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
@@ -182,7 +185,7 @@ const int DELETE_CART = 1;
             creditview = [[UIView alloc] initWithFrame:CGRectMake(0, -40, self.config.screenWidth, 40)];
             CALayer *layer = [CALayer layer];
             layer.frame = CGRectMake(0, creditview.frame.size.height, creditview.frame.size.width, 0.5);
-            layer.backgroundColor = [[UIColor colorWithRed:197.0/255.0 green:197.0/255.0 blue:197.0/255.0 alpha:1] CGColor];
+            layer.backgroundColor = [[UIColor colorWithRed:217/255.0 green:217/255.0 blue:217/255.0 alpha:1] CGColor];
             [creditview.layer addSublayer:layer];
             
             credit = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, self.config.screenWidth, creditview.frame.size.height)];
@@ -198,7 +201,7 @@ const int DELETE_CART = 1;
             [btn addTarget:self action:@selector(apply_credit:) forControlEvents:UIControlEventTouchUpInside];
             btn.layer.borderWidth = 0.5;
             btn.layer.cornerRadius = 5;
-            btn.layer.borderColor = [[UIColor colorWithRed:197.0/255.0 green:197.0/255.0 blue:197.0/255.0 alpha:1] CGColor];
+            btn.layer.borderColor = [[UIColor colorWithRed:217/255.0 green:217/255.0 blue:217/255.0 alpha:1] CGColor];
             [creditview addSubview:btn];
             
             applyCredit = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, btn.frame.size.width, btn.frame.size.height)];
@@ -274,10 +277,13 @@ const int DELETE_CART = 1;
     }
 }
 
+
+
 -(void)load_cart:(int)start{
     if (loading == 1) return;
     if (start == 0){
         [self.config.cart removeAllObjects];
+        
         [NSThread detachNewThreadSelector:@selector(threadStartAnimating) toTarget:self withObject:nil];
     }
     loading = 1;
@@ -372,7 +378,55 @@ const int DELETE_CART = 1;
     
 }
 
+-(void)load_payment{
+    self.config.user_payment_methods = [[NSMutableArray alloc] init];
+    NSString *myRequestString = [NSString stringWithFormat:@"app_uuid=%@&user_id=%@&access_token=%@", self.config.APP_UUID, self.config.user_id, self.config.token];
+    
+    // Create Data from request
+    NSData *myRequestData = [NSData dataWithBytes: [myRequestString UTF8String] length: [myRequestString length]];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL: [NSURL URLWithString: [NSString stringWithFormat:@"%@%@", self.config.API_ROOT, self.config.API_GET_USER_PAYMENTMETHOD]]];
+    
+    
+    NSLog(@"%@", myRequestString);
+    // set Request Type
+    [request setHTTPMethod: @"POST"];
+    // Set content-type
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"content-type"];
+    // Set Request Body
+    [request setHTTPBody: myRequestData];
+    
+    NSURLConnectionBlock *connection = [[NSURLConnectionBlock alloc] initWithRequest:request];
+    connection.completion = ^(id obj, NSError *err) {
+        
+        if (!err) {
+            //It's ok, do domething with the response data (obj)
+            NSMutableData *d = (NSMutableData *)obj;
+            NSString *response = [[NSString alloc] initWithBytes:[d bytes] length:[d length] encoding:NSUTF8StringEncoding];
+            NSLog(@"%@", response);
+            
+            NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:d options:0 error:nil];
+            NSArray *arr = [dic objectForKey:@"payment_method"];
+            for (NSDictionary *pay in arr){
+                UserPaymentMethod *upm = [[UserPaymentMethod alloc] init];
+                [upm dictionary_to_method:pay];
+                [self.config.user_payment_methods addObject:upm];
+                
+                if (upm.is_default || arr.count == 1){
+                    self.config.selected_payment = upm;
+                }
+            }
+            
+            
+        } else {
+            //There was an error
+            NSLog(@"%@", err.description);
+        }
+        
+    };
+    [connection start];
 
+
+}
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -393,8 +447,8 @@ const int DELETE_CART = 1;
     
     
     CartTableViewCell *cell = [[CartTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] ;
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
         if (temp.sku == nil || [temp.sku isKindOfClass:[NSNull class]] || temp.sku.length == 0) cell.name.text = [self.config localisedString:@"Product Deleted"];
     else {
         
@@ -429,7 +483,10 @@ const int DELETE_CART = 1;
         }
         cell.leftImage.contentMode = UIViewContentModeScaleAspectFit;
     // cell.leftImage.image = temp.itemImage;
-        if (temp.imageURL != nil && ![temp.imageURL isKindOfClass:[NSNull class]]) {
+        
+
+        
+        if (temp.imageURL != nil && ![temp.imageURL isKindOfClass:[NSNull class]] && temp.itemImage == nil) {
         //but.image = [UIImage imageNamed:@"default-shop.png"];
             NSString *url = [temp.imageURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
             dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
@@ -451,9 +508,13 @@ const int DELETE_CART = 1;
                 //but.image = newImage;
                     temp.itemImage = newImage;
                     cell.leftImage.image = newImage;
+                    
                 });
             });
+        } else {
+            cell.leftImage.image = temp.itemImage;
         }
+        
         if (temp.deleted == 0) {
             
         } else {
@@ -596,7 +657,7 @@ const int DELETE_CART = 1;
 
 -(IBAction)checkout:(id)sender{
     
-    if (![self.config.payment_method isEqualToString:@"Paypal"]) {
+    //if (![self.config.payment_method isEqualToString:@"Paypal"]) {
             CheckoutViewController *cv = [[CheckoutViewController alloc] initWithNibName:@"CheckoutViewController" bundle:nil];
             cv.config = self.config;
             cv.total = total;
@@ -617,7 +678,7 @@ const int DELETE_CART = 1;
             
             [self.navigationController pushViewController:cv animated:YES];
         }
-    } else {
+   /* } else {
             
             CheckoutPaypalViewController *cpv = [[CheckoutPaypalViewController alloc] initWithNibName:@"CheckoutPaypalViewController" bundle:nil];
             cpv.config = self.config;
@@ -639,7 +700,7 @@ const int DELETE_CART = 1;
             
             [self.navigationController pushViewController:cpv animated:YES];
         }
-    }
+    }*/
     
 }
 

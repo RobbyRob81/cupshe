@@ -40,6 +40,8 @@
     int ziprow;
     int countryrow;
     int phonerow;
+    
+    BOOL shipping_all_country;
 }
 
 

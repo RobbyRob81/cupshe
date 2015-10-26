@@ -33,12 +33,12 @@ const int ImageDetailBorder = 0;
     [self.view addSubview:label];
     //[label sizeToFit];
     [Design navigationbar_title:label config:self.config];
-    
+
     
     
     CALayer *layer = [CALayer layer];
     layer.frame = CGRectMake(0, 64, self.config.screenWidth, 0.5);
-    layer.backgroundColor = [[UIColor colorWithRed:197.0/255.0 green:197.0/255.0 blue:197.0/255.0 alpha:1] CGColor];
+    layer.backgroundColor = [[UIColor colorWithRed:217/255.0 green:217/255.0 blue:217/255.0 alpha:1] CGColor];
     [self.view.layer addSublayer:layer];
     
     close.titleLabel.font = [IonIcons fontWithSize:28];
@@ -60,7 +60,7 @@ const int ImageDetailBorder = 0;
     
     [scroll addGestureRecognizer:toleft];
     [scroll addGestureRecognizer:toright];
-    
+   
     
     scroll.scrollEnabled = NO;
     [scroll delaysContentTouches];
@@ -71,7 +71,7 @@ const int ImageDetailBorder = 0;
         
         UIImageView *image = [self.images objectAtIndex:i];
         
-        
+       
         
         UIScrollView *uivscroll = [[UIScrollView alloc] init];
         uivscroll.frame = CGRectMake(ImageDetailBorder*(i+1)+self.config.screenWidth*i, 0, self.config.screenWidth-2*ImageDetailBorder, (self.config.screenHeight-64-ImageDetailBorder));
@@ -196,7 +196,7 @@ const int ImageDetailBorder = 0;
         v.zoomScale = 1;
         v.tag = 0;
     } else {
-        CGPoint point = [ges locationInView:ges.view];
+            CGPoint point = [ges locationInView:ges.view];
         [v zoomToRect:CGRectMake(point.x-50, point.y-50, 50, 50) animated:YES];
         v.tag = 1;
     }

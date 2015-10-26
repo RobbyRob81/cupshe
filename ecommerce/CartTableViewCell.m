@@ -68,7 +68,7 @@
         [self.contentView addSubview:self.qty];
         [self.contentView addSubview:self.price];
         [self.contentView addSubview:self.leftImage];
-        
+       
     }
     return self;
 }
@@ -114,7 +114,7 @@
     self.price.font = [UIFont boldSystemFontOfSize:13];
     self.price.textColor =[UIColor colorWithRed:88/255.0 green:88/255.0 blue:88/255.0 alpha:1];
     
-    
+   
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

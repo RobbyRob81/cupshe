@@ -28,7 +28,7 @@
         scroll.delegate = self;
         titleScroll.delegate = self;
         search_display = [[UITableView alloc] init];
-        search_display.separatorColor = [UIColor colorWithRed:173/255.0 green:173/255.0 blue:173/255.0 alpha:1];
+        search_display.separatorColor = [UIColor colorWithRed:217/255.0 green:217/255.0 blue:217/255.0 alpha:1];
         search_display.hidden = YES;
         search_display.delegate = self;
         search_display.dataSource = self;

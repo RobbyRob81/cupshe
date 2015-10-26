@@ -129,6 +129,8 @@ const int PAYPAL_CARD_PURCHASE = 3;
         }
         
     }
+    
+    
 }
 -(void)back{
     [self.navigationController popViewControllerAnimated:YES];
@@ -184,9 +186,9 @@ const int PAYPAL_CARD_PURCHASE = 3;
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     if (section == 0){
-        //return 2;  //enable this after figuring out other payment method
-        sel_method = 1;
-        return 1;
+        return 2;  //enable this after figuring out other payment method
+        //sel_method = 1;
+        //return 1;
     } else if (section == 1) {
         if (sel_method == 0)
         return 1;
@@ -242,12 +244,12 @@ const int PAYPAL_CARD_PURCHASE = 3;
             cell.textLabel.text = [self.config localisedString:@"Credit Card"];
         if (sel_method == 0) cell.accessoryType = UITableViewCellAccessoryCheckmark;
     }*/
-    if (indexPath.section == 0 && indexPath.row == 0){
+    if (indexPath.section == 0 && indexPath.row == 1){
         cell.textLabel.text = [self.config localisedString:@"PayPal"];
         cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:18.3f];
         if (sel_method == 1) cell.accessoryType = UITableViewCellAccessoryCheckmark;
     }
-    if (indexPath.section == 0 && indexPath.row == 1){
+    if (indexPath.section == 0 && indexPath.row == 0){
         cell.textLabel.text = [self.config localisedString:@"Credit Card"];
         cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:18.3f];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -520,17 +522,18 @@ const int PAYPAL_CARD_PURCHASE = 3;
 
 -(void)calculate_tax{
     tax = [NSDecimalNumber decimalNumberWithString:@"0"];
-    NSDecimalNumber *taxrate =[self.config.tax objectForKey:self.config.state];
-    if (taxrate == nil) taxrate = [NSDecimalNumber decimalNumberWithString:@"0"];
-    if (self.config.state != nil) tax = [taxrate decimalNumberByMultiplyingBy:self.total];
-    if ([tax compare:[NSNumber numberWithFloat:0.01]] == NSOrderedAscending) tax = [NSDecimalNumber decimalNumberWithString:@"0"];
+    //NSDecimalNumber *taxrate =[self.config.tax objectForKey:self.config.state];
+    //if (taxrate == nil) taxrate = [NSDecimalNumber decimalNumberWithString:@"0"];
+    ///if (self.config.state != nil) tax = [taxrate decimalNumberByMultiplyingBy:self.total];
+    //if ([tax compare:[NSNumber numberWithFloat:0.01]] == NSOrderedAscending) tax = [NSDecimalNumber decimalNumberWithString:@"0"];
 }
 
 
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section == 0 && indexPath.row == 1){
+    
+    if (indexPath.section == 0 && indexPath.row == 0){
         sel_method = 0;
         [submit setTitle:[self.config localisedString:@"Submit Order"] forState:UIControlStateNormal];
         [table reloadData];
@@ -540,7 +543,7 @@ const int PAYPAL_CARD_PURCHASE = 3;
         [self.navigationController pushViewController:ac animated:YES];
         return;
     }
-    if (indexPath.section == 0 && indexPath.row == 0){
+    if (indexPath.section == 0 && indexPath.row == 1){
         sel_method = 1;
         [submit setTitle:[self.config localisedString:@"Pay with PayPal"] forState:UIControlStateNormal];
         [table reloadData];

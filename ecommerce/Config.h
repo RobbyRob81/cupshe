@@ -12,6 +12,7 @@
 #import "AffiliateModule.h"
 #import "WholesaleModule.h"
 #import "CachedDataModule.h"
+#import "PaymentMethod.h"
 
 @interface Config : NSObject
 
@@ -63,7 +64,7 @@
 @property (nonatomic, strong) NSString *app_text_logo;
 @property (nonatomic, strong) NSString *device_token;
 @property (nonatomic, strong) NSString *push_token;
-@property (nonatomic, strong)NSString *payment_method;
+//@property (nonatomic, strong)NSString *payment_method;
 @property (nonatomic, strong) NSString *payment_method_option;
 @property (nonatomic, strong)NSString *link_inventory;
 @property int paypal_live;
@@ -116,7 +117,7 @@
 
 //app info
 @property (nonatomic, strong) NSMutableArray *shipping;
-@property (nonatomic, strong) NSMutableDictionary *tax;
+//@property (nonatomic, strong) NSMutableDictionary *tax;
 @property (nonatomic, strong) NSString *returnPolicy;
 @property (nonatomic, strong) NSString *privacyPolicy;
 @property (nonatomic, strong) NSString *contact;
@@ -164,7 +165,9 @@
 @property (nonatomic, strong) NSString *temp_email;
 
 
-
+//new payment method
+@property (nonatomic, strong) UserPaymentMethod *selected_payment;
+@property (nonatomic, strong) NSMutableArray *user_payment_methods;
 
 -(void)load_default;
 -(void)save_default;

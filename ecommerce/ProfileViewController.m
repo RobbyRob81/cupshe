@@ -68,6 +68,8 @@
     [profile setObject:email forKey:@"email"  ];
     [profile setObject:@"*****" forKey:@"password"  ];
     
+    
+    
     /*NSString *name = self.config.name;
     if (self.config.name == nil) name = @"";
     //[profile setObject:name forKey:@"name"];

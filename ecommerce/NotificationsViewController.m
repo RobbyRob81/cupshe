@@ -298,7 +298,7 @@
         UILabel *timelabel = [[UILabel alloc] initWithFrame:CGRectMake(10, response.frame.origin.y+response.frame.size.height+10, frame.size.width, 20)];
         timelabel.textColor = [UIColor lightGrayColor];
         timelabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:15.0f];
-        timelabel.textColor = [UIColor colorWithRed:173.0/255.0 green:173.0/255.0 blue:173.0/255.0 alpha:1];
+        timelabel.textColor = [UIColor colorWithRed:217/255.0 green:217/255.0 blue:217/255.0 alpha:1];
         timelabel.text = date;
         [pv addSubview:timelabel];
         

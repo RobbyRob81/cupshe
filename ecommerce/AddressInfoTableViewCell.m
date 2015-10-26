@@ -19,7 +19,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
-        
+       
         
         
         self.bigTitle = [[UILabel alloc] init];
@@ -37,7 +37,7 @@
         self.value.font = [UIFont systemFontOfSize:15];
         [self.contentView addSubview:self.value];
         
-        
+      
     }
     return self;
 }
@@ -81,7 +81,7 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-    
+
     // Configure the view for the selected state
 }
 

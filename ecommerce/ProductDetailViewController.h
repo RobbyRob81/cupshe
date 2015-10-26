@@ -17,7 +17,6 @@
 @class ProductDetailDesign;
 @interface ProductDetailViewController : UIViewController <UIPickerViewDelegate, UIPickerViewDataSource, UIGestureRecognizerDelegate, UIWebViewDelegate, ProductReviewViewControllerModuleDelegate> {
     IBOutlet UIScrollView *scroll;
-    UIActivityIndicatorView *indicator;
     //IBOutlet UIImageView *image;
     //IBOutlet UILabel *name;
    // IBOutlet UIButton *choose;
@@ -25,6 +24,7 @@
     //IBOutlet UILabel *sale_ori;
     //IBOutlet UILabel *sale_sale;
     IBOutlet UIButton *addcart;
+    UIActivityIndicatorView *indicator;
     UILabel *addcarttop;
     UILabel *addcartbottom;
     UILabel *addcartmiddle;

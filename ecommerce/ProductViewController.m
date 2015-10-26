@@ -94,7 +94,7 @@ const int FILTER = 2;
     
     
     
-    
+   
     
     [searchCancelBtn setTitle:[self.config localisedString:@"Cancel"] forState:UIControlStateNormal];
     
@@ -490,6 +490,7 @@ const int FILTER = 2;
     if (wid == nil) wid = @"";
     
     NSString *myRequestString = [NSString stringWithFormat:@"app_uuid=%@&start=%d&filter=%@&search_terms=%@&rank=%@&category=%@&attributes=%@&department_id=%@&wholesale_user_id=%@&location=%@&currency=%@", self.config.APP_UUID, start, f, st, self.rank, catjson, attrjson, self.departmentid, wid,self.config.location, self.config.currency];
+    
     
     
     
@@ -1118,8 +1119,9 @@ const int FILTER = 2;
     long line = 0;
     //CGRect prev = [Design product_initial_frame:(int)itemViews.count config:self.config];
     CGRect last = CGRectMake(0, 0, 0, 0);
+    NSLog(@"%ld",itemViews.count);
     long currentcount = itemViews.count;
-    for (long i = itemViews.count; i < currentcount+1 && i < items.count; i++){
+    for (long i = itemViews.count; i < currentcount+2 && i < items.count; i++){
         Product *temp = [items objectAtIndex:i];
         line = i/2;
         

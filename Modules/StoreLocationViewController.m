@@ -11,7 +11,7 @@
 #import "Design.h"
 #import "ionicons-codes.h"
 #import "IonIcons.h"
-
+#import "PKRevealController.h"
 const NSString *GET_STORE=@"ecommerce/getStoreLocation";
 @interface StoreLocationViewController ()
 
@@ -42,18 +42,13 @@ const NSString *GET_STORE=@"ecommerce/getStoreLocation";
     
     
     
-    UILabel *menubtn = [IonIcons labelWithIcon:icon_ios7_arrow_back size:22 color:[UIColor blackColor]];;
+    UILabel *menubtn = [IonIcons labelWithIcon:icon_navicon_round size:34 color:[UIColor blackColor]];
     menubtn.frame = CGRectMake(0, 0, 60, 44);
-    // menubtn.font = [UIFont fontWithName:kFontAwesomeFamilyName size:22.f];
-    // menubtn.text =[NSString fontAwesomeIconStringForIconIdentifier:@"fa-bars"];
-    
     UITapGestureRecognizer *menutap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(back)];
     [menubtn addGestureRecognizer:menutap];
     menubtn.userInteractionEnabled = YES;
-    
     [Design navigationbar_ion_icon:menubtn config:self.config];
     [Design style:[[DOM alloc] initWithView:menubtn parent:nil] design:[[self.config.design objectForKey:@"design"] objectForKey:@"left_navigation_ion_icon"] config:self.config];
-    
     
     UIBarButtonItem *barbtn = [[UIBarButtonItem alloc] initWithCustomView:menubtn];
     
@@ -63,14 +58,15 @@ const NSString *GET_STORE=@"ecommerce/getStoreLocation";
     
     
     
-    table = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.config.screenWidth, self.config.screenHeight)];
-    table.separatorColor = [UIColor colorWithRed:173/255.0 green:173/255.0 blue:173/255.0 alpha:1];
+    table = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.config.screenWidth, self.config.screenHeight-64)];
+    table.separatorColor = [UIColor colorWithRed:217/255.0 green:217/255.0 blue:217/255.0 alpha:1];
     table.rowHeight = 80;
     table.dataSource = self;
     table.delegate = self;
+    
     [self.view addSubview:table];
     
-   
+    
     
     [self getStores];
 }
@@ -121,33 +117,33 @@ const NSString *GET_STORE=@"ecommerce/getStoreLocation";
     };
     [connection start];
     
-   /*
-    StoreLocation *a = [[StoreLocation alloc] init];
-    StoreLocation *b = [[StoreLocation alloc] init];
-    StoreLocation *c = [[StoreLocation alloc] init];
-    a.city = @"a";
-    b.city = @"b";
-    c.city = @"c";
-    
-    NSMutableArray *sts = [[NSMutableArray alloc] initWithObjects:c,a,b, nil];
-    stores = [sts sortedArrayUsingComparator:^NSComparisonResult(StoreLocation *a, StoreLocation *b) {
-        return [a.city compare:b.city];
-    }];
-    
-    for (StoreLocation *s in stores){
-        NSLog(@"%@", s.city);
-    }*/
+    /*
+     StoreLocation *a = [[StoreLocation alloc] init];
+     StoreLocation *b = [[StoreLocation alloc] init];
+     StoreLocation *c = [[StoreLocation alloc] init];
+     a.city = @"a";
+     b.city = @"b";
+     c.city = @"c";
+     
+     NSMutableArray *sts = [[NSMutableArray alloc] initWithObjects:c,a,b, nil];
+     stores = [sts sortedArrayUsingComparator:^NSComparisonResult(StoreLocation *a, StoreLocation *b) {
+     return [a.city compare:b.city];
+     }];
+     
+     for (StoreLocation *s in stores){
+     NSLog(@"%@", s.city);
+     }*/
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     
@@ -161,36 +157,37 @@ const NSString *GET_STORE=@"ecommerce/getStoreLocation";
     
 }
 /*- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
-    UITableViewHeaderFooterView *header = (UITableViewHeaderFooterView *)view;
-    
-    
-    header.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:16.0f];;
-    CGRect headerFrame = header.frame;
-    header.textLabel.frame = headerFrame;
-    
-}
-
--(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-    return [sectionTitle objectAtIndex:section];
-}*/
+ UITableViewHeaderFooterView *header = (UITableViewHeaderFooterView *)view;
+ 
+ 
+ header.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:16.0f];;
+ CGRect headerFrame = header.frame;
+ header.textLabel.frame = headerFrame;
+ 
+ }
+ 
+ -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+ return [sectionTitle objectAtIndex:section];
+ }*/
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     StoreLocation *st = [stores objectAtIndex:indexPath.row];
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    UILabel *city = [[UILabel alloc] initWithFrame:CGRectMake(15, 17, self.config.screenWidth-20, 20)];
+    
+    UILabel *city = [[UILabel alloc] initWithFrame:CGRectMake(15, 17, self.config.screenWidth-50, 20)];
     city.font = [UIFont boldSystemFontOfSize:17.3];
     city.text = [NSString stringWithFormat:@"%@, %@", st.city, st.state];
     [cell addSubview:city];
     
-    UITextView *addr = [[UITextView alloc] initWithFrame:CGRectMake(15, 35, self.config.screenWidth-20, 30)];
-    addr.contentInset = UIEdgeInsetsMake(-6, -4, 0, 0);
+    UILabel *addr = [[UILabel alloc] initWithFrame:CGRectMake(15, 39, self.config.screenWidth-50, 30)];
+    //addr.contentInset = UIEdgeInsetsMake(-6, -4, 0, 0);
     addr.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:17.3f];
     addr.text = st.address;
-    addr.editable = NO;
-    addr.scrollEnabled = NO;
-    addr.userInteractionEnabled = NO;
+    //addr.editable = NO;
+    //addr.scrollEnabled = NO;
+    // addr.userInteractionEnabled = NO;
     [cell addSubview:addr];
     
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -209,7 +206,15 @@ const NSString *GET_STORE=@"ecommerce/getStoreLocation";
 
 
 -(void)back{
-    [self.navigationController popViewControllerAnimated:YES];
+    if (self.navigationController.revealController.focusedController == self.navigationController.revealController.leftViewController)
+    {
+        [self.navigationController.revealController showViewController:self.navigationController.revealController.frontViewController];
+    }
+    else
+    {
+        
+        [self.navigationController.revealController showViewController:self.navigationController.revealController.leftViewController];
+    }
 }
 
 @end
@@ -259,7 +264,7 @@ const NSString *GET_STORE=@"ecommerce/getStoreLocation";
     
     self.navigationItem.leftBarButtonItem = barbtn;
     
-    UIScrollView *scroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.config.screenWidth, (self.config.screenHeight-64)/3)];
+    UIScrollView *scroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.config.screenWidth, (self.config.screenHeight-64)/4)];
     
     UITextView *addr = [[UITextView alloc] initWithFrame:CGRectMake(10, 20, self.config.screenWidth-20, 0)];
     addr.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:17.3f];
@@ -281,8 +286,8 @@ const NSString *GET_STORE=@"ecommerce/getStoreLocation";
     desc.scrollEnabled = NO;
     desc.userInteractionEnabled = NO;
     
-     fixedWidth = desc.frame.size.width;
-     newSize = [desc sizeThatFits:CGSizeMake(fixedWidth, MAXFLOAT)];
+    fixedWidth = desc.frame.size.width;
+    newSize = [desc sizeThatFits:CGSizeMake(fixedWidth, MAXFLOAT)];
     
     desc.frame = CGRectMake(desc.frame.origin.x, desc.frame.origin.y, desc.frame.size.width, newSize.height);
     [scroll addSubview:desc];
@@ -292,7 +297,30 @@ const NSString *GET_STORE=@"ecommerce/getStoreLocation";
     [self.view addSubview:scroll];
     
     
-    map = [[MKMapView alloc] initWithFrame:CGRectMake(0, scroll.frame.origin.y+scroll.frame.size.height, self.config.screenWidth, self.config.screenHeight - scroll.frame.origin.y-scroll.frame.size.height)];
+    UIView *phoneview = [[UIView alloc] initWithFrame:CGRectMake(0, scroll.frame.origin.y+scroll.frame.size.height, self.config.screenWidth, 50)];
+    CALayer *layer = [CALayer layer];
+    layer.frame = CGRectMake(0, 0, phoneview.frame.size.width, 0.5);
+    layer.backgroundColor = [[UIColor colorWithRed:217/255.0 green:217/255.0 blue:217/255.0 alpha:1] CGColor];
+    [phoneview.layer addSublayer:layer];
+    CALayer *layer2 = [CALayer layer];
+    layer2.frame = CGRectMake(0, phoneview.frame.size.height-0.5, phoneview.frame.size.width, 0.5);
+    layer2.backgroundColor = [[UIColor colorWithRed:217/255.0 green:217/255.0 blue:217/255.0 alpha:1] CGColor];
+    [phoneview.layer addSublayer:layer2];
+    
+    UILabel *phonelabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, phoneview.frame.size.width-40, phoneview.frame.size.height)];
+    phonelabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:18.3];
+    phonelabel.textColor = [UIColor colorWithRed:41.0/255.0 green:39/255.0 blue:39/255.0 alpha:1];
+    phonelabel.text = self.store.phone;
+    [phoneview addSubview:phonelabel];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(call)];
+    phoneview.userInteractionEnabled = YES;
+    [phoneview addGestureRecognizer:tap];
+    
+    [self.view addSubview:phoneview];
+    
+    
+    map = [[MKMapView alloc] initWithFrame:CGRectMake(0, phoneview.frame.origin.y+phoneview.frame.size.height, self.config.screenWidth, self.config.screenHeight - phoneview.frame.origin.y-phoneview.frame.size.height)];
     
     CLLocationCoordinate2D zoomLocation;
     zoomLocation.latitude = self.store.lat;
@@ -317,6 +345,13 @@ const NSString *GET_STORE=@"ecommerce/getStoreLocation";
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)call{
+    
+    NSString *num = [self.store.phone stringByReplacingOccurrencesOfString:@"." withString:@""];
+    
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"tel://%@", num]]];
 }
 
 

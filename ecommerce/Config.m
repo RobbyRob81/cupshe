@@ -33,7 +33,7 @@
         //self.APP_UUID = @"DDA";
         
         
-        self.app_version = @"2";
+        self.app_version = @"1";
         
         self.API_ROOT = @"https://www.twixxies.com/";
         self.API_PROMOTION = @"ecommerce/promotions";
@@ -51,8 +51,8 @@
         self.API_GUEST_GET_CART = @"userappuser/guestgetcart";
         self.API_GUEST_LOG_IN = @"userappuser/guestCheckoutLogin";
         self.API_GET_ORDER = @"userappuser/getorders";
-        self.API_SHIPPING_AND_TAX = @"ecommerce/shippingtax";
-        self.API_BUY = @"userappusernew/buy_new";
+        self.API_SHIPPING_AND_TAX = @"ecommerce/getShippingTax";
+        self.API_BUY = @"userappuser/submitOrder";
         self.API_USER_SETTING=@"userappuser/usersetting";
         self.API_CHANGE_CARD=@"userappuser/changecard";
         self.API_POLICY=@"ecommerce/policy";
@@ -78,7 +78,7 @@
         self.API_ADD_EDIT_USER_PAYMENTMETHOD = @"userappuser/addEditUserPaymentMethod";
         self.cart = [[NSMutableArray alloc] init];
         self.shipping = [[NSMutableArray alloc] init];
-        self.tax = [[NSMutableDictionary alloc] init];
+        //self.tax = [[NSMutableDictionary alloc] init];
         self.departments = [[NSMutableArray alloc] init];
         self.design = [[NSMutableDictionary alloc] init];
         self.sharingText = [[NSMutableDictionary alloc] init];
@@ -87,7 +87,7 @@
         self.refresh_cart = NO;
         self.cartnum = 0;
         self.ituneID = @"";
-        self.payment_method = @"";
+        //self.payment_method = @"";
         self.payment_method_option = @"";
         self.link_inventory = @"";
         self.use_facebook_login = YES;
@@ -102,7 +102,7 @@
         self.codetocountry = [[NSMutableDictionary alloc] init];
         self.wholesale = [[WholesaleModule alloc] init];
         
-        self.guest_checkout = NO;
+        self.guest_checkout = YES;
         self.cache = [[CachedDataModule alloc] init];
         
         NSLocale *locale = [NSLocale currentLocale];

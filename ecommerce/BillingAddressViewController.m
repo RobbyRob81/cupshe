@@ -112,7 +112,8 @@
     [self.view insertSubview:scroll belowSubview:indicator];
     
     table = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.config.screenWidth, self.config.screenHeight) style:UITableViewStylePlain];
-    table.separatorColor = [UIColor colorWithRed:173/255.0 green:173/255.0 blue:173/255.0 alpha:1];
+    
+    table.separatorColor = [UIColor colorWithRed:217/255.0 green:217/255.0 blue:217/255.0 alpha:1];
     table.rowHeight = 57.3;
     table.delegate = self;
     table.dataSource = self;

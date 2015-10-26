@@ -64,7 +64,7 @@
 "Zip"="Código Postal";
 "Country"="País";
 "Phone"="Telefone";
-"Non U.S. (Please Type)"="Não dos Estados Unidos (Por favor Especifique)";
+"Other (Please Type)"="De outros (Por favor Especifique)";
 "Shopping Cart"="Carrinho de Compras";
 "Item"="Artigo";
 "Edit"="Editar";
@@ -253,3 +253,12 @@
 "Inactive"="Inativo";
 "Connect with Facebook"="Facebook";
 "Hi there,"="Olá";
+"The card is invalid."="O cartão é inválido.";
+"Select Payment"="Selecione Pagamento";
+"Payment Options"="Opções de Pagamento";
+"Payment Details"="Detalhes do pagamento";
+"Delete Payment Method"="Excluir método de pagamento";
+"Delete"="Delete";
+"Payment Description"="Descrição de Pagamento";
+"Payment Info"="Informações de Pagamento";
+"Payment Methods"="Formas de pagamento";

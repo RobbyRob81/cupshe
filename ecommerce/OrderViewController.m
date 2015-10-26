@@ -241,6 +241,7 @@ const int Get_ORDER = 1;
         if (scroll.contentSize.height < self.config.screenHeight-64){
             scroll.contentSize = CGSizeMake(self.config.screenWidth, self.config.screenHeight+1);
         }
+        
         [order_views addObject:order];
         [scroll addSubview:order];
         

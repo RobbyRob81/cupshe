@@ -33,7 +33,7 @@ const int UPDATE_FILTER = 1;
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     table.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-    table.backgroundView = nil;
+    
     table.backgroundColor = [UIColor clearColor];
     selattr = [[NSMutableArray alloc] init];
     

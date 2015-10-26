@@ -250,3 +250,12 @@
 "Inactive"="未注册";
 "Connect with Facebook"="Facebook登陆";
 "Hi there,"="您好";
+"The card is invalid."="信用卡无效";
+"Select Payment"="选择付款方式";
+"Payment Options"="付款种类";
+"Payment Details"="付款细节";
+"Delete Payment Method"="删除此付款方式";
+"Delete"="删除";
+"Payment Description"="付款描述";
+"Payment Info"="付款信息";
+"Payment Methods"="付款方式";

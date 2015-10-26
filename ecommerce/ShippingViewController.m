@@ -42,7 +42,27 @@
     //[label sizeToFit];
     [Design navigationbar_title:label config:self.config];
     // Do any additional setup after loading the view from its nib.
-    states = [NSArray arrayWithObjects: [self.config localisedString:@"Non U.S. (Please type)"],@"Alabama", @"Alaska", @"Arizona", @"Arkansas", @"California", @"Colorado", @"Connecticut", @"Delaware", @"Florida", @"Georgia", @"Hawaii", @"Idaho", @"Illinois", @"Indiana", @"Iowa", @"Kansas", @"Kentucky", @"Louisiana", @"Maine", @"Maryland", @"Massachusetts", @"Michigan", @"Minnesota", @"Mississippi", @"Missouri", @"Montana", @"Nebraska", @"Nevada", @"New Hampshire", @"New Jersey", @"New Mexico", @"New York", @"North Carolina", @"North Dakota", @"Ohio", @"Oklahoma", @"Oregon", @"Pennsylvania", @"Rhode Island", @"South Carolina", @"South Dakota", @"Tennessee", @"Texas", @"Utah", @"Vermont", @"Virginia", @"Washington", @"West Virginia", @"Wisconsin", @"Wyoming", nil];
+    
+    shipping_all_country = NO;
+    NSMutableArray *s = [[NSMutableArray alloc] init];
+    [s addObject:[self.config localisedString:@"Other (Please Type)"]];
+    for (ShippingCountry *sc in self.config.shipping){
+        if ([sc.code isEqualToString:self.config.location]){
+            for (ShippingState *ss in sc.states){
+                [s addObject:ss.name];
+            }
+        }
+        if ([sc.code isEqualToString:@"*"]){
+            shipping_all_country = YES;
+        }
+    }
+    
+    if ([self.config.location isEqualToString:@"US"]){
+        states = [NSArray arrayWithObjects: [self.config localisedString:@"Other (Please Type)"],@"Alabama", @"Alaska", @"Arizona", @"Arkansas", @"California", @"Colorado", @"Connecticut", @"Delaware", @"Florida", @"Georgia", @"Hawaii", @"Idaho", @"Illinois", @"Indiana", @"Iowa", @"Kansas", @"Kentucky", @"Louisiana", @"Maine", @"Maryland", @"Massachusetts", @"Michigan", @"Minnesota", @"Mississippi", @"Missouri", @"Montana", @"Nebraska", @"Nevada", @"New Hampshire", @"New Jersey", @"New Mexico", @"New York", @"North Carolina", @"North Dakota", @"Ohio", @"Oklahoma", @"Oregon", @"Pennsylvania", @"Rhode Island", @"South Carolina", @"South Dakota", @"Tennessee", @"Texas", @"Utah", @"Vermont", @"Virginia", @"Washington", @"West Virginia", @"Wisconsin", @"Wyoming", nil];
+    } else {
+       
+        states = s;
+    }
     
     
     
@@ -89,10 +109,11 @@
     [self.view insertSubview:scroll belowSubview:indicator];
     
     table = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.config.screenWidth, self.config.screenHeight) style:UITableViewStylePlain];
-    table.separatorColor = [UIColor colorWithRed:173/255.0 green:173/255.0 blue:173/255.0 alpha:1];
+    table.separatorColor = [UIColor colorWithRed:217/255.0 green:217/255.0 blue:217/255.0 alpha:1];
     table.rowHeight = 57.3;
     table.delegate = self;
     table.dataSource = self;
+    table.tag = -1;
     [scroll addSubview:table];
     
     
@@ -192,24 +213,24 @@
     UISwitch *sw = (UISwitch *)sender;
     if (!sw.isOn) return;
     
-    if (self.config.billingname.length == 0 || self.config.billingaddress.length == 0 || self.config.billingstate.length == 0 || self.config.billingcity.length == 0 || self.config.billingzip.length == 0){
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[self.config localisedString:@"Billing address is incomplete."] message:nil delegate:nil cancelButtonTitle:[self.config localisedString:@"Close"] otherButtonTitles: nil];
+    if (self.config.selected_payment == nil){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[self.config localisedString:@"No billing address found"] message:nil delegate:nil cancelButtonTitle:[self.config localisedString:@"Close"] otherButtonTitles: nil];
         [alert show];
         return;
     }
     
     // self.config.name = self.config.billingname;
-    name.text = self.config.billingname;
+    name.text = [NSString stringWithFormat:@"%@ %@", self.config.selected_payment.billingfirstname, self.config.selected_payment.billinglastname];
     // self.config.address=self.config.billingaddress;
-    address.text = self.config.billingaddress;
+    address.text = self.config.selected_payment.billingaddress;
     // self.config.city = self.config.billingcity;
-    city.text = self.config.billingcity;
+    city.text = self.config.selected_payment.billingcity;
     // self.config.state=self.config.billingstate;
-    state.text = self.config.billingstate;
+    state.text = self.config.selected_payment.billingstate;
     //  self.config.zip=self.config.billingzip;
-    zip.text = self.config.billingzip;
+    zip.text = self.config.selected_payment.billingzip;
     //self.config.country = self.config.billingcountry;
-    country.text = [self.config.codetocountry objectForKey:self.config.billingcountry];
+    country.text = [self.config.codetocountry objectForKey:self.config.selected_payment.billingcountry];
     
     
     
@@ -246,6 +267,35 @@
         [alert show];
         return;
     }
+    int countryfound = 0;
+    int statefound = 0;
+    
+    for (ShippingCountry *sc in self.config.shipping){
+        if ([sc.code isEqualToString:[self.config.countrytocode objectForKey:country.text]]){
+            countryfound = 1;
+            for (ShippingState *ss in sc.states){
+                if ([[ss.name lowercaseString] isEqualToString:[state.text lowercaseString]] || [[ss.code lowercaseString] isEqualToString:[state.text lowercaseString]]){
+                    statefound = 1;
+                }
+            }
+        }
+        if ([sc.code isEqualToString:@"*"]){
+            countryfound = 1;
+        }
+    }
+    if (countryfound == 0){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[self.config localisedString:@"Shipping country is not supported."] message:nil delegate:nil cancelButtonTitle:[self.config localisedString:@"Close"] otherButtonTitles: nil];
+        [alert show];
+        return;
+    }
+    if (statefound == 0){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[self.config localisedString:@"Shipping state is not valid."] message:nil delegate:nil cancelButtonTitle:[self.config localisedString:@"Close"] otherButtonTitles: nil];
+        [alert show];
+        return;
+    }
+    
+    
+    
     self.config.name = name.text;
     self.config.state = state.text;
     self.config.city = city.text;
@@ -298,8 +348,13 @@
             [state becomeFirstResponder];
         }
     } else if ([country isFirstResponder]){
+        if (shipping_all_country) {
         NSString *s = [self.config.countries objectAtIndex:[countrypicker selectedRowInComponent:0]];
         country.text = s;
+        } else {
+            ShippingCountry *sc = [self.config.shipping objectAtIndex:[countrypicker selectedRowInComponent:0]];
+            country.text = sc.name;
+        }
         [country resignFirstResponder];
     }
 }
@@ -332,13 +387,23 @@
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
     if (pickerView == statepicker) return [states objectAtIndex:row];
-    else return [self.config.countries objectAtIndex:row];
+    else if (pickerView == countrypicker){
+        if (shipping_all_country) return [self.config.countries objectAtIndex:row];
+        else {
+            ShippingCountry *sc = [self.config.shipping objectAtIndex:row];
+            return sc.name;
+        }
+    } else return @"";
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
     if (pickerView == statepicker) return states.count;
-    else return self.config.countries.count;
+    else if (pickerView == countrypicker){
+        if (shipping_all_country)return self.config.countries.count;
+        else return self.config.shipping.count;
+    }
+    else return  0;
 }
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
@@ -381,25 +446,29 @@
     }if (indexPath.row == namerow){
         cell.smallTitle.text =[NSString stringWithFormat:@"%@", [self.config localisedString:@"Name"]];
         cell.value.delegate = self;
-        cell.value.text = self.config.name;
+        if (cell.value.text.length == 0)
+            cell.value.text = self.config.name;
         name = cell.value;
         cell.sw.hidden = YES;
     }if (indexPath.row == addrrow){
         cell.smallTitle.text = [self.config localisedString:@"Address"];
         cell.value.delegate = self;
-        cell.value.text = self.config.address;
+        if (cell.value.text.length == 0)
+            cell.value.text = self.config.address;
         address = cell.value;
         cell.sw.hidden = YES;
     }if (indexPath.row == cityrow){
         cell.smallTitle.text = [self.config localisedString:@"City"];
         cell.value.delegate = self;
-        cell.value.text = self.config.city;
+        if (cell.value.text.length == 0)
+            cell.value.text = self.config.city;
         city = cell.value;
         cell.sw.hidden = YES;
     }if (indexPath.row == staterow){
         cell.smallTitle.text = [self.config localisedString:@"State"];
         cell.value.delegate = self;
-        cell.value.text = self.config.state;
+        if (cell.value.text.length == 0)
+            cell.value.text = self.config.state;
         state = cell.value;
         state.inputView = statepicker;
         state.inputAccessoryView = picker_view;
@@ -408,7 +477,8 @@
     }if (indexPath.row == ziprow){
         cell.smallTitle.text = [self.config localisedString:@"Zip"];
         cell.value.delegate = self;
-        cell.value.text = self.config.zip;
+        if (cell.value.text.length == 0)
+            cell.value.text = self.config.zip;
         zip = cell.value;
         zip.keyboardType = UIKeyboardTypeDecimalPad;
         cell.sw.hidden = YES;
@@ -416,7 +486,8 @@
     }if (indexPath.row == countryrow){
         cell.smallTitle.text = [self.config localisedString:@"Country"];
         cell.value.delegate = self;
-        cell.value.text = [self.config.codetocountry objectForKey:self.config.country];
+        if (cell.value.text.length == 0)
+            cell.value.text = [self.config.codetocountry objectForKey:self.config.country];
         country = cell.value;
         country.inputView = countrypicker;
         country.inputAccessoryView = picker_view;
@@ -425,12 +496,20 @@
     }if (indexPath.row == phonerow){
         cell.smallTitle.text = [self.config localisedString:@"Phone"];
         cell.value.delegate = self;
-        cell.value.text = self.config.phone;
+        if (cell.value.text.length == 0)
+            cell.value.text = self.config.phone;
         phone = cell.value;
         phone.keyboardType = UIKeyboardTypeDecimalPad;
         cell.sw.hidden = YES;
         
+        if (tableView.tag == -1){
+            tableView.contentSize = CGSizeMake(tableView.contentSize.width, tableView.contentSize.height+200);
+            tableView.tag = -2;
+        }
+        
     }
+    
+    
     
     
     return cell;

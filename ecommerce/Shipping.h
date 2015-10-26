@@ -8,6 +8,26 @@
 
 #import <Foundation/Foundation.h>
 
+@interface ShippingCountry : NSObject
+
+@property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSString *code;
+@property (nonatomic, strong) NSDecimalNumber *tax;
+@property (nonatomic, strong) NSMutableArray *shippings;
+@property (nonatomic, strong) NSMutableArray *states;
+
+-(void)shipping_country_from_dictionary:(NSDictionary *)d;
+-(NSDecimalNumber *)claculate_shipping:(NSArray *)cart totalprice:(NSDecimalNumber *)total;
+@end
+
+@interface ShippingState : NSObject
+@property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSString *code;
+@property (nonatomic, strong) NSDecimalNumber *tax;
+
+-(void)shipping_state_from_dictionary:(NSDictionary *)d;
+@end
+
 @interface Shipping : NSObject
 
 @property (nonatomic, strong) NSString *shipping_id;

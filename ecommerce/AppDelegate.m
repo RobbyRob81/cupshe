@@ -14,7 +14,7 @@
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import "Branch.h"
 #import "DeepLinkModule.h"
-#import <NewRelicAgent/NewRelic.h>
+
 @implementation AppDelegate
 
 @synthesize managedObjectContext = _managedObjectContext;
@@ -60,7 +60,7 @@
     }
     
     [Stripe setDefaultPublishableKey:@"pk_live_Th8wG3VsSdRxIIu9lPyXjnPB"];
-   
+    
     
     //registering APIs
     
@@ -95,11 +95,11 @@
         }
     }];
     
-    [NewRelicAgent startWithApplicationToken:@"AA9b7202801a3224ebc667bc4702b5a08235adcd1f"];
+   
     
-    return [[FBSDKApplicationDelegate sharedInstance]
-            application:application
-            didFinishLaunchingWithOptions:launchOptions];
+    
+    return [[FBSDKApplicationDelegate sharedInstance] application:application
+                                    didFinishLaunchingWithOptions:launchOptions];
     
     //return YES;
 }
@@ -140,7 +140,7 @@
 {
     // Saves changes in the application's managed object context before the application terminates.
     [self saveContext];
-   
+    
 }
 
 - (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
@@ -177,7 +177,8 @@
         return [[FBSDKApplicationDelegate sharedInstance] application:application
                                                               openURL:url
                                                     sourceApplication:sourceApplication
-                                                           annotation:annotation];
+                                                           annotation:annotation
+                ];
     }
     return NO;
 }

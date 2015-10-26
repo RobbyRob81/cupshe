@@ -77,10 +77,11 @@
     
     
     table = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.config.screenWidth, self.config.screenHeight-64) style:UITableViewStyleGrouped];
-    table.separatorColor = [UIColor colorWithRed:173/255.0 green:173/255.0 blue:173/255.0 alpha:1];
+    table.separatorColor = [UIColor colorWithRed:217/255.0 green:217/255.0 blue:217/255.0 alpha:1];
     table.delegate = self;
     table.dataSource = self;
     [self.view addSubview:table];
+    
     
     
     hiddenText = [[UITextField alloc] init];

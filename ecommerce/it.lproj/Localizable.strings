@@ -64,7 +64,7 @@
 "Zip"="CAP";
 "Country"="Paese";
 "Phone"="Telefono";
-"Non U.S. (Please Type)"="Fuori dagli U.S.A (per favore digita)";
+"Other (Please Type)"="Altro (per favore digita)";
 "Shopping Cart"="Carrello degli acquisti";
 "Item"="Oggetto";
 "Edit"="Modifica";
@@ -253,3 +253,12 @@
 "Inactive"="Inattivo";
 "Connect with Facebook"="Facebook";
 "Hi there,"="Ciao";
+"The card is invalid."="La carta non è valido.";
+"Select Payment"="Scegliere di pagamento";
+"Payment Options"="Opzioni di pagamento";
+"Payment Details"="Dettagli sui pagamenti";
+"Delete Payment Method"="Elimina Metodo di pagamento";
+"Delete"="Elimina";
+"Payment Description"="Descrizione di pagamento";
+"Payment Info"="Informazioni di pagamento";
+"Payment Methods"="Metodi di Pagamento";

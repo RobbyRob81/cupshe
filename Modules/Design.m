@@ -1070,7 +1070,7 @@
 +(void)department_twitter:(NSMutableDictionary *)twitterViews config:(Config *)config prevFrame:(CGRect)prev{
     CGSize main = CGSizeMake(config.screenWidth, 0);
     
-    
+   
     
     UILabel *name = [twitterViews objectForKey:@"author"];
     name.frame = CGRectMake(60, 10, 180, 15);
