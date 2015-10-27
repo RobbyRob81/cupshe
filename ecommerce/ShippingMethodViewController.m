@@ -108,9 +108,9 @@
         [indicator startAnimating];
         [self.view addSubview:indicator];
         
-    NSString *myRequestString = [NSString stringWithFormat:@"app_uuid=%@&user_id=%@&token=%@&address=%@&city=%@&state=%@&zip=%@&country=%@&name=%@&phone=%@&location=%@&currency=%@", self.config.APP_UUID, self.config.user_id, self.config.token, self.config.address, self.config.city, self.config.state, self.config.zip, self.config.country, self.config.name, self.config.phone, self.config.location, self.config.currency];
-    
-    // Create Data from request
+        NSString *myRequestString = [NSString stringWithFormat:@"app_uuid=%@&user_id=%@&token=%@&address=%@&city=%@&state=%@&zip=%@&country=%@&name=%@&phone=%@&location=%@&currency=%@", self.config.APP_UUID, self.config.user_id, self.config.token, self.config.address, self.config.city, self.config.state, self.config.zip, self.config.country, self.config.name, self.config.phone, self.config.location, self.config.currency];
+        
+        // Create Data from request
         NSData *myRequestData = [NSData dataWithBytes: [myRequestString UTF8String] length: [myRequestString length]];
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL: [NSURL URLWithString: [NSString stringWithFormat:@"%@%@", self.config.API_ROOT, self.config.API_SHIPPING_AND_TAX]]];
         
@@ -122,8 +122,8 @@
         [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"content-type"];
         // Set Request Body
         [request setHTTPBody: myRequestData];
-    
-    
+        
+        
         NSURLConnectionBlock *connection = [[NSURLConnectionBlock alloc] initWithRequest:request];
         connection.completion = ^(id obj, NSError *err) {
             
@@ -184,16 +184,18 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     Shipping *s = [shipping objectAtIndex:indexPath.row];
     ShippingMethodTableViewCell *cell = [[ShippingMethodTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
-   cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.primaryLabel.text = s.name;
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
     NSDecimalNumber *price = [s claculate_shipping:self.config.cart totalprice:self.totalprice];
     if (price == nil) cell.primary_right.text = @"N/A";
+    cell.primaryLabel.text = s.name;
+    if (s.name == nil || s.name.length == 0) cell.primaryLabel.text = [self.config localisedString:@"Other Shipping"];
     else if ([price compare:[NSNumber numberWithInt:0]] == NSOrderedSame) cell.primary_right.text = [self.config localisedString:@"Free"];
     else cell.primary_right.text = [NSString stringWithFormat:@"%@%@", [self.config getCurrencySymbol], [price stringValue]];
     
     
     return cell;
-   
+    
 }
 
 

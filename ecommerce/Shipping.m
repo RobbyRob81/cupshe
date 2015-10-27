@@ -75,11 +75,11 @@
 -(NSDecimalNumber *)claculate_shipping:(NSArray *)cart totalprice:(NSDecimalNumber *)total{
     if ([self.type isEqualToString:@"1"]){
         if ([total compare:self.free_threshold]== NSOrderedDescending && ![self.free_threshold isEqualToNumber:[NSNumber numberWithInt:0]]) {
-           
+            
             return [NSDecimalNumber decimalNumberWithString:@"0"];
         } else {
             NSDecimalNumber *totalp = self.base_price;
-             totalp =[totalp decimalNumberByAdding:[self.additional_price decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%ld",(cart.count-1)]]]];
+            totalp =[totalp decimalNumberByAdding:[self.additional_price decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%ld",(cart.count-1)]]]];
             return totalp;
         }
         
@@ -91,8 +91,11 @@
         BOOL found = NO;
         for (ShippingWeight *sw in self.weights){
             if (sw.low <= totalweight && (sw.high > totalweight || sw.high == 0)){
+                if (sw.name != nil && sw.name.length > 0)
+                    self.name = sw.name;
                 return sw.cost;
-               
+                
+                
             }
         }
         return  nil;
@@ -110,6 +113,7 @@
     self.high = [[d objectForKey:@"high"] doubleValue];
     NSString *cost = [NSString stringWithFormat:@"%@", [d objectForKey:@"cost"]];
     self.cost = [NSDecimalNumber decimalNumberWithString:cost] ;
+    self.name = [d objectForKey:@"name"];
     
 }
 

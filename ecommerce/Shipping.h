@@ -47,6 +47,7 @@
 @property  float low;
 @property float high;
 @property (nonatomic, strong) NSDecimalNumber *cost;
+@property (nonatomic, strong) NSString *name;
 
 -(void)weight_from_dictionary:(NSDictionary *)d;
 

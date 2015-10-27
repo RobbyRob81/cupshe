@@ -273,14 +273,11 @@
     for (ShippingCountry *sc in self.config.shipping){
         if ([sc.code isEqualToString:[self.config.countrytocode objectForKey:country.text]]){
             countryfound = 1;
-            for (ShippingState *ss in sc.states){
-                if ([[ss.name lowercaseString] isEqualToString:[state.text lowercaseString]] || [[ss.code lowercaseString] isEqualToString:[state.text lowercaseString]]){
-                    statefound = 1;
-                }
-            }
+            
         }
         if ([sc.code isEqualToString:@"*"]){
             countryfound = 1;
+            
         }
     }
     if (countryfound == 0){
@@ -288,11 +285,7 @@
         [alert show];
         return;
     }
-    if (statefound == 0){
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[self.config localisedString:@"Shipping state is not valid."] message:nil delegate:nil cancelButtonTitle:[self.config localisedString:@"Close"] otherButtonTitles: nil];
-        [alert show];
-        return;
-    }
+    
     
     
     
