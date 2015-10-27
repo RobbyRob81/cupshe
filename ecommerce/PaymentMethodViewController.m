@@ -797,11 +797,15 @@ const int CARD_NO_CHANGE = 0;
     [self.view addSubview:indicator];
     
     cardnumber = [[UITextField alloc] init];
+    cardnumber.keyboardType = UIKeyboardTypeNumberPad;
     expmonth = [[UITextField alloc] init];
+    expmonth.keyboardType = UIKeyboardTypeNumberPad;
     expmonth.placeholder = @"MM";
     expyear = [[UITextField alloc] init];
     expyear.placeholder = @"YYYY";
+    expyear.keyboardType = UIKeyboardTypeNumberPad;
     cvc = [[UITextField alloc] init];
+    cvc.keyboardType = UIKeyboardTypeNumberPad;
     fn = [[UITextField alloc] init];
     ln = [[UITextField alloc] init];
     addr = [[UITextField alloc] init];

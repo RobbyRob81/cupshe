@@ -502,6 +502,7 @@
         PaymentMethodViewController *pm = [[PaymentMethodViewController alloc] init];
         pm.config = self.config;
         pm.is_checkout = YES;
+        pm.parent = self;
         [self.navigationController pushViewController:pm animated:YES];
     } else if ([title isEqualToString:@"Shipping Address"]){
         ShippingViewController *shipp = [[ShippingViewController alloc] initWithNibName:@"ShippingViewController" bundle:nil];
@@ -537,6 +538,8 @@
 }
 
 -(void)submit_order:(UITapGestureRecognizer *)ges{
+    
+    
     [NSThread detachNewThreadSelector:@selector(startAnimating) toTarget:self withObject:nil];
     NSString *title = @"";
     NSString *message = @"";
@@ -592,6 +595,12 @@
                                                        options:0
                                                          error:nil];
     NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    
+    if (self.config.selected_payment.handle_payment == YES){
+        self.config.selected_payment.delegate = self;
+        [self.config.selected_payment pay:self.total shipping:shipping tax:tax];
+        return;
+    }
     
     NSString *myRequestString = [NSString stringWithFormat:@"app_uuid=%@&user_id=%@&access_token=%@&temp_user_id=%@&name=%@&address=%@&city=%@&state=%@&zip=%@&country=%@&phone=%@&save_address=%d&shipping_id=%@&payment_method_id=%@&total_paying=%@&use_store_credit=%d&wholesale_user_id=%@&location=%@&currency=%@&cached_data=%@", self.config.APP_UUID, uid, self.config.token, tuid, self.config.name, self.config.address, self.config.city, self.config.state, self.config.zip,self.config.country,self.config.phone, self.config.save_address,self.config.chosen_shipping.shipping_id, self.config.selected_payment.payment_method_id,[totalp stringValue], use_credit, wu, self.config.location, self.config.currency, jsonString];
     
@@ -658,6 +667,109 @@
     };
     [connection start];
     
+}
+
+
+-(void)pay_succeed:(NSMutableDictionary *)data{
+    [self calculate_tax];
+    NSDecimalNumber *totalp = nil;
+    if (shipping == nil) totalp = [self.total decimalNumberByAdding:tax];
+    else totalp = [[self.total decimalNumberByAdding:tax] decimalNumberByAdding:shipping] ;
+    NSString *stoken = self.config.stripeToken;
+    if (self.config.stripeToken == nil) stoken = @"";
+    int use_credit = 0;
+    if (self.config.use_credit)use_credit = 1;
+    
+    NSString *cardnum = self.config.card.number;
+    if (cardnum == nil) cardnum = @"";
+    
+    NSString *wu = self.config.wholesale.wholesale_user_id;
+    if (wu == nil) wu = @"";
+    
+    NSString *uid = self.config.user_id;
+    if (self.config.user_id == nil) uid = @"";
+    
+    NSString *tuid = self.config.temp_user_id;
+    if (self.config.temp_user_id == nil) tuid = @"";
+    
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:self.config.cache.cart
+                                                       options:0
+                                                         error:nil];
+    NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    
+    jsonData = [NSJSONSerialization dataWithJSONObject:dic
+                                               options:0
+                                                 error:nil];
+    NSString *gatewaydatastr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    
+    NSString *myRequestString = [NSString stringWithFormat:@"app_uuid=%@&user_id=%@&access_token=%@&temp_user_id=%@&name=%@&address=%@&city=%@&state=%@&zip=%@&country=%@&phone=%@&save_address=%d&shipping_id=%@&payment_method_id=%@&payment_gateway=%@&payment_method=%@&payment_customer_id=%@&payment_method_token=%@&total_paying=%@&use_store_credit=%d&wholesale_user_id=%@&location=%@&currency=%@&cached_data=%@&payment_gateway_data=%@&payment_handeled=%@&transaction_id=%@", self.config.APP_UUID, uid, self.config.token, tuid, self.config.name, self.config.address, self.config.city, self.config.state, self.config.zip,self.config.country,self.config.phone, self.config.save_address,self.config.chosen_shipping.shipping_id, self.config.selected_payment.payment_method_id,self.config.selected_payment.payment_gateway, self.config.selected_payment.payment_method, self.config.selected_payment.customer_id, self.config.selected_payment.payment_token,totalp, 0, wu, self.config.location, self.config.currency, jsonString, gatewaydatastr, @"1", [data objectForKey:@"transaction id"]];
+    
+    NSLog(myRequestString);
+    
+    // Create Data from request
+    NSData *myRequestData = [NSData dataWithBytes: [myRequestString UTF8String] length: [myRequestString length]];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL: [NSURL URLWithString: [NSString stringWithFormat:@"%@%@", self.config.API_ROOT, self.config.API_BUY]]];
+    
+    
+    
+    // set Request Type
+    [request setHTTPMethod: @"POST"];
+    // Set content-type
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"content-type"];
+    // Set Request Body
+    [request setHTTPBody: myRequestData];
+    // Now send a request and get Response
+    // NSData *returnData = [NSURLConnection sendSynchronousRequest: request returningResponse: nil error: nil];
+    // Log Response
+    // NSString *response = [[NSString alloc] initWithBytes:[returnData bytes] length:[returnData length] encoding:NSUTF8StringEncoding];
+    // NSLog(@"%@",response);
+    NSURLConnectionBlock *connection = [[NSURLConnectionBlock alloc] initWithRequest:request];
+    connection.completion = ^(id obj, NSError *err) {
+        
+        if (!err) {
+            //It's ok, do domething with the response data (obj)
+            NSMutableData *data = (NSMutableData *)obj;
+            
+            NSString *myxml = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
+            NSLog(@"%@", myxml);
+            NSDictionary *d = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+            int success = [[d objectForKey:@"success"] intValue];
+            if (success == 0) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[d objectForKey:@"message"] message:[self.config localisedString:@"Your card is not charged."] delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
+                [alert show];
+            } else if (success == -1) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[self.config localisedString:@"Item price in your cart may have changed. Please refresh your cart."] message:[self.config localisedString:@"Your card is not charged."] delegate:self cancelButtonTitle:[self.config localisedString:@"Close"] otherButtonTitles:[self.config localisedString:@"Refresh"], nil];
+                [alert show];
+            } else {
+                [self purchase_event];
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[self.config localisedString:@"Your order is submitted."] message:@"" delegate:nil cancelButtonTitle:[self.config localisedString:@"Close"] otherButtonTitles: nil];
+                [alert show];
+                self.config.cartnum = 0;
+                self.config.cartnum = 0;
+                [self.config.cache clear];
+                [self.config.cache save_default];
+                
+                [self.navigationController popToViewController:self.parent animated:YES];
+            }
+            
+            
+            [indicator stopAnimating];
+            
+            
+        } else {
+            //There was an error
+            
+        }
+        
+    };
+    [connection start];
+}
+
+-(void)pay_failed:(NSMutableDictionary *)data{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[self.config localisedString:@"Payment Failed"] message:[self.config localisedString:@"Your card is not charged."] delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
+    [alert show];
 }
 
 -(void)back{
