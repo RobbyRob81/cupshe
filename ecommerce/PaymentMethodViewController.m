@@ -94,7 +94,7 @@
     self.view.backgroundColor = [UIColor colorWithRed:242.0/255.0 green:240.0/255.0 blue:240.0/255.0 alpha:1];
     
     
-    if (self.config.user_payment_methods.count == 0){
+    if (self.config.user_payment_methods.count == 0 && self.config.selected_payment == nil){
         AddEditPaymentMethodViewController *aep = [[AddEditPaymentMethodViewController alloc] init];
         aep.config = self.config;
         aep.allusermethods = self.config.user_payment_methods;
@@ -641,7 +641,7 @@
  */
 
 -(void)back{
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popToViewController:self.parent animated:YES];
 }
 
 @end
