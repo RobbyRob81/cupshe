@@ -427,6 +427,7 @@ const int SHIPPING_TAX = 4;
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error{
     [indicator stopAnimating];
     [self showLoadingView:NO];
+    NSLog(@"%@", error);
     NSURLConnectionWithTag *conn = (NSURLConnectionWithTag *)connection;
     if (conn.tag ==LOAD_DEPARTMENT ) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[self.config localisedString:@"Cannot Connect to Internet"] message:[self.config localisedString:@"This app requires internet connection."] delegate:self cancelButtonTitle:[self.config localisedString:@"Close"] otherButtonTitles:[self.config localisedString:@"Retry"], nil];

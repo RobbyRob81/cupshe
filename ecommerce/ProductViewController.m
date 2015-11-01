@@ -957,10 +957,12 @@ const int FILTER = 2;
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:received options:0 error:nil];
         searchWords = [dic objectForKey:@"search_words"];
         NSArray *a = [dic objectForKey:@"categories"];
-        NSArray *sorteda = [a sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
-        NSMutableDictionary *catd = [[NSMutableDictionary alloc] init];
-        [catd setObject:sorteda forKey:self.config.APP_UUID]; //special treatment because on server query side category and attribute are separate
-        [filters setObject:catd forKey:@"Categories"];
+        if (a.count > 0){
+            NSArray *sorteda = [a sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+            NSMutableDictionary *catd = [[NSMutableDictionary alloc] init];
+            [catd setObject:sorteda forKey:self.config.APP_UUID]; //special treatment because on server query side category and attribute are separate
+            [filters setObject:catd forKey:@"Categories"];
+        }
         NSArray *attr = [dic objectForKey:@"attributes"];
         for (NSDictionary *d in attr){
             NSString *name = [d objectForKey:@"attrname"];
