@@ -1416,9 +1416,6 @@ const int ADD_TO_CART = 0;
         if (img != nil && img.url != nil){
             NSString *url = [img.url absoluteString];
             
-            [Config syncLoadImageURL:url toImageView:img withCacheKey:url trim:YES sizeMultiplyer:2.5 completion:^{
-                [img.indicator stopAnimating];
-            }];
             [Config loadImageURL:url toImageView:img withCacheKey:url trim:YES sizeMultiplyer:2.5 completion:^{
                 [img.indicator stopAnimating];
             }];
