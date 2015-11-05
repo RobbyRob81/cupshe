@@ -15,6 +15,79 @@
 		050DB3271B839CD4006D05FC /* CachedDataModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 050DB3261B839CD4006D05FC /* CachedDataModule.m */; };
 		050DB35F1B83F707006D05FC /* GuestCheckoutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 050DB35D1B83F707006D05FC /* GuestCheckoutViewController.m */; };
 		050DB3601B83F707006D05FC /* GuestCheckoutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 050DB35E1B83F707006D05FC /* GuestCheckoutViewController.xib */; };
+		052E87941BEBE6FD0052044C /* DDXMLElementAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 052E86FE1BEBE6FC0052044C /* DDXMLElementAdditions.m */; };
+		052E87951BEBE6FD0052044C /* NSString+DDXML.m in Sources */ = {isa = PBXBuildFile; fileRef = 052E87011BEBE6FC0052044C /* NSString+DDXML.m */; };
+		052E87961BEBE6FD0052044C /* DDXMLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 052E87041BEBE6FC0052044C /* DDXMLDocument.m */; };
+		052E87971BEBE6FD0052044C /* DDXMLElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 052E87061BEBE6FC0052044C /* DDXMLElement.m */; };
+		052E87981BEBE6FD0052044C /* DDXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 052E87081BEBE6FC0052044C /* DDXMLNode.m */; };
+		052E87991BEBE6FD0052044C /* MIMEKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 052E870D1BEBE6FC0052044C /* MIMEKit.m */; };
+		052E879A1BEBE6FD0052044C /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 052E870F1BEBE6FC0052044C /* NSData+Base64.m */; };
+		052E879B1BEBE6FD0052044C /* NSData+GUID.m in Sources */ = {isa = PBXBuildFile; fileRef = 052E87111BEBE6FC0052044C /* NSData+GUID.m */; };
+		052E879C1BEBE6FD0052044C /* NSData+MIMETransferEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 052E87131BEBE6FC0052044C /* NSData+MIMETransferEncoding.m */; };
+		052E879D1BEBE6FD0052044C /* NSDictionary+CaseInsensitiveKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = 052E87151BEBE6FC0052044C /* NSDictionary+CaseInsensitiveKeys.m */; };
+		052E879E1BEBE6FD0052044C /* NSString+GUID.m in Sources */ = {isa = PBXBuildFile; fileRef = 052E87171BEBE6FC0052044C /* NSString+GUID.m */; };
+		052E879F1BEBE6FD0052044C /* PKContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = 052E87191BEBE6FC0052044C /* PKContentType.m */; };
+		052E87A01BEBE6FD0052044C /* PKMIMEData.m in Sources */ = {isa = PBXBuildFile; fileRef = 052E871B1BEBE6FC0052044C /* PKMIMEData.m */; };
+		052E87A11BEBE6FD0052044C /* PKMIMEMessage+XOP-XML.m in Sources */ = {isa = PBXBuildFile; fileRef = 052E871D1BEBE6FC0052044C /* PKMIMEMessage+XOP-XML.m */; };
+		052E87A21BEBE6FD0052044C /* PKMIMEMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 052E871F1BEBE6FC0052044C /* PKMIMEMessage.m */; };
+		052E87A31BEBE6FD0052044C /* UIImage+MIME.m in Sources */ = {isa = PBXBuildFile; fileRef = 052E87211BEBE6FC0052044C /* UIImage+MIME.m */; };
+		052E87A41BEBE6FD0052044C /* ReadMe.txt in Resources */ = {isa = PBXBuildFile; fileRef = 052E87221BEBE6FC0052044C /* ReadMe.txt */; };
+		052E87A51BEBE6FD0052044C /* USAePayAccountDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 052E87251BEBE6FC0052044C /* USAePayAccountDetails.m */; };
+		052E87A61BEBE6FD0052044C /* USAePayAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 052E87271BEBE6FC0052044C /* USAePayAddress.m */; };
+		052E87A71BEBE6FD0052044C /* USAePayBank.m in Sources */ = {isa = PBXBuildFile; fileRef = 052E87291BEBE6FC0052044C /* USAePayBank.m */; };
+		052E87A81BEBE6FD0052044C /* USAePayBankArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 052E872B1BEBE6FC0052044C /* USAePayBankArray.m */; };
+		052E87A91BEBE6FD0052044C /* USAePayBatchSearchResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 052E872D1BEBE6FC0052044C /* USAePayBatchSearchResult.m */; };
+		052E87AA1BEBE6FD0052044C /* USAePayBatchStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 052E872F1BEBE6FC0052044C /* USAePayBatchStatus.m */; };
+		052E87AB1BEBE6FD0052044C /* USAePayBatchStatusArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 052E87311BEBE6FC0052044C /* USAePayBatchStatusArray.m */; };
+		052E87AC1BEBE6FD0052044C /* USAePayBatchUploadStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 052E87331BEBE6FC0052044C /* USAePayBatchUploadStatus.m */; };
+		052E87AD1BEBE6FD0052044C /* USAePayCheckData.m in Sources */ = {isa = PBXBuildFile; fileRef = 052E87351BEBE6FC0052044C /* USAePayCheckData.m */; };
+		052E87AE1BEBE6FD0052044C /* USAePayCheckTrace.m in Sources */ = {isa = PBXBuildFile; fileRef = 052E87371BEBE6FC0052044C /* USAePayCheckTrace.m */; };
+		052E87AF1BEBE6FD0052044C /* USAePayCreditCardData.m in Sources */ = {isa = PBXBuildFile; fileRef = 052E87391BEBE6FC0052044C /* USAePayCreditCardData.m */; };
+		052E87B01BEBE6FD0052044C /* USAePayCurrencyConversion.m in Sources */ = {isa = PBXBuildFile; fileRef = 052E873B1BEBE6FC0052044C /* USAePayCurrencyConversion.m */; };
+		052E87B11BEBE6FD0052044C /* USAePayCurrencyConversionArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 052E873D1BEBE6FC0052044C /* USAePayCurrencyConversionArray.m */; };
+		052E87B21BEBE6FD0052044C /* USAePayCurrencyObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 052E873F1BEBE6FC0052044C /* USAePayCurrencyObject.m */; };
+		052E87B31BEBE6FD0052044C /* USAePayCurrencyObjectArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 052E87411BEBE6FC0052044C /* USAePayCurrencyObjectArray.m */; };
+		052E87B41BEBE6FD0052044C /* USAePayCustomerObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 052E87431BEBE6FC0052044C /* USAePayCustomerObject.m */; };
+		052E87B51BEBE6FD0052044C /* USAePayCustomerObjectArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 052E87451BEBE6FC0052044C /* USAePayCustomerObjectArray.m */; };
+		052E87B61BEBE6FD0052044C /* USAePayCustomerSearchResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 052E87471BEBE6FC0052044C /* USAePayCustomerSearchResult.m */; };
+		052E87B71BEBE6FD0052044C /* USAePayCustomerTransactionRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 052E87491BEBE6FC0052044C /* USAePayCustomerTransactionRequest.m */; };
+		052E87B81BEBE6FD0052044C /* USAePaydoubleArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 052E874B1BEBE6FC0052044C /* USAePaydoubleArray.m */; };
+		052E87B91BEBE6FD0052044C /* USAePayFieldValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 052E874D1BEBE6FC0052044C /* USAePayFieldValue.m */; };
+		052E87BA1BEBE6FD0052044C /* USAePayFieldValueArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 052E874F1BEBE6FC0052044C /* USAePayFieldValueArray.m */; };
+		052E87BB1BEBE6FD0052044C /* USAePayHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 052E87511BEBE6FC0052044C /* USAePayHelper.m */; };
+		052E87BC1BEBE6FD0052044C /* USAePayLineItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 052E87531BEBE6FC0052044C /* USAePayLineItem.m */; };
+		052E87BD1BEBE6FD0052044C /* USAePayLineItemArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 052E87551BEBE6FC0052044C /* USAePayLineItemArray.m */; };
+		052E87BE1BEBE6FD0052044C /* USAePayPaymentMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 052E87571BEBE6FC0052044C /* USAePayPaymentMethod.m */; };
+		052E87BF1BEBE6FD0052044C /* USAePayPaymentMethodArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 052E87591BEBE6FC0052044C /* USAePayPaymentMethodArray.m */; };
+		052E87C01BEBE6FD0052044C /* USAePayPriceTier.m in Sources */ = {isa = PBXBuildFile; fileRef = 052E875B1BEBE6FC0052044C /* USAePayPriceTier.m */; };
+		052E87C11BEBE6FD0052044C /* USAePayPriceTierArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 052E875D1BEBE6FC0052044C /* USAePayPriceTierArray.m */; };
+		052E87C21BEBE6FD0052044C /* USAePayProduct.m in Sources */ = {isa = PBXBuildFile; fileRef = 052E875F1BEBE6FC0052044C /* USAePayProduct.m */; };
+		052E87C31BEBE6FD0052044C /* USAePayProductArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 052E87611BEBE6FC0052044C /* USAePayProductArray.m */; };
+		052E87C41BEBE6FD0052044C /* USAePayProductCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 052E87631BEBE6FC0052044C /* USAePayProductCategory.m */; };
+		052E87C51BEBE6FD0052044C /* USAePayProductCategoryArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 052E87651BEBE6FC0052044C /* USAePayProductCategoryArray.m */; };
+		052E87C61BEBE6FD0052044C /* USAePayProductInventory.m in Sources */ = {isa = PBXBuildFile; fileRef = 052E87671BEBE6FC0052044C /* USAePayProductInventory.m */; };
+		052E87C71BEBE6FD0052044C /* USAePayProductInventoryArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 052E87691BEBE6FC0052044C /* USAePayProductInventoryArray.m */; };
+		052E87C81BEBE6FD0052044C /* USAePayProductSearchResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 052E876B1BEBE6FC0052044C /* USAePayProductSearchResult.m */; };
+		052E87C91BEBE6FD0052044C /* USAePayReceipt.m in Sources */ = {isa = PBXBuildFile; fileRef = 052E876D1BEBE6FC0052044C /* USAePayReceipt.m */; };
+		052E87CA1BEBE6FD0052044C /* USAePayReceiptArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 052E876F1BEBE6FC0052044C /* USAePayReceiptArray.m */; };
+		052E87CB1BEBE6FD0052044C /* USAePayRecurringBilling.m in Sources */ = {isa = PBXBuildFile; fileRef = 052E87711BEBE6FC0052044C /* USAePayRecurringBilling.m */; };
+		052E87CC1BEBE6FD0052044C /* USAePayRequestResultHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 052E87731BEBE6FC0052044C /* USAePayRequestResultHandler.m */; };
+		052E87CD1BEBE6FD0052044C /* USAePaySearchParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 052E87751BEBE6FC0052044C /* USAePaySearchParam.m */; };
+		052E87CE1BEBE6FD0052044C /* USAePaySearchParamArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 052E87771BEBE6FC0052044C /* USAePaySearchParamArray.m */; };
+		052E87CF1BEBE6FD0052044C /* USAePaySoapError.m in Sources */ = {isa = PBXBuildFile; fileRef = 052E87791BEBE6FC0052044C /* USAePaySoapError.m */; };
+		052E87D01BEBE6FD0052044C /* USAePaystringArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 052E877B1BEBE6FC0052044C /* USAePaystringArray.m */; };
+		052E87D11BEBE6FD0052044C /* USAePaySyncLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 052E877D1BEBE6FC0052044C /* USAePaySyncLog.m */; };
+		052E87D21BEBE6FD0052044C /* USAePaySyncLogArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 052E877F1BEBE6FC0052044C /* USAePaySyncLogArray.m */; };
+		052E87D31BEBE6FD0052044C /* USAePaySystemInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 052E87811BEBE6FC0052044C /* USAePaySystemInfo.m */; };
+		052E87D41BEBE6FD0052044C /* USAePayTransactionDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 052E87831BEBE6FC0052044C /* USAePayTransactionDetail.m */; };
+		052E87D51BEBE6FD0052044C /* USAePayTransactionObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 052E87851BEBE6FD0052044C /* USAePayTransactionObject.m */; };
+		052E87D61BEBE6FD0052044C /* USAePayTransactionObjectArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 052E87871BEBE6FD0052044C /* USAePayTransactionObjectArray.m */; };
+		052E87D71BEBE6FD0052044C /* USAePayTransactionRequestObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 052E87891BEBE6FD0052044C /* USAePayTransactionRequestObject.m */; };
+		052E87D81BEBE6FD0052044C /* USAePayTransactionResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 052E878B1BEBE6FD0052044C /* USAePayTransactionResponse.m */; };
+		052E87D91BEBE6FD0052044C /* USAePayTransactionSearchResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 052E878D1BEBE6FD0052044C /* USAePayTransactionSearchResult.m */; };
+		052E87DA1BEBE6FD0052044C /* USAePayueHash.m in Sources */ = {isa = PBXBuildFile; fileRef = 052E878F1BEBE6FD0052044C /* USAePayueHash.m */; };
+		052E87DB1BEBE6FD0052044C /* USAePayueSecurityToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 052E87911BEBE6FD0052044C /* USAePayueSecurityToken.m */; };
+		052E87DC1BEBE6FD0052044C /* USAePayueSoapServerBinding.m in Sources */ = {isa = PBXBuildFile; fileRef = 052E87931BEBE6FD0052044C /* USAePayueSoapServerBinding.m */; };
 		055D713D1BA9119C00F7436B /* PaymentMethodViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 055D713B1BA9119C00F7436B /* PaymentMethodViewController.m */; };
 		055D713E1BA9119C00F7436B /* PaymentMethodViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 055D713C1BA9119C00F7436B /* PaymentMethodViewController.xib */; };
 		055D79041BAA178A00F7436B /* CreateCustomerPaymentProfileRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 055D78B31BAA178A00F7436B /* CreateCustomerPaymentProfileRequest.m */; };
@@ -53,17 +126,17 @@
 		055D79251BAA178A00F7436B /* ValidationModes.m in Sources */ = {isa = PBXBuildFile; fileRef = 055D79031BAA178A00F7436B /* ValidationModes.m */; };
 		055D79301BABA7F400F7436B /* CheckoutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 055D792F1BABA7F400F7436B /* CheckoutViewController.m */; };
 		0569EE021B7674C200EB37BF /* WholesaleModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 0569EE011B7674C200EB37BF /* WholesaleModule.m */; };
-		058CDC511BC5898E00C27560 /* amex.png in Resources */ = {isa = PBXBuildFile; fileRef = 058CDC4A1BC5898E00C27560 /* amex.png */; settings = {ASSET_TAGS = (); }; };
-		058CDC521BC5898E00C27560 /* discover.png in Resources */ = {isa = PBXBuildFile; fileRef = 058CDC4B1BC5898E00C27560 /* discover.png */; settings = {ASSET_TAGS = (); }; };
-		058CDC531BC5898E00C27560 /* maestro.png in Resources */ = {isa = PBXBuildFile; fileRef = 058CDC4C1BC5898E00C27560 /* maestro.png */; settings = {ASSET_TAGS = (); }; };
-		058CDC541BC5898E00C27560 /* master-card.png in Resources */ = {isa = PBXBuildFile; fileRef = 058CDC4D1BC5898E00C27560 /* master-card.png */; settings = {ASSET_TAGS = (); }; };
-		058CDC551BC5898E00C27560 /* paypal.png in Resources */ = {isa = PBXBuildFile; fileRef = 058CDC4E1BC5898E00C27560 /* paypal.png */; settings = {ASSET_TAGS = (); }; };
-		058CDC561BC5898E00C27560 /* visa.png in Resources */ = {isa = PBXBuildFile; fileRef = 058CDC4F1BC5898E00C27560 /* visa.png */; settings = {ASSET_TAGS = (); }; };
-		058CDC571BC5898E00C27560 /* western-union.png in Resources */ = {isa = PBXBuildFile; fileRef = 058CDC501BC5898E00C27560 /* western-union.png */; settings = {ASSET_TAGS = (); }; };
-		058CDC5C1BC5B3AE00C27560 /* StringUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 058CDC5B1BC5B3AE00C27560 /* StringUtility.m */; settings = {ASSET_TAGS = (); }; };
+		058CDC511BC5898E00C27560 /* amex.png in Resources */ = {isa = PBXBuildFile; fileRef = 058CDC4A1BC5898E00C27560 /* amex.png */; };
+		058CDC521BC5898E00C27560 /* discover.png in Resources */ = {isa = PBXBuildFile; fileRef = 058CDC4B1BC5898E00C27560 /* discover.png */; };
+		058CDC531BC5898E00C27560 /* maestro.png in Resources */ = {isa = PBXBuildFile; fileRef = 058CDC4C1BC5898E00C27560 /* maestro.png */; };
+		058CDC541BC5898E00C27560 /* master-card.png in Resources */ = {isa = PBXBuildFile; fileRef = 058CDC4D1BC5898E00C27560 /* master-card.png */; };
+		058CDC551BC5898E00C27560 /* paypal.png in Resources */ = {isa = PBXBuildFile; fileRef = 058CDC4E1BC5898E00C27560 /* paypal.png */; };
+		058CDC561BC5898E00C27560 /* visa.png in Resources */ = {isa = PBXBuildFile; fileRef = 058CDC4F1BC5898E00C27560 /* visa.png */; };
+		058CDC571BC5898E00C27560 /* western-union.png in Resources */ = {isa = PBXBuildFile; fileRef = 058CDC501BC5898E00C27560 /* western-union.png */; };
+		058CDC5C1BC5B3AE00C27560 /* StringUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 058CDC5B1BC5B3AE00C27560 /* StringUtility.m */; };
 		05988BD01B90F4C70064CBA1 /* StoreLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05988BCF1B90F4C70064CBA1 /* StoreLocationViewController.m */; };
 		05988BD21B916CB00064CBA1 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05988BD11B916CB00064CBA1 /* MapKit.framework */; };
-		05990B3A1BC8CE1700A2B41D /* custom-payment.png in Resources */ = {isa = PBXBuildFile; fileRef = 05990B391BC8CE1700A2B41D /* custom-payment.png */; settings = {ASSET_TAGS = (); }; };
+		05990B3A1BC8CE1700A2B41D /* custom-payment.png in Resources */ = {isa = PBXBuildFile; fileRef = 05990B391BC8CE1700A2B41D /* custom-payment.png */; };
 		05B846841BA1130900A54FE1 /* ANetApiRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B845CB1BA1130900A54FE1 /* ANetApiRequest.m */; };
 		05B846851BA1130900A54FE1 /* ANetApiResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B845CC1BA1130900A54FE1 /* ANetApiResponse.m */; };
 		05B846861BA1130900A54FE1 /* AuthNet.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B845CD1BA1130900A54FE1 /* AuthNet.m */; };
@@ -331,6 +404,153 @@
 		050DB35C1B83F707006D05FC /* GuestCheckoutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GuestCheckoutViewController.h; path = ecommerce/GuestCheckoutViewController.h; sourceTree = SOURCE_ROOT; };
 		050DB35D1B83F707006D05FC /* GuestCheckoutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GuestCheckoutViewController.m; path = ecommerce/GuestCheckoutViewController.m; sourceTree = SOURCE_ROOT; };
 		050DB35E1B83F707006D05FC /* GuestCheckoutViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = GuestCheckoutViewController.xib; path = ecommerce/GuestCheckoutViewController.xib; sourceTree = SOURCE_ROOT; };
+		052E86FD1BEBE6FC0052044C /* DDXMLElementAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLElementAdditions.h; sourceTree = "<group>"; };
+		052E86FE1BEBE6FC0052044C /* DDXMLElementAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDXMLElementAdditions.m; sourceTree = "<group>"; };
+		052E87001BEBE6FC0052044C /* NSString+DDXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+DDXML.h"; sourceTree = "<group>"; };
+		052E87011BEBE6FC0052044C /* NSString+DDXML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+DDXML.m"; sourceTree = "<group>"; };
+		052E87021BEBE6FC0052044C /* DDXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXML.h; sourceTree = "<group>"; };
+		052E87031BEBE6FC0052044C /* DDXMLDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLDocument.h; sourceTree = "<group>"; };
+		052E87041BEBE6FC0052044C /* DDXMLDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDXMLDocument.m; sourceTree = "<group>"; };
+		052E87051BEBE6FC0052044C /* DDXMLElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLElement.h; sourceTree = "<group>"; };
+		052E87061BEBE6FC0052044C /* DDXMLElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDXMLElement.m; sourceTree = "<group>"; };
+		052E87071BEBE6FC0052044C /* DDXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLNode.h; sourceTree = "<group>"; };
+		052E87081BEBE6FC0052044C /* DDXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDXMLNode.m; sourceTree = "<group>"; };
+		052E870A1BEBE6FC0052044C /* DDXMLPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLPrivate.h; sourceTree = "<group>"; };
+		052E870C1BEBE6FC0052044C /* MIMEKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIMEKit.h; sourceTree = "<group>"; };
+		052E870D1BEBE6FC0052044C /* MIMEKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIMEKit.m; sourceTree = "<group>"; };
+		052E870E1BEBE6FC0052044C /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
+		052E870F1BEBE6FC0052044C /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
+		052E87101BEBE6FC0052044C /* NSData+GUID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+GUID.h"; sourceTree = "<group>"; };
+		052E87111BEBE6FC0052044C /* NSData+GUID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+GUID.m"; sourceTree = "<group>"; };
+		052E87121BEBE6FC0052044C /* NSData+MIMETransferEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+MIMETransferEncoding.h"; sourceTree = "<group>"; };
+		052E87131BEBE6FC0052044C /* NSData+MIMETransferEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+MIMETransferEncoding.m"; sourceTree = "<group>"; };
+		052E87141BEBE6FC0052044C /* NSDictionary+CaseInsensitiveKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+CaseInsensitiveKeys.h"; sourceTree = "<group>"; };
+		052E87151BEBE6FC0052044C /* NSDictionary+CaseInsensitiveKeys.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+CaseInsensitiveKeys.m"; sourceTree = "<group>"; };
+		052E87161BEBE6FC0052044C /* NSString+GUID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+GUID.h"; sourceTree = "<group>"; };
+		052E87171BEBE6FC0052044C /* NSString+GUID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+GUID.m"; sourceTree = "<group>"; };
+		052E87181BEBE6FC0052044C /* PKContentType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKContentType.h; sourceTree = "<group>"; };
+		052E87191BEBE6FC0052044C /* PKContentType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKContentType.m; sourceTree = "<group>"; };
+		052E871A1BEBE6FC0052044C /* PKMIMEData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKMIMEData.h; sourceTree = "<group>"; };
+		052E871B1BEBE6FC0052044C /* PKMIMEData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKMIMEData.m; sourceTree = "<group>"; };
+		052E871C1BEBE6FC0052044C /* PKMIMEMessage+XOP-XML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PKMIMEMessage+XOP-XML.h"; sourceTree = "<group>"; };
+		052E871D1BEBE6FC0052044C /* PKMIMEMessage+XOP-XML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PKMIMEMessage+XOP-XML.m"; sourceTree = "<group>"; };
+		052E871E1BEBE6FC0052044C /* PKMIMEMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKMIMEMessage.h; sourceTree = "<group>"; };
+		052E871F1BEBE6FC0052044C /* PKMIMEMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKMIMEMessage.m; sourceTree = "<group>"; };
+		052E87201BEBE6FC0052044C /* UIImage+MIME.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+MIME.h"; sourceTree = "<group>"; };
+		052E87211BEBE6FC0052044C /* UIImage+MIME.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+MIME.m"; sourceTree = "<group>"; };
+		052E87221BEBE6FC0052044C /* ReadMe.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ReadMe.txt; sourceTree = "<group>"; };
+		052E87241BEBE6FC0052044C /* USAePayAccountDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USAePayAccountDetails.h; sourceTree = "<group>"; };
+		052E87251BEBE6FC0052044C /* USAePayAccountDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USAePayAccountDetails.m; sourceTree = "<group>"; };
+		052E87261BEBE6FC0052044C /* USAePayAddress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USAePayAddress.h; sourceTree = "<group>"; };
+		052E87271BEBE6FC0052044C /* USAePayAddress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USAePayAddress.m; sourceTree = "<group>"; };
+		052E87281BEBE6FC0052044C /* USAePayBank.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USAePayBank.h; sourceTree = "<group>"; };
+		052E87291BEBE6FC0052044C /* USAePayBank.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USAePayBank.m; sourceTree = "<group>"; };
+		052E872A1BEBE6FC0052044C /* USAePayBankArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USAePayBankArray.h; sourceTree = "<group>"; };
+		052E872B1BEBE6FC0052044C /* USAePayBankArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USAePayBankArray.m; sourceTree = "<group>"; };
+		052E872C1BEBE6FC0052044C /* USAePayBatchSearchResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USAePayBatchSearchResult.h; sourceTree = "<group>"; };
+		052E872D1BEBE6FC0052044C /* USAePayBatchSearchResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USAePayBatchSearchResult.m; sourceTree = "<group>"; };
+		052E872E1BEBE6FC0052044C /* USAePayBatchStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USAePayBatchStatus.h; sourceTree = "<group>"; };
+		052E872F1BEBE6FC0052044C /* USAePayBatchStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USAePayBatchStatus.m; sourceTree = "<group>"; };
+		052E87301BEBE6FC0052044C /* USAePayBatchStatusArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USAePayBatchStatusArray.h; sourceTree = "<group>"; };
+		052E87311BEBE6FC0052044C /* USAePayBatchStatusArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USAePayBatchStatusArray.m; sourceTree = "<group>"; };
+		052E87321BEBE6FC0052044C /* USAePayBatchUploadStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USAePayBatchUploadStatus.h; sourceTree = "<group>"; };
+		052E87331BEBE6FC0052044C /* USAePayBatchUploadStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USAePayBatchUploadStatus.m; sourceTree = "<group>"; };
+		052E87341BEBE6FC0052044C /* USAePayCheckData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USAePayCheckData.h; sourceTree = "<group>"; };
+		052E87351BEBE6FC0052044C /* USAePayCheckData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USAePayCheckData.m; sourceTree = "<group>"; };
+		052E87361BEBE6FC0052044C /* USAePayCheckTrace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USAePayCheckTrace.h; sourceTree = "<group>"; };
+		052E87371BEBE6FC0052044C /* USAePayCheckTrace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USAePayCheckTrace.m; sourceTree = "<group>"; };
+		052E87381BEBE6FC0052044C /* USAePayCreditCardData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USAePayCreditCardData.h; sourceTree = "<group>"; };
+		052E87391BEBE6FC0052044C /* USAePayCreditCardData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USAePayCreditCardData.m; sourceTree = "<group>"; };
+		052E873A1BEBE6FC0052044C /* USAePayCurrencyConversion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USAePayCurrencyConversion.h; sourceTree = "<group>"; };
+		052E873B1BEBE6FC0052044C /* USAePayCurrencyConversion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USAePayCurrencyConversion.m; sourceTree = "<group>"; };
+		052E873C1BEBE6FC0052044C /* USAePayCurrencyConversionArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USAePayCurrencyConversionArray.h; sourceTree = "<group>"; };
+		052E873D1BEBE6FC0052044C /* USAePayCurrencyConversionArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USAePayCurrencyConversionArray.m; sourceTree = "<group>"; };
+		052E873E1BEBE6FC0052044C /* USAePayCurrencyObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USAePayCurrencyObject.h; sourceTree = "<group>"; };
+		052E873F1BEBE6FC0052044C /* USAePayCurrencyObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USAePayCurrencyObject.m; sourceTree = "<group>"; };
+		052E87401BEBE6FC0052044C /* USAePayCurrencyObjectArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USAePayCurrencyObjectArray.h; sourceTree = "<group>"; };
+		052E87411BEBE6FC0052044C /* USAePayCurrencyObjectArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USAePayCurrencyObjectArray.m; sourceTree = "<group>"; };
+		052E87421BEBE6FC0052044C /* USAePayCustomerObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USAePayCustomerObject.h; sourceTree = "<group>"; };
+		052E87431BEBE6FC0052044C /* USAePayCustomerObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USAePayCustomerObject.m; sourceTree = "<group>"; };
+		052E87441BEBE6FC0052044C /* USAePayCustomerObjectArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USAePayCustomerObjectArray.h; sourceTree = "<group>"; };
+		052E87451BEBE6FC0052044C /* USAePayCustomerObjectArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USAePayCustomerObjectArray.m; sourceTree = "<group>"; };
+		052E87461BEBE6FC0052044C /* USAePayCustomerSearchResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USAePayCustomerSearchResult.h; sourceTree = "<group>"; };
+		052E87471BEBE6FC0052044C /* USAePayCustomerSearchResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USAePayCustomerSearchResult.m; sourceTree = "<group>"; };
+		052E87481BEBE6FC0052044C /* USAePayCustomerTransactionRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USAePayCustomerTransactionRequest.h; sourceTree = "<group>"; };
+		052E87491BEBE6FC0052044C /* USAePayCustomerTransactionRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USAePayCustomerTransactionRequest.m; sourceTree = "<group>"; };
+		052E874A1BEBE6FC0052044C /* USAePaydoubleArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USAePaydoubleArray.h; sourceTree = "<group>"; };
+		052E874B1BEBE6FC0052044C /* USAePaydoubleArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USAePaydoubleArray.m; sourceTree = "<group>"; };
+		052E874C1BEBE6FC0052044C /* USAePayFieldValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USAePayFieldValue.h; sourceTree = "<group>"; };
+		052E874D1BEBE6FC0052044C /* USAePayFieldValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USAePayFieldValue.m; sourceTree = "<group>"; };
+		052E874E1BEBE6FC0052044C /* USAePayFieldValueArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USAePayFieldValueArray.h; sourceTree = "<group>"; };
+		052E874F1BEBE6FC0052044C /* USAePayFieldValueArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USAePayFieldValueArray.m; sourceTree = "<group>"; };
+		052E87501BEBE6FC0052044C /* USAePayHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USAePayHelper.h; sourceTree = "<group>"; };
+		052E87511BEBE6FC0052044C /* USAePayHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USAePayHelper.m; sourceTree = "<group>"; };
+		052E87521BEBE6FC0052044C /* USAePayLineItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USAePayLineItem.h; sourceTree = "<group>"; };
+		052E87531BEBE6FC0052044C /* USAePayLineItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USAePayLineItem.m; sourceTree = "<group>"; };
+		052E87541BEBE6FC0052044C /* USAePayLineItemArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USAePayLineItemArray.h; sourceTree = "<group>"; };
+		052E87551BEBE6FC0052044C /* USAePayLineItemArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USAePayLineItemArray.m; sourceTree = "<group>"; };
+		052E87561BEBE6FC0052044C /* USAePayPaymentMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USAePayPaymentMethod.h; sourceTree = "<group>"; };
+		052E87571BEBE6FC0052044C /* USAePayPaymentMethod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USAePayPaymentMethod.m; sourceTree = "<group>"; };
+		052E87581BEBE6FC0052044C /* USAePayPaymentMethodArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USAePayPaymentMethodArray.h; sourceTree = "<group>"; };
+		052E87591BEBE6FC0052044C /* USAePayPaymentMethodArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USAePayPaymentMethodArray.m; sourceTree = "<group>"; };
+		052E875A1BEBE6FC0052044C /* USAePayPriceTier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USAePayPriceTier.h; sourceTree = "<group>"; };
+		052E875B1BEBE6FC0052044C /* USAePayPriceTier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USAePayPriceTier.m; sourceTree = "<group>"; };
+		052E875C1BEBE6FC0052044C /* USAePayPriceTierArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USAePayPriceTierArray.h; sourceTree = "<group>"; };
+		052E875D1BEBE6FC0052044C /* USAePayPriceTierArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USAePayPriceTierArray.m; sourceTree = "<group>"; };
+		052E875E1BEBE6FC0052044C /* USAePayProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USAePayProduct.h; sourceTree = "<group>"; };
+		052E875F1BEBE6FC0052044C /* USAePayProduct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USAePayProduct.m; sourceTree = "<group>"; };
+		052E87601BEBE6FC0052044C /* USAePayProductArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USAePayProductArray.h; sourceTree = "<group>"; };
+		052E87611BEBE6FC0052044C /* USAePayProductArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USAePayProductArray.m; sourceTree = "<group>"; };
+		052E87621BEBE6FC0052044C /* USAePayProductCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USAePayProductCategory.h; sourceTree = "<group>"; };
+		052E87631BEBE6FC0052044C /* USAePayProductCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USAePayProductCategory.m; sourceTree = "<group>"; };
+		052E87641BEBE6FC0052044C /* USAePayProductCategoryArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USAePayProductCategoryArray.h; sourceTree = "<group>"; };
+		052E87651BEBE6FC0052044C /* USAePayProductCategoryArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USAePayProductCategoryArray.m; sourceTree = "<group>"; };
+		052E87661BEBE6FC0052044C /* USAePayProductInventory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USAePayProductInventory.h; sourceTree = "<group>"; };
+		052E87671BEBE6FC0052044C /* USAePayProductInventory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USAePayProductInventory.m; sourceTree = "<group>"; };
+		052E87681BEBE6FC0052044C /* USAePayProductInventoryArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USAePayProductInventoryArray.h; sourceTree = "<group>"; };
+		052E87691BEBE6FC0052044C /* USAePayProductInventoryArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USAePayProductInventoryArray.m; sourceTree = "<group>"; };
+		052E876A1BEBE6FC0052044C /* USAePayProductSearchResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USAePayProductSearchResult.h; sourceTree = "<group>"; };
+		052E876B1BEBE6FC0052044C /* USAePayProductSearchResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USAePayProductSearchResult.m; sourceTree = "<group>"; };
+		052E876C1BEBE6FC0052044C /* USAePayReceipt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USAePayReceipt.h; sourceTree = "<group>"; };
+		052E876D1BEBE6FC0052044C /* USAePayReceipt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USAePayReceipt.m; sourceTree = "<group>"; };
+		052E876E1BEBE6FC0052044C /* USAePayReceiptArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USAePayReceiptArray.h; sourceTree = "<group>"; };
+		052E876F1BEBE6FC0052044C /* USAePayReceiptArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USAePayReceiptArray.m; sourceTree = "<group>"; };
+		052E87701BEBE6FC0052044C /* USAePayRecurringBilling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USAePayRecurringBilling.h; sourceTree = "<group>"; };
+		052E87711BEBE6FC0052044C /* USAePayRecurringBilling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USAePayRecurringBilling.m; sourceTree = "<group>"; };
+		052E87721BEBE6FC0052044C /* USAePayRequestResultHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USAePayRequestResultHandler.h; sourceTree = "<group>"; };
+		052E87731BEBE6FC0052044C /* USAePayRequestResultHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USAePayRequestResultHandler.m; sourceTree = "<group>"; };
+		052E87741BEBE6FC0052044C /* USAePaySearchParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USAePaySearchParam.h; sourceTree = "<group>"; };
+		052E87751BEBE6FC0052044C /* USAePaySearchParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USAePaySearchParam.m; sourceTree = "<group>"; };
+		052E87761BEBE6FC0052044C /* USAePaySearchParamArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USAePaySearchParamArray.h; sourceTree = "<group>"; };
+		052E87771BEBE6FC0052044C /* USAePaySearchParamArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USAePaySearchParamArray.m; sourceTree = "<group>"; };
+		052E87781BEBE6FC0052044C /* USAePaySoapError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USAePaySoapError.h; sourceTree = "<group>"; };
+		052E87791BEBE6FC0052044C /* USAePaySoapError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USAePaySoapError.m; sourceTree = "<group>"; };
+		052E877A1BEBE6FC0052044C /* USAePaystringArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USAePaystringArray.h; sourceTree = "<group>"; };
+		052E877B1BEBE6FC0052044C /* USAePaystringArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USAePaystringArray.m; sourceTree = "<group>"; };
+		052E877C1BEBE6FC0052044C /* USAePaySyncLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USAePaySyncLog.h; sourceTree = "<group>"; };
+		052E877D1BEBE6FC0052044C /* USAePaySyncLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USAePaySyncLog.m; sourceTree = "<group>"; };
+		052E877E1BEBE6FC0052044C /* USAePaySyncLogArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USAePaySyncLogArray.h; sourceTree = "<group>"; };
+		052E877F1BEBE6FC0052044C /* USAePaySyncLogArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USAePaySyncLogArray.m; sourceTree = "<group>"; };
+		052E87801BEBE6FC0052044C /* USAePaySystemInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USAePaySystemInfo.h; sourceTree = "<group>"; };
+		052E87811BEBE6FC0052044C /* USAePaySystemInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USAePaySystemInfo.m; sourceTree = "<group>"; };
+		052E87821BEBE6FC0052044C /* USAePayTransactionDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USAePayTransactionDetail.h; sourceTree = "<group>"; };
+		052E87831BEBE6FC0052044C /* USAePayTransactionDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USAePayTransactionDetail.m; sourceTree = "<group>"; };
+		052E87841BEBE6FC0052044C /* USAePayTransactionObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USAePayTransactionObject.h; sourceTree = "<group>"; };
+		052E87851BEBE6FD0052044C /* USAePayTransactionObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USAePayTransactionObject.m; sourceTree = "<group>"; };
+		052E87861BEBE6FD0052044C /* USAePayTransactionObjectArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USAePayTransactionObjectArray.h; sourceTree = "<group>"; };
+		052E87871BEBE6FD0052044C /* USAePayTransactionObjectArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USAePayTransactionObjectArray.m; sourceTree = "<group>"; };
+		052E87881BEBE6FD0052044C /* USAePayTransactionRequestObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USAePayTransactionRequestObject.h; sourceTree = "<group>"; };
+		052E87891BEBE6FD0052044C /* USAePayTransactionRequestObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USAePayTransactionRequestObject.m; sourceTree = "<group>"; };
+		052E878A1BEBE6FD0052044C /* USAePayTransactionResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USAePayTransactionResponse.h; sourceTree = "<group>"; };
+		052E878B1BEBE6FD0052044C /* USAePayTransactionResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USAePayTransactionResponse.m; sourceTree = "<group>"; };
+		052E878C1BEBE6FD0052044C /* USAePayTransactionSearchResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USAePayTransactionSearchResult.h; sourceTree = "<group>"; };
+		052E878D1BEBE6FD0052044C /* USAePayTransactionSearchResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USAePayTransactionSearchResult.m; sourceTree = "<group>"; };
+		052E878E1BEBE6FD0052044C /* USAePayueHash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USAePayueHash.h; sourceTree = "<group>"; };
+		052E878F1BEBE6FD0052044C /* USAePayueHash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USAePayueHash.m; sourceTree = "<group>"; };
+		052E87901BEBE6FD0052044C /* USAePayueSecurityToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USAePayueSecurityToken.h; sourceTree = "<group>"; };
+		052E87911BEBE6FD0052044C /* USAePayueSecurityToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USAePayueSecurityToken.m; sourceTree = "<group>"; };
+		052E87921BEBE6FD0052044C /* USAePayueSoapServerBinding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USAePayueSoapServerBinding.h; sourceTree = "<group>"; };
+		052E87931BEBE6FD0052044C /* USAePayueSoapServerBinding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USAePayueSoapServerBinding.m; sourceTree = "<group>"; };
 		055D713A1BA9119C00F7436B /* PaymentMethodViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PaymentMethodViewController.h; path = ecommerce/PaymentMethodViewController.h; sourceTree = SOURCE_ROOT; };
 		055D713B1BA9119C00F7436B /* PaymentMethodViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PaymentMethodViewController.m; path = ecommerce/PaymentMethodViewController.m; sourceTree = SOURCE_ROOT; };
 		055D713C1BA9119C00F7436B /* PaymentMethodViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PaymentMethodViewController.xib; path = ecommerce/PaymentMethodViewController.xib; sourceTree = SOURCE_ROOT; };
@@ -922,6 +1142,208 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		052E86FA1BEBE6FC0052044C /* USAePay */ = {
+			isa = PBXGroup;
+			children = (
+				052E86FB1BEBE6FC0052044C /* KissXML */,
+				052E870B1BEBE6FC0052044C /* MIMEKit */,
+				052E87221BEBE6FC0052044C /* ReadMe.txt */,
+				052E87231BEBE6FC0052044C /* src */,
+			);
+			path = USAePay;
+			sourceTree = "<group>";
+		};
+		052E86FB1BEBE6FC0052044C /* KissXML */ = {
+			isa = PBXGroup;
+			children = (
+				052E86FC1BEBE6FC0052044C /* Additions */,
+				052E86FF1BEBE6FC0052044C /* Categories */,
+				052E87021BEBE6FC0052044C /* DDXML.h */,
+				052E87031BEBE6FC0052044C /* DDXMLDocument.h */,
+				052E87041BEBE6FC0052044C /* DDXMLDocument.m */,
+				052E87051BEBE6FC0052044C /* DDXMLElement.h */,
+				052E87061BEBE6FC0052044C /* DDXMLElement.m */,
+				052E87071BEBE6FC0052044C /* DDXMLNode.h */,
+				052E87081BEBE6FC0052044C /* DDXMLNode.m */,
+				052E87091BEBE6FC0052044C /* Private */,
+			);
+			path = KissXML;
+			sourceTree = "<group>";
+		};
+		052E86FC1BEBE6FC0052044C /* Additions */ = {
+			isa = PBXGroup;
+			children = (
+				052E86FD1BEBE6FC0052044C /* DDXMLElementAdditions.h */,
+				052E86FE1BEBE6FC0052044C /* DDXMLElementAdditions.m */,
+			);
+			path = Additions;
+			sourceTree = "<group>";
+		};
+		052E86FF1BEBE6FC0052044C /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				052E87001BEBE6FC0052044C /* NSString+DDXML.h */,
+				052E87011BEBE6FC0052044C /* NSString+DDXML.m */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
+		052E87091BEBE6FC0052044C /* Private */ = {
+			isa = PBXGroup;
+			children = (
+				052E870A1BEBE6FC0052044C /* DDXMLPrivate.h */,
+			);
+			path = Private;
+			sourceTree = "<group>";
+		};
+		052E870B1BEBE6FC0052044C /* MIMEKit */ = {
+			isa = PBXGroup;
+			children = (
+				052E870C1BEBE6FC0052044C /* MIMEKit.h */,
+				052E870D1BEBE6FC0052044C /* MIMEKit.m */,
+				052E870E1BEBE6FC0052044C /* NSData+Base64.h */,
+				052E870F1BEBE6FC0052044C /* NSData+Base64.m */,
+				052E87101BEBE6FC0052044C /* NSData+GUID.h */,
+				052E87111BEBE6FC0052044C /* NSData+GUID.m */,
+				052E87121BEBE6FC0052044C /* NSData+MIMETransferEncoding.h */,
+				052E87131BEBE6FC0052044C /* NSData+MIMETransferEncoding.m */,
+				052E87141BEBE6FC0052044C /* NSDictionary+CaseInsensitiveKeys.h */,
+				052E87151BEBE6FC0052044C /* NSDictionary+CaseInsensitiveKeys.m */,
+				052E87161BEBE6FC0052044C /* NSString+GUID.h */,
+				052E87171BEBE6FC0052044C /* NSString+GUID.m */,
+				052E87181BEBE6FC0052044C /* PKContentType.h */,
+				052E87191BEBE6FC0052044C /* PKContentType.m */,
+				052E871A1BEBE6FC0052044C /* PKMIMEData.h */,
+				052E871B1BEBE6FC0052044C /* PKMIMEData.m */,
+				052E871C1BEBE6FC0052044C /* PKMIMEMessage+XOP-XML.h */,
+				052E871D1BEBE6FC0052044C /* PKMIMEMessage+XOP-XML.m */,
+				052E871E1BEBE6FC0052044C /* PKMIMEMessage.h */,
+				052E871F1BEBE6FC0052044C /* PKMIMEMessage.m */,
+				052E87201BEBE6FC0052044C /* UIImage+MIME.h */,
+				052E87211BEBE6FC0052044C /* UIImage+MIME.m */,
+			);
+			path = MIMEKit;
+			sourceTree = "<group>";
+		};
+		052E87231BEBE6FC0052044C /* src */ = {
+			isa = PBXGroup;
+			children = (
+				052E87241BEBE6FC0052044C /* USAePayAccountDetails.h */,
+				052E87251BEBE6FC0052044C /* USAePayAccountDetails.m */,
+				052E87261BEBE6FC0052044C /* USAePayAddress.h */,
+				052E87271BEBE6FC0052044C /* USAePayAddress.m */,
+				052E87281BEBE6FC0052044C /* USAePayBank.h */,
+				052E87291BEBE6FC0052044C /* USAePayBank.m */,
+				052E872A1BEBE6FC0052044C /* USAePayBankArray.h */,
+				052E872B1BEBE6FC0052044C /* USAePayBankArray.m */,
+				052E872C1BEBE6FC0052044C /* USAePayBatchSearchResult.h */,
+				052E872D1BEBE6FC0052044C /* USAePayBatchSearchResult.m */,
+				052E872E1BEBE6FC0052044C /* USAePayBatchStatus.h */,
+				052E872F1BEBE6FC0052044C /* USAePayBatchStatus.m */,
+				052E87301BEBE6FC0052044C /* USAePayBatchStatusArray.h */,
+				052E87311BEBE6FC0052044C /* USAePayBatchStatusArray.m */,
+				052E87321BEBE6FC0052044C /* USAePayBatchUploadStatus.h */,
+				052E87331BEBE6FC0052044C /* USAePayBatchUploadStatus.m */,
+				052E87341BEBE6FC0052044C /* USAePayCheckData.h */,
+				052E87351BEBE6FC0052044C /* USAePayCheckData.m */,
+				052E87361BEBE6FC0052044C /* USAePayCheckTrace.h */,
+				052E87371BEBE6FC0052044C /* USAePayCheckTrace.m */,
+				052E87381BEBE6FC0052044C /* USAePayCreditCardData.h */,
+				052E87391BEBE6FC0052044C /* USAePayCreditCardData.m */,
+				052E873A1BEBE6FC0052044C /* USAePayCurrencyConversion.h */,
+				052E873B1BEBE6FC0052044C /* USAePayCurrencyConversion.m */,
+				052E873C1BEBE6FC0052044C /* USAePayCurrencyConversionArray.h */,
+				052E873D1BEBE6FC0052044C /* USAePayCurrencyConversionArray.m */,
+				052E873E1BEBE6FC0052044C /* USAePayCurrencyObject.h */,
+				052E873F1BEBE6FC0052044C /* USAePayCurrencyObject.m */,
+				052E87401BEBE6FC0052044C /* USAePayCurrencyObjectArray.h */,
+				052E87411BEBE6FC0052044C /* USAePayCurrencyObjectArray.m */,
+				052E87421BEBE6FC0052044C /* USAePayCustomerObject.h */,
+				052E87431BEBE6FC0052044C /* USAePayCustomerObject.m */,
+				052E87441BEBE6FC0052044C /* USAePayCustomerObjectArray.h */,
+				052E87451BEBE6FC0052044C /* USAePayCustomerObjectArray.m */,
+				052E87461BEBE6FC0052044C /* USAePayCustomerSearchResult.h */,
+				052E87471BEBE6FC0052044C /* USAePayCustomerSearchResult.m */,
+				052E87481BEBE6FC0052044C /* USAePayCustomerTransactionRequest.h */,
+				052E87491BEBE6FC0052044C /* USAePayCustomerTransactionRequest.m */,
+				052E874A1BEBE6FC0052044C /* USAePaydoubleArray.h */,
+				052E874B1BEBE6FC0052044C /* USAePaydoubleArray.m */,
+				052E874C1BEBE6FC0052044C /* USAePayFieldValue.h */,
+				052E874D1BEBE6FC0052044C /* USAePayFieldValue.m */,
+				052E874E1BEBE6FC0052044C /* USAePayFieldValueArray.h */,
+				052E874F1BEBE6FC0052044C /* USAePayFieldValueArray.m */,
+				052E87501BEBE6FC0052044C /* USAePayHelper.h */,
+				052E87511BEBE6FC0052044C /* USAePayHelper.m */,
+				052E87521BEBE6FC0052044C /* USAePayLineItem.h */,
+				052E87531BEBE6FC0052044C /* USAePayLineItem.m */,
+				052E87541BEBE6FC0052044C /* USAePayLineItemArray.h */,
+				052E87551BEBE6FC0052044C /* USAePayLineItemArray.m */,
+				052E87561BEBE6FC0052044C /* USAePayPaymentMethod.h */,
+				052E87571BEBE6FC0052044C /* USAePayPaymentMethod.m */,
+				052E87581BEBE6FC0052044C /* USAePayPaymentMethodArray.h */,
+				052E87591BEBE6FC0052044C /* USAePayPaymentMethodArray.m */,
+				052E875A1BEBE6FC0052044C /* USAePayPriceTier.h */,
+				052E875B1BEBE6FC0052044C /* USAePayPriceTier.m */,
+				052E875C1BEBE6FC0052044C /* USAePayPriceTierArray.h */,
+				052E875D1BEBE6FC0052044C /* USAePayPriceTierArray.m */,
+				052E875E1BEBE6FC0052044C /* USAePayProduct.h */,
+				052E875F1BEBE6FC0052044C /* USAePayProduct.m */,
+				052E87601BEBE6FC0052044C /* USAePayProductArray.h */,
+				052E87611BEBE6FC0052044C /* USAePayProductArray.m */,
+				052E87621BEBE6FC0052044C /* USAePayProductCategory.h */,
+				052E87631BEBE6FC0052044C /* USAePayProductCategory.m */,
+				052E87641BEBE6FC0052044C /* USAePayProductCategoryArray.h */,
+				052E87651BEBE6FC0052044C /* USAePayProductCategoryArray.m */,
+				052E87661BEBE6FC0052044C /* USAePayProductInventory.h */,
+				052E87671BEBE6FC0052044C /* USAePayProductInventory.m */,
+				052E87681BEBE6FC0052044C /* USAePayProductInventoryArray.h */,
+				052E87691BEBE6FC0052044C /* USAePayProductInventoryArray.m */,
+				052E876A1BEBE6FC0052044C /* USAePayProductSearchResult.h */,
+				052E876B1BEBE6FC0052044C /* USAePayProductSearchResult.m */,
+				052E876C1BEBE6FC0052044C /* USAePayReceipt.h */,
+				052E876D1BEBE6FC0052044C /* USAePayReceipt.m */,
+				052E876E1BEBE6FC0052044C /* USAePayReceiptArray.h */,
+				052E876F1BEBE6FC0052044C /* USAePayReceiptArray.m */,
+				052E87701BEBE6FC0052044C /* USAePayRecurringBilling.h */,
+				052E87711BEBE6FC0052044C /* USAePayRecurringBilling.m */,
+				052E87721BEBE6FC0052044C /* USAePayRequestResultHandler.h */,
+				052E87731BEBE6FC0052044C /* USAePayRequestResultHandler.m */,
+				052E87741BEBE6FC0052044C /* USAePaySearchParam.h */,
+				052E87751BEBE6FC0052044C /* USAePaySearchParam.m */,
+				052E87761BEBE6FC0052044C /* USAePaySearchParamArray.h */,
+				052E87771BEBE6FC0052044C /* USAePaySearchParamArray.m */,
+				052E87781BEBE6FC0052044C /* USAePaySoapError.h */,
+				052E87791BEBE6FC0052044C /* USAePaySoapError.m */,
+				052E877A1BEBE6FC0052044C /* USAePaystringArray.h */,
+				052E877B1BEBE6FC0052044C /* USAePaystringArray.m */,
+				052E877C1BEBE6FC0052044C /* USAePaySyncLog.h */,
+				052E877D1BEBE6FC0052044C /* USAePaySyncLog.m */,
+				052E877E1BEBE6FC0052044C /* USAePaySyncLogArray.h */,
+				052E877F1BEBE6FC0052044C /* USAePaySyncLogArray.m */,
+				052E87801BEBE6FC0052044C /* USAePaySystemInfo.h */,
+				052E87811BEBE6FC0052044C /* USAePaySystemInfo.m */,
+				052E87821BEBE6FC0052044C /* USAePayTransactionDetail.h */,
+				052E87831BEBE6FC0052044C /* USAePayTransactionDetail.m */,
+				052E87841BEBE6FC0052044C /* USAePayTransactionObject.h */,
+				052E87851BEBE6FD0052044C /* USAePayTransactionObject.m */,
+				052E87861BEBE6FD0052044C /* USAePayTransactionObjectArray.h */,
+				052E87871BEBE6FD0052044C /* USAePayTransactionObjectArray.m */,
+				052E87881BEBE6FD0052044C /* USAePayTransactionRequestObject.h */,
+				052E87891BEBE6FD0052044C /* USAePayTransactionRequestObject.m */,
+				052E878A1BEBE6FD0052044C /* USAePayTransactionResponse.h */,
+				052E878B1BEBE6FD0052044C /* USAePayTransactionResponse.m */,
+				052E878C1BEBE6FD0052044C /* USAePayTransactionSearchResult.h */,
+				052E878D1BEBE6FD0052044C /* USAePayTransactionSearchResult.m */,
+				052E878E1BEBE6FD0052044C /* USAePayueHash.h */,
+				052E878F1BEBE6FD0052044C /* USAePayueHash.m */,
+				052E87901BEBE6FD0052044C /* USAePayueSecurityToken.h */,
+				052E87911BEBE6FD0052044C /* USAePayueSecurityToken.m */,
+				052E87921BEBE6FD0052044C /* USAePayueSoapServerBinding.h */,
+				052E87931BEBE6FD0052044C /* USAePayueSoapServerBinding.m */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
 		055D78B01BAA178900F7436B /* CIM */ = {
 			isa = PBXGroup;
 			children = (
@@ -1456,6 +1878,7 @@
 		0C4B6CAD19325D8D00EFBD27 = {
 			isa = PBXGroup;
 			children = (
+				052E86FA1BEBE6FC0052044C /* USAePay */,
 				05B845C81BA1130900A54FE1 /* AuthorizeNet */,
 				0C31F6531AE5D59F00501881 /* Branch-iOS-SDK */,
 				0C2ED5551A3A6FC10085BDFA /* Modules */,
@@ -1936,6 +2359,7 @@
 				05B846A21BA1130900A54FE1 /* GetSettledBatchListResponse.xml in Resources */,
 				055D713E1BA9119C00F7436B /* PaymentMethodViewController.xib in Resources */,
 				0C3FDB081A8E89DF00108235 /* FinxLeftMenuViewController.xib in Resources */,
+				052E87A41BEBE6FD0052044C /* ReadMe.txt in Resources */,
 				058CDC531BC5898E00C27560 /* maestro.png in Resources */,
 				058CDC551BC5898E00C27560 /* paypal.png in Resources */,
 			);
@@ -1981,25 +2405,33 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				052E87CC1BEBE6FD0052044C /* USAePayRequestResultHandler.m in Sources */,
 				0CBAA540199C9EAF00AD4B87 /* ProductFilterViewController.m in Sources */,
 				055D79301BABA7F400F7436B /* CheckoutViewController.m in Sources */,
 				0C818A061AE0A49A001B192B /* PopUpModule.m in Sources */,
 				0C2ED5601A3A6FC10085BDFA /* DOM.m in Sources */,
 				05B846911BA1130900A54FE1 /* CreateTransactionResponse.m in Sources */,
 				05B846DF1BA1130900A54FE1 /* NSString+stringWithEscapedXMLValue.m in Sources */,
+				052E87D11BEBE6FD0052044C /* USAePaySyncLog.m in Sources */,
 				0CC522E41A5B3804001BCBB6 /* BillboardModule.m in Sources */,
 				0C7852301A82D32000EEEFAC /* SDWebImageDownloader.m in Sources */,
 				0C0DE3661935276100ADD573 /* CartTableViewCell.m in Sources */,
 				0C37F8F31B12BB7000A426F6 /* ProductFavoriteViewController.m in Sources */,
 				05B846961BA1130900A54FE1 /* CustomerAddressType.m in Sources */,
+				052E87BA1BEBE6FD0052044C /* USAePayFieldValueArray.m in Sources */,
+				052E87C01BEBE6FD0052044C /* USAePayPriceTier.m in Sources */,
 				0C4C3CA61A85C64A00E80A8D /* DepartmentModule.m in Sources */,
 				05B846BC1BA1130900A54FE1 /* OpaqueDataType.m in Sources */,
+				052E87D71BEBE6FD0052044C /* USAePayTransactionRequestObject.m in Sources */,
 				0C0DE3781935667500ADD573 /* ShippingViewController.m in Sources */,
 				05B846DD1BA1130900A54FE1 /* NSString+stringForRFC3339DateTimeString.m in Sources */,
 				05B846E01BA1130900A54FE1 /* NSString+stringWithXMLTag.m in Sources */,
 				055D79211BAA178A00F7436B /* UpdateCustomerShippingAddressRequest.m in Sources */,
 				05B846B51BA1130900A54FE1 /* MobileDeviceLoginResponse.m in Sources */,
+				052E87C21BEBE6FD0052044C /* USAePayProduct.m in Sources */,
+				052E87A81BEBE6FD0052044C /* USAePayBankArray.m in Sources */,
 				0CEEFA561A8AB4DE005029DC /* DDPageControl.m in Sources */,
+				052E87951BEBE6FD0052044C /* NSString+DDXML.m in Sources */,
 				0C4B6D011932687400EFBD27 /* NSURLConnectionWithTag.m in Sources */,
 				0C04527A1932AF840075A99F /* ProductViewController.m in Sources */,
 				050DB3271B839CD4006D05FC /* CachedDataModule.m in Sources */,
@@ -2008,6 +2440,7 @@
 				055D79161BAA178A00F7436B /* GetCustomerProfileRequest.m in Sources */,
 				055D79131BAA178A00F7436B /* DeleteCustomerShippingAddressResponse.m in Sources */,
 				05B846A31BA1130900A54FE1 /* GetTransactionDetailsRequest.m in Sources */,
+				052E87BB1BEBE6FD0052044C /* USAePayHelper.m in Sources */,
 				0C7852361A82D32000EEEFAC /* UIImage+MultiFormat.m in Sources */,
 				0C31F6781AE5D59F00501881 /* BNCServerInterface.m in Sources */,
 				0C07057119686C8C00F04038 /* Cart.m in Sources */,
@@ -2018,6 +2451,7 @@
 				055D79191BAA178A00F7436B /* GetCustomerProfileIdsResponse.m in Sources */,
 				05B846B01BA1130900A54FE1 /* MerchantAccountType.m in Sources */,
 				05B846B81BA1130900A54FE1 /* MobileDeviceRegistrationResponse.m in Sources */,
+				052E87B11BEBE6FD0052044C /* USAePayCurrencyConversionArray.m in Sources */,
 				055D79071BAA178A00F7436B /* CreateCustomerProfileResponse.m in Sources */,
 				05B846A11BA1130900A54FE1 /* GetSettledBatchListResponse.m in Sources */,
 				05B846CF1BA1130900A54FE1 /* TransactionRequestType.m in Sources */,
@@ -2025,30 +2459,42 @@
 				0C04527E1932B85C0075A99F /* Product.m in Sources */,
 				0C31F6761AE5D59F00501881 /* BNCLinkData.m in Sources */,
 				0C8EDA881A5C5F2100AB971F /* Billboard.m in Sources */,
+				052E87C71BEBE6FD0052044C /* USAePayProductInventoryArray.m in Sources */,
+				052E87A61BEBE6FD0052044C /* USAePayAddress.m in Sources */,
 				0C7852351A82D32000EEEFAC /* UIImage+GIF.m in Sources */,
+				052E87A71BEBE6FD0052044C /* USAePayBank.m in Sources */,
 				055D79051BAA178A00F7436B /* CreateCustomerPaymentProfileResponse.m in Sources */,
 				0C31F67C1AE5D5A000501881 /* BNCSystemObserver.m in Sources */,
 				055D791D1BAA178A00F7436B /* UpdateCustomerPaymentProfileRequest.m in Sources */,
 				05B846C31BA1130900A54FE1 /* SendCustomerTransactionReceiptResponse.m in Sources */,
 				0C92152D1933EDF6009919AD /* PKRevealControllerContainerView.m in Sources */,
+				052E87C61BEBE6FD0052044C /* USAePayProductInventory.m in Sources */,
 				05B846951BA1130900A54FE1 /* CreditCardType.m in Sources */,
+				052E879C1BEBE6FD0052044C /* NSData+MIMETransferEncoding.m in Sources */,
 				05B8468D1BA1130900A54FE1 /* BatchDetailsType.m in Sources */,
 				0C3840291A8D871700042902 /* AddressInfoTableViewCell.m in Sources */,
 				0C4B6CD219325D8D00EFBD27 /* Ecommerce.xcdatamodeld in Sources */,
 				05B846C51BA1130900A54FE1 /* SettingType.m in Sources */,
 				05B846881BA1130900A54FE1 /* AuthNetRequest.m in Sources */,
+				052E87AA1BEBE6FD0052044C /* USAePayBatchStatus.m in Sources */,
 				05B846C01BA1130900A54FE1 /* PaymentType.m in Sources */,
 				055D791B1BAA178A00F7436B /* GetCustomerShippingAddressResponse.m in Sources */,
 				05B846A61BA1130900A54FE1 /* GetTransactionListRequest.m in Sources */,
 				0CCADC5219807D84001EA081 /* ProfileViewController.m in Sources */,
+				052E87BC1BEBE6FD0052044C /* USAePayLineItem.m in Sources */,
 				0C2ED5611A3A6FC10085BDFA /* ViewWithData.m in Sources */,
 				0C78522F1A82D32000EEEFAC /* SDWebImageDecoder.m in Sources */,
 				0C31F67A1AE5D5A000501881 /* BNCServerRequestQueue.m in Sources */,
+				052E87AB1BEBE6FD0052044C /* USAePayBatchStatusArray.m in Sources */,
 				05B846A71BA1130900A54FE1 /* GetTransactionListResponse.m in Sources */,
+				052E87A21BEBE6FD0052044C /* PKMIMEMessage.m in Sources */,
 				055D79171BAA178A00F7436B /* GetCustomerProfileResponse.m in Sources */,
+				052E87D91BEBE6FD0052044C /* USAePayTransactionSearchResult.m in Sources */,
+				052E87CE1BEBE6FD0052044C /* USAePaySearchParamArray.m in Sources */,
 				0C3CFAE81A3F878E002082AA /* SocialFeedModule.m in Sources */,
 				0C4C45CE198B716900028A15 /* Order.m in Sources */,
 				0C78522C1A82D32000EEEFAC /* NSData+ImageContentType.m in Sources */,
+				052E87CB1BEBE6FD0052044C /* USAePayRecurringBilling.m in Sources */,
 				05B846C71BA1130900A54FE1 /* Reachability.m in Sources */,
 				055D79151BAA178A00F7436B /* GetCustomerPaymentProfileResponse.m in Sources */,
 				05B846BD1BA1130900A54FE1 /* OrderExType.m in Sources */,
@@ -2056,14 +2502,18 @@
 				055D713D1BA9119C00F7436B /* PaymentMethodViewController.m in Sources */,
 				05B846891BA1130900A54FE1 /* AuthNetResponse.m in Sources */,
 				05B846D21BA1130900A54FE1 /* TransRetailInfoType.m in Sources */,
+				052E87BD1BEBE6FD0052044C /* USAePayLineItemArray.m in Sources */,
+				052E87DC1BEBE6FD0052044C /* USAePayueSoapServerBinding.m in Sources */,
 				05B8468F1BA1130900A54FE1 /* CCAuthenticationType.m in Sources */,
 				0C4C45D2198B878E00028A15 /* OrderDetailViewController.m in Sources */,
+				052E87D01BEBE6FD0052044C /* USAePaystringArray.m in Sources */,
 				18ED5437199A0909005DE74C /* MultiPageView.m in Sources */,
 				05B846B41BA1130900A54FE1 /* MobileDeviceLoginRequest.m in Sources */,
 				05B846D31BA1130900A54FE1 /* UserField.m in Sources */,
 				0C7F83B91ABDF207008620A4 /* AffiliateModule.m in Sources */,
 				0C92153E19340EF9009919AD /* ProductDetailViewController.m in Sources */,
 				0CB2657819FF0C550051F1DA /* NSString+FontAwesome.m in Sources */,
+				052E87D81BEBE6FD0052044C /* USAePayTransactionResponse.m in Sources */,
 				05B846DB1BA1130900A54FE1 /* NSString+Hex.m in Sources */,
 				0CB4819C1B0E6F44001114B2 /* NotificationsViewController.m in Sources */,
 				058CDC5C1BC5B3AE00C27560 /* StringUtility.m in Sources */,
@@ -2074,15 +2524,22 @@
 				055D790F1BAA178A00F7436B /* DeleteCustomerPaymentProfileResponse.m in Sources */,
 				0C78522B1A82D32000EEEFAC /* MKAnnotationView+WebCache.m in Sources */,
 				0CB2657F19FF15550051F1DA /* IonIcons.m in Sources */,
+				052E87A01BEBE6FD0052044C /* PKMIMEData.m in Sources */,
 				0C4B867D1AC1EA1000AB537E /* DeepLinkModule.m in Sources */,
 				05B846C11BA1130900A54FE1 /* PermissionType.m in Sources */,
+				052E87D21BEBE6FD0052044C /* USAePaySyncLogArray.m in Sources */,
 				05B846B71BA1130900A54FE1 /* MobileDeviceRegistrationRequest.m in Sources */,
+				052E87C51BEBE6FD0052044C /* USAePayProductCategoryArray.m in Sources */,
 				055D790C1BAA178A00F7436B /* CustomerProfileBaseType.m in Sources */,
 				055D79251BAA178A00F7436B /* ValidationModes.m in Sources */,
+				052E87AE1BEBE6FD0052044C /* USAePayCheckTrace.m in Sources */,
 				0C0DE3701935590200ADD573 /* AddCardViewController.m in Sources */,
+				052E87DA1BEBE6FD0052044C /* USAePayueHash.m in Sources */,
 				05B846BE1BA1130900A54FE1 /* OrderType.m in Sources */,
+				052E87B61BEBE6FD0052044C /* USAePayCustomerSearchResult.m in Sources */,
 				05B846DA1BA1130900A54FE1 /* NSString+dataFromFilename.m in Sources */,
 				05B846991BA1130900A54FE1 /* ExtendedAmountType.m in Sources */,
+				052E87D31BEBE6FD0052044C /* USAePaySystemInfo.m in Sources */,
 				050DB35F1B83F707006D05FC /* GuestCheckoutViewController.m in Sources */,
 				0CDB235C1A98348A009EE0AB /* ProductReviewViewControllerModule.m in Sources */,
 				0C9215331933EE41009919AD /* LeftMenuViewController.m in Sources */,
@@ -2092,6 +2549,7 @@
 				05B846CE1BA1130900A54FE1 /* TransactionDetailsType.m in Sources */,
 				05B846E11BA1130900A54FE1 /* UIToolbar+BackgroundImage.m in Sources */,
 				0C2ED55F1A3A6FC10085BDFA /* Design.m in Sources */,
+				052E87A11BEBE6FD0052044C /* PKMIMEMessage+XOP-XML.m in Sources */,
 				0C4C45CB198B6EF900028A15 /* OrderTableViewCell.m in Sources */,
 				0C7852381A82D32000EEEFAC /* UIImageView+HighlightedWebCache.m in Sources */,
 				18ED5435199A0909005DE74C /* MPPage.m in Sources */,
@@ -2099,6 +2557,7 @@
 				05B846AA1BA1130900A54FE1 /* GetUnsettledTransactionListResponse.m in Sources */,
 				05B846A41BA1130900A54FE1 /* GetTransactionDetailsResponse.m in Sources */,
 				0C31F6791AE5D59F00501881 /* BNCServerRequest.m in Sources */,
+				052E879D1BEBE6FD0052044C /* NSDictionary+CaseInsensitiveKeys.m in Sources */,
 				18E5151A199DF0AE000DEE2B /* MultiPageInfinateView.m in Sources */,
 				05B846841BA1130900A54FE1 /* ANetApiRequest.m in Sources */,
 				0CCADC621980831C001EA081 /* SettingsTableViewCell.m in Sources */,
@@ -2112,32 +2571,43 @@
 				0C4B6CCC19325D8D00EFBD27 /* AppDelegate.m in Sources */,
 				0C7F83BC1ABDFF7C008620A4 /* NSURLConnectionBlock.m in Sources */,
 				0C4B6CFA19325DE700EFBD27 /* PromotionViewController.m in Sources */,
+				052E87C91BEBE6FD0052044C /* USAePayReceipt.m in Sources */,
 				05B846D01BA1130900A54FE1 /* TransactionResponse.m in Sources */,
+				052E87C81BEBE6FD0052044C /* USAePayProductSearchResult.m in Sources */,
 				05B846861BA1130900A54FE1 /* AuthNet.m in Sources */,
 				0C7852391A82D32000EEEFAC /* UIImageView+WebCache.m in Sources */,
 				055D79121BAA178A00F7436B /* DeleteCustomerShippingAddressRequest.m in Sources */,
 				055D790D1BAA178A00F7436B /* CustomerProfileTransactionRequestType.m in Sources */,
 				05B846C61BA1130900A54FE1 /* SplitTenderPayment.m in Sources */,
 				0C31F6741AE5D59F00501881 /* BNCError.m in Sources */,
+				052E87B41BEBE6FD0052044C /* USAePayCustomerObject.m in Sources */,
 				0569EE021B7674C200EB37BF /* WholesaleModule.m in Sources */,
 				05B846DE1BA1130900A54FE1 /* NSString+stringValueOfXMLElement.m in Sources */,
+				052E879B1BEBE6FD0052044C /* NSData+GUID.m in Sources */,
 				0C1730B7197364B80001D580 /* Shipping.m in Sources */,
 				055D790A1BAA178A00F7436B /* CreateCustomerShippingAddressRequest.m in Sources */,
 				0C7852371A82D32000EEEFAC /* UIImage+WebP.m in Sources */,
 				05B8468C1BA1130900A54FE1 /* BankAccountType.m in Sources */,
+				052E87981BEBE6FD0052044C /* DDXMLNode.m in Sources */,
 				05B846A01BA1130900A54FE1 /* GetSettledBatchListRequest.m in Sources */,
 				05B846DC1BA1130900A54FE1 /* NSString+HMAC_MD5.m in Sources */,
 				0C79781319DDF7B300EA2CB9 /* BillingAddressViewController.m in Sources */,
 				05B846D91BA1130900A54FE1 /* NSArray+PerformSelector.m in Sources */,
 				0C0DE36B19353F1E00ADD573 /* CheckoutViewControllerOld.m in Sources */,
 				05B846B31BA1130900A54FE1 /* Messages.m in Sources */,
+				052E879A1BEBE6FD0052044C /* NSData+Base64.m in Sources */,
 				05B846AC1BA1130900A54FE1 /* LineItemType.m in Sources */,
 				055D790E1BAA178A00F7436B /* DeleteCustomerPaymentProfileRequest.m in Sources */,
+				052E87D51BEBE6FD0052044C /* USAePayTransactionObject.m in Sources */,
 				05B846BF1BA1130900A54FE1 /* PaymentMaskedType.m in Sources */,
+				052E87BF1BEBE6FD0052044C /* USAePayPaymentMethodArray.m in Sources */,
+				052E87D41BEBE6FD0052044C /* USAePayTransactionDetail.m in Sources */,
 				18ED5436199A0909005DE74C /* MPSearchBar.m in Sources */,
 				05B846B21BA1130900A54FE1 /* MerchantContactType.m in Sources */,
 				05B846971BA1130900A54FE1 /* CustomerDataType.m in Sources */,
+				052E87961BEBE6FD0052044C /* DDXMLDocument.m in Sources */,
 				0CAF169C1AA6136C002575F3 /* AnalyticModule.m in Sources */,
+				052E87C11BEBE6FD0052044C /* USAePayPriceTierArray.m in Sources */,
 				0C31F67E1AE5D5A000501881 /* BranchActivityItemProvider.m in Sources */,
 				0C8E9B7C198A667800750C05 /* ChangeCardViewController.m in Sources */,
 				0C50AF6F19E8C65900851A7D /* CheckoutPaypalViewController.m in Sources */,
@@ -2152,50 +2622,76 @@
 				0CF577791974AC1000712156 /* ShippingMethodTableViewCell.m in Sources */,
 				05B8469A1BA1130900A54FE1 /* FDSFilterType.m in Sources */,
 				055D791C1BAA178A00F7436B /* PaymentProfileType.m in Sources */,
+				052E87A51BEBE6FD0052044C /* USAePayAccountDetails.m in Sources */,
 				05B846C81BA1130900A54FE1 /* SwiperDataType.m in Sources */,
+				052E879E1BEBE6FD0052044C /* NSString+GUID.m in Sources */,
 				055D79111BAA178A00F7436B /* DeleteCustomerProfileResponse.m in Sources */,
 				055D791A1BAA178A00F7436B /* GetCustomerShippingAddressRequest.m in Sources */,
 				0C4B6D04193268A600EFBD27 /* Promotion.m in Sources */,
 				05B846F51BA26AB000A54FE1 /* PaymentMethod.m in Sources */,
 				0C08246A197B3A6B00457B45 /* OrderViewController.m in Sources */,
+				052E87B21BEBE6FD0052044C /* USAePayCurrencyObject.m in Sources */,
+				052E87991BEBE6FD0052044C /* MIMEKit.m in Sources */,
+				052E87D61BEBE6FD0052044C /* USAePayTransactionObjectArray.m in Sources */,
+				052E87BE1BEBE6FD0052044C /* USAePayPaymentMethod.m in Sources */,
 				05B8469E1BA1130900A54FE1 /* GetBatchStatisticsResponse.m in Sources */,
 				0C31F6771AE5D59F00501881 /* BNCPreferenceHelper.m in Sources */,
 				0C8E9B77198A5F1E00750C05 /* UserAccountViewController.m in Sources */,
+				052E87B51BEBE6FD0052044C /* USAePayCustomerObjectArray.m in Sources */,
+				052E87A91BEBE6FD0052044C /* USAePayBatchSearchResult.m in Sources */,
 				05988BD01B90F4C70064CBA1 /* StoreLocationViewController.m in Sources */,
 				0C9215381933EF5A009919AD /* MainViewController.m in Sources */,
 				05B8469B1BA1130900A54FE1 /* FingerPrintObjectType.m in Sources */,
 				05B846941BA1130900A54FE1 /* CreditCardTrackType.m in Sources */,
+				052E87B31BEBE6FD0052044C /* USAePayCurrencyObjectArray.m in Sources */,
 				055D79061BAA178A00F7436B /* CreateCustomerProfileRequest.m in Sources */,
 				0C0DE362193510EF00ADD573 /* CartViewController.m in Sources */,
 				0C31F67D1AE5D5A000501881 /* Branch.m in Sources */,
+				052E87CA1BEBE6FD0052044C /* USAePayReceiptArray.m in Sources */,
+				052E87AC1BEBE6FD0052044C /* USAePayBatchUploadStatus.m in Sources */,
 				0C8E9B81198A9FDE00750C05 /* PolicyViewController.m in Sources */,
 				05B846AD1BA1130900A54FE1 /* LogoutRequest.m in Sources */,
 				0C78522E1A82D32000EEEFAC /* SDWebImageCompat.m in Sources */,
 				05B846901BA1130900A54FE1 /* CreateTransactionRequest.m in Sources */,
+				052E87C31BEBE6FD0052044C /* USAePayProductArray.m in Sources */,
+				052E87C41BEBE6FD0052044C /* USAePayProductCategory.m in Sources */,
+				052E87B71BEBE6FD0052044C /* USAePayCustomerTransactionRequest.m in Sources */,
 				055D790B1BAA178A00F7436B /* CreateCustomerShippingAddressResponse.m in Sources */,
 				055D79141BAA178A00F7436B /* GetCustomerPaymentProfileRequest.m in Sources */,
+				052E879F1BEBE6FD0052044C /* PKContentType.m in Sources */,
 				0C92152E1933EDF6009919AD /* UIViewController+PKRevealController.m in Sources */,
 				0C328A901A8C5D0F00A3323E /* ProductDetailImageViewController.m in Sources */,
 				0C7DEA8E1AE176D000479506 /* InAppEventModule.m in Sources */,
 				0C78522D1A82D32000EEEFAC /* SDImageCache.m in Sources */,
 				0C7852311A82D32000EEEFAC /* SDWebImageDownloaderOperation.m in Sources */,
+				052E87CD1BEBE6FD0052044C /* USAePaySearchParam.m in Sources */,
 				055D79181BAA178A00F7436B /* GetCustomerProfileIdsRequest.m in Sources */,
 				0C92152C1933EDF6009919AD /* PKRevealController.m in Sources */,
+				052E87A31BEBE6FD0052044C /* UIImage+MIME.m in Sources */,
 				055D79081BAA178A00F7436B /* CreateCustomerProfileTransactionRequest.m in Sources */,
+				052E87B81BEBE6FD0052044C /* USAePaydoubleArray.m in Sources */,
 				0CC93AD0197DD92E00295F8F /* MenuTableCell.m in Sources */,
 				055D79241BAA178A00F7436B /* ValidateCustomerPaymentProfileResponse.m in Sources */,
 				05B846D11BA1130900A54FE1 /* TransactionSummaryType.m in Sources */,
+				052E87CF1BEBE6FD0052044C /* USAePaySoapError.m in Sources */,
 				0C3FC48F198EA4C000FDFCFC /* JSCustomBadge.m in Sources */,
 				05B846BB1BA1130900A54FE1 /* NameAndAddressType.m in Sources */,
+				052E87941BEBE6FD0052044C /* DDXMLElementAdditions.m in Sources */,
+				052E87AF1BEBE6FD0052044C /* USAePayCreditCardData.m in Sources */,
+				052E87AD1BEBE6FD0052044C /* USAePayCheckData.m in Sources */,
 				05B8469D1BA1130900A54FE1 /* GetBatchStatisticsRequest.m in Sources */,
 				05B846B11BA1130900A54FE1 /* MerchantAuthenticationType.m in Sources */,
+				052E87B91BEBE6FD0052044C /* USAePayFieldValue.m in Sources */,
 				05B846CA1BA1130900A54FE1 /* TestAccountCaptchaResponse.m in Sources */,
 				0C7366871ADC9AED00909970 /* WidgetView.m in Sources */,
 				0C3FDB071A8E89DF00108235 /* FinxLeftMenuViewController.m in Sources */,
 				055D79041BAA178A00F7436B /* CreateCustomerPaymentProfileRequest.m in Sources */,
+				052E87DB1BEBE6FD0052044C /* USAePayueSecurityToken.m in Sources */,
 				0C31F6751AE5D59F00501881 /* BNCLinkCache.m in Sources */,
+				052E87B01BEBE6FD0052044C /* USAePayCurrencyConversion.m in Sources */,
 				0C31F67F1AE5D5A000501881 /* BranchServerInterface.m in Sources */,
 				055D79201BAA178A00F7436B /* UpdateCustomerProfileResponse.m in Sources */,
+				052E87971BEBE6FD0052044C /* DDXMLElement.m in Sources */,
 				05B846A91BA1130900A54FE1 /* GetUnsettledTransactionListRequest.m in Sources */,
 				05B8468E1BA1130900A54FE1 /* BatchStatisticType.m in Sources */,
 				0C2ED55E1A3A6FC10085BDFA /* CollectionModule.m in Sources */,

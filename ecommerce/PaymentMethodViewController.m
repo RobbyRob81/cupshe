@@ -18,6 +18,10 @@
 #import "CreateCustomerProfileResponse.h"
 #import "CustomerProfileBaseType.h"
 #import "StringUtility.h"
+#import <CommonCrypto/CommonDigest.h>
+#import "USAePayueSoapServerBinding.h"
+#import "USAePayueHash.h"
+#import "USAePayAddress.h"
 @interface PaymentMethodViewController ()
 
 @end
@@ -94,19 +98,19 @@
     self.view.backgroundColor = [UIColor colorWithRed:242.0/255.0 green:240.0/255.0 blue:240.0/255.0 alpha:1];
     
     
-    if (self.config.user_payment_methods.count == 0 && self.config.selected_payment == nil){
-        AddEditPaymentMethodViewController *aep = [[AddEditPaymentMethodViewController alloc] init];
-        aep.config = self.config;
-        aep.allusermethods = self.config.user_payment_methods;
-        aep.parent = self.parent;
-        [self.navigationController pushViewController:aep animated:NO];
-    }
-    
 }
 
 -(void)viewDidAppear:(BOOL)animated{
     if ((self.config.user_id == nil || self.config.user_id == 0 || self.config.user_id.length == 0) && self.config.guest_checkout){
         [self build_payment];
+        
+        if (self.config.user_payment_methods.count == 0 && self.config.selected_payment == nil){
+            AddEditPaymentMethodViewController *aep = [[AddEditPaymentMethodViewController alloc] init];
+            aep.config = self.config;
+            aep.allusermethods = self.config.user_payment_methods;
+            aep.parent = self.parent;
+            [self.navigationController pushViewController:aep animated:NO];
+        }
         
     } else {
         [self load_payment_method];
@@ -157,6 +161,15 @@
             self.config.user_payment_methods = nil;
             self.config.user_payment_methods = user_payment_method;
             [self build_payment];
+            
+            if (self.config.user_payment_methods.count == 0 && self.config.selected_payment == nil){
+                AddEditPaymentMethodViewController *aep = [[AddEditPaymentMethodViewController alloc] init];
+                aep.config = self.config;
+                aep.allusermethods = self.config.user_payment_methods;
+                aep.parent = self.parent;
+                [self.navigationController pushViewController:aep animated:NO];
+            }
+            
             [indicator stopAnimating];
             
         } else {
@@ -1207,6 +1220,15 @@ const int CARD_NO_CHANGE = 0;
 
 
 -(void)save{
+    
+    if (fn.text.length == 0 || ln.text.length == 0 || addr.text.length == 0||city.text.length == 0||state.text.length == 0||zip.text.length == 0||country.text.length == 0){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[self.config localisedString:@"Billing address is incomplete."] message:nil delegate:nil cancelButtonTitle:[self.config localisedString:@"Close"] otherButtonTitles: nil];
+        [alert show];
+        return;
+    }
+    
+    
+    
     BOOL isnew = NO;
     if (self.usermethod == nil) isnew = YES;
     else if (![self.usermethod.payment_gateway isEqualToString:self.appmethod.payment_gateway] && ![self.usermethod.payment_method isEqualToString:self.appmethod.payment_method]) isnew = YES;
@@ -1315,6 +1337,34 @@ const int CARD_NO_CHANGE = 0;
                 return;
             }
         }
+    }
+    if ([self.appmethod.payment_gateway isEqualToString:@"USAePay"]){
+        if (isnew){
+            [self save_usaepay:cutomserid];
+            return;
+        } else {
+            if (changed == CARD_NO_CHANGE) {
+                [self.navigationController popViewControllerAnimated:YES];
+                return;
+            } else if (changed == CARD_INFO_UNCHANGED){
+                self.usermethod.billingfirstname = fn.text;
+                self.usermethod.billinglastname = ln.text;
+                self.usermethod.billingaddress = addr.text;
+                self.usermethod.billingcity = city.text;
+                self.usermethod.billingstate = state.text;
+                self.usermethod.billingzip = zip.text;
+                self.usermethod.billingcountry = [self.config.countrytocode objectForKey:country.text];
+                if (isdefault.isOn) self.usermethod.is_default = YES;
+                else self.usermethod.is_default = NO;
+                
+                [self save_user_method_no_card];
+                return;
+            } else {
+                [self edit_usaepay:cutomserid];
+                return;
+            }
+        }
+        
     }
 }
 
@@ -1724,9 +1774,206 @@ const int CARD_NO_CHANGE = 0;
     [connection start];
 }
 
+
+//**************USAEPay
+
 -(void)startAnimating{
     [indicator startAnimating];
 }
+
+
+
+-(void)save_usaepay:(NSString *)customer_id{
+    
+    
+    
+    NSString *expdate = @"";
+    if (expyear.text.length == 4){
+        expdate = [NSString stringWithFormat:@"%@%@", expmonth.text, [expyear.text substringFromIndex:2 ]];
+    } else {
+        return;
+    }
+    
+    USAePayueSoapServerBinding *soap = [[USAePayueSoapServerBinding alloc] initWithEnvironment:YES];
+    USAePayueSecurityToken *token = [[USAePayueSecurityToken alloc] init];
+    USAePayueHash *hash = [[USAePayueHash alloc] init];
+    hash.Type = @"sha1";
+    hash.Seed = [NSString stringWithFormat:@"%f", [[NSDate date] timeIntervalSince1970]];
+    token.SourceKey = self.appmethod.api_token;
+    
+    NSString *hashstr = [NSString stringWithFormat:@"%@%@%@", token.SourceKey, hash.Seed, self.appmethod.api_secret];
+    
+    NSData *data = [hashstr dataUsingEncoding:NSUTF8StringEncoding];
+    uint8_t digest[CC_SHA1_DIGEST_LENGTH];
+    
+    CC_SHA1(data.bytes, data.length, digest);
+    
+    NSMutableString *output = [NSMutableString stringWithCapacity:CC_SHA1_DIGEST_LENGTH * 2];
+    
+    for (int i = 0; i < CC_SHA1_DIGEST_LENGTH; i++)
+    {
+        [output appendFormat:@"%02x", digest[i]];
+    }
+    hash.HashValue = output;
+    token.PinHash = hash;
+    
+    
+    USAePayCustomerObject *cus = [[USAePayCustomerObject alloc] init];
+    
+    cus.BillingAddress = [[USAePayAddress alloc] init];
+    cus.BillingAddress.FirstName = fn.text;
+    cus.BillingAddress.LastName = ln.text;
+    cus.BillingAddress.Street = addr.text;
+    cus.BillingAddress.City = city.text;
+    cus.BillingAddress.State = state.text;
+    cus.BillingAddress.Country = country.text;
+    cus.BillingAddress.Zip = zip.text;
+    
+    /*cus.PaymentMethods = [[JAWPaymentMethodArray alloc] init];
+     
+     JAWPaymentMethod *mth = [[JAWPaymentMethod alloc] init];
+     mth.CardNumber = cardnumber.text;
+     mth.CardExpiration =expdate;
+     mth.CardCode = cvc.text;*/
+    
+    [soap addCustomerAsyncWithBlock:token CustomerData:cus __handler:^(USAePayRequestResultHandler *res) {
+        
+        NSString *cid = [NSString stringWithFormat:@"%@", res];
+        if ([cid intValue] > 0){
+            NSNumber *cnum = [NSNumber numberWithInteger:[cid integerValue]];
+            
+            USAePayueSoapServerBinding *soap2 = [[USAePayueSoapServerBinding alloc] initWithEnvironment:YES];
+            USAePayueSecurityToken *token2 = [[USAePayueSecurityToken alloc] init];
+            USAePayueHash *hash2 = [[USAePayueHash alloc] init];
+            hash2.Type = @"sha1";
+            hash2.Seed = [NSString stringWithFormat:@"%f", [[NSDate date] timeIntervalSince1970]];
+            token2.SourceKey = self.appmethod.api_token;
+            
+            NSString *hashstr2 = [NSString stringWithFormat:@"%@%@%@", token2.SourceKey, hash2.Seed, self.appmethod.api_secret];
+            
+            
+            
+            NSData *data2 = [hashstr2 dataUsingEncoding:NSUTF8StringEncoding];
+            uint8_t digest2[CC_SHA1_DIGEST_LENGTH];
+            
+            CC_SHA1(data2.bytes, data2.length, digest2);
+            
+            NSMutableString *output2 = [NSMutableString stringWithCapacity:CC_SHA1_DIGEST_LENGTH * 2];
+            
+            for (int i = 0; i < CC_SHA1_DIGEST_LENGTH; i++)
+            {
+                [output2 appendFormat:@"%02x", digest2[i]];
+            }
+            hash2.HashValue = output2;
+            token2.PinHash = hash2;
+            
+            
+            USAePayPaymentMethod *mth = [[USAePayPaymentMethod alloc] init];
+            mth.CardNumber = cardnumber.text;
+            mth.CardExpiration =expdate;
+            mth.CardCode = cvc.text;
+            
+            [soap2 addCustomerPaymentMethodAsyncWithBlock:token2 CustNum:cnum PaymentMethod:mth MakeDefault:0 Verify:0 __handler:^(USAePayRequestResultHandler *res) {
+                
+                
+                NSString *pid = [NSString stringWithFormat:@"%@", res];
+                
+                NSLog(@"%@", pid);
+                if ([pid intValue] > 0){
+                    
+                    
+                    if (self.usermethod == nil) {
+                        self.usermethod = [[UserPaymentMethod alloc] init];
+                        self.usermethod.appmethod = self.appmethod;
+                    }
+                    self.usermethod.payment_token = pid;
+                    self.usermethod.payment_gateway = self.appmethod.payment_gateway;
+                    self.usermethod.payment_method = self.appmethod.payment_method;
+                    self.usermethod.customer_id = cid;
+                    self.usermethod.last4 = [cardnumber.text substringFromIndex:cardnumber.text.length-4];
+                    self.usermethod.expyear = expyear.text;
+                    self.usermethod.expmonth = expmonth.text;
+                    self.usermethod.billingfirstname = fn.text;
+                    self.usermethod.billinglastname = ln.text;
+                    self.usermethod.billingaddress = addr.text;
+                    self.usermethod.billingcity = city.text;
+                    self.usermethod.billingstate = state.text;
+                    self.usermethod.billingzip = zip.text;
+                    self.usermethod.billingcountry = [self.config.countrytocode objectForKey:country.text];
+                    if (isdefault.isOn) self.usermethod.is_default = YES;
+                    else self.usermethod.is_default = NO;
+                    
+                    [self save_user_method];
+                    
+                    
+                } else {
+                    NSLog(@"%@", res);
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[self.config localisedString:@"Fail to save card."] message:@"" delegate:nil cancelButtonTitle:[self.config localisedString:@"Close"] otherButtonTitles: nil];
+                    [alert show];
+                    [indicator stopAnimating];
+                    return;
+                }
+                
+                
+                
+                
+            }];
+        }
+        
+        
+    }];
+    
+}
+
+-(void)edit_usaepay:(NSString *)cid{
+    NSString *expdate = @"";
+    if (expyear.text.length == 4){
+        expdate = [NSString stringWithFormat:@"%@%@", expmonth.text, [expyear.text substringFromIndex:2 ]];
+    } else {
+        return;
+    }
+    
+    USAePayueSoapServerBinding *soap = [[USAePayueSoapServerBinding alloc] initWithEnvironment:YES];
+    USAePayueSecurityToken *token = [[USAePayueSecurityToken alloc] init];
+    USAePayueHash *hash = [[USAePayueHash alloc] init];
+    hash.Type = @"sha1";
+    hash.Seed = [NSString stringWithFormat:@"%f", [[NSDate date] timeIntervalSince1970]];
+    token.SourceKey = self.appmethod.api_token;
+    
+    NSString *hashstr = [NSString stringWithFormat:@"%@%@%@", token.SourceKey, hash.Seed, self.appmethod.api_secret];
+    
+    NSData *data = [hashstr dataUsingEncoding:NSUTF8StringEncoding];
+    uint8_t digest[CC_SHA1_DIGEST_LENGTH];
+    
+    CC_SHA1(data.bytes, data.length, digest);
+    
+    NSMutableString *output = [NSMutableString stringWithCapacity:CC_SHA1_DIGEST_LENGTH * 2];
+    
+    for (int i = 0; i < CC_SHA1_DIGEST_LENGTH; i++)
+    {
+        [output appendFormat:@"%02x", digest[i]];
+    }
+    hash.HashValue = output;
+    token.PinHash = hash;
+    
+    
+    
+    
+    
+    USAePayPaymentMethod *mth = [[USAePayPaymentMethod alloc] init];
+    mth.CardNumber = cardnumber.text;
+    mth.CardExpiration =expdate;
+    mth.CardCode = cvc.text;
+    mth.MethodID = [NSNumber numberWithInteger:[self.usermethod.payment_token integerValue]] ;
+    
+    
+    
+    
+    [soap updateCustomerPaymentMethodAsyncWithBlock:token PaymentMethod:mth Verify:[NSNumber numberWithInt:0] __handler:^(USAePayRequestResultHandler *res) {
+        NSLog(@"%@", res);
+    }];
+}
+
 
 @end
 
