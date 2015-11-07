@@ -27,6 +27,8 @@
         NSString *value = [d objectForKey:@"value"];
         [self.attributes setObject:value forKey:name];
     }
+    self.images = [[NSMutableArray alloc] init];
+    self.images = [[d objectForKey:@"images"] mutableCopy];
     
 }
 

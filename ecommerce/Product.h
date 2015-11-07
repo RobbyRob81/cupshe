@@ -14,6 +14,7 @@
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *imageURL;
 @property (nonatomic, strong) NSArray *images;
+@property (nonatomic, strong) NSArray *unassigned_images;
 @property (nonatomic, strong) NSString *third_party_id;
 @property (nonatomic, strong) NSString *brand;
 @property (nonatomic, strong) NSString  *desc;

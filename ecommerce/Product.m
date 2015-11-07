@@ -16,8 +16,14 @@
     self.name = [[d objectForKey:@"name"]  stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     self.imageURL = [d objectForKey:@"image_url"];
     if ([d objectForKey:@"images"] != nil && ![[d objectForKey:@"images"] isKindOfClass:[NSNull class]]){
-    self.images = [d objectForKey:@"images"];
+        self.images = [d objectForKey:@"images"];
     } else self.images = [[NSMutableArray alloc] init];
+    
+    if ([d objectForKey:@"unassigned_images"] != nil && ![[d objectForKey:@"unassigned_images"] isKindOfClass:[NSNull class]]){
+        self.unassigned_images = [d objectForKey:@"unassigned_images"];
+    } else self.unassigned_images = [[NSMutableArray alloc] init];
+    
+    
     self.brand = [[d objectForKey:@"brand"]  stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     self.desc = [d objectForKey:@"description"];
     self.total_stock = [[d objectForKey:@"total_stock"] intValue];

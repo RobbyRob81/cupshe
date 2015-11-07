@@ -230,20 +230,20 @@ const int ADD_TO_CART = 0;
     [UIView setAnimationsEnabled:YES];
     [self.config add_badge:cartbtn withnumber:self.config.cartnum];
     
-      if (self.config.user_id == nil || self.config.user_id.length == 0 || [self.config.user_id isEqualToString:@"0"]){
-     //[addcart setTitle:@"Sign in to add to cart" forState:UIControlStateNormal];
-     addcarttop.text = [self.config localisedString:@"SIGN UP OR LOG IN TO"];
-     addcartbottom.text = [self.config localisedString:@"ADD TO CART"];
-     addcartmiddle.text = @"";
-     } else {
-    // [addcart setTitle:@"Add to cart" forState:UIControlStateNormal];
-         [self check_fav];
-         [self.config check_cart_with_view:cartbtn];
-         addcarttop.text = @"";
-         addcartbottom.text = @"";
-         addcartmiddle.text = [self.config localisedString:@"ADD TO CART"];
-       
-         
+    if (self.config.user_id == nil || self.config.user_id.length == 0 || [self.config.user_id isEqualToString:@"0"]){
+        //[addcart setTitle:@"Sign in to add to cart" forState:UIControlStateNormal];
+        addcarttop.text = [self.config localisedString:@"SIGN UP OR LOG IN TO"];
+        addcartbottom.text = [self.config localisedString:@"ADD TO CART"];
+        addcartmiddle.text = @"";
+    } else {
+        // [addcart setTitle:@"Add to cart" forState:UIControlStateNormal];
+        [self check_fav];
+        [self.config check_cart_with_view:cartbtn];
+        addcarttop.text = @"";
+        addcartbottom.text = @"";
+        addcartmiddle.text = [self.config localisedString:@"ADD TO CART"];
+        
+        
     }
 }
 
@@ -325,7 +325,7 @@ const int ADD_TO_CART = 0;
         rotate.duration = 0.5;
         
         [favbtn.layer addAnimation:rotate
-                                forKey:@"myRotationAnimation"];
+                            forKey:@"myRotationAnimation"];
     } else {
         favbtn.text = [NSString fontAwesomeIconStringForIconIdentifier:@"fa-heart-o"];
         //favbtn.textColor = [UIColor colorWithRed:55.0/255.0 green:55.0/255.0 blue:55.0/255.0 alpha:1];
@@ -335,7 +335,7 @@ const int ADD_TO_CART = 0;
                             options:UIViewAnimationOptionCurveEaseOut
                          animations:^{
                              
-                            favbtn.transform = CGAffineTransformRotate(favbtn.transform, (1080.0/180.0)*M_PI);;
+                             favbtn.transform = CGAffineTransformRotate(favbtn.transform, (1080.0/180.0)*M_PI);;
                          }
                          completion:^(BOOL finished){
                          }];
@@ -967,6 +967,7 @@ const int ADD_TO_CART = 0;
         [uiv addGestureRecognizer:otherimgtap];
         uiv.indicator = indi;
         uiv.url = [NSURL URLWithString:url];
+        uiv.item_id = [self.product.images objectAtIndex:i];
         [images addObject:uiv];
         [imgscroll addSubview:uiv];
         [image_laoding_queue addObject:uiv];
@@ -1101,10 +1102,7 @@ const int ADD_TO_CART = 0;
             }
         }
     }
-    
-   
     for (ProductVar *pv in self.product.variations){
-        if (pv.stock == 0) continue;
         NSArray *keys = [pv.attributes allKeys];
         for (NSString *key in keys){
             NSString *val = [pv.attributes objectForKey:key];
@@ -1296,7 +1294,7 @@ const int ADD_TO_CART = 0;
     [review init_preview:CGRectMake(webbackground.frame.origin.x, webbackground.frame.origin.y+webbackground.frame.size.height, webbackground.frame.size.width, 40)];
     
     
-   
+    
     //review.preview.hidden = YES;
     
     [scroll addSubview:review.preview];
@@ -1351,23 +1349,23 @@ const int ADD_TO_CART = 0;
         [webbackground addSubview:webbackbutton];
         
         if (design.desc_show.size.height > design.desc_hide.size.height) {
-        readmore = [[UIButton alloc] initWithFrame:CGRectMake(webbackbutton.frame.size.width-110, 0, 100, 20)];
-        [readmore setTitle:[self.config localisedString:@"Read more"] forState:UIControlStateNormal];
-        [readmore setTitleColor:[UIColor colorWithRed:0/255.0 green:122/255.0 blue:255/255.0 alpha:1] forState:UIControlStateNormal];
-        readmore.titleLabel.font = [UIFont boldSystemFontOfSize:16];
-        [readmore addTarget:self action:@selector(readmore:) forControlEvents:UIControlEventTouchUpInside];
-        [webbackbutton addSubview:readmore];
-        
-        readless = [[UIButton alloc] initWithFrame:CGRectMake(webbackbutton.frame.size.width-70, 0, 60, 20)];
-        [readless setTitle:[self.config localisedString:@"Hide"] forState:UIControlStateNormal];
-        [readless setTitleColor:[UIColor colorWithRed:0/255.0 green:122/255.0 blue:255/255.0 alpha:1] forState:UIControlStateNormal];
-        readless.titleLabel.font = [UIFont boldSystemFontOfSize:16];
-        readless.hidden = YES;
-        [readless addTarget:self action:@selector(readmore:) forControlEvents:UIControlEventTouchUpInside];
-        [webbackbutton addSubview:readless];
+            readmore = [[UIButton alloc] initWithFrame:CGRectMake(webbackbutton.frame.size.width-110, 0, 100, 20)];
+            [readmore setTitle:[self.config localisedString:@"Read more"] forState:UIControlStateNormal];
+            [readmore setTitleColor:[UIColor colorWithRed:0/255.0 green:122/255.0 blue:255/255.0 alpha:1] forState:UIControlStateNormal];
+            readmore.titleLabel.font = [UIFont boldSystemFontOfSize:16];
+            [readmore addTarget:self action:@selector(readmore:) forControlEvents:UIControlEventTouchUpInside];
+            [webbackbutton addSubview:readmore];
+            
+            readless = [[UIButton alloc] initWithFrame:CGRectMake(webbackbutton.frame.size.width-70, 0, 60, 20)];
+            [readless setTitle:[self.config localisedString:@"Hide"] forState:UIControlStateNormal];
+            [readless setTitleColor:[UIColor colorWithRed:0/255.0 green:122/255.0 blue:255/255.0 alpha:1] forState:UIControlStateNormal];
+            readless.titleLabel.font = [UIFont boldSystemFontOfSize:16];
+            readless.hidden = YES;
+            [readless addTarget:self action:@selector(readmore:) forControlEvents:UIControlEventTouchUpInside];
+            [webbackbutton addSubview:readless];
         }
         
-       
+        
         
         for (int i = 0 ; i < after_desc.count; i++){
             UIView *v = [after_desc objectAtIndex:i];
@@ -1415,6 +1413,7 @@ const int ADD_TO_CART = 0;
         if (!shoudLoadImg) return;
         if (img != nil && img.url != nil){
             NSString *url = [img.url absoluteString];
+            
             
             [Config loadImageURL:url toImageView:img withCacheKey:url trim:YES sizeMultiplyer:2.5 completion:^{
                 [img.indicator stopAnimating];
@@ -1582,11 +1581,12 @@ const int ADD_TO_CART = 0;
                 for (ProductVar *v in self.product.variations){
                     NSString *pval = [v.attributes objectForKey:key];
                     if (pval == nil || pval.length == 0) continue;
+                    int found = 0;
                     if ([val isEqualToString:pval] && v.stock > 0){
                         pval = [v.attributes objectForKey:choose.key];
                         if (pval == nil || pval.length == 0) continue;
                         
-                        int found = 0;
+                        
                         for (NSString *str in arr) {
                             if ([str isEqualToString: pval]) found = 1;
                         }
@@ -1594,7 +1594,7 @@ const int ADD_TO_CART = 0;
                         if (found == 0) [arr addObject:pval];
                         
                     } else {
-                        int found = 0;
+                        
                         pval = [v.attributes objectForKey:choose.key];
                         for (NSString *str in notavailable) {
                             if ([str isEqualToString:pval]) found = 1;
@@ -1602,6 +1602,7 @@ const int ADD_TO_CART = 0;
                         if (found == 0 && v.stock != 0) [notavailable addObject:pval];
                         
                     }
+                    
                 }
                 for (NSString *str in arr){
                     int removeindex = -1;
@@ -1786,16 +1787,34 @@ const int ADD_TO_CART = 0;
     ProductVar *matched = nil;
     for (ProductVar *v in self.product.variations){
         BOOL match = YES;
+        int firstvar = 0;
         for (NSString *key in [v.attributes allKeys]){
             //if ( ((NSString *)[v.attributes objectForKey:key]).length == 0) continue;
             
             if (![[sel_attr objectForKey:key] isEqualToString:[v.attributes objectForKey:key]]){
                 match = NO;
+            } else {
+                
+                if (firstvar == 0){
+                    firstvar++;
+                    if (v.images.count > 0){
+                        NSString *url = [v.images objectAtIndex:0];
+                        
+                        for (ImageWithData *img in images){
+                            if ([img.item_id isEqualToString:url]){
+                                [imgscroll setContentOffset:CGPointMake(img.frame.origin.x-30, 0) animated:YES];
+                            }
+                        }
+                    }
+                    
+                }
+                
             }
         }
         if (match) {
             count++;
             matched = v;
+            
             
         }
     }
@@ -1808,6 +1827,8 @@ const int ADD_TO_CART = 0;
     prev_sel_var = nil;
     [hidden resignFirstResponder];
 }
+
+
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
@@ -1911,8 +1932,8 @@ const int ADD_TO_CART = 0;
                 UIButton *varbtn = [varbtns objectAtIndex:0];
                 UIView *varview = [varbtn superview];
                 if (varview != nil){
-                CGPoint to = CGPointMake(varview.frame.origin.x, varview.frame.origin.y-60);
-                [scroll setContentOffset:to animated:YES];
+                    CGPoint to = CGPointMake(varview.frame.origin.x, varview.frame.origin.y-60);
+                    [scroll setContentOffset:to animated:YES];
                 }
                 
             }
@@ -2034,17 +2055,17 @@ const int ADD_TO_CART = 0;
 }
 
 -(IBAction)cart:(id)sender{
-     if ((self.config.user_id != nil && ![self.config.user_id isEqualToString:@"0"] && self.config.user_id.length > 0 ) || self.config.guest_checkout){
-    CartViewController *cc = [[CartViewController alloc] initWithNibName:@"CartViewController" bundle:nil];
-    cc.config = self.config;
-    cc.isFromMenu = 0;
-    cc.parent = self;
-    [self.navigationController pushViewController:cc animated:YES];
+    if ((self.config.user_id != nil && ![self.config.user_id isEqualToString:@"0"] && self.config.user_id.length > 0 ) || self.config.guest_checkout){
+        CartViewController *cc = [[CartViewController alloc] initWithNibName:@"CartViewController" bundle:nil];
+        cc.config = self.config;
+        cc.isFromMenu = 0;
+        cc.parent = self;
+        [self.navigationController pushViewController:cc animated:YES];
     } else {
-     LoginViewController *lefty = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
-     lefty.config = self.config;
-     [self presentViewController:lefty animated:YES completion:nil];
-     }
+        LoginViewController *lefty = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
+        lefty.config = self.config;
+        [self presentViewController:lefty animated:YES completion:nil];
+    }
 }
 
 -(IBAction)share:(id)sender{

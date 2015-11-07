@@ -19,6 +19,7 @@
 @property int stock;
 @property (nonatomic, strong) NSString *product_var_id;
 @property (nonatomic, strong) NSMutableDictionary *attributes;
+@property (nonatomic, strong) NSMutableArray *images;
 
 
 -(void)product_var_from_dictionary:(NSDictionary *)d;
