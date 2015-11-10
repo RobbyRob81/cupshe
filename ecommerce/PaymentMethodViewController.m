@@ -168,6 +168,8 @@
                 aep.allusermethods = self.config.user_payment_methods;
                 aep.parent = self.parent;
                 [self.navigationController pushViewController:aep animated:NO];
+            } else {
+                self.parent = self;
             }
             
             [indicator stopAnimating];

@@ -15,7 +15,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "2669"
             endingLineNumber = "2669"
-            landmarkName = "-save_user_method"
+            landmarkName = "-payPalFuturePaymentViewController:didAuthorizeFuturePayment:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
