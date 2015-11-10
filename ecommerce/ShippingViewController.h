@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "Config.h"
 @interface ShippingViewController : UIViewController <UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UITableViewDataSource, UITableViewDelegate>{
-    IBOutlet UITextField *name;
+    IBOutlet UITextField *fname;
+    IBOutlet UITextField *lname;
     IBOutlet UITextField *address;
     IBOutlet UITextField *city;
     IBOutlet UITextField *state;

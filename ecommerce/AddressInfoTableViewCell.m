@@ -19,7 +19,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
-       
+        
         
         
         self.bigTitle = [[UILabel alloc] init];
@@ -27,7 +27,8 @@
         [self.contentView addSubview:self.bigTitle];
         
         self.smallTitle = [[UILabel alloc] init];
-        self.smallTitle.font = [UIFont systemFontOfSize:15];
+        self.smallTitle.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:15];
+        self.smallTitle.textColor = [UIColor colorWithRed:41/255.0 green:39/255.0 blue:39/255.0 alpha:1];
         [self.contentView addSubview:self.smallTitle];
         
         self.sw = [[UISwitch alloc] init];
@@ -37,7 +38,7 @@
         self.value.font = [UIFont systemFontOfSize:15];
         [self.contentView addSubview:self.value];
         
-      
+        
     }
     return self;
 }
@@ -81,7 +82,7 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
+    
     // Configure the view for the selected state
 }
 

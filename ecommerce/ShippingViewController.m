@@ -60,7 +60,7 @@
     if ([self.config.location isEqualToString:@"US"]){
         states = [NSArray arrayWithObjects: [self.config localisedString:@"Other (Please Type)"],@"Alabama", @"Alaska", @"Arizona", @"Arkansas", @"California", @"Colorado", @"Connecticut", @"Delaware", @"Florida", @"Georgia", @"Hawaii", @"Idaho", @"Illinois", @"Indiana", @"Iowa", @"Kansas", @"Kentucky", @"Louisiana", @"Maine", @"Maryland", @"Massachusetts", @"Michigan", @"Minnesota", @"Mississippi", @"Missouri", @"Montana", @"Nebraska", @"Nevada", @"New Hampshire", @"New Jersey", @"New Mexico", @"New York", @"North Carolina", @"North Dakota", @"Ohio", @"Oklahoma", @"Oregon", @"Pennsylvania", @"Rhode Island", @"South Carolina", @"South Dakota", @"Tennessee", @"Texas", @"Utah", @"Vermont", @"Virginia", @"Washington", @"West Virginia", @"Wisconsin", @"Wyoming", nil];
     } else {
-       
+        
         states = s;
     }
     
@@ -160,6 +160,10 @@
         phonerow = 8;
         
     }
+    
+    fname = [[UITextField alloc] init];
+    lname = [[UITextField alloc] init];
+    fname.font = lname.font = [UIFont systemFontOfSize:15];
 }
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
@@ -173,7 +177,8 @@
 }
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
-    if (name != nil) [name resignFirstResponder];
+    if (fname != nil) [fname resignFirstResponder];
+    if (lname != nil) [lname resignFirstResponder];
     if (address != nil)[address resignFirstResponder];
     if (state != nil)[state resignFirstResponder];
     if (zip != nil)[zip resignFirstResponder];
@@ -220,7 +225,8 @@
     }
     
     // self.config.name = self.config.billingname;
-    name.text = [NSString stringWithFormat:@"%@ %@", self.config.selected_payment.billingfirstname, self.config.selected_payment.billinglastname];
+    fname.text =  self.config.selected_payment.billingfirstname;
+    lname.text = self.config.selected_payment.billinglastname;
     // self.config.address=self.config.billingaddress;
     address.text = self.config.selected_payment.billingaddress;
     // self.config.city = self.config.billingcity;
@@ -237,7 +243,7 @@
 }
 
 -(IBAction)save:(id)sender{
-    if (name.text.length == 0) {
+    if (fname.text.length == 0 || lname.text.length == 0) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[self.config localisedString:@"Name is required."] message:nil delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
         [alert show];
         return;
@@ -268,7 +274,6 @@
         return;
     }
     int countryfound = 0;
-    int statefound = 0;
     
     for (ShippingCountry *sc in self.config.shipping){
         if ([sc.code isEqualToString:[self.config.countrytocode objectForKey:country.text]]){
@@ -288,8 +293,7 @@
     
     
     
-    
-    self.config.name = name.text;
+    self.config.name = [NSString stringWithFormat:@"%@ %@", fname.text, lname.text];
     self.config.state = state.text;
     self.config.city = city.text;
     self.config.address = address.text;
@@ -342,8 +346,8 @@
         }
     } else if ([country isFirstResponder]){
         if (shipping_all_country) {
-        NSString *s = [self.config.countries objectAtIndex:[countrypicker selectedRowInComponent:0]];
-        country.text = s;
+            NSString *s = [self.config.countries objectAtIndex:[countrypicker selectedRowInComponent:0]];
+            country.text = s;
         } else {
             ShippingCountry *sc = [self.config.shipping objectAtIndex:[countrypicker selectedRowInComponent:0]];
             country.text = sc.name;
@@ -437,11 +441,53 @@
         save = cell.sw;
         cell.sw.hidden = NO;
     }if (indexPath.row == namerow){
-        cell.smallTitle.text =[NSString stringWithFormat:@"%@", [self.config localisedString:@"Name"]];
-        cell.value.delegate = self;
-        if (cell.value.text.length == 0)
-            cell.value.text = self.config.name;
-        name = cell.value;
+        UILabel *ctitle = [[UILabel alloc] initWithFrame:CGRectMake(20, 2, 150, 30)];
+        ctitle.textColor = [UIColor colorWithRed:41/255.0 green:39/255.0 blue:39/255.0 alpha:1];
+        ctitle.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:15];
+        [cell addSubview:ctitle];
+        
+        UILabel *ctitle2 = [[UILabel alloc] initWithFrame:CGRectMake(self.config.screenWidth/2+20, 2, 150, 30)];
+        ctitle2.textColor = [UIColor colorWithRed:41/255.0 green:39/255.0 blue:39/255.0 alpha:1];
+        ctitle2.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:15];
+        [cell addSubview:ctitle2];
+        
+        CALayer *mid = [CALayer layer];
+        mid.frame = CGRectMake(self.config.screenWidth/2, 0, 0.5, table.rowHeight);
+        mid.backgroundColor = [[UIColor colorWithRed:217/255.0 green:217/255.0 blue:217/255.0 alpha:1] CGColor];
+        
+        NSArray *names = [self.config.name componentsSeparatedByString:@" "];
+        
+        NSString *firstname = @"";
+        NSString *lastname = @"";
+        
+        if (names.count > 0) firstname = [names objectAtIndex:0];
+        if (names.count > 1) {
+            NSMutableString *ln = [[NSMutableString alloc] init];
+            for (int i = 1; i < names.count; i++){
+                if (i == 1) [ln appendFormat:@"%@", [names objectAtIndex:i]];
+                else [ln appendFormat:@" %@", [names objectAtIndex:i]];
+            }
+            lastname = [NSString stringWithFormat:@"%@", ln];
+        }
+        
+        ctitle.text = [self.config localisedString:@"First Name"];
+        fname.frame = CGRectMake(20, 30, self.config.screenWidth/2-30, table.rowHeight-30);
+        fname.delegate = self;
+        fname.textColor = [UIColor darkGrayColor];
+        if (fname.text.length == 0) fname.text = firstname;
+        [cell addSubview:fname];
+        
+        ctitle2.text = [self.config localisedString:@"Last Name"];
+        lname.frame = CGRectMake(self.config.screenWidth/2+20, 30, self.config.screenWidth/2-30, table.rowHeight-30);
+        lname.delegate = self;
+        lname.textColor = [UIColor darkGrayColor];
+        if (lname.text.length == 0) lname.text = lastname;
+        [cell addSubview:lname];
+        
+        [cell.layer addSublayer:mid];
+        
+        cell.value.hidden = YES;
+        
         cell.sw.hidden = YES;
     }if (indexPath.row == addrrow){
         cell.smallTitle.text = [self.config localisedString:@"Address"];
