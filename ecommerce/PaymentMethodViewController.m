@@ -18,10 +18,13 @@
 #import "CreateCustomerProfileResponse.h"
 #import "CustomerProfileBaseType.h"
 #import "StringUtility.h"
+//USAePay
 #import <CommonCrypto/CommonDigest.h>
 #import "USAePayueSoapServerBinding.h"
 #import "USAePayueHash.h"
 #import "USAePayAddress.h"
+//Braintree
+
 @interface PaymentMethodViewController ()
 
 @end
@@ -97,6 +100,7 @@
     
     self.view.backgroundColor = [UIColor colorWithRed:242.0/255.0 green:240.0/255.0 blue:240.0/255.0 alpha:1];
     
+    initial = 1;
     
 }
 
@@ -162,12 +166,13 @@
             self.config.user_payment_methods = user_payment_method;
             [self build_payment];
             
-            if (self.config.user_payment_methods.count == 0 && self.config.selected_payment == nil){
+            if (self.config.user_payment_methods.count == 0 && self.config.selected_payment == nil && initial == 1){
                 AddEditPaymentMethodViewController *aep = [[AddEditPaymentMethodViewController alloc] init];
                 aep.config = self.config;
                 aep.allusermethods = self.config.user_payment_methods;
                 aep.parent = self.parent;
                 [self.navigationController pushViewController:aep animated:NO];
+                initial = 0;
             } else {
                 self.parent = self;
             }
@@ -364,8 +369,16 @@
                     cc.allusermethods = self.config.user_payment_methods;
                     cc.parent = self;
                     [self.navigationController pushViewController:cc animated:YES];
-                } else if ([apm.payment_gateway isEqualToString:@"Paypal"] && [apm.payment_method isEqualToString:@"paypal"]){
+                } else if (([apm.payment_gateway isEqualToString:@"Paypal"] || [apm.payment_gateway isEqualToString:@"Braintree"]) && [apm.payment_method isEqualToString:@"paypal"] && ![apm.appmethod.payment_flow isEqualToString:@"in app"]){
                     AccountPaymentViewController *cp = [[AccountPaymentViewController alloc] init];
+                    cp.config = self.config;
+                    cp.appmethod = apm.appmethod;
+                    cp.usermethod = apm;
+                    cp.allusermethods = self.config.user_payment_methods;
+                    cp.parent = self;
+                    [self.navigationController pushViewController:cp animated:YES];
+                } else if (([apm.payment_gateway isEqualToString:@"Paypal"] || [apm.payment_gateway isEqualToString:@"Braintree"]) && [apm.payment_method isEqualToString:@"paypal"] && [apm.appmethod.payment_flow isEqualToString:@"in app"]){
+                    CustomePaymentViewController *cp = [[CustomePaymentViewController alloc] init];
                     cp.config = self.config;
                     cp.appmethod = apm.appmethod;
                     cp.usermethod = apm;
@@ -625,11 +638,19 @@
                     cc.allusermethods = self.allusermethods;
                     cc.parent = self.parent;
                     [self.navigationController pushViewController:cc animated:YES];
-                }  else if ([apm.payment_gateway isEqualToString:@"Paypal"] && [apm.payment_method isEqualToString:@"paypal"]){
+                }  else if (([apm.payment_gateway isEqualToString:@"Paypal"] || [apm.payment_gateway isEqualToString:@"Braintree"]) && [apm.payment_method isEqualToString:@"paypal"] && ![apm.payment_flow isEqualToString:@"in app"]){
                     AccountPaymentViewController *cp = [[AccountPaymentViewController alloc] init];
                     cp.config = self.config;
                     cp.appmethod = apm;
                     cp.allusermethods = self.config.user_payment_methods;
+                    cp.parent = self.parent;
+                    [self.navigationController pushViewController:cp animated:YES];
+                } else if (([apm.payment_gateway isEqualToString:@"Paypal"] || [apm.payment_gateway isEqualToString:@"Braintree"]) && [apm.payment_method isEqualToString:@"paypal"] && [apm.payment_flow isEqualToString:@"in app"]){
+                    CustomePaymentViewController *cp = [[CustomePaymentViewController alloc] init];
+                    cp.config = self.config;
+                    cp.appmethod = apm;
+                    //cp.usermethod = apm;
+                    cp.allusermethods = self.allusermethods;
                     cp.parent = self.parent;
                     [self.navigationController pushViewController:cp animated:YES];
                 }
@@ -1170,6 +1191,7 @@ const int CARD_NO_CHANGE = 0;
         country.text = s;
         [country resignFirstResponder];
     }
+    if (changed == CARD_NO_CHANGE) changed = CARD_INFO_UNCHANGED;
 }
 
 
@@ -1232,7 +1254,7 @@ const int CARD_NO_CHANGE = 0;
     
     
     BOOL isnew = NO;
-    if (self.usermethod == nil) isnew = YES;
+    if (self.usermethod == nil || self.usermethod.customer_id == nil || self.usermethod.customer_id.length == 0) isnew = YES;
     else if (![self.usermethod.payment_gateway isEqualToString:self.appmethod.payment_gateway] && ![self.usermethod.payment_method isEqualToString:self.appmethod.payment_method]) isnew = YES;
     
     self.usermethod.payment_gateway = self.appmethod.payment_gateway;
@@ -1368,6 +1390,7 @@ const int CARD_NO_CHANGE = 0;
         }
         
     }
+    
 }
 
 -(void)save_user_method{
@@ -1387,6 +1410,7 @@ const int CARD_NO_CHANGE = 0;
     self.usermethod.cc = cardnumber.text;
     if (self.usermethod.is_default) isdef = 1;
     NSString *myRequestString = [NSString stringWithFormat:@"app_uuid=%@&user_id=%@&access_token=%@&method_id=%@&payment_gateway=%@&customer_id=%@&payment_token=%@&last4=%@&exp_month=%@&exp_year=%@&payment_method=%@&card_type=%@&account_id=%@&billing_firstname=%@&billing_lastname=%@&billing_address=%@&billing_city=%@&billing_state=%@&billing_zip=%@&billing_country=%@&is_default=%d&is_delete=0&card_changed=1", self.config.APP_UUID, self.config.user_id, self.config.token, self.usermethod.payment_method_id, self.usermethod.payment_gateway, self.usermethod.customer_id, self.usermethod.payment_token, self.usermethod.last4, self.usermethod.expmonth, self.usermethod.expyear, self.usermethod.payment_method, self.usermethod.cardtype, self.usermethod.account_id, self.usermethod.billingfirstname, self.usermethod.billinglastname, self.usermethod.billingaddress, self.usermethod.billingcity, self.usermethod.billingstate, self.usermethod.billingzip, self.usermethod.billingcountry,isdef];
+    
     
     
     
@@ -1413,6 +1437,14 @@ const int CARD_NO_CHANGE = 0;
             NSLog(@"%@", response);
             
             NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:d options:0 error:nil];
+            
+            if ([dic objectForKey:@"success"]!= nil && ![[dic objectForKey:@"success"] isEqualToString:@"1"]){
+                UIAlertView *alert =[[UIAlertView alloc] initWithTitle:[self.config localisedString:@"Failed to save card"] message:@"" delegate:nil cancelButtonTitle:[self.config localisedString:@"Close"] otherButtonTitles: nil];
+                [alert show];
+                [indicator stopAnimating];
+                return;
+            }
+            
             if (self.usermethod.payment_method_id == nil || self.usermethod.payment_method_id.length == 0) {
                 self.usermethod.payment_method_id = [dic objectForKey:@"payment_method_id"];
             }
@@ -1471,6 +1503,14 @@ const int CARD_NO_CHANGE = 0;
             NSLog(@"%@", response);
             
             NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:d options:0 error:nil];
+            
+            if ([dic objectForKey:@"success"]!= nil && ![[dic objectForKey:@"success"] isEqualToString:@"1"]){
+                UIAlertView *alert =[[UIAlertView alloc] initWithTitle:[self.config localisedString:@"Failed to save card"] message:@"" delegate:nil cancelButtonTitle:[self.config localisedString:@"Close"] otherButtonTitles: nil];
+                [alert show];
+                [indicator stopAnimating];
+                return;
+            }
+            
             
             [self.navigationController popToViewController:self.parent animated:YES];
             
@@ -1875,7 +1915,7 @@ const int CARD_NO_CHANGE = 0;
             mth.CardExpiration =expdate;
             mth.CardCode = cvc.text;
             
-            [soap2 addCustomerPaymentMethodAsyncWithBlock:token2 CustNum:cnum PaymentMethod:mth MakeDefault:0 Verify:0 __handler:^(USAePayRequestResultHandler *res) {
+            [soap2 addCustomerPaymentMethodAsyncWithBlock:token2 CustNum:cnum PaymentMethod:mth MakeDefault:0 Verify:[NSNumber numberWithInt:1] __handler:^(USAePayRequestResultHandler *res) {
                 
                 
                 NSString *pid = [NSString stringWithFormat:@"%@", res];
@@ -1892,6 +1932,12 @@ const int CARD_NO_CHANGE = 0;
                     self.usermethod.payment_gateway = self.appmethod.payment_gateway;
                     self.usermethod.payment_method = self.appmethod.payment_method;
                     self.usermethod.customer_id = cid;
+                    OLCreditCardType cardType = [Luhn typeFromString:cardnumber.text];
+                    if (cardType == OLCreditCardTypeAmex) self.usermethod.cardtype = @"amex";
+                    else if (cardType == OLCreditCardTypeDinersClub) self.usermethod.cardtype = @"dinersclub";
+                    else if (cardType == OLCreditCardTypeDiscover) self.usermethod.cardtype = @"discover";
+                    else if (cardType == OLCreditCardTypeMastercard) self.usermethod.cardtype = @"mastercard";
+                    else if (cardType == OLCreditCardTypeVisa) self.usermethod.cardtype = @"visa";
                     self.usermethod.last4 = [cardnumber.text substringFromIndex:cardnumber.text.length-4];
                     self.usermethod.expyear = expyear.text;
                     self.usermethod.expmonth = expmonth.text;
@@ -1969,12 +2015,40 @@ const int CARD_NO_CHANGE = 0;
     mth.MethodID = [NSNumber numberWithInteger:[self.usermethod.payment_token integerValue]] ;
     
     
-    
-    
-    [soap updateCustomerPaymentMethodAsyncWithBlock:token PaymentMethod:mth Verify:[NSNumber numberWithInt:0] __handler:^(USAePayRequestResultHandler *res) {
-        NSLog(@"%@", res);
+    [soap updateCustomerPaymentMethodAsyncWithBlock:token PaymentMethod:mth Verify:[NSNumber numberWithInt:1] __handler:^(USAePayRequestResultHandler *res) {
+        NSString *pid = [NSString stringWithFormat:@"%@", res];
+        
+        NSLog(@"%@", pid);
+        if ([pid intValue] > 0){
+            OLCreditCardType cardType = [Luhn typeFromString:cardnumber.text];
+            if (cardType == OLCreditCardTypeAmex) self.usermethod.cardtype = @"amex";
+            else if (cardType == OLCreditCardTypeDinersClub) self.usermethod.cardtype = @"dinersclub";
+            else if (cardType == OLCreditCardTypeDiscover) self.usermethod.cardtype = @"discover";
+            else if (cardType == OLCreditCardTypeMastercard) self.usermethod.cardtype = @"mastercard";
+            else if (cardType == OLCreditCardTypeVisa) self.usermethod.cardtype = @"visa";
+            self.usermethod.last4 = [cardnumber.text substringFromIndex:cardnumber.text.length-4];
+            self.usermethod.expyear = expyear.text;
+            self.usermethod.expmonth = expmonth.text;
+            self.usermethod.billingfirstname = fn.text;
+            self.usermethod.billinglastname = ln.text;
+            self.usermethod.billingaddress = addr.text;
+            self.usermethod.billingcity = city.text;
+            self.usermethod.billingstate = state.text;
+            self.usermethod.billingzip = zip.text;
+            self.usermethod.billingcountry = [self.config.countrytocode objectForKey:country.text];
+            if (isdefault.isOn) self.usermethod.is_default = YES;
+            else self.usermethod.is_default = NO;
+            
+            [self save_user_method];
+        } else {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[self.config localisedString:@"Fail to save card."] message:@"" delegate:nil cancelButtonTitle:[self.config localisedString:@"Close"] otherButtonTitles: nil];
+            [alert show];
+            [indicator stopAnimating];
+            return;
+        }
     }];
 }
+
 
 
 @end
@@ -2258,6 +2332,7 @@ const int CARD_NO_CHANGE = 0;
                 
                 NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:d options:0 error:nil];
                 
+                
                 if (self.usermethod != nil && self.usermethod.payment_method_id != nil && [self.usermethod.payment_method_id isEqualToString:self.config.selected_payment.payment_method_id]){
                     self.config.selected_payment = nil;
                 }
@@ -2379,6 +2454,19 @@ const int CARD_NO_CHANGE = 0;
             
             NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:d options:0 error:nil];
             
+            
+            if ([dic objectForKey:@"success"]!= nil && ![[dic objectForKey:@"success"] isEqualToString:@"1"]){
+                UIAlertView *alert =[[UIAlertView alloc] initWithTitle:[self.config localisedString:@"Failed to save card"] message:@"" delegate:nil cancelButtonTitle:[self.config localisedString:@"Close"] otherButtonTitles: nil];
+                [alert show];
+                [indicator stopAnimating];
+                return;
+            }
+            
+            if (self.usermethod.payment_method_id == nil || self.usermethod.payment_method_id.length == 0) {
+                self.usermethod.payment_method_id = [dic objectForKey:@"payment_method_id"];
+            }
+            
+            if (self.config.user_payment_methods.count == 0) self.config.selected_payment = self.usermethod;
             [self.navigationController popToViewController:self.parent animated:YES];
             
         } else {
@@ -2399,6 +2487,22 @@ const int CARD_NO_CHANGE = 0;
 }
 
 @end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2919,13 +3023,19 @@ const int PAYMENT_ACCOUNT_CHANGED = 1;
             
             NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:d options:0 error:nil];
             
-            self.usermethod.payment_method_id = [dic objectForKey:@"payment_method_id"];
+            
+            if ([dic objectForKey:@"success"]!= nil && ![[dic objectForKey:@"success"] isEqualToString:@"1"]){
+                UIAlertView *alert =[[UIAlertView alloc] initWithTitle:[self.config localisedString:@"Failed to save payment"] message:@"" delegate:nil cancelButtonTitle:[self.config localisedString:@"Close"] otherButtonTitles: nil];
+                [alert show];
+                [indicator stopAnimating];
+                return;
+            }
+            
             if (self.usermethod.payment_method_id == nil || self.usermethod.payment_method_id.length == 0) {
                 self.usermethod.payment_method_id = [dic objectForKey:@"payment_method_id"];
             }
             
             if (self.config.user_payment_methods.count == 0) self.config.selected_payment = self.usermethod;
-            
             [self.navigationController popToViewController:self.parent animated:YES];
             
         } else {
@@ -2983,6 +3093,18 @@ const int PAYMENT_ACCOUNT_CHANGED = 1;
             NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:d options:0 error:nil];
             
             
+            if ([dic objectForKey:@"success"]!= nil && ![[dic objectForKey:@"success"] isEqualToString:@"1"]){
+                UIAlertView *alert =[[UIAlertView alloc] initWithTitle:[self.config localisedString:@"Failed to save payment"] message:@"" delegate:nil cancelButtonTitle:[self.config localisedString:@"Close"] otherButtonTitles: nil];
+                [alert show];
+                [indicator stopAnimating];
+                return;
+            }
+            
+            if (self.usermethod.payment_method_id == nil || self.usermethod.payment_method_id.length == 0) {
+                self.usermethod.payment_method_id = [dic objectForKey:@"payment_method_id"];
+            }
+            
+            if (self.config.user_payment_methods.count == 0) self.config.selected_payment = self.usermethod;
             [self.navigationController popToViewController:self.parent animated:YES];
             
         } else {

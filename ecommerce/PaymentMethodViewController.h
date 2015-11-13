@@ -13,12 +13,14 @@
 #import "Config.h"
 #import "PaymentMethod.h"
 
+
 @interface PaymentMethodViewController : UIViewController{
     UIActivityIndicatorView *indicator;
     NSMutableArray *user_payment_method;
     UILabel *seg;
     UIScrollView *scroll;
     NSMutableArray *payment_views;
+    int initial;
 }
 
 @property (nonatomic, strong) Config *config;
@@ -92,7 +94,7 @@
     UISwitch *isdefault;
     
     
-   
+    
 }
 
 @property (nonatomic, strong) Config *config;

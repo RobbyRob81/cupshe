@@ -224,6 +224,7 @@
 @implementation AppPaymentMethod
 
 -(void)dictionary_to_method:(NSDictionary *)d{
+    
     self.payment_method_id = [d objectForKey:@"payment_method_id"];
     self.payment_gateway = [d objectForKey:@"payment_gateway"];
     self.payment_method = [d objectForKey:@"payment_method"];
@@ -235,6 +236,7 @@
     self.sandbox_api_secret = [d objectForKey:@"sandbox_api_secret"];
     self.api_version = [d objectForKey:@"api_version"];
     self.desc = [d objectForKey:@"description"];
+    self.payment_flow = [d objectForKey:@"pay_flow"];
     self.islive = [[d objectForKey:@"isLive"] intValue];
 }
 

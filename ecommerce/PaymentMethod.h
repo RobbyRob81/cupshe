@@ -71,6 +71,7 @@
 @property (nonatomic, strong) NSString *api_version;
 @property (nonatomic, strong) NSString *desc;
 @property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSString *payment_flow;
 @property int islive;
 
 -(void)dictionary_to_method:(NSDictionary *)d;
