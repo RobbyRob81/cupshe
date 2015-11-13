@@ -127,13 +127,15 @@
     [indicator stopAnimating];
     [self.view addSubview:indicator];
     
+    
+    
     if (self.config.country == nil || self.config.country.length == 0)
         self.config.country = self.config.location;
     
     
 }
 -(void)viewWillAppear:(BOOL)animated{
-    [indicator stopAnimating];
+    //[indicator stopAnimating];
     [table reloadData];
 }
 
@@ -565,6 +567,7 @@
     if (error){
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:@"" delegate:nil cancelButtonTitle:[self.config localisedString:@"Close"] otherButtonTitles: nil];
         [alert show];
+        [indicator stopAnimating];
         return;
     }
     
@@ -695,7 +698,7 @@
         // Amount, currency, and description
         payment.amount = total_paying;
         payment.currencyCode = cur;
-        payment.shortDescription = @"Twixxies Purchase";
+        payment.shortDescription = @"CUPSHE App Purchase";
         payment.intent = PayPalPaymentIntentAuthorize;
         
         PayPalShippingAddress *sa = [[PayPalShippingAddress alloc] init];
@@ -741,10 +744,13 @@
     [self capture_order:[[completedPayment.confirmation objectForKey:@"response"] objectForKey:@"authorization_id"]];
     // Dismiss the PayPalPaymentViewController.
     [self dismissViewControllerAnimated:YES completion:nil];
+    
 }
 
 - (void)payPalPaymentDidCancel:(PayPalPaymentViewController *)paymentViewController {
     // The payment was canceled; dismiss the PayPalPaymentViewController.
+    
+    [indicator stopAnimating];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -812,16 +818,8 @@
                                                          error:nil];
     NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
     
-    if (self.config.selected_payment.handle_payment == YES){
-        self.config.selected_payment.delegate = self;
-        [self.config.selected_payment pay:self.total shipping:shipping tax:tax];
-        return;
-    }
     
-    if ([self.config.selected_payment.appmethod.payment_flow isEqualToString:@"in app"]){
-        [self in_app_payment:totalp currency:self.config.currency];
-        return;
-    }
+    
     
     
     NSString *myRequestString = [NSString stringWithFormat:@"app_uuid=%@&user_id=%@&access_token=%@&temp_user_id=%@&name=%@&address=%@&city=%@&state=%@&zip=%@&country=%@&phone=%@&save_address=%d&shipping_id=%@&payment_method_id=%@&total_paying=%@&use_store_credit=%d&wholesale_user_id=%@&location=%@&currency=%@&cached_data=%@&capture_token=%@&is_capture=1", self.config.APP_UUID, uid, self.config.token, tuid, self.config.name, self.config.address, self.config.city, self.config.state, self.config.zip,self.config.country,self.config.phone, self.config.save_address,self.config.chosen_shipping.shipping_id, self.config.selected_payment.payment_method_id,[totalp stringValue], use_credit, wu, self.config.location, self.config.currency, jsonString, token];

@@ -98,7 +98,7 @@
                 
             }
         }
-        return  nil;
+        return  [NSDecimalNumber decimalNumberWithString:@"0"];
         
     } else {
         return nil;
