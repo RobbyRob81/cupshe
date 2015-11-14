@@ -926,7 +926,7 @@ const int ADD_TO_CART = 0;
     [productImage addGestureRecognizer:imgtap];
     productImage.contentMode = UIViewContentModeScaleAspectFit;
     productImage.tag = 0;
-    
+    productImage.item_id = self.product.imageURL;
     productImage.image = self.product.itemImage;
     
     
@@ -1785,6 +1785,9 @@ const int ADD_TO_CART = 0;
     [sel_attr setObject:d forKey:choose.key];
     int count = 0;
     ProductVar *matched = nil;
+    
+    ImageWithData *scrolltoimg;
+    int imgindex = 0;
     for (ProductVar *v in self.product.variations){
         BOOL match = YES;
         int firstvar = 0;
@@ -1797,12 +1800,15 @@ const int ADD_TO_CART = 0;
                 
                 if (firstvar == 0){
                     firstvar++;
-                    if (v.images.count > 0){
+                    if (v.images.count > 0 && count == 0){
                         NSString *url = [v.images objectAtIndex:0];
                         
-                        for (ImageWithData *img in images){
+                        for (int i = 0 ; i < images.count;i++){
+                            ImageWithData *img = [images objectAtIndex:i];
                             if ([img.item_id isEqualToString:url]){
-                                [imgscroll setContentOffset:CGPointMake(img.frame.origin.x-30, 0) animated:YES];
+                                //[imgscroll setContentOffset:CGPointMake(img.frame.origin.x-30, 0) animated:YES];
+                                scrolltoimg = img;
+                                imgindex = i;
                             }
                         }
                     }
@@ -1816,6 +1822,22 @@ const int ADD_TO_CART = 0;
             matched = v;
             
             
+            if (v.images.count > 0 && count == 1){
+                NSString *url = [v.images objectAtIndex:0];
+                
+                for (int i = 0 ; i < images.count;i++){
+                    ImageWithData *img = [images objectAtIndex:i];
+                    if ([img.item_id isEqualToString:url]){
+                        scrolltoimg = img;
+                        imgindex = i;
+                    }
+                }
+            } else {
+                scrolltoimg = [images objectAtIndex:0];
+                imgindex = 0;
+            }
+            
+            
         }
     }
     if (count == 1) {
@@ -1825,6 +1847,13 @@ const int ADD_TO_CART = 0;
     else selvar = nil;
     
     prev_sel_var = nil;
+    
+    if (scrolltoimg != nil){
+        
+        [imgscroll setContentOffset:CGPointMake(scrolltoimg.frame.origin.x-30, 0) animated:YES];
+        page.currentPage = imgindex;
+    }
+    
     [hidden resignFirstResponder];
 }
 
