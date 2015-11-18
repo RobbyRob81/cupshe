@@ -41,6 +41,20 @@
     [Design navigationbar_title:label config:self.config];
     
     
+    /*self.config.selected_payment = [[UserPaymentMethod alloc] init];
+    self.config.selected_payment.payment_gateway = @"Paypal";
+    self.config.selected_payment.payment_method = @"paypal";
+    self.config.selected_payment.appmethod = [[AppPaymentMethod alloc] init];
+    self.config.selected_payment.appmethod.payment_gateway = @"Paypal";
+    self.config.selected_payment.appmethod.payment_method = @"paypal";
+    self.config.selected_payment.appmethod.payment_flow = @"in app";
+    self.config.selected_payment.appmethod.api_userid = @"AZjhSu3fGkDl2mVcNRqpUy6oqpiNrLlWkRoIjTvl-SFePCHoeyyf9RIr1BMCHaLAnpXhaGAXTKr1lEHs";
+    self.config.selected_payment.appmethod.api_secret = @"EO7JDpwS_A-pyXurBQi-jW962gdEu-Iw_j3-Gm9kAJRnIuYV_NpvqFXBs9hytK9PhjM2MTkJZbiS2bt8";
+    self.config.selected_payment.appmethod.sandbox_api_userid = @"AT6egBVYGKGZ6GrCy8Z4LSnG9xB0DsLe-LBH2sJOIU2U64jybv9azyTmWpI_UcB06FBuXnPoIChI7YTO";
+    self.config.selected_payment.appmethod.sandbox_api_secret = @"EB51NPJRffA9XcbohUcUPYYVtqnEwc02zJPVkb-wvykubSTgdlJ_FPHC4COeI3PDSRq48KjC1OVBcMHb";
+    self.config.selected_payment.appmethod.islive = 1;*/
+    
+    
     submit = [[UIView alloc] initWithFrame:CGRectMake(0, self.config.screenHeight-64-51, self.config.screenWidth, 51)];
     UITapGestureRecognizer *submitorder = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(submit_order:)];
     submit.userInteractionEnabled = YES;
@@ -49,7 +63,7 @@
     submit_view.userInteractionEnabled = NO;
     submit_middle = [[UILabel alloc] init];
     submit_middle.userInteractionEnabled = NO;
-    submit_middle.text = [self.config localisedString:@"Submit Order"];
+    submit_middle.text = @"Pay With Paypal";
     [submit addSubview:submit_view];
     [submit_view addSubview:submit_middle];
     [self.view addSubview:submit];
