@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "053BAE5DCB605018D0F5CA27DE906576178C7F7A",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "053BAE5DCB605018D0F5CA27DE906576178C7F7A" : 0,
+    "DB38DD4A92E0A4764B5A956BA36373A87971CA99" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "76915588-C637-40BC-B4E8-9FEB909338CC",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "053BAE5DCB605018D0F5CA27DE906576178C7F7A" : "cupshe\/",
+    "DB38DD4A92E0A4764B5A956BA36373A87971CA99" : ""
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "ecommerce",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "ecommerce.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Twixxies-LLC\/cupshe.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "053BAE5DCB605018D0F5CA27DE906576178C7F7A"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Twixxies-LLC\/smoke.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "DB38DD4A92E0A4764B5A956BA36373A87971CA99"
+    }
+  ]
+}
