@@ -29,6 +29,7 @@
 
 @property int quantity;
 @property double paid_price;
+@property double original_price;
 @property (nonatomic, strong) NSString *attr_string;
 
 @property (nonatomic, strong) UIImage *itemImage;

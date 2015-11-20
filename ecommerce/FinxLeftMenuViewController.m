@@ -393,8 +393,8 @@
         mailCont.mailComposeDelegate = self;
         
         [mailCont setSubject:@"Report a Bug"];
-        [mailCont setToRecipients:[NSArray arrayWithObject:@"hello@twixxies.com"]];
-        [mailCont setMessageBody:@"" isHTML:NO];
+        [mailCont setToRecipients:[NSArray arrayWithObject:@"support@twixxies.com"]];
+        [mailCont setMessageBody:[NSString stringWithFormat:@"%@ %@ %@:", self.config.app_name, self.config.app_version, [self.config localisedString:@"Bug Report"]] isHTML:NO];
         
         [self presentViewController:mailCont animated:YES completion:nil];
     }

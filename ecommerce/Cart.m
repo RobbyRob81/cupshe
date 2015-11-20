@@ -38,6 +38,7 @@
         self.sale_price = [NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%@", sp]];
     }
     self.paid_price = [[d objectForKey:@"paid_price"] doubleValue];
+    self.original_price = [[d objectForKey:@"original_price"] doubleValue];
     self.sale_start = [d objectForKey:@"sale_start"];
     self.sale_end = [d objectForKey:@"sale_end"];
     NSString *st = [d objectForKey:@"stock"];

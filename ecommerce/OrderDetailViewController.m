@@ -45,7 +45,7 @@
     [Design navigationbar_title:label config:self.config];
     
     // Setup save button
-   
+    
     UILabel *cartbtn = [[UILabel alloc] init];
     //cartbtn.transform = CGAffineTransformMakeScale(-1.0, 1.0);
     cartbtn.text = [self.config localisedString:@"Support"];
@@ -201,7 +201,7 @@
         pname.scrollEnabled = NO;
         [cart addSubview:pname];
         
-        UILabel *attr = [[UILabel alloc] initWithFrame:CGRectMake(img.frame.origin.x+img.frame.size.width+8, viewheight-30, cart.frame.size.width-img.frame.origin.x-img.frame.size.width-100, 12)];
+        UILabel *attr = [[UILabel alloc] initWithFrame:CGRectMake(img.frame.origin.x+img.frame.size.width+8, viewheight-30, cart.frame.size.width-img.frame.origin.x-img.frame.size.width-140, 12)];
         attr.font = [UIFont systemFontOfSize:12];
         attr.textColor = [UIColor lightGrayColor];
         attr.text = c.attr_string;
@@ -214,15 +214,41 @@
         quan.text = [NSString stringWithFormat:@"%@: %d", [self.config localisedString:@"Qty"], c.quantity] ;
         [cart addSubview:quan];
         
-        UILabel *price = [[UILabel alloc] initWithFrame:CGRectMake(cart.frame.size.width-100, attr.frame.origin.y, 90, 26)];
+        
+        
+        UILabel *price = [[UILabel alloc] initWithFrame:CGRectMake(cart.frame.size.width-130, attr.frame.origin.y, 125, 26)];
         price.font = [UIFont systemFontOfSize:15];
         price.textColor = [UIColor colorWithRed:41.0/255.0 green:39.0/255.0 blue:39.0/255.0 alpha:1];
         price.textAlignment = NSTextAlignmentRight;
         price.text = [NSString stringWithFormat:@"%@%0.2f", [self.config getCurrencySymbol], c.paid_price];
+        
+        if (c.original_price > c.paid_price){
+            NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%0.2f  %@%0.2f",[self.config getCurrencySymbol], c.original_price, [self.config getCurrencySymbol], c.paid_price]];
+            
+            
+            NSString *pstr = [NSString stringWithFormat:@"%@%0.2f", [self.config getCurrencySymbol],c.original_price];
+            //NSString *s = [NSString stringWithFormat:@"$%0.2f", sale_price];
+            [attributeString addAttribute:NSStrikethroughStyleAttributeName value:[NSNumber numberWithInt:1] range:(NSRange){0,[pstr length]}];
+            
+            UIColor *priceColor = [UIColor colorWithRed:61/255.0 green:61/255.0 blue:61/255.0 alpha:1];
+            
+            UIColor *saleColor = [UIColor colorWithRed:204/255.0 green:76/255.0 blue:70/255.0 alpha:1];
+            
+            
+            [attributeString addAttribute:NSForegroundColorAttributeName value:(id)priceColor range:NSMakeRange(0, [pstr length])];
+            [attributeString addAttribute:NSForegroundColorAttributeName value:(id)saleColor range:NSMakeRange([pstr length], [attributeString length]-[pstr length])];
+            [attributeString addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:11] range:NSMakeRange(0, [attributeString length])];
+            
+            
+            price.text = @"";
+            price.attributedText = attributeString;
+        }
+        
+        
         [cart addSubview:price];
-        
-        
         [productView addSubview:cart];
+        
+        
         CGRect frame = productView.frame;
         frame.size.height = cart.frame.origin.y+cart.frame.size.height;
         productView.frame = frame;
@@ -247,11 +273,12 @@
     subtotaltitle.text = [self.config localisedString:@"Order Subtotal"];
     [subtotalView addSubview:subtotaltitle];
     
+    
     UILabel *subtotalprice = [[UILabel alloc] initWithFrame:CGRectMake(subtotalView.frame.size.width-150, 0, 140, 35)];
     subtotalprice.font = [UIFont systemFontOfSize:14];
     subtotalprice.textColor = [UIColor colorWithRed:41.0/255.0 green:39.0/255.0 blue:39.0/255.0 alpha:1];
     subtotalprice.text = [NSString stringWithFormat:@"%@%0.2f",[self.config getCurrencySymbol], self.order.total_product];
-     subtotalprice.textAlignment = NSTextAlignmentRight;
+    subtotalprice.textAlignment = NSTextAlignmentRight;
     subtotalprice.font = [UIFont systemFontOfSize:15];
     [subtotalView addSubview:subtotalprice];
     
