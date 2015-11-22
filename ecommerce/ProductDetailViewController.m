@@ -1714,27 +1714,36 @@ const int ADD_TO_CART = 0;
 
 
 -(void)update_price:(ProductVar *)var{
-    price.hidden = NO;
-    sale_ori.hidden = YES;
-    sale_sale.hidden = YES;
+    UILabel *exprice = price;
+    exprice.textAlignment=NSTextAlignmentLeft;
+    exprice.text = [NSString stringWithFormat:@"%@%0.2f",[self.config getCurrencySymbol], var.price];
     
     
-    price.text =[NSString stringWithFormat:@"%@%0.2f",[self.config getCurrencySymbol],var.price];
     
-    if (var.sale_price > 0 && var.sale_price < var.price){
+    
+    if (var.sale_price > 0 && var.price > var.sale_price){
+        //frame = CGRectMake(0, image.frame.size.width*1.533+45, image.frame.size.width/2, 10);
+        //exprice.frame = frame;
+        exprice.adjustsFontSizeToFitWidth = YES;
+        NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%0.2f  %@%0.2f",[self.config getCurrencySymbol], var.price, [self.config getCurrencySymbol], var.sale_price]];
         
         
-        NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%0.2f",[self.config getCurrencySymbol],var.price]];
-        [attributeString addAttribute:NSStrikethroughStyleAttributeName
-                                value:[NSNumber numberWithInt:1]
-                                range:(NSRange){0,[attributeString length]}];
-        price.text = @"";
-        price.hidden = YES;
-        sale_ori.attributedText = attributeString;
-        sale_ori.hidden = NO;
+        NSString *pstr = [NSString stringWithFormat:@"%@%0.2f", [self.config getCurrencySymbol],var.price];
+        //NSString *s = [NSString stringWithFormat:@"$%0.2f", sale_price];
+        [attributeString addAttribute:NSStrikethroughStyleAttributeName value:[NSNumber numberWithInt:1] range:(NSRange){0,[pstr length]}];
         
-        sale_sale.text = [NSString stringWithFormat:@"%@%0.2f",[self.config getCurrencySymbol],var.sale_price];
-        sale_sale.hidden = NO;
+        UIColor *priceColor = [UIColor colorWithRed:61/255.0 green:61/255.0 blue:61/255.0 alpha:1];
+        
+        UIColor *saleColor = [UIColor colorWithRed:204/255.0 green:76/255.0 blue:70/255.0 alpha:1];
+        
+        
+        [attributeString addAttribute:NSForegroundColorAttributeName value:(id)priceColor range:NSMakeRange(0, [pstr length])];
+        [attributeString addAttribute:NSFontAttributeName value:(id)[UIFont systemFontOfSize:20] range:NSMakeRange(0, [pstr length])];
+        [attributeString addAttribute:NSForegroundColorAttributeName value:(id)saleColor range:NSMakeRange([pstr length], [attributeString length]-[pstr length])];
+        [attributeString addAttribute:NSFontAttributeName value:(id)[UIFont boldSystemFontOfSize:20] range:NSMakeRange([pstr length], [attributeString length]-[pstr length])];
+        
+        exprice.text = @"";
+        exprice.attributedText = attributeString;
         
     }
     
