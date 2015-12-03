@@ -88,6 +88,7 @@
         for (Cart *c in cart){
             totalweight+= c.weight;
         }
+        
         BOOL found = NO;
         for (ShippingWeight *sw in self.weights){
             if (sw.low <= totalweight && (sw.high > totalweight || sw.high == 0)){

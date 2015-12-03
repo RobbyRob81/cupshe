@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 
-#import "Stripe.h"
+#import <Braintree/Braintree.h>
 
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
@@ -50,7 +50,7 @@
     
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
     {
-       [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
+        [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
     }
     else
     {
@@ -58,7 +58,7 @@
          (UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert)];
     }
     
-    [Stripe setDefaultPublishableKey:@"pk_live_Th8wG3VsSdRxIIu9lPyXjnPB"];
+    
     
     
     //registering APIs
@@ -94,8 +94,8 @@
         }
     }];
     
-   
     
+    [Braintree setReturnURLScheme:@"com.twixxies.cupsheapp.braintree"];
     
     return [[FBSDKApplicationDelegate sharedInstance] application:application
                                     didFinishLaunchingWithOptions:launchOptions];
@@ -141,7 +141,6 @@
     [self saveContext];
     
 }
-
 - (void)application:(UIApplication *)application didRegisterUserNotificationSettings:   (UIUserNotificationSettings *)notificationSettings
 {
     //register to receive notifications
@@ -170,6 +169,7 @@
 }
 
 
+
 - (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
 {
     NSLog(@"Failed to get token, error: %@", error);
@@ -185,7 +185,11 @@
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
     
-    if ([[Branch getInstance] handleDeepLink:url]) {
+    if ([Braintree handleOpenURL:url sourceApplication:sourceApplication]){
+        return YES;
+        
+    }
+    else if ([[Branch getInstance] handleDeepLink:url]) {
         
         return YES;
     } else {

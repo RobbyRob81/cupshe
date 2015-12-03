@@ -78,7 +78,9 @@
         BOOL found = false;
         
         ShippingCountry *all = nil;
+        
         for (ShippingCountry *sc in self.config.shipping){
+            NSLog(@"%@ %@", sc.code, self.config.country);
             if ([sc.code isEqualToString:self.config.country]){
                 shipping = sc.shippings;
                 found = true;

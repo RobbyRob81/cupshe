@@ -12,7 +12,7 @@
 #import "CreditCardType.h"
 #import "Config.h"
 #import "PaymentMethod.h"
-
+#import <Braintree/Braintree.h>
 
 @interface PaymentMethodViewController : UIViewController{
     UIActivityIndicatorView *indicator;
@@ -119,7 +119,7 @@
 
 #import "PayPalMobile.h"
 
-@interface AccountPaymentViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UIAlertViewDelegate, PayPalFuturePaymentDelegate>{
+@interface AccountPaymentViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UIAlertViewDelegate, PayPalFuturePaymentDelegate, BTPaymentMethodCreationDelegate>{
     UIActivityIndicatorView *indicator;
     UITableView *table;
     UITextView *textview;

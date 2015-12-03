@@ -4,35 +4,65 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Pods-Ecommerce-PaymentKit.xcscheme</key>
+		<key>Braintree-Braintree-Drop-In-Localization.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>1</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
-		<key>Pods-Ecommerce-Stripe.xcscheme</key>
+		<key>Braintree-Braintree-UI-Localization.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>2</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
-		<key>Pods-Ecommerce.xcscheme</key>
+		<key>Braintree.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>0</integer>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>PaymentKit.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Stripe.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>9542F5B3BBA342CA91830833</key>
+		<key>0216339234056F76B51ADD1F615F7714</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9BB6E465F3D24946836627E4</key>
+		<key>67888BA0CE2896391466EA50C1C56711</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A6D4AD4162C0479EA9846DF8</key>
+		<key>686217A859C946F4F6041FB8448AB64F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8CF024DA34B6663C097B35D6354ED9E9</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F0F4B09D8D45F688830BF58CFF39DA25</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F2861B2DF62E3EA79F345FD260738461</key>
 		<dict>
 			<key>primary</key>
 			<true/>

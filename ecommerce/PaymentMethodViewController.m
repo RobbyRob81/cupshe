@@ -1390,7 +1390,34 @@ const int CARD_NO_CHANGE = 0;
         }
         
     }
-    
+    if ([self.appmethod.payment_gateway isEqualToString:@"Braintree"]){
+        if (isnew){
+            [self save_braintree:cutomserid];
+            return;
+        } else {
+            if (changed == CARD_NO_CHANGE) {
+                [self.navigationController popViewControllerAnimated:YES];
+                return;
+            } else if (changed == CARD_INFO_UNCHANGED){
+                self.usermethod.billingfirstname = fn.text;
+                self.usermethod.billinglastname = ln.text;
+                self.usermethod.billingaddress = addr.text;
+                self.usermethod.billingcity = city.text;
+                self.usermethod.billingstate = state.text;
+                self.usermethod.billingzip = zip.text;
+                self.usermethod.billingcountry = [self.config.countrytocode objectForKey:country.text];
+                if (isdefault.isOn) self.usermethod.is_default = YES;
+                else self.usermethod.is_default = NO;
+                
+                [self save_user_method_no_card];
+                return;
+            } else {
+                [self edit_braintree:cutomserid];
+                return;
+            }
+        }
+        
+    }
 }
 
 -(void)save_user_method{
@@ -2050,6 +2077,64 @@ const int CARD_NO_CHANGE = 0;
 }
 
 
+
+//*******************************Braintree
+-(void)save_braintree:(NSString *)customer_id{
+    NSString *ct = self.appmethod.api_token;
+    if (self.appmethod.islive == 0) ct = self.appmethod.sandbox_api_token;
+    Braintree *braintree = [Braintree braintreeWithClientToken:ct];
+    
+    BTClientCardRequest *request = [BTClientCardRequest new];
+    request.number = cardnumber.text;
+    request.expirationMonth = expmonth.text;
+    request.expirationYear = expyear.text;
+    request.cvv = cvc.text;
+    
+    [braintree tokenizeCard:request
+                 completion:^(NSString *nonce, NSError *error) {
+                     // Communicate the nonce to your server, or handle error
+                     if (error != nil){
+                         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[self.config localisedString:@"Fail to save card."] message:@"" delegate:nil cancelButtonTitle:[self.config localisedString:@"Close"] otherButtonTitles: nil];
+                         [alert show];
+                         return;
+                         
+                     } else {
+                         if (self.usermethod == nil) {
+                             self.usermethod = [[UserPaymentMethod alloc] init];
+                             self.usermethod.appmethod = self.appmethod;
+                         }
+                         self.usermethod.payment_token = nonce;
+                         self.usermethod.payment_gateway = self.appmethod.payment_gateway;
+                         self.usermethod.payment_method = self.appmethod.payment_method;
+                         self.usermethod.customer_id = customer_id;
+                         OLCreditCardType cardType = [Luhn typeFromString:cardnumber.text];
+                         if (cardType == OLCreditCardTypeAmex) self.usermethod.cardtype = @"amex";
+                         else if (cardType == OLCreditCardTypeDinersClub) self.usermethod.cardtype = @"dinersclub";
+                         else if (cardType == OLCreditCardTypeDiscover) self.usermethod.cardtype = @"discover";
+                         else if (cardType == OLCreditCardTypeMastercard) self.usermethod.cardtype = @"mastercard";
+                         else if (cardType == OLCreditCardTypeVisa) self.usermethod.cardtype = @"visa";
+                         self.usermethod.last4 = [cardnumber.text substringFromIndex:cardnumber.text.length-4];
+                         self.usermethod.expyear = expyear.text;
+                         self.usermethod.expmonth = expmonth.text;
+                         self.usermethod.billingfirstname = fn.text;
+                         self.usermethod.billinglastname = ln.text;
+                         self.usermethod.billingaddress = addr.text;
+                         self.usermethod.billingcity = city.text;
+                         self.usermethod.billingstate = state.text;
+                         self.usermethod.billingzip = zip.text;
+                         self.usermethod.billingcountry = [self.config.countrytocode objectForKey:country.text];
+                         if (isdefault.isOn) self.usermethod.is_default = YES;
+                         else self.usermethod.is_default = NO;
+                         
+                         [self save_user_method];
+                     }
+                 }];
+    
+}
+
+-(void)edit_braintree:(NSString *)customer_id{
+    
+}
 
 @end
 
@@ -2749,6 +2834,17 @@ const int PAYMENT_ACCOUNT_CHANGED = 1;
             
             
             [self presentViewController:paymentViewController animated:YES completion:nil];
+        } else if ([self.appmethod.payment_gateway isEqualToString:@"Braintree"] && [self.appmethod.payment_method isEqualToString:@"paypal"]){
+            
+            
+            NSString *ct = self.appmethod.api_token;
+            if (self.appmethod.islive == 0) ct = self.appmethod.sandbox_api_token;
+            
+            Braintree *braintree = [Braintree braintreeWithClientToken:ct];
+            BTPaymentProvider *provider = [braintree paymentProviderWithDelegate:self];
+            [provider createPaymentMethod:BTPaymentProviderTypePayPal];
+            
+            
         }
     }
     if (indexPath.section == 2 && indexPath.row == 0){
