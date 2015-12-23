@@ -110,7 +110,7 @@
         [indicator startAnimating];
         [self.view addSubview:indicator];
         
-        NSString *myRequestString = [NSString stringWithFormat:@"app_uuid=%@&user_id=%@&token=%@&address=%@&city=%@&state=%@&zip=%@&country=%@&name=%@&phone=%@&location=%@&currency=%@", self.config.APP_UUID, self.config.user_id, self.config.token, self.config.address, self.config.city, self.config.state, self.config.zip, self.config.country, self.config.name, self.config.phone, self.config.location, self.config.currency];
+        NSString *myRequestString = [NSString stringWithFormat:@"app_uuid=%@&user_id=%@&token=%@&address=%@&city=%@&state=%@&zip=%@&country=%@&firstname=%@&lastname=%@&phone=%@&location=%@&currency=%@", self.config.APP_UUID, self.config.user_id, self.config.token, self.config.address, self.config.city, self.config.state, self.config.zip, self.config.country, self.config.firstname,self.config.lastname, self.config.phone, self.config.location, self.config.currency];
         
         // Create Data from request
         NSData *myRequestData = [NSData dataWithBytes: [myRequestString UTF8String] length: [myRequestString length]];

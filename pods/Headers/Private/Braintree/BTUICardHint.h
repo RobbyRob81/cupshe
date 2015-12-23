@@ -1,1 +1,1 @@
-../../../Braintree/Braintree/UI/Views/Payments Components/BTUICardHint.h
+../../../Braintree/BraintreeUI/Public/BTUICardHint.h

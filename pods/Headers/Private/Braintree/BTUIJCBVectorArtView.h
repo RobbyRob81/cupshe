@@ -1,1 +1,1 @@
-../../../Braintree/Braintree/UI/Views/Vector Art/BTUIJCBVectorArtView.h
+../../../Braintree/BraintreeUI/Views/Vector Art/BTUIJCBVectorArtView.h

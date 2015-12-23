@@ -1,1 +1,1 @@
-../../../Braintree/Braintree/UI/Views/Vector Art/BTUIPayPalWordmarkVectorArtView.h
+../../../Braintree/BraintreeUI/Views/Vector Art/BTUIPayPalWordmarkVectorArtView.h

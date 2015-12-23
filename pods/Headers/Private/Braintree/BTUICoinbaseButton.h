@@ -1,1 +1,1 @@
-../../../Braintree/Braintree/UI/Views/Payments Components/BTUICoinbaseButton.h
+../../../Braintree/BraintreeUI/Public/BTUICoinbaseButton.h

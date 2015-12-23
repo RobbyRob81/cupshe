@@ -1,1 +1,1 @@
-../../../Braintree/Braintree/UI/Views/BTUIViewUtil.h
+../../../Braintree/BraintreeUI/Views/BTUIViewUtil.h

@@ -1,1 +1,1 @@
-../../../Braintree/Braintree/UI/Views/Vector Art/BTUICoinbaseMonogramCardView.h
+../../../Braintree/BraintreeUI/Views/Vector Art/BTUICoinbaseMonogramCardView.h

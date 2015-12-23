@@ -81,7 +81,8 @@
 
 
 @property (nonatomic, strong) PKCard *card;
-@property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSString *firstname;
+@property (nonatomic, strong) NSString *lastname;
 @property (nonatomic, strong) NSString *address;
 @property (nonatomic, strong) NSString *city;
 @property (nonatomic, strong) NSString *state;

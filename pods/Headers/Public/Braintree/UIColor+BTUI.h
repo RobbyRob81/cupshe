@@ -1,1 +1,1 @@
-../../../Braintree/Braintree/UI/Theme/UIColor+BTUI.h
+../../../Braintree/BraintreeUI/Public/UIColor+BTUI.h

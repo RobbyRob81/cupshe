@@ -293,7 +293,9 @@
     
     
     
-    self.config.name = [NSString stringWithFormat:@"%@ %@", fname.text, lname.text];
+    //self.config.name = [NSString stringWithFormat:@"%@ %@", fname.text, lname.text];
+    self.config.firstname = fname.text;
+    self.config.lastname = lname.text;
     self.config.state = state.text;
     self.config.city = city.text;
     self.config.address = address.text;
@@ -309,7 +311,7 @@
 }
 
 -(void)save_address{
-    NSString *myRequestString = [NSString stringWithFormat:@"app_uuid=%@&user_id=%@&access_token=%@&name=%@&address=%@&city=%@&state=%@&country=%@&zip=%@&phone=%@&address_type=%@", self.config.APP_UUID, self.config.user_id, self.config.token, self.config.name, self.config.address, self.config.city, self.config.state, self.config.country, self.config.zip, self.config.phone, @"shipping"];
+    NSString *myRequestString = [NSString stringWithFormat:@"app_uuid=%@&user_id=%@&access_token=%@&firstname=%@&lastname=%@&address=%@&city=%@&state=%@&country=%@&zip=%@&phone=%@&address_type=%@", self.config.APP_UUID, self.config.user_id, self.config.token, self.config.firstname,self.config.lastname, self.config.address, self.config.city, self.config.state, self.config.country, self.config.zip, self.config.phone, @"shipping"];
     
     // Create Data from request
     NSData *myRequestData = [NSData dataWithBytes: [myRequestString UTF8String] length: [myRequestString length]];
@@ -455,33 +457,19 @@
         mid.frame = CGRectMake(self.config.screenWidth/2, 0, 0.5, table.rowHeight);
         mid.backgroundColor = [[UIColor colorWithRed:217/255.0 green:217/255.0 blue:217/255.0 alpha:1] CGColor];
         
-        NSArray *names = [self.config.name componentsSeparatedByString:@" "];
-        
-        NSString *firstname = @"";
-        NSString *lastname = @"";
-        
-        if (names.count > 0) firstname = [names objectAtIndex:0];
-        if (names.count > 1) {
-            NSMutableString *ln = [[NSMutableString alloc] init];
-            for (int i = 1; i < names.count; i++){
-                if (i == 1) [ln appendFormat:@"%@", [names objectAtIndex:i]];
-                else [ln appendFormat:@" %@", [names objectAtIndex:i]];
-            }
-            lastname = [NSString stringWithFormat:@"%@", ln];
-        }
         
         ctitle.text = [self.config localisedString:@"First Name"];
         fname.frame = CGRectMake(20, 30, self.config.screenWidth/2-30, table.rowHeight-30);
         fname.delegate = self;
         fname.textColor = [UIColor darkGrayColor];
-        if (fname.text.length == 0) fname.text = firstname;
+        if (fname.text.length == 0) fname.text = self.config.firstname;
         [cell addSubview:fname];
         
         ctitle2.text = [self.config localisedString:@"Last Name"];
         lname.frame = CGRectMake(self.config.screenWidth/2+20, 30, self.config.screenWidth/2-30, table.rowHeight-30);
         lname.delegate = self;
         lname.textColor = [UIColor darkGrayColor];
-        if (lname.text.length == 0) lname.text = lastname;
+        if (lname.text.length == 0) lname.text = self.config.lastname;
         [cell addSubview:lname];
         
         [cell.layer addSublayer:mid];

@@ -1,1 +1,1 @@
-../../../Braintree/Braintree/UI/Views/Apple Pay/BTMockApplePayPaymentAuthorizationView.h
+../../../Braintree/BraintreeUI/Views/Apple Pay/BTMockApplePayPaymentAuthorizationView.h

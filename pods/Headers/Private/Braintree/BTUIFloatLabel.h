@@ -1,1 +1,1 @@
-../../../Braintree/Braintree/UI/Views/Custom Views/BTUIFloatLabel.h
+../../../Braintree/BraintreeUI/Views/Custom Views/BTUIFloatLabel.h

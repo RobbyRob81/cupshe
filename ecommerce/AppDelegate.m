@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 
-#import <Braintree/Braintree.h>
+#import "BTAppSwitch.h"
 
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
@@ -95,7 +95,7 @@
     }];
     
     
-    [Braintree setReturnURLScheme:@"com.twixxies.cupsheapp.braintree"];
+    [BTAppSwitch setReturnURLScheme:@"com.twixxies.cupsheapp.braintree"];
     
     return [[FBSDKApplicationDelegate sharedInstance] application:application
                                     didFinishLaunchingWithOptions:launchOptions];
@@ -185,7 +185,7 @@
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
     
-    if ([Braintree handleOpenURL:url sourceApplication:sourceApplication]){
+    if ([BTAppSwitch handleOpenURL:url sourceApplication:sourceApplication]){
         return YES;
         
     }

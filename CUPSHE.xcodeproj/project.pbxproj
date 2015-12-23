@@ -243,7 +243,6 @@
 		0C0DE362193510EF00ADD573 /* CartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C0DE360193510EF00ADD573 /* CartViewController.m */; };
 		0C0DE363193510EF00ADD573 /* CartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C0DE361193510EF00ADD573 /* CartViewController.xib */; };
 		0C0DE3661935276100ADD573 /* CartTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C0DE3651935276100ADD573 /* CartTableViewCell.m */; };
-		0C0DE36B19353F1E00ADD573 /* CheckoutViewControllerOld.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C0DE36919353F1E00ADD573 /* CheckoutViewControllerOld.m */; };
 		0C0DE36C19353F1E00ADD573 /* CheckoutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C0DE36A19353F1E00ADD573 /* CheckoutViewController.xib */; };
 		0C0DE3701935590200ADD573 /* AddCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C0DE36E1935590200ADD573 /* AddCardViewController.m */; };
 		0C0DE3711935590200ADD573 /* AddCardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C0DE36F1935590200ADD573 /* AddCardViewController.xib */; };
@@ -302,8 +301,6 @@
 		0C4CEA191AA8ED1C00902BEE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0C4CEA1B1AA8ED1C00902BEE /* Localizable.strings */; };
 		0C4E67D61AD84EC400B6202F /* LanguageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C4E67D41AD84EC400B6202F /* LanguageViewController.m */; };
 		0C4E67D71AD84EC400B6202F /* LanguageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C4E67D51AD84EC400B6202F /* LanguageViewController.xib */; };
-		0C50AF6F19E8C65900851A7D /* CheckoutPaypalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C50AF6D19E8C65900851A7D /* CheckoutPaypalViewController.m */; };
-		0C50AF7019E8C65900851A7D /* CheckoutPaypalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C50AF6E19E8C65900851A7D /* CheckoutPaypalViewController.xib */; };
 		0C59B0961B0FA01C009FEB7A /* NotificationsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C59B0951B0FA01C009FEB7A /* NotificationsViewController.xib */; };
 		0C7366871ADC9AED00909970 /* WidgetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C7366861ADC9AED00909970 /* WidgetView.m */; };
 		0C7815B219677A8A00E31B43 /* ProductVar.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C7815B119677A8A00E31B43 /* ProductVar.m */; };
@@ -323,8 +320,6 @@
 		0C7852381A82D32000EEEFAC /* UIImageView+HighlightedWebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C7852261A82D32000EEEFAC /* UIImageView+HighlightedWebCache.m */; };
 		0C7852391A82D32000EEEFAC /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C7852281A82D32000EEEFAC /* UIImageView+WebCache.m */; };
 		0C78523A1A82D32000EEEFAC /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C78522A1A82D32000EEEFAC /* UIView+WebCacheOperation.m */; };
-		0C79781319DDF7B300EA2CB9 /* BillingAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C79781119DDF7B300EA2CB9 /* BillingAddressViewController.m */; };
-		0C79781419DDF7B300EA2CB9 /* BillingAddressViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C79781219DDF7B300EA2CB9 /* BillingAddressViewController.xib */; };
 		0C7A04D21ADC4B5D00FA18FA /* SocialShareModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C7A04D11ADC4B5D00FA18FA /* SocialShareModule.m */; };
 		0C7A04D41ADC587300FA18FA /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C7A04D31ADC587300FA18FA /* Social.framework */; };
 		0C7DEA8E1AE176D000479506 /* InAppEventModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C7DEA8D1AE176D000479506 /* InAppEventModule.m */; };
@@ -843,8 +838,6 @@
 		0C0DE361193510EF00ADD573 /* CartViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CartViewController.xib; sourceTree = "<group>"; };
 		0C0DE3641935276100ADD573 /* CartTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CartTableViewCell.h; sourceTree = "<group>"; };
 		0C0DE3651935276100ADD573 /* CartTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CartTableViewCell.m; sourceTree = "<group>"; };
-		0C0DE36819353F1E00ADD573 /* CheckoutViewControllerOld.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckoutViewControllerOld.h; sourceTree = "<group>"; };
-		0C0DE36919353F1E00ADD573 /* CheckoutViewControllerOld.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckoutViewControllerOld.m; sourceTree = "<group>"; };
 		0C0DE36A19353F1E00ADD573 /* CheckoutViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CheckoutViewController.xib; sourceTree = "<group>"; };
 		0C0DE36D1935590200ADD573 /* AddCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddCardViewController.h; sourceTree = "<group>"; };
 		0C0DE36E1935590200ADD573 /* AddCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddCardViewController.m; sourceTree = "<group>"; };
@@ -956,9 +949,6 @@
 		0C4E67D31AD84EC400B6202F /* LanguageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LanguageViewController.h; sourceTree = "<group>"; };
 		0C4E67D41AD84EC400B6202F /* LanguageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LanguageViewController.m; sourceTree = "<group>"; };
 		0C4E67D51AD84EC400B6202F /* LanguageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LanguageViewController.xib; sourceTree = "<group>"; };
-		0C50AF6C19E8C65900851A7D /* CheckoutPaypalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckoutPaypalViewController.h; sourceTree = "<group>"; };
-		0C50AF6D19E8C65900851A7D /* CheckoutPaypalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckoutPaypalViewController.m; sourceTree = "<group>"; };
-		0C50AF6E19E8C65900851A7D /* CheckoutPaypalViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CheckoutPaypalViewController.xib; sourceTree = "<group>"; };
 		0C59B0951B0FA01C009FEB7A /* NotificationsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NotificationsViewController.xib; path = ecommerce/NotificationsViewController.xib; sourceTree = SOURCE_ROOT; };
 		0C7366851ADC9AED00909970 /* WidgetView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WidgetView.h; sourceTree = "<group>"; };
 		0C7366861ADC9AED00909970 /* WidgetView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WidgetView.m; sourceTree = "<group>"; };
@@ -1000,9 +990,6 @@
 		0C79780A19DDA88900EA2CB9 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		0C79780C19DDA88F00EA2CB9 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		0C79780E19DDA89400EA2CB9 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
-		0C79781019DDF7B300EA2CB9 /* BillingAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BillingAddressViewController.h; sourceTree = "<group>"; };
-		0C79781119DDF7B300EA2CB9 /* BillingAddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BillingAddressViewController.m; sourceTree = "<group>"; };
-		0C79781219DDF7B300EA2CB9 /* BillingAddressViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BillingAddressViewController.xib; sourceTree = "<group>"; };
 		0C7A04D01ADC4B5D00FA18FA /* SocialShareModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocialShareModule.h; sourceTree = "<group>"; };
 		0C7A04D11ADC4B5D00FA18FA /* SocialShareModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocialShareModule.m; sourceTree = "<group>"; };
 		0C7A04D31ADC587300FA18FA /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
@@ -2020,12 +2007,7 @@
 				050DB35E1B83F707006D05FC /* GuestCheckoutViewController.xib */,
 				055D792E1BABA7F400F7436B /* CheckoutViewController.h */,
 				055D792F1BABA7F400F7436B /* CheckoutViewController.m */,
-				0C0DE36819353F1E00ADD573 /* CheckoutViewControllerOld.h */,
-				0C0DE36919353F1E00ADD573 /* CheckoutViewControllerOld.m */,
 				0C0DE36A19353F1E00ADD573 /* CheckoutViewController.xib */,
-				0C50AF6C19E8C65900851A7D /* CheckoutPaypalViewController.h */,
-				0C50AF6D19E8C65900851A7D /* CheckoutPaypalViewController.m */,
-				0C50AF6E19E8C65900851A7D /* CheckoutPaypalViewController.xib */,
 				055D713A1BA9119C00F7436B /* PaymentMethodViewController.h */,
 				055D713B1BA9119C00F7436B /* PaymentMethodViewController.m */,
 				055D713C1BA9119C00F7436B /* PaymentMethodViewController.xib */,
@@ -2037,9 +2019,6 @@
 				0C0DE3771935667500ADD573 /* ShippingViewController.xib */,
 				0C3840271A8D871700042902 /* AddressInfoTableViewCell.h */,
 				0C3840281A8D871700042902 /* AddressInfoTableViewCell.m */,
-				0C79781019DDF7B300EA2CB9 /* BillingAddressViewController.h */,
-				0C79781119DDF7B300EA2CB9 /* BillingAddressViewController.m */,
-				0C79781219DDF7B300EA2CB9 /* BillingAddressViewController.xib */,
 				0CF577721974AAB300712156 /* ShippingMethodViewController.h */,
 				0CF577731974AAB300712156 /* ShippingMethodViewController.m */,
 				0CF577741974AAB300712156 /* ShippingMethodViewController.xib */,
@@ -2338,7 +2317,6 @@
 				0CB2657A19FF0E610051F1DA /* FontAwesome.ttf in Resources */,
 				05B846D81BA1130900A54FE1 /* SDK License Agreement (10.20.10).pdf in Resources */,
 				0C37F8F41B12BB7000A426F6 /* ProductFavoriteViewController.xib in Resources */,
-				0C79781419DDF7B300EA2CB9 /* BillingAddressViewController.xib in Resources */,
 				0CB2658019FF15550051F1DA /* ionicons.ttf in Resources */,
 				0C4B6CDA19325D8D00EFBD27 /* Images.xcassets in Resources */,
 				0C92153F19340EF9009919AD /* ProductDetailViewController.xib in Resources */,
@@ -2357,7 +2335,6 @@
 				0CCADC5319807D84001EA081 /* ProfileViewController.xib in Resources */,
 				05B846921BA1130900A54FE1 /* CreateTransactionResponse.xml in Resources */,
 				0C444D721B0C1A7B002FDF9F /* 4-Launch.png in Resources */,
-				0C50AF7019E8C65900851A7D /* CheckoutPaypalViewController.xib in Resources */,
 				0C0DE3791935667500ADD573 /* ShippingViewController.xib in Resources */,
 				058CDC561BC5898E00C27560 /* visa.png in Resources */,
 				05B846CB1BA1130900A54FE1 /* TestAccountCaptchaResponse.xml in Resources */,
@@ -2623,9 +2600,7 @@
 				052E87981BEBE6FD0052044C /* DDXMLNode.m in Sources */,
 				05B846A01BA1130900A54FE1 /* GetSettledBatchListRequest.m in Sources */,
 				05B846DC1BA1130900A54FE1 /* NSString+HMAC_MD5.m in Sources */,
-				0C79781319DDF7B300EA2CB9 /* BillingAddressViewController.m in Sources */,
 				05B846D91BA1130900A54FE1 /* NSArray+PerformSelector.m in Sources */,
-				0C0DE36B19353F1E00ADD573 /* CheckoutViewControllerOld.m in Sources */,
 				05B846B31BA1130900A54FE1 /* Messages.m in Sources */,
 				052E879A1BEBE6FD0052044C /* NSData+Base64.m in Sources */,
 				05B846AC1BA1130900A54FE1 /* LineItemType.m in Sources */,
@@ -2642,7 +2617,6 @@
 				052E87C11BEBE6FD0052044C /* USAePayPriceTierArray.m in Sources */,
 				0C31F67E1AE5D5A000501881 /* BranchActivityItemProvider.m in Sources */,
 				0C8E9B7C198A667800750C05 /* ChangeCardViewController.m in Sources */,
-				0C50AF6F19E8C65900851A7D /* CheckoutPaypalViewController.m in Sources */,
 				0C78523A1A82D32000EEEFAC /* UIView+WebCacheOperation.m in Sources */,
 				05B846851BA1130900A54FE1 /* ANetApiResponse.m in Sources */,
 				05B846931BA1130900A54FE1 /* CreditCardMaskedType.m in Sources */,

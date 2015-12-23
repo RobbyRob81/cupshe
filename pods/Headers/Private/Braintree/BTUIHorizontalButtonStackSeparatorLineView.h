@@ -1,1 +1,1 @@
-../../../Braintree/Braintree/UI/Views/Collection Views/BTUIHorizontalButtonStackSeparatorLineView.h
+../../../Braintree/BraintreeUI/Views/Collection Views/BTUIHorizontalButtonStackSeparatorLineView.h

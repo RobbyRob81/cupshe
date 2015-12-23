@@ -1,44 +1,27 @@
 PODS:
-  - Braintree (3.9.6):
-    - Braintree/API (= 3.9.6)
-    - Braintree/Coinbase (= 3.9.6)
-    - Braintree/Drop-In (= 3.9.6)
-    - Braintree/Payments (= 3.9.6)
-    - Braintree/PayPal (= 3.9.6)
-    - Braintree/UI (= 3.9.6)
-    - Braintree/Venmo (= 3.9.6)
-  - Braintree/API (3.9.6)
-  - Braintree/Coinbase (3.9.6):
-    - Braintree/API
-  - Braintree/Drop-In (3.9.6):
-    - Braintree/API
-    - Braintree/Coinbase
-    - Braintree/Payments
-    - Braintree/PayPal
-    - Braintree/UI
-    - Braintree/Venmo
-  - Braintree/Payments (3.9.6):
-    - Braintree/API
-    - Braintree/Coinbase
-    - Braintree/PayPal
-    - Braintree/Venmo
-  - Braintree/PayPal (3.9.6):
-    - Braintree/API
-    - Braintree/UI
-  - Braintree/UI (3.9.6):
-    - Braintree/API
-  - Braintree/Venmo (3.9.6):
-    - Braintree/API
+  - Braintree (4.0.1):
+    - Braintree/Card (= 4.0.1)
+    - Braintree/Core (= 4.0.1)
+    - Braintree/PayPal (= 4.0.1)
+    - Braintree/UI (= 4.0.1)
+  - Braintree/Card (4.0.1):
+    - Braintree/Core
+  - Braintree/Core (4.0.1)
+  - Braintree/PayPal (4.0.1):
+    - Braintree/Core
+  - Braintree/UI (4.0.1):
+    - Braintree/Card
+    - Braintree/Core
   - PaymentKit (1.0.5)
   - Stripe (1.1.4):
     - PaymentKit (~> 1.0.4)
 
 DEPENDENCIES:
-  - Braintree
+  - Braintree (~> 4.0)
   - Stripe
 
 SPEC CHECKSUMS:
-  Braintree: 74f0bd85743c2227147c361cc2c5c9aefe083ae8
+  Braintree: fa4982b359cc831e7d7e8e5587b6fef343648d79
   PaymentKit: 1348e9bf1643830a2dcf6ec0e20046f39d1c115d
   Stripe: de02b8afcbb1447c699acfc31fc91bea423f404a
 

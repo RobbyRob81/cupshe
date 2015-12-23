@@ -1,1 +1,1 @@
-../../../Braintree/Braintree/UI/Views/Custom Views/BTUIFormField_Protected.h
+../../../Braintree/BraintreeUI/Views/Custom Views/BTUIFormField_Protected.h

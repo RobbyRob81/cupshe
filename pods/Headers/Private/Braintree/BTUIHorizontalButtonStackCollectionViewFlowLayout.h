@@ -1,1 +1,1 @@
-../../../Braintree/Braintree/UI/Views/Collection Views/BTUIHorizontalButtonStackCollectionViewFlowLayout.h
+../../../Braintree/BraintreeUI/Views/Collection Views/BTUIHorizontalButtonStackCollectionViewFlowLayout.h

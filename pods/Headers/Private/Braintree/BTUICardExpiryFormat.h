@@ -1,1 +1,1 @@
-../../../Braintree/Braintree/UI/Models/BTUICardExpiryFormat.h
+../../../Braintree/BraintreeUI/Models/BTUICardExpiryFormat.h

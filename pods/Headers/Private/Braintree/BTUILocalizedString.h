@@ -1,1 +1,1 @@
-../../../Braintree/Braintree/UI/Localization/BTUILocalizedString.h
+../../../Braintree/BraintreeUI/Localization/BTUILocalizedString.h

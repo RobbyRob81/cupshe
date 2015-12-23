@@ -1,1 +1,1 @@
-../../../Braintree/Braintree/Drop-In/BTDropInViewController.h
+../../../Braintree/BraintreeUI/Public/BTDropInViewController.h

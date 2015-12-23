@@ -15,7 +15,7 @@
 #import "NSURLConnectionBlock.h"
 #import "LanguageViewController.h"
 #import "Department.h"
-#import "PayPalMobile.h"
+
 #import "Design.h"
 #import "Branch.h"
 #import "AffiliateModule.h"
@@ -566,11 +566,7 @@ const int SHIPPING_TAX = 4;
                 //self.config.payment_method = pay;
             }
             if ([pay isEqualToString:@"Paypal"]){
-                NSString *cid = [dic objectForKey:@"paypal_client_id"];
-                NSString *scid = [dic objectForKey:@"paypal_sandbox_id"];
-                self.config.paypal_live = [[dic objectForKey:@"paypal_live"] intValue];
-                [PayPalMobile initializeWithClientIdsForEnvironments:@{PayPalEnvironmentProduction :cid,
-                                                                       PayPalEnvironmentSandbox : scid}];
+               
                 //self.config.payment_method = pay;
             }
             self.config.app_template = [dic objectForKey:@"app_template"];

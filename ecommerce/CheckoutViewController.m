@@ -63,7 +63,7 @@
     submit_view.userInteractionEnabled = NO;
     submit_middle = [[UILabel alloc] init];
     submit_middle.userInteractionEnabled = NO;
-    submit_middle.text = @"Pay With Paypal";
+    submit_middle.text =[self.config localisedString:@"Submit Order"] ;
     [submit addSubview:submit_view];
     [submit_view addSubview:submit_middle];
     [self.view addSubview:submit];
@@ -176,7 +176,7 @@
     
     if ([title isEqualToString:@"Shipping Address"]){
         
-        if (self.config.name != nil && self.config.name.length &&
+        if (self.config.firstname != nil && self.config.firstname.length && self.config.lastname != nil && self.config.lastname.length &&
             self.config.city != nil && self.config.city.length &&
             self.config.address != nil && self.config.address.length &&
             self.config.state != nil && self.config.state.length &&
@@ -353,7 +353,7 @@
         cell.textLabel.text = [self.config localisedString:@"Shipping Address"];
         cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:18.3f];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        if (self.config.name != nil && self.config.name.length &&
+        if (self.config.firstname != nil && self.config.firstname && self.config.lastname!= nil && self.config.lastname.length &&
             self.config.city != nil && self.config.city.length &&
             self.config.address != nil && self.config.address.length &&
             self.config.state != nil && self.config.state.length &&
@@ -371,7 +371,7 @@
             
             UILabel *addr = [[UILabel alloc] initWithFrame:CGRectMake(15, title.frame.origin.y+title.frame.size.height, self.config.screenWidth-20, 16)];
             addr.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:13.0f];
-            addr.text = self.config.name;
+            addr.text = [NSString stringWithFormat:@"%@ %@", self.config.firstname, self.config.lastname];
             [cell addSubview:addr];
             
             UILabel *addr2 = [[UILabel alloc] initWithFrame:CGRectMake(15, addr.frame.origin.y+addr.frame.size.height, self.config.screenWidth-20, 16)];
@@ -569,7 +569,7 @@
         }
     }
     
-    if (self.config.name == nil || self.config.address == nil || self.config.state == nil || self.config.zip == nil || self.config.city == nil ||  self.config.name.length ==0 || self.config.address.length == 0 || self.config.state.length == 0 || self.config.zip.length == 0 || self.config.city.length == 0){
+    if (self.config.firstname == nil || self.config.lastname == nil || self.config.address == nil || self.config.state == nil || self.config.zip == nil || self.config.city == nil ||  self.config.firstname.length ==0 || self.config.lastname.length == 0 || self.config.address.length == 0 || self.config.state.length == 0 || self.config.zip.length == 0 || self.config.city.length == 0){
         title = [self.config localisedString:@"Shipping address is incomplete"];
         error = YES;
     }
@@ -620,22 +620,13 @@
         return;
     }
     
-    if ([self.config.selected_payment.appmethod.payment_flow isEqualToString:@"in app"]){
-         NSString *myRequestString = [NSString stringWithFormat:@"app_uuid=%@&user_id=%@&access_token=%@&temp_user_id=%@&name=%@&address=%@&city=%@&state=%@&zip=%@&country=%@&phone=%@&save_address=%d&shipping_id=%@&payment_method_id=%@&total_paying=%@&use_store_credit=%d&wholesale_user_id=%@&location=%@&currency=%@&cached_data=%@&is_capture=1", self.config.APP_UUID, uid, self.config.token, tuid, self.config.name, self.config.address, self.config.city, self.config.state, self.config.zip,self.config.country,self.config.phone, self.config.save_address,self.config.chosen_shipping.shipping_id, self.config.selected_payment.payment_method_id,[totalp stringValue], use_credit, wu, self.config.location, self.config.currency, jsonString];
-        
-        if ((self.config.user_id == nil || self.config.user_id == 0 || self.config.user_id.length == 0) && self.config.guest_checkout){
-            myRequestString = [NSString stringWithFormat:@"app_uuid=%@&user_id=%@&access_token=%@&temp_user_id=%@&name=%@&address=%@&city=%@&state=%@&zip=%@&country=%@&phone=%@&save_address=%d&shipping_id=%@&payment_method_id=%@&total_paying=%@&use_store_credit=%d&wholesale_user_id=%@&location=%@&currency=%@&cached_data=%@&payment_gateway=%@&payment_method=%@&payment_customer_id=%@&payment_method_token=%@", self.config.APP_UUID, uid, self.config.token, tuid, self.config.name, self.config.address, self.config.city, self.config.state, self.config.zip,self.config.country,self.config.phone, self.config.save_address,self.config.chosen_shipping.shipping_id, self.config.selected_payment.payment_method_id,[totalp stringValue], use_credit, wu, self.config.location, self.config.currency, jsonString, self.config.selected_payment.payment_gateway, self.config.selected_payment.payment_method, self.config.selected_payment.customer_id, self.config.selected_payment.payment_token];
-        }
-        
-        [self in_app_payment:myRequestString total:totalp currency:self.config.currency];
-        return;
-    }
     
     
-    NSString *myRequestString = [NSString stringWithFormat:@"app_uuid=%@&user_id=%@&access_token=%@&temp_user_id=%@&name=%@&address=%@&city=%@&state=%@&zip=%@&country=%@&phone=%@&save_address=%d&shipping_id=%@&payment_method_id=%@&total_paying=%@&use_store_credit=%d&wholesale_user_id=%@&location=%@&currency=%@&cached_data=%@", self.config.APP_UUID, uid, self.config.token, tuid, self.config.name, self.config.address, self.config.city, self.config.state, self.config.zip,self.config.country,self.config.phone, self.config.save_address,self.config.chosen_shipping.shipping_id, self.config.selected_payment.payment_method_id,[totalp stringValue], use_credit, wu, self.config.location, self.config.currency, jsonString];
+    
+    NSString *myRequestString = [NSString stringWithFormat:@"app_uuid=%@&user_id=%@&access_token=%@&temp_user_id=%@&firstname=%@&lastname=%@&address=%@&city=%@&state=%@&zip=%@&country=%@&phone=%@&save_address=%d&shipping_id=%@&payment_method_id=%@&total_paying=%@&use_store_credit=%d&wholesale_user_id=%@&location=%@&currency=%@&cached_data=%@", self.config.APP_UUID, uid, self.config.token, tuid, self.config.firstname,self.config.lastname, self.config.address, self.config.city, self.config.state, self.config.zip,self.config.country,self.config.phone, self.config.save_address,self.config.chosen_shipping.shipping_id, self.config.selected_payment.payment_method_id,[totalp stringValue], use_credit, wu, self.config.location, self.config.currency, jsonString];
     
     if ((self.config.user_id == nil || self.config.user_id == 0 || self.config.user_id.length == 0) && self.config.guest_checkout){
-        myRequestString = [NSString stringWithFormat:@"app_uuid=%@&user_id=%@&access_token=%@&temp_user_id=%@&name=%@&address=%@&city=%@&state=%@&zip=%@&country=%@&phone=%@&save_address=%d&shipping_id=%@&payment_method_id=%@&total_paying=%@&use_store_credit=%d&wholesale_user_id=%@&location=%@&currency=%@&cached_data=%@&payment_gateway=%@&payment_method=%@&payment_customer_id=%@&payment_method_token=%@", self.config.APP_UUID, uid, self.config.token, tuid, self.config.name, self.config.address, self.config.city, self.config.state, self.config.zip,self.config.country,self.config.phone, self.config.save_address,self.config.chosen_shipping.shipping_id, self.config.selected_payment.payment_method_id,[totalp stringValue], use_credit, wu, self.config.location, self.config.currency, jsonString, self.config.selected_payment.payment_gateway, self.config.selected_payment.payment_method, self.config.selected_payment.customer_id, self.config.selected_payment.payment_token];
+        myRequestString = [NSString stringWithFormat:@"app_uuid=%@&user_id=%@&access_token=%@&temp_user_id=%@&firstname=%@&lastname=%@&address=%@&city=%@&state=%@&zip=%@&country=%@&phone=%@&save_address=%d&shipping_id=%@&payment_method_id=%@&total_paying=%@&use_store_credit=%d&wholesale_user_id=%@&location=%@&currency=%@&cached_data=%@&payment_gateway=%@&payment_method=%@&payment_customer_id=%@&payment_method_token=%@", self.config.APP_UUID, uid, self.config.token, tuid, self.config.firstname,self.config.lastname, self.config.address, self.config.city, self.config.state, self.config.zip,self.config.country,self.config.phone, self.config.save_address,self.config.chosen_shipping.shipping_id, self.config.selected_payment.payment_method_id,[totalp stringValue], use_credit, wu, self.config.location, self.config.currency, jsonString, self.config.selected_payment.payment_gateway, self.config.selected_payment.payment_method, self.config.selected_payment.customer_id, self.config.selected_payment.payment_token];
     }
     
     NSLog(myRequestString);
@@ -703,93 +694,10 @@
     
 }
 
--(void)in_app_payment:(NSString *)myRequestString total:(NSDecimalNumber *)totalp currency:(NSString *)cur{
-    
-
-    
-    
-    
-    
-    
-    
-   
-    
-    if ([self.config.selected_payment.appmethod.payment_gateway isEqualToString:@"Paypal"] && [self.config.selected_payment.appmethod.payment_method isEqualToString:@"paypal"]){
-        
-        [PayPalMobile initializeWithClientIdsForEnvironments:@{PayPalEnvironmentProduction : self.config.selected_payment.appmethod.api_userid,  PayPalEnvironmentSandbox : self.config.selected_payment.appmethod.sandbox_api_userid}];
-        
-        if (self.config.selected_payment.appmethod.islive == 1){
-            [PayPalMobile preconnectWithEnvironment:PayPalEnvironmentProduction];
-        } else {
-            [PayPalMobile preconnectWithEnvironment:PayPalEnvironmentSandbox];
-        }
-        
-        
-        
-        PayPalPayment *payment = [[PayPalPayment alloc] init];
-        
-        // Amount, currency, and description
-        payment.amount = totalp;
-        payment.currencyCode = cur;
-        payment.shortDescription = @"CUPSHE App Purchase";
-        payment.intent = PayPalPaymentIntentOrder;
-        
-        PayPalShippingAddress *sa = [[PayPalShippingAddress alloc] init];
-        sa.recipientName = self.config.name;
-        sa.city = self.config.city;
-        sa.state = self.config.state;
-        sa.postalCode = self.config.zip;
-        sa.countryCode = self.config.country;
-        sa.line1 = self.config.address;
-        payment.shippingAddress = sa; // a previously-created PayPalShippingAddress object
-        
-        // Check whether payment is processable.
-        if (!payment.processable) {
-            // If, for example, the amount was negative or the shortDescription was empty, then
-            // this payment would not be processable. You would want to handle that here.
-        }
-        
-        PayPalConfiguration *pconfig = [[PayPalConfiguration alloc] init];
-        
-        
-        //pconfig.payPalShippingAddressOption = PayPalShippingAddressOptionPayPal;
-        
-        PayPalPaymentViewController *paymentViewController;
-        paymentViewController = [[PayPalPaymentViewController alloc] initWithPayment:payment
-                                                                       configuration:pconfig
-                                                                            delegate:self];
-        
-        // Present the PayPalPaymentViewController.
-        [self presentViewController:paymentViewController animated:YES completion:nil];
-        
-    }
-    
-    
-}
-
-
-- (void)payPalPaymentViewController:(PayPalPaymentViewController *)paymentViewController
-                 didCompletePayment:(PayPalPayment *)completedPayment {
-    // Payment was processed successfully; send to server for verification and fulfillment.
-    
-    NSLog(@"%@", [[completedPayment.confirmation objectForKey:@"response"] objectForKey:@"authorization_id"]);
-    
-    //[self capture_order:[[completedPayment.confirmation objectForKey:@"response"] objectForKey:@"authorization_id"]];
-    // Dismiss the PayPalPaymentViewController.
-    [self dismissViewControllerAnimated:YES completion:nil];
-    
-}
-
-- (void)payPalPaymentDidCancel:(PayPalPaymentViewController *)paymentViewController {
-    // The payment was canceled; dismiss the PayPalPaymentViewController.
-    
-    [indicator stopAnimating];
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
 
 
 
-/*
+
 
 -(void)capture_order:(NSString *)token{
     
@@ -807,7 +715,7 @@
         }
     }
     
-    if (self.config.name == nil || self.config.address == nil || self.config.state == nil || self.config.zip == nil || self.config.city == nil ||  self.config.name.length ==0 || self.config.address.length == 0 || self.config.state.length == 0 || self.config.zip.length == 0 || self.config.city.length == 0){
+    if (self.config.firstname == nil || self.config.lastname==nil || self.config.address == nil || self.config.state == nil || self.config.zip == nil || self.config.city == nil ||  self.config.firstname.length ==0 || self.config.lastname.length == 0 || self.config.address.length == 0 || self.config.state.length == 0 || self.config.zip.length == 0 || self.config.city.length == 0){
         title = [self.config localisedString:@"Shipping address is incomplete"];
         error = YES;
     }
@@ -855,7 +763,7 @@
     
     
     
-    NSString *myRequestString = [NSString stringWithFormat:@"app_uuid=%@&user_id=%@&access_token=%@&temp_user_id=%@&name=%@&address=%@&city=%@&state=%@&zip=%@&country=%@&phone=%@&save_address=%d&shipping_id=%@&payment_method_id=%@&total_paying=%@&use_store_credit=%d&wholesale_user_id=%@&location=%@&currency=%@&cached_data=%@&capture_token=%@&is_capture=1", self.config.APP_UUID, uid, self.config.token, tuid, self.config.name, self.config.address, self.config.city, self.config.state, self.config.zip,self.config.country,self.config.phone, self.config.save_address,self.config.chosen_shipping.shipping_id, self.config.selected_payment.payment_method_id,[totalp stringValue], use_credit, wu, self.config.location, self.config.currency, jsonString, token];
+    NSString *myRequestString = [NSString stringWithFormat:@"app_uuid=%@&user_id=%@&access_token=%@&temp_user_id=%@&firstname=%@&lastname=%@&address=%@&city=%@&state=%@&zip=%@&country=%@&phone=%@&save_address=%d&shipping_id=%@&payment_method_id=%@&total_paying=%@&use_store_credit=%d&wholesale_user_id=%@&location=%@&currency=%@&cached_data=%@&capture_token=%@&is_capture=1", self.config.APP_UUID, uid, self.config.token, tuid, self.config.firstname,self.config.lastname, self.config.address, self.config.city, self.config.state, self.config.zip,self.config.country,self.config.phone, self.config.save_address,self.config.chosen_shipping.shipping_id, self.config.selected_payment.payment_method_id,[totalp stringValue], use_credit, wu, self.config.location, self.config.currency, jsonString, token];
     
     NSLog(myRequestString);
     
@@ -920,7 +828,7 @@
     };
     [connection start];
     
-}*/
+}
 
 
 

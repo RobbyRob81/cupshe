@@ -1,1 +1,1 @@
-../../../Braintree/Braintree/UI/Views/Forms/BTUICardFormView.h
+../../../Braintree/BraintreeUI/Public/BTUICardFormView.h

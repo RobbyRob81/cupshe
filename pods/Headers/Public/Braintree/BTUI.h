@@ -1,1 +1,1 @@
-../../../Braintree/Braintree/UI/Theme/BTUI.h
+../../../Braintree/BraintreeUI/Public/BTUI.h

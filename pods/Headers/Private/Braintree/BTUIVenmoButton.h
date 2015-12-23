@@ -1,1 +1,1 @@
-../../../Braintree/Braintree/UI/Views/Payments Components/BTUIVenmoButton.h
+../../../Braintree/BraintreeUI/Public/BTUIVenmoButton.h

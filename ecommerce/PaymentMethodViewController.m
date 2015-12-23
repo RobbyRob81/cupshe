@@ -532,7 +532,7 @@
 
 -(void)load_payment_method{
     app_payment_method = [[NSMutableArray alloc] init];
-    NSString *myRequestString = [NSString stringWithFormat:@"app_uuid=%@&user_id=%@&access_token=%@", self.config.APP_UUID, self.config.user_id, self.config.token];
+    NSString *myRequestString = [NSString stringWithFormat:@"app_uuid=%@&user_id=%@&access_token=%@&app_version=1", self.config.APP_UUID, self.config.user_id, self.config.token];
     
     // Create Data from request
     NSData *myRequestData = [NSData dataWithBytes: [myRequestString UTF8String] length: [myRequestString length]];
@@ -720,7 +720,8 @@
 
 
 
-
+#import "BTCardClient.h"
+#import "BTCard.h"
 
 
 const int CARD_INFO_CHANGED = 1;
@@ -1412,7 +1413,7 @@ const int CARD_NO_CHANGE = 0;
                 [self save_user_method_no_card];
                 return;
             } else {
-                [self edit_braintree:cutomserid];
+                [self save_braintree:cutomserid];
                 return;
             }
         }
@@ -2082,7 +2083,57 @@ const int CARD_NO_CHANGE = 0;
 -(void)save_braintree:(NSString *)customer_id{
     NSString *ct = self.appmethod.api_token;
     if (self.appmethod.islive == 0) ct = self.appmethod.sandbox_api_token;
-    Braintree *braintree = [Braintree braintreeWithClientToken:ct];
+    
+    
+    BTAPIClient *braintreeClient = [[BTAPIClient alloc] initWithAuthorization:ct];
+    BTCardClient *cardClient = [[BTCardClient alloc] initWithAPIClient:braintreeClient];
+    BTCard *card = [[BTCard alloc] initWithNumber:cardnumber.text
+                                  expirationMonth:expmonth.text
+                                   expirationYear: expyear.text
+                                              cvv:nil];
+    [cardClient tokenizeCard:card completion:^(BTCardNonce *tokenizedCard, NSError *error) {
+                      // Communicate the tokenizedCard.nonce to your server, or handle error
+                      
+        if (error != nil){
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[self.config localisedString:@"Fail to save card."] message:@"" delegate:nil cancelButtonTitle:[self.config localisedString:@"Close"] otherButtonTitles: nil];
+            [alert show];
+            return;
+            
+        } else {
+            if (self.usermethod == nil) {
+                self.usermethod = [[UserPaymentMethod alloc] init];
+                self.usermethod.appmethod = self.appmethod;
+            }
+            self.usermethod.payment_token = tokenizedCard.nonce;
+            self.usermethod.payment_gateway = self.appmethod.payment_gateway;
+            self.usermethod.payment_method = self.appmethod.payment_method;
+            self.usermethod.customer_id = customer_id;
+            OLCreditCardType cardType = [Luhn typeFromString:cardnumber.text];
+            if (cardType == OLCreditCardTypeAmex) self.usermethod.cardtype = @"amex";
+            else if (cardType == OLCreditCardTypeDinersClub) self.usermethod.cardtype = @"dinersclub";
+            else if (cardType == OLCreditCardTypeDiscover) self.usermethod.cardtype = @"discover";
+            else if (cardType == OLCreditCardTypeMastercard) self.usermethod.cardtype = @"mastercard";
+            else if (cardType == OLCreditCardTypeVisa) self.usermethod.cardtype = @"visa";
+            self.usermethod.last4 = [cardnumber.text substringFromIndex:cardnumber.text.length-4];
+            self.usermethod.expyear = expyear.text;
+            self.usermethod.expmonth = expmonth.text;
+            self.usermethod.billingfirstname = fn.text;
+            self.usermethod.billinglastname = ln.text;
+            self.usermethod.billingaddress = addr.text;
+            self.usermethod.billingcity = city.text;
+            self.usermethod.billingstate = state.text;
+            self.usermethod.billingzip = zip.text;
+            self.usermethod.billingcountry = [self.config.countrytocode objectForKey:country.text];
+            if (isdefault.isOn) self.usermethod.is_default = YES;
+            else self.usermethod.is_default = NO;
+            
+            [self save_user_method];
+        }
+        
+    }];
+    
+    
+    /*Braintree *braintree = [Braintree braintreeWithClientToken:ct];
     
     BTClientCardRequest *request = [BTClientCardRequest new];
     request.number = cardnumber.text;
@@ -2128,7 +2179,7 @@ const int CARD_NO_CHANGE = 0;
                          
                          [self save_user_method];
                      }
-                 }];
+                 }];*/
     
 }
 
@@ -2598,8 +2649,8 @@ const int CARD_NO_CHANGE = 0;
 
 
 
-
-
+#import "BTPayPalDriver.h"
+#import "BTPayPalRequest.h"
 
 
 @implementation AccountPaymentViewController
@@ -2805,44 +2856,57 @@ const int PAYMENT_ACCOUNT_CHANGED = 1;
     if (indexPath.section == 0 && indexPath.row == 0){
         if ([self.appmethod.payment_gateway isEqualToString:@"Paypal"] && [self.appmethod.payment_method isEqualToString:@"paypal"]){
             
-            [PayPalMobile initializeWithClientIdsForEnvironments:@{PayPalEnvironmentProduction :self.appmethod.api_userid,
-                                                                   PayPalEnvironmentSandbox : self.appmethod.sandbox_api_userid}];
-            if (self.appmethod.islive == 0) {
-                [PayPalMobile preconnectWithEnvironment:PayPalEnvironmentSandbox];
-            } else {
-                [PayPalMobile preconnectWithEnvironment:PayPalEnvironmentProduction];
-            }
             
-            
-            PayPalConfiguration *_payPalConfiguration = [[PayPalConfiguration alloc] init];
-            
-            // See PayPalConfiguration.h for details and default values.
-            
-            // Minimally, you will need to set three merchant information properties.
-            // These should be the same values that you provided to PayPal when you registered your app.
-            _payPalConfiguration.merchantName = @"Ultramagnetic Omega Supreme";
-            _payPalConfiguration.merchantPrivacyPolicyURL = [NSURL URLWithString:@"https://www.omega.supreme.example/privacy"];
-            _payPalConfiguration.merchantUserAgreementURL = [NSURL URLWithString:@"https://www.omega.supreme.example/user_agreement"];
-            
-            
-            
-            
-            // Update payPalConfig re accepting credit cards.
-            //self.payPalConfig.acceptCreditCards = YES;
-            
-            PayPalFuturePaymentViewController *paymentViewController = [[PayPalFuturePaymentViewController alloc] initWithConfiguration:_payPalConfiguration delegate:self];
-            
-            
-            [self presentViewController:paymentViewController animated:YES completion:nil];
         } else if ([self.appmethod.payment_gateway isEqualToString:@"Braintree"] && [self.appmethod.payment_method isEqualToString:@"paypal"]){
             
             
             NSString *ct = self.appmethod.api_token;
             if (self.appmethod.islive == 0) ct = self.appmethod.sandbox_api_token;
             
-            Braintree *braintree = [Braintree braintreeWithClientToken:ct];
-            BTPaymentProvider *provider = [braintree paymentProviderWithDelegate:self];
-            [provider createPaymentMethod:BTPaymentProviderTypePayPal];
+            
+            
+            BTAPIClient *braintreeClient = [[BTAPIClient alloc] initWithAuthorization:ct];
+            
+            BTPayPalDriver *payPalDriver = [[BTPayPalDriver alloc] initWithAPIClient:braintreeClient];
+            payPalDriver.viewControllerPresentingDelegate = self;
+            payPalDriver.appSwitchDelegate = self; // Optional
+            
+            // Start the Vault flow, or...
+            [payPalDriver authorizeAccountWithCompletion:^(BTPayPalAccountNonce *tokenizedPayPalAccount, NSError *error) {
+                if (error != nil){
+                    NSLog(@"%@",error);
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[self.config localisedString:@"Fail to save card."] message:@"" delegate:nil cancelButtonTitle:[self.config localisedString:@"Close"] otherButtonTitles: nil];
+                    [alert show];
+                    return;
+                    
+                } else {
+                    if (tokenizedPayPalAccount == nil){
+                        //[self dismissViewControllerAnimated:YES completion:nil];
+                        return;
+                    }
+                    if (self.usermethod == nil) {
+                        self.usermethod = [[UserPaymentMethod alloc] init];
+                        self.usermethod.appmethod = self.appmethod;
+                    }
+                    self.usermethod.payment_token = tokenizedPayPalAccount.nonce;
+                    self.usermethod.payment_gateway = self.appmethod.payment_gateway;
+                    self.usermethod.payment_method = self.appmethod.payment_method;
+                    self.usermethod.billingfirstname = tokenizedPayPalAccount.firstName;
+                    self.usermethod.billinglastname = tokenizedPayPalAccount.lastName;
+                    self.usermethod.account_id = tokenizedPayPalAccount.email;
+                    //self.usermethod.customer_id = customer_id;
+                    
+                    if (isdefault.isOn) self.usermethod.is_default = YES;
+                    else self.usermethod.is_default = NO;
+                    
+                    
+                    is_changed = 1;
+                    [tableView reloadData];
+                    
+                    //[self save_user_method];
+                }
+            }];
+           
             
             
         }
@@ -2858,101 +2922,17 @@ const int PAYMENT_ACCOUNT_CHANGED = 1;
 
 
 
-
-- (void)payPalFuturePaymentDidCancel:(PayPalFuturePaymentViewController *)futurePaymentViewController {
-    // User cancelled login. Dismiss the PayPalLoginViewController, breathe deeply.
-    [self dismissViewControllerAnimated:YES completion:nil];
+- (void)paymentDriver:(id)paymentDriver
+requestsPresentationOfViewController:(UIViewController *)viewController {
+    [self presentViewController:viewController animated:YES completion:nil];
 }
 
-- (void)payPalFuturePaymentViewController:(PayPalFuturePaymentViewController *)futurePaymentViewController
-                didAuthorizeFuturePayment:(NSDictionary *)futurePaymentAuthorization {
-    // The user has successfully logged into PayPal, and has consented to future payments.
-    
-    // Your code must now send the authorization response to your server.
-    
-    is_changed = PAYMENT_ACCOUNT_CHANGED;
-    
-    
-    NSString *code = [[futurePaymentAuthorization objectForKey:@"response"] objectForKey:@"code"];
-    
-    
-    //obtain refresh token
-    
-    NSString *myRequestString = [NSString stringWithFormat:@"grant_type=authorization_code&response_type=token&redirect_uri=urn:ietf:wg:oauth:2.0:oob&code=%@", code];
-    
-    NSData *myRequestData = [NSData dataWithBytes: [myRequestString UTF8String] length: [myRequestString length]];
-    
-    // Create Data from request
-    
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL: [NSURL URLWithString: [NSString stringWithFormat:@"https://api.paypal.com/v1/oauth2/token"]]];
-    if (self.appmethod.islive == 0){
-        request = [[NSMutableURLRequest alloc] initWithURL: [NSURL URLWithString: [NSString stringWithFormat:@"https://api.sandbox.paypal.com/v1/oauth2/token"]]];
-    }
-    
-    
-    
-    NSString *authStr = [NSString stringWithFormat:@"%@:%@", self.appmethod.api_userid, self.appmethod.api_secret];
-    if (self.appmethod.islive == 0){
-        authStr = [NSString stringWithFormat:@"%@:%@", self.appmethod.sandbox_api_userid, self.appmethod.sandbox_api_secret];
-    }
-    
-    NSData *authData = [authStr dataUsingEncoding:NSASCIIStringEncoding];
-    NSString *authValue = [NSString stringWithFormat:@"Basic %@", [authData base64EncodedStringWithOptions:0]];
-    NSLog(authValue);
-    [request setValue:authValue forHTTPHeaderField:@"Authorization"];
-    
-    
-    // set Request Type
-    [request setHTTPMethod: @"POST"];
-    // Set content-type
-    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-type"];
-    // Set Request Body
-    [request setHTTPBody: myRequestData];
-    
-    NSURLConnectionBlock *connection = [[NSURLConnectionBlock alloc] initWithRequest:request];
-    connection.completion = ^(id obj, NSError *err) {
-        
-        if (!err) {
-            //It's ok, do domething with the response data (obj)
-            NSMutableData *d = (NSMutableData *)obj;
-            NSString *response = [[NSString alloc] initWithBytes:[d bytes] length:[d length] encoding:NSUTF8StringEncoding];
-            NSLog(@"%@", response);
-            
-            NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:d options:0 error:nil];
-            
-            
-            if (self.usermethod == nil) {
-                self.usermethod = [[UserPaymentMethod alloc] init];
-                self.usermethod.appmethod = self.appmethod;
-            }
-            self.usermethod.payment_gateway = self.appmethod.payment_gateway;
-            self.usermethod.payment_method = self.appmethod.payment_method;
-            self.usermethod.payment_token = [dic objectForKey:@"refresh_token"];
-            self.usermethod.is_default = NO;
-            if (isdefault.isOn) self.usermethod.is_default = YES;
-            
-            
-            [table reloadData];
-            
-            
-            [self dismissViewControllerAnimated:YES completion:nil];
-            
-            
-        } else {
-            //There was an error
-            NSLog(@"%@", err.description);
-        }
-        
-        [indicator stopAnimating];
-        
-    };
-    [connection start];
-    
-    
-    
-    
-    
+// Required
+- (void)paymentDriver:(id)paymentDriver
+requestsDismissalOfViewController:(UIViewController *)viewController {
+    //[self dismissViewControllerAnimated:YES completion:nil];
 }
+
 
 
 

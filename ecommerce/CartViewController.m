@@ -12,7 +12,7 @@
 #import "PKRevealController.h"
 #import "CartTableViewCell.h"
 #import "CheckoutViewController.h"
-#import "CheckoutPaypalViewController.h"
+
 #import "LoginViewController.h"
 #import "IonIcons.h"
 #import "ionicons-codes.h"

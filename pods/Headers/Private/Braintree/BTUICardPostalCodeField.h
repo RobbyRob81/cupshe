@@ -1,1 +1,1 @@
-../../../Braintree/Braintree/UI/Views/Form Fields/BTUICardPostalCodeField.h
+../../../Braintree/BraintreeUI/Views/Form Fields/BTUICardPostalCodeField.h

@@ -1,1 +1,1 @@
-../../../Braintree/Braintree/UI/Views/Custom Views/BTUIThemedView.h
+../../../Braintree/BraintreeUI/Public/BTUIThemedView.h

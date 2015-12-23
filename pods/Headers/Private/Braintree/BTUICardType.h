@@ -1,1 +1,1 @@
-../../../Braintree/Braintree/UI/Models/BTUICardType.h
+../../../Braintree/BraintreeUI/Models/BTUICardType.h

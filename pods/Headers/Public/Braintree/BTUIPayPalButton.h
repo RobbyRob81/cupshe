@@ -1,1 +1,1 @@
-../../../Braintree/Braintree/UI/Views/Payments Components/BTUIPayPalButton.h
+../../../Braintree/BraintreeUI/Public/BTUIPayPalButton.h

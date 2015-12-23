@@ -26,7 +26,7 @@
     self.total_product = [[dic objectForKey:@"total_product"] floatValue];
     self.total_shipping = [[dic objectForKey:@"total_shipping"] floatValue];
     self.total_tax = [[dic objectForKey:@"total_tax"] floatValue];
-    self.status = [[dic objectForKey:@"status"] intValue];
+    self.status = [dic objectForKey:@"status"];
     self.items = [[NSMutableArray alloc] init];
     NSArray *i = [dic objectForKey:@"items"];
     for (NSDictionary *d in i){

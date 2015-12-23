@@ -19,7 +19,7 @@
 #import "IonIcons.h"
 #import "Design.h"
 #import "ShippingViewController.h"
-#import "BillingAddressViewController.h"
+
 #import "Branch.h"
 #import "AffiliateModule.h"
 #import "PromotionViewController.h"
@@ -412,13 +412,6 @@
         sv.is_setting = YES;
         sv.config = self.config;
         [self.navigationController pushViewController:sv animated:YES];
-        }
-    }else if ([title isEqualToString: @"Billing Info"]){
-        if ([self check_login]){
-            BillingAddressViewController *sv = [[BillingAddressViewController alloc] initWithNibName:@"BillingAddressViewController" bundle:nil];
-            sv.is_setting = YES;
-            sv.config = self.config;
-            [self.navigationController pushViewController:sv animated:YES];
         }
     }
     else if ([title isEqualToString: @"Affiliate"]){

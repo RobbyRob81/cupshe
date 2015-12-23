@@ -157,10 +157,10 @@
     UILabel *shippment = [[UILabel alloc] initWithFrame:CGRectMake(ordernum.frame.origin.x, 5, shippingView.frame.size.width, 17)];
     shippment.font = [UIFont systemFontOfSize:13];
     shippment.textColor = [UIColor colorWithRed:41.0/255.0 green:39.0/255.0 blue:39.0/255.0 alpha:1];
-    NSString *status = [self.config localisedString:@"Processing Order"];
-    if (self.order.status == 1) status = [self.config localisedString:@"Shipped"];
-    else if (self.order.status == 2) status = [self.config localisedString:@"Returned"];
-    shippment.text = [NSString stringWithFormat:@"%@: %@", [self.config localisedString:@"Status"], status];
+    //NSString *status = [self.config localisedString:@"Processing Order"];
+    //if (self.order.status ) status = [self.config localisedString:@"Shipped"];
+    //else if (self.order.status == 2) status = [self.config localisedString:@"Returned"];
+    shippment.text = [NSString stringWithFormat:@"%@: %@", [self.config localisedString:@"Status"], self.order.status];
     [shippingView addSubview:shippment];
     
     UILabel *shipdate = [[UILabel alloc] initWithFrame:CGRectMake(shippment.frame.origin.x, 19, shippingView.frame.size.width, 15)];

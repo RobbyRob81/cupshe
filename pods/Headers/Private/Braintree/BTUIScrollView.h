@@ -1,1 +1,1 @@
-../../../Braintree/Braintree/UI/Views/Custom Views/BTUIScrollView.h
+../../../Braintree/BraintreeUI/Views/Custom Views/BTUIScrollView.h

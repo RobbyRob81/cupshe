@@ -1,6 +1,6 @@
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
 HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/Braintree" "${PODS_ROOT}/Headers/Public/PaymentKit" "${PODS_ROOT}/Headers/Public/Stripe"
-LIBRARY_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Braintree/Braintree/PayPal/mSDK"
+LIBRARY_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Braintree/BraintreePayPal/PayPalOneTouchCore"
 OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/Braintree" -isystem "${PODS_ROOT}/Headers/Public/PaymentKit" -isystem "${PODS_ROOT}/Headers/Public/Stripe"
-OTHER_LDFLAGS = $(inherited) -ObjC -l"Braintree" -l"PayPalMobile-BT" -l"PaymentKit" -l"Stripe" -l"c++" -framework "AVFoundation" -framework "Accelerate" -framework "AddressBook" -framework "AudioToolbox" -framework "CoreLocation" -framework "CoreMedia" -framework "Foundation" -framework "MessageUI" -framework "MobileCoreServices" -framework "QuartzCore" -framework "Security" -framework "SystemConfiguration" -framework "UIKit" -weak_framework "PassKit"
+OTHER_LDFLAGS = $(inherited) -ObjC -l"Braintree" -l"PayPalOneTouchCore" -l"PaymentKit" -l"Stripe" -l"c++" -framework "AddressBook" -framework "CoreLocation" -framework "Foundation" -framework "MessageUI" -framework "QuartzCore" -framework "Security" -framework "SystemConfiguration" -framework "UIKit" -weak_framework "Contacts"
 PODS_ROOT = ${SRCROOT}/Pods

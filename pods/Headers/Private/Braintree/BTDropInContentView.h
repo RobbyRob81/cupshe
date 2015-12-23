@@ -1,1 +1,1 @@
-../../../Braintree/Braintree/Drop-In/BTDropInContentView.h
+../../../Braintree/BraintreeUI/Drop-In/BTDropInContentView.h

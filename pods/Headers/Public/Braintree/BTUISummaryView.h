@@ -1,1 +1,1 @@
-../../../Braintree/Braintree/UI/Views/Payments Components/BTUISummaryView.h
+../../../Braintree/BraintreeUI/Public/BTUISummaryView.h

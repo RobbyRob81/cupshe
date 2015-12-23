@@ -1,64 +1,70 @@
 # Braintree v.zero SDK for iOS
 
-Welcome to Braintree's v.zero SDK for iOS. This CocoaPod will help you accept card, PayPal, and Venmo payments in your iOS app.
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+
+Welcome to Braintree's v.zero SDK for iOS. This library will help you accept card and PayPal payments in your iOS app.
+
+**The Braintree iOS SDK requires Xcode 7+ and a Base SDK of iOS 9+**. It permits a Deployment Target of iOS 7.0 or higher.
 
 ![Screenshot of v.zero](screenshot.png)
 
-## Documentation
+## Getting Started
 
-Start with [**'Hello, Client!'**](https://developers.braintreepayments.com/ios/start/hello-client) for instructions on basic setup and usage.
+The current version is 4.0. If you are upgrading from version 3.x, take a look at our [Braintree iOS 3.x to 4.x Migration Guide](Docs/Braintree-4.0-Migration-Guide.md).
 
-Next, read the [**full documentation**](https://developers.braintreepayments.com/ios/sdk/client) for information about integration options, such as Drop-In UI, custom payment button, and credit card tokenization.
+If you're looking to integrate 4.0 and you need to accept payments with Venmo, please contact [Braintree Support](mailto:support@braintreepayments.com) about joining the beta program for Pay with Venmo. Version 3.x of the iOS SDK supports a way to accept payments via Venmo, and support in version 4 is coming soon. 
 
-Finally, [**cocoadocs.org/docsets/Braintree**](http://cocoadocs.org/docsets/Braintree) hosts the complete, up-to-date API documentation generated straight from the header files.
+We recommend using either [CocoaPods](https://github.com/CocoaPods/CocoaPods) or [Carthage](https://github.com/Carthage/Carthage) to integrate the Braintree SDK with your project.
 
-## Demo
+### CocoaPods
 
-A demo app is included in project. To run it, run `pod install` and then open `Braintree.xcworkspace` in Xcode. See the [README](Demos/Braintree-Demo/README.md) for more details.
-
-### Special note on preprocessor macros
-
-Apple Pay is a build option. To include Apple Pay support in your build, use the `Apple-Pay` subspec in your Podfile:
-
+Add to your `Podfile`:
 ```
-pod "Braintree"
-pod "Braintree/Apple-Pay"
+pod 'Braintree'
+```
+Then run `pod install`. This includes everything you need to accept card and PayPal payments. It also includes our Drop-in UI and payment button.
+
+Customize your integration by specifying additional components. For example, add Apple Pay support:
+```
+pod 'Braintree'
+pod 'Braintree/Apple-Pay'
 ```
 
-Then ensure `BT_ENABLE_APPLE_PAY=1` is present in your target's "Preprocessor Macros" settings.
-By default, this should happen automatically if you have a Preprocessor Macro entry for `$(inherited)`.
+You can also strip down your integration to only support credit and debit cards:
+```
+pod 'Braintree/Card'
+```
 
-## Updating for iOS 9
+See our [`Podspec`](Braintree.podspec) for more information.
 
-**Xcode 7 is required.**
+Although we recommend upgrading to the latest version of our SDK, you can choose to remain on the 3.x version, e.g.
+```
+pod 'Braintree', '~> 3.9'
+```
 
-### Supporting Bitcode
+### Carthage
 
-The Braintree SDK works with apps that have [bitcode](https://developer.apple.com/library/prerelease/ios/documentation/IDEs/Conceptual/AppDistributionGuide/AppThinning/AppThinning.html#//apple_ref/doc/uid/TP40012582-CH35-SW3) enabled.
+Add `github "braintree/braintree_ios"` to your `Cartfile`, and [add the frameworks to your project](https://github.com/Carthage/Carthage#adding-frameworks-to-an-application).
 
-However, if your integration uses `BTData` for fraud detection, it does not currently support having bitcode enabled. We are working to add support for this shortly.
+### Static Library
+
+Coming soon: we will be offering a static library of the Braintree SDK.
+
+### Manual Integration
+
+Follow the [manual integration instructions](https://github.braintreeps.com/braintree/braintree-ios/blob/master/Docs/Manual%20Integration.md).
+
+## Supporting iOS 9
+
+Support for iOS 9 requires a few configuration changes with your Xcode project, detailed below.
 
 ### App Transport Security
 
-iOS 9 introduces new security requirements and restrictions. If your app is compiled with iOS 9 SDK, it must comply with Apple's [App Transport Security](https://developer.apple.com/library/prerelease/ios/technotes/App-Transport-Security-Technote/) policy.
+iOS 9 introduces new security requirements and restrictions. If your app is compiled with iOS 9 SDK, it must comply with Apple's [App Transport Security](https://developer.apple.com/library/ios/technotes/App-Transport-Security-Technote/) policy.
 
 The Braintree Gateway domain complies with this policy.
 
-If your app uses `BTData` (Kount), include the following under `NSExceptionDomains`:
-
-```
-  <key>kaptcha.com</key>
-    <dict>
-      <key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
-      <false/>
-      <key>NSIncludesSubdomains</key>
-      <true/>
-      <key>NSTemporaryExceptionMinimumTLSVersion</key>
-      <string>TLSv1.0</string>
-  </dict>
-```
-
-In the future, the SSL certificate will be updated so that your app will not require this exception.
+3D Secure uses third party domains, which may need to be whitelisted for ATS, as part of the authentication process.
 
 ### URL Query Scheme Whitelist
 
@@ -67,19 +73,13 @@ If your app is compiled with iOS 9 SDK and integrates payment options with an ap
 If your app supports payments from PayPal:
 * `com.paypal.ppclient.touch.v1`
 * `com.paypal.ppclient.touch.v2`
-* `org-appextension-feature-password-management`
 
-If your app supports payments from Venmo:
-* `com.venmo.touch.v1`
-
-For example, if your app supports both PayPal and Venmo, you could add the following:
+For example, if your app supports PayPal, you could add the following:
 ```
   <key>LSApplicationQueriesSchemes</key>
   <array>
-    <string>com.venmo.touch.v1</string>
     <string>com.paypal.ppclient.touch.v1</string>
     <string>com.paypal.ppclient.touch.v2</string>
-    <string>org-appextension-feature-password-management</string>
   </array>
 ```
 
@@ -94,9 +94,25 @@ In either case, you still need to implement the deprecated equivalent in order t
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 ```
 
+#### Bitcode
+
+The Braintree SDK works with apps that have [bitcode](https://developer.apple.com/library/ios/documentation/IDEs/Conceptual/AppDistributionGuide/AppThinning/AppThinning.html#//apple_ref/doc/uid/TP40012582-CH35-SW3) enabled.
+
+## Documentation
+
+Start with [**'Hello, Client!'**](https://developers.braintreepayments.com/ios/start/hello-client) for instructions on basic setup and usage.
+
+Next, read the [**full documentation**](https://developers.braintreepayments.com/ios/sdk/client) for information about integration options, such as Drop-In UI, custom payment button, and credit card tokenization.
+
+Finally, [**cocoadocs.org/docsets/Braintree**](http://cocoadocs.org/docsets/Braintree) hosts the complete, up-to-date API documentation generated straight from the header files.
+
+## Demo
+
+A demo app is included in project. To run it, run `pod install` and then open `Braintree.xcworkspace` in Xcode.
+
 ## Help
 
-* [Read the headers](Braintree/Braintree.h)
+* Read the headers
 * [Read the docs](https://developers.braintreepayments.com/ios/sdk/client)
 * Find a bug? [Open an issue](https://github.com/braintree/braintree_ios/issues)
 * Want to contribute? [Check out contributing guidelines](CONTRIBUTING.md) and [submit a pull request](https://help.github.com/articles/creating-a-pull-request).
@@ -113,4 +129,3 @@ Here are a few ways to get in touch:
 ### License
 
 The Braintree v.zero SDK is open source and available under the MIT license. See the [LICENSE](LICENSE) file for more info.
-

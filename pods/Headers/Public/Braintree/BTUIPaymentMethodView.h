@@ -1,1 +1,1 @@
-../../../Braintree/Braintree/UI/Views/Payments Components/BTUIPaymentMethodView.h
+../../../Braintree/BraintreeUI/Public/BTUIPaymentMethodView.h

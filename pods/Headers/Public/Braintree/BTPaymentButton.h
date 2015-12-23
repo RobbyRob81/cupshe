@@ -1,1 +1,1 @@
-../../../Braintree/Braintree/Drop-In/BTPaymentButton.h
+../../../Braintree/BraintreeUI/Public/BTPaymentButton.h

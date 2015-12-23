@@ -25,7 +25,7 @@
 @property float total_product;
 @property float total_shipping;
 @property float total_tax;
-@property int status;
+@property (nonatomic, strong) NSString * status;
 @property (nonatomic, strong) NSMutableArray *items;
 
 -(void)order_from_dictionary:(NSDictionary *)dic;

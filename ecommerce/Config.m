@@ -189,7 +189,8 @@
     self.token = [dic objectForKey:@"access_token"];
     [self save_default];
     self.cartnum = [[dic objectForKey:@"cart_number"] intValue];
-    self.name = [[dic objectForKey:@"name"] isKindOfClass:[NSString class]] ? [dic objectForKey:@"name"] : @"";
+    self.firstname = [[dic objectForKey:@"firstname"] isKindOfClass:[NSString class]] ? [dic objectForKey:@"firstname"] : @"";
+    self.lastname = [[dic objectForKey:@"lastname"] isKindOfClass:[NSString class]] ? [dic objectForKey:@"lastname"] : @"";
     self.address = [[dic objectForKey:@"address"] isKindOfClass:[NSString class]] ? [dic objectForKey:@"address"] : @"";
     self.city = [[dic objectForKey:@"city"] isKindOfClass:[NSString class]]? [dic objectForKey:@"city"] : @"";
     self.state = [[dic objectForKey:@"state"] isKindOfClass:[NSString class]]? [dic objectForKey:@"state"] :@"";
@@ -213,7 +214,8 @@
     self.email = @"";
     self.token = @"";
     [self save_default];
-    self.name =  @"";
+    self.firstname =  @"";
+    self.lastname = @"";
     self.address =  @"";
     self.city =  @"";
     self.state = @"";

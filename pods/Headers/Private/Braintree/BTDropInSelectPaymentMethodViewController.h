@@ -1,1 +1,1 @@
-../../../Braintree/Braintree/Drop-In/BTDropInSelectPaymentMethodViewController.h
+../../../Braintree/BraintreeUI/Drop-In/BTDropInSelectPaymentMethodViewController.h
