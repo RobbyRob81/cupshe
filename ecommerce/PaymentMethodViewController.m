@@ -851,12 +851,25 @@ const int CARD_NO_CHANGE = 0;
     zip = [[UITextField alloc] init];
     country = [[UITextField alloc] init];
     isdefault = [[UISwitch alloc] init];
+    
+    if (self.usermethod != nil){
+        fn.text = self.usermethod.billingfirstname;
+        ln.text = self.usermethod.billinglastname;
+        addr.text = self.usermethod.billingaddress;
+        city.text = self.usermethod.billingcity;
+        state.text = self.usermethod.billingstate;
+        country.text = self.usermethod.billingcountry;
+        zip.text = self.usermethod.billingzip;
+    }
+    
     [isdefault addTarget:self action:@selector(default_switch:) forControlEvents:UIControlEventValueChanged];
     if (self.usermethod.is_default){
         [isdefault setOn:YES];
     } else [isdefault setOn:NO];
     
 }
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -291,6 +291,10 @@
         return;
     }
     
+    BOOL empty = NO;
+    if (self.config.address==nil || self.config.address.length == 0){
+        empty = YES;
+    }
     
     
     //self.config.name = [NSString stringWithFormat:@"%@ %@", fname.text, lname.text];
@@ -303,7 +307,7 @@
     self.config.country = [self.config.countrytocode objectForKey:country.text];
     
     self.config.phone = phone.text;
-    if (save.isOn || self.is_setting ){
+    if (save.isOn || self.is_setting || empty){
         self.config.save_address = 1;
         [self save_address];
     } else self.config.save_address = 0;

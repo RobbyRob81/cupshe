@@ -10,12 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ecommerce/PaymentMethodViewController.m"
-            timestampString = "472529883.376665"
+            timestampString = "473197555.201705"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1465"
-            endingLineNumber = "1465"
-            landmarkName = "-save_user_method"
+            startingLineNumber = "1512"
+            endingLineNumber = "1512"
+            landmarkName = "-save_user_method_no_card"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
