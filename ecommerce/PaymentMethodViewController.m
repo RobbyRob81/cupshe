@@ -130,7 +130,7 @@
 -(void)load_payment_method{
     [NSThread detachNewThreadSelector:@selector(startAnimating) toTarget:self withObject:nil];
     user_payment_method = [[NSMutableArray alloc] init];
-    NSString *myRequestString = [NSString stringWithFormat:@"app_uuid=%@&user_id=%@&access_token=%@", self.config.APP_UUID, self.config.user_id, self.config.token];
+    NSString *myRequestString = [NSString stringWithFormat:@"app_uuid=%@&user_id=%@&access_token=%@&version=1", self.config.APP_UUID, self.config.user_id, self.config.token];
     
     // Create Data from request
     NSData *myRequestData = [NSData dataWithBytes: [myRequestString UTF8String] length: [myRequestString length]];
