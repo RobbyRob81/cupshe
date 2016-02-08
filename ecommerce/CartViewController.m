@@ -145,13 +145,72 @@ const int DELETE_CART = 1;
     
     self.navigationItem.rightBarButtonItem = segmentBarItem;
     
+    UIView *couponView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.config.screenWidth, 40)];
+    CALayer *layer=  [CALayer layer];
+    layer.frame = CGRectMake(0, 40, self.config.screenWidth, 0.5);
+    layer.backgroundColor = [[UIColor colorWithRed:217/255.0 green:217/255.0 blue:217/255.0 alpha:1] CGColor];
+    [couponView.layer addSublayer:layer];
+    [self.view addSubview:couponView];
+    
+    couponTitle = [[UILabel alloc] initWithFrame:CGRectMake(10,5,self.config.screenWidth-80, 30)];
+    couponTitle.textColor = [UIColor colorWithRed:41/255.0 green:39/255.0 blue:39/255.0 alpha:1];
+    couponTitle.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:13];
+    
+    [couponView addSubview:couponTitle];
+    
+    couponChange = [[UIButton alloc] initWithFrame:CGRectMake(couponTitle.frame.size.width+10, 5, 60, 30)];
+    [couponChange setTitle:[self.config localisedString:@"Change"] forState:UIControlStateNormal];
+    [couponChange setTitleColor:[UIColor colorWithRed:41/255.0 green:39/255.0 blue:39/255.0 alpha:1] forState:UIControlStateNormal];
+    couponChange.titleLabel.font =  [UIFont fontWithName:@"HelveticaNeue-Light" size:13];
+    couponChange.layer.borderColor =[[UIColor colorWithRed:217/255.0 green:217/255.0 blue:217/255.0 alpha:1] CGColor];
+    couponChange.layer.borderWidth = 0.5;
+    couponChange.layer.cornerRadius = 5;
+    [couponChange addTarget:self action:@selector(couponChange) forControlEvents:UIControlEventTouchUpInside];
+    [couponView addSubview:couponChange];
+    
+    
+    couponCode = [[UITextField alloc] initWithFrame:CGRectMake(10,5,self.config.screenWidth-90, 30)];
+    couponCode.textColor = [UIColor colorWithRed:41/255.0 green:39/255.0 blue:39/255.0 alpha:1];
+    couponCode.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:13];
+    couponCode.layer.borderColor =[[UIColor colorWithRed:217/255.0 green:217/255.0 blue:217/255.0 alpha:1] CGColor];
+    couponCode.layer.borderWidth = 0.5;
+    couponCode.layer.cornerRadius = 5;
+    couponCode.delegate = self;
+    [couponView addSubview:couponCode];
+    
+    couponSubmit = [[UIButton alloc] initWithFrame:CGRectMake(couponCode.frame.size.width+20, 5, 60, 30)];
+    [couponSubmit setTitle:[self.config localisedString:@"Submit"] forState:UIControlStateNormal];
+    [couponSubmit setTitleColor:[UIColor colorWithRed:41/255.0 green:39/255.0 blue:39/255.0 alpha:1] forState:UIControlStateNormal];
+    couponSubmit.titleLabel.font =  [UIFont fontWithName:@"HelveticaNeue-Light" size:13];
+    couponSubmit.layer.borderColor =[[UIColor colorWithRed:217/255.0 green:217/255.0 blue:217/255.0 alpha:1] CGColor];
+    couponSubmit.layer.borderWidth = 0.5;
+    couponSubmit.layer.cornerRadius = 5;
+    [couponSubmit addTarget:self action:@selector(couponSubmit) forControlEvents:UIControlEventTouchUpInside];
+    [couponView addSubview:couponSubmit];
+    
+    
+    if (self.config.coupon != nil && [self.config.coupon objectForKey:@"code"] != nil){
+        couponTitle.text = [self.config.coupon objectForKey:@"title"];
+        couponTitle.hidden = NO;
+        couponChange.hidden = NO;
+        couponCode.hidden = YES;
+        couponSubmit.hidden = YES;
+    } else {
+        couponCode.placeholder = [self.config localisedString:@"Have a coupon code?"];
+        couponTitle.hidden = YES;
+        couponChange.hidden = YES;
+        couponCode.hidden = NO;
+        couponSubmit.hidden = NO;
+    }
+    
+    
     
     table = [[UITableView alloc] init];
     table.separatorColor = [UIColor colorWithRed:217/255.0 green:217/255.0 blue:217/255.0 alpha:1];
     table.delegate = self;
     table.dataSource = self;
     table.rowHeight = 140;
-    table.frame = CGRectMake(0, 0, self.config.screenWidth, self.config.screenHeight-64-101);
+    table.frame = CGRectMake(0, couponView.frame.size.height, self.config.screenWidth, self.config.screenHeight-64-101-couponView.frame.size.height);
     
     [self.view insertSubview:table belowSubview:indicator];
     
@@ -159,6 +218,10 @@ const int DELETE_CART = 1;
     [self load_cart:0];
     [self load_payment];
     
+}
+-(BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [couponCode resignFirstResponder];
+    return YES;
 }
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
@@ -291,8 +354,11 @@ const int DELETE_CART = 1;
     if (self.config.user_id != nil && ![self.config.user_id isEqualToString:@"0"] && self.config.user_id.length > 0 ) {
             NSString *wu = self.config.wholesale.wholesale_user_id;
             if (wu == nil) wu = @"";
+        
+        NSString *coupCode =couponCode.text;
+        if (coupCode == nil) coupCode = @"";
     
-            NSString *myRequestString = [NSString stringWithFormat:@"app_uuid=%@&user_id=%@&access_token=%@&device_token=%@&wholesale_user_id=%@&start=%d&location=%@&currency=%@", self.config.APP_UUID, self.config.user_id, self.config.token,self.config.device_token, wu, start, self.config.location, self.config.currency];
+            NSString *myRequestString = [NSString stringWithFormat:@"app_uuid=%@&user_id=%@&access_token=%@&device_token=%@&wholesale_user_id=%@&start=%d&location=%@&currency=%@&coupon=%@", self.config.APP_UUID, self.config.user_id, self.config.token,self.config.device_token, wu, start, self.config.location, self.config.currency, coupCode];
     
             NSLog(@"%@", myRequestString);
             // Create Data from request
@@ -319,7 +385,10 @@ const int DELETE_CART = 1;
         
         NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
         
-        NSString *myRequestString = [NSString stringWithFormat:@"app_uuid=%@&device_token=%@&location=%@&currency=%@&cached_cart=%@", self.config.APP_UUID, self.config.device_token, self.config.location, self.config.currency, jsonString];
+        NSString *coupCode =[self.config.coupon objectForKey:@"code"];
+        if (coupCode == nil) coupCode = @"";
+        
+        NSString *myRequestString = [NSString stringWithFormat:@"app_uuid=%@&device_token=%@&location=%@&currency=%@&cached_cart=%@&coupon=%@", self.config.APP_UUID, self.config.device_token, self.config.location, self.config.currency, jsonString,coupCode];
         
         NSLog(@"%@", myRequestString);
         // Create Data from request
@@ -705,6 +774,18 @@ const int DELETE_CART = 1;
 }
 
 
+-(void)couponChange{
+    couponChange.hidden = YES;
+    couponTitle.hidden = YES;
+    couponSubmit.hidden = NO;
+    couponCode.hidden = NO;
+    [couponCode becomeFirstResponder];
+}
+
+-(void)couponSubmit{
+    [couponCode resignFirstResponder];
+    [self load_cart:0];
+}
 
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response{
@@ -758,6 +839,20 @@ const int DELETE_CART = 1;
                 [p cart_from_dictionary:d];
                 [self.config.cart addObject:p];
             }
+            if ([[dic objectForKey:@"coupon"] class]!= [NSNull class]){
+                
+                if ([[[dic objectForKey:@"coupon"] objectForKey:@"code"] class] == [NSNull class]){
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Coupon is invalid" message:@"" delegate:self cancelButtonTitle:[self.config localisedString:@"Close"] otherButtonTitles: nil];
+                    [alert show];
+                } else {
+                    couponTitle.text =[[dic objectForKey:@"coupon"] objectForKey:@"title"];
+                    self.config.coupon = [dic objectForKey:@"coupon"];
+                    couponChange.hidden = NO;
+                    couponTitle.hidden = NO;
+                    couponSubmit.hidden = YES;
+                    couponCode.hidden = YES;
+                }
+            }
             if (self.config.cart.count > 0){
                 checkout.enabled = YES;
                 checkout.alpha = 1;
@@ -793,7 +888,7 @@ const int DELETE_CART = 1;
         
     }
     @catch (NSException *exception) {
-        //NSLog(exception.description);
+        NSLog(exception.description);
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[self.config localisedString:@"Failed to load cart."] message:@"" delegate:nil cancelButtonTitle:[self.config localisedString:@"Close"] otherButtonTitles: nil];
         [alert show];
         

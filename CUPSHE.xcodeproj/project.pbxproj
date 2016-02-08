@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		013AACFC6AEE4665A069E33F /* libPods-Ecommerce.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 48CA2B5C92FF41EE8345AEE0 /* libPods-Ecommerce.a */; };
 		05086DCB1BAF9B8A003642BC /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C7B0A921B0D4EED0007FF2B /* FBSDKCoreKit.framework */; };
 		05086DCC1BAF9B8A003642BC /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C7B0A931B0D4EED0007FF2B /* FBSDKLoginKit.framework */; };
 		05086DCD1BAF9B8A003642BC /* FBSDKMessengerShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C7B0A941B0D4EED0007FF2B /* FBSDKMessengerShareKit.framework */; };
@@ -15,6 +14,8 @@
 		050DB3271B839CD4006D05FC /* CachedDataModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 050DB3261B839CD4006D05FC /* CachedDataModule.m */; };
 		050DB35F1B83F707006D05FC /* GuestCheckoutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 050DB35D1B83F707006D05FC /* GuestCheckoutViewController.m */; };
 		050DB3601B83F707006D05FC /* GuestCheckoutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 050DB35E1B83F707006D05FC /* GuestCheckoutViewController.xib */; };
+		0523AFBA1C35C35400655168 /* libStripe.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0523AFB91C35C35400655168 /* libStripe.a */; };
+		0523AFBC1C35C38800655168 /* libPaymentKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0523AFBB1C35C38800655168 /* libPaymentKit.a */; };
 		052E87941BEBE6FD0052044C /* DDXMLElementAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 052E86FE1BEBE6FC0052044C /* DDXMLElementAdditions.m */; };
 		052E87951BEBE6FD0052044C /* NSString+DDXML.m in Sources */ = {isa = PBXBuildFile; fileRef = 052E87011BEBE6FC0052044C /* NSString+DDXML.m */; };
 		052E87961BEBE6FD0052044C /* DDXMLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 052E87041BEBE6FC0052044C /* DDXMLDocument.m */; };
@@ -401,6 +402,8 @@
 		050DB35C1B83F707006D05FC /* GuestCheckoutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GuestCheckoutViewController.h; path = ecommerce/GuestCheckoutViewController.h; sourceTree = SOURCE_ROOT; };
 		050DB35D1B83F707006D05FC /* GuestCheckoutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GuestCheckoutViewController.m; path = ecommerce/GuestCheckoutViewController.m; sourceTree = SOURCE_ROOT; };
 		050DB35E1B83F707006D05FC /* GuestCheckoutViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = GuestCheckoutViewController.xib; path = ecommerce/GuestCheckoutViewController.xib; sourceTree = SOURCE_ROOT; };
+		0523AFB91C35C35400655168 /* libStripe.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libStripe.a; path = "Pods/../build/Debug-iphoneos/libStripe.a"; sourceTree = "<group>"; };
+		0523AFBB1C35C38800655168 /* libPaymentKit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPaymentKit.a; path = "Pods/../build/Debug-iphoneos/libPaymentKit.a"; sourceTree = "<group>"; };
 		052E86FD1BEBE6FC0052044C /* DDXMLElementAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLElementAdditions.h; sourceTree = "<group>"; };
 		052E86FE1BEBE6FC0052044C /* DDXMLElementAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDXMLElementAdditions.m; sourceTree = "<group>"; };
 		052E87001BEBE6FC0052044C /* NSString+DDXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+DDXML.h"; sourceTree = "<group>"; };
@@ -1104,6 +1107,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0523AFBC1C35C38800655168 /* libPaymentKit.a in Frameworks */,
+				0523AFBA1C35C35400655168 /* libStripe.a in Frameworks */,
 				05700CB81C0AC231006F34BA /* libBraintree.a in Frameworks */,
 				05E47DFE1BB84E6200744676 /* SafariServices.framework in Frameworks */,
 				05E47DFA1BB84E5C00744676 /* Accelerate.framework in Frameworks */,
@@ -1126,7 +1131,6 @@
 				0C4B6CC019325D8D00EFBD27 /* CoreData.framework in Frameworks */,
 				0C4B6CBE19325D8D00EFBD27 /* UIKit.framework in Frameworks */,
 				0C4B6CBA19325D8D00EFBD27 /* Foundation.framework in Frameworks */,
-				013AACFC6AEE4665A069E33F /* libPods-Ecommerce.a in Frameworks */,
 				C6B17682365BDCE1C0CF1F7D /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1915,6 +1919,8 @@
 		0C4B6CB819325D8D00EFBD27 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0523AFBB1C35C38800655168 /* libPaymentKit.a */,
+				0523AFB91C35C35400655168 /* libStripe.a */,
 				05700CB71C0AC231006F34BA /* libBraintree.a */,
 				05E47DFD1BB84E6200744676 /* SafariServices.framework */,
 				05E47DF91BB84E5C00744676 /* Accelerate.framework */,
@@ -2243,7 +2249,7 @@
 				ORGANIZATIONNAME = Twixxies;
 				TargetAttributes = {
 					0C4B6CB519325D8D00EFBD27 = {
-						DevelopmentTeam = AEVEWU75QC;
+						DevelopmentTeam = 4LW7EC66TK;
 					};
 				};
 			};
@@ -2829,7 +2835,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Nanjing Huating Trading Co. Ltd. (4LW7EC66TK)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Nanjing Huating Trading Co. Ltd. (4LW7EC66TK)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2877,7 +2883,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Nanjing Huating Trading Co. Ltd. (4LW7EC66TK)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Nanjing Huating Trading Co. Ltd. (4LW7EC66TK)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (

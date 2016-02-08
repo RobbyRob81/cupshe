@@ -84,6 +84,7 @@
         }
         
     } else if ([self.type isEqualToString:@"2"]){
+        
         float totalweight = 0;
         for (Cart *c in cart){
             totalweight+= c.weight;
@@ -99,7 +100,7 @@
                 
             }
         }
-        return  [NSDecimalNumber decimalNumberWithString:@"0"];
+        return  nil;
         
     } else {
         return nil;

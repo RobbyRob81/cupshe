@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Config.h"
 #import "Cart.h"
-@interface CartViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>{
+@interface CartViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>{
     
     IBOutlet UITableView *table;
 
@@ -25,6 +25,14 @@
     UILabel *totalPrice;
     UILabel *totalSave;
     UILabel *seg;
+    
+    
+    UITextField *couponCode;
+    UILabel *couponTitle;
+    UIButton *couponSubmit;
+    UIButton *couponChange;
+    
+    
     
     NSMutableArray *receivedData;
     NSMutableArray *cart;

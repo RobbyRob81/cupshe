@@ -227,6 +227,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     [self calculate_tax];
     shipping = [self.config.chosen_shipping claculate_shipping:self.config.cart totalprice:self.total];
+    //if (shipping == nil) shipping = [NSDecimalNumber decimalNumberWithString:@"0"];
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     UILabel *price = [[UILabel alloc] init];
@@ -573,10 +574,17 @@
         title = [self.config localisedString:@"Shipping address is incomplete"];
         error = YES;
     }
+    
+    
     if (self.config.shipping.count > 0 && self.config.chosen_shipping == nil ){
         title = [self.config localisedString:@"Shipping method is required"];
         error = YES;
     } else shipping = [self.config.chosen_shipping claculate_shipping:self.config.cart totalprice:self.total];
+    
+    if (shipping == nil){
+        title = [self.config localisedString:@"Shipping method is required"];
+        error  = YES;
+    }
     
     if (error){
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:@"" delegate:nil cancelButtonTitle:[self.config localisedString:@"Close"] otherButtonTitles: nil];
@@ -620,13 +628,14 @@
         return;
     }
     
+    NSString *coupCode =@"";
+    if (self.config.coupon != nil && [self.config.coupon objectForKey:@"code"] != nil) coupCode = [self.config.coupon objectForKey:@"code"];
     
     
-    
-    NSString *myRequestString = [NSString stringWithFormat:@"app_uuid=%@&user_id=%@&access_token=%@&temp_user_id=%@&firstname=%@&lastname=%@&address=%@&city=%@&state=%@&zip=%@&country=%@&phone=%@&save_address=%d&shipping_id=%@&payment_method_id=%@&total_paying=%@&use_store_credit=%d&wholesale_user_id=%@&location=%@&currency=%@&cached_data=%@", self.config.APP_UUID, uid, self.config.token, tuid, self.config.firstname,self.config.lastname, self.config.address, self.config.city, self.config.state, self.config.zip,self.config.country,self.config.phone, self.config.save_address,self.config.chosen_shipping.shipping_id, self.config.selected_payment.payment_method_id,[totalp stringValue], use_credit, wu, self.config.location, self.config.currency, jsonString];
+    NSString *myRequestString = [NSString stringWithFormat:@"app_uuid=%@&user_id=%@&access_token=%@&temp_user_id=%@&firstname=%@&lastname=%@&address=%@&city=%@&state=%@&zip=%@&country=%@&phone=%@&save_address=%d&shipping_id=%@&payment_method_id=%@&total_paying=%@&use_store_credit=%d&wholesale_user_id=%@&location=%@&currency=%@&cached_data=%@&coupon=%@", self.config.APP_UUID, uid, self.config.token, tuid, self.config.firstname,self.config.lastname, self.config.address, self.config.city, self.config.state, self.config.zip,self.config.country,self.config.phone, self.config.save_address,self.config.chosen_shipping.shipping_id, self.config.selected_payment.payment_method_id,[totalp stringValue], use_credit, wu, self.config.location, self.config.currency, jsonString, coupCode];
     
     if ((self.config.user_id == nil || self.config.user_id == 0 || self.config.user_id.length == 0) && self.config.guest_checkout){
-        myRequestString = [NSString stringWithFormat:@"app_uuid=%@&user_id=%@&access_token=%@&temp_user_id=%@&firstname=%@&lastname=%@&address=%@&city=%@&state=%@&zip=%@&country=%@&phone=%@&save_address=%d&shipping_id=%@&payment_method_id=%@&total_paying=%@&use_store_credit=%d&wholesale_user_id=%@&location=%@&currency=%@&cached_data=%@&payment_gateway=%@&payment_method=%@&payment_customer_id=%@&payment_method_token=%@", self.config.APP_UUID, uid, self.config.token, tuid, self.config.firstname,self.config.lastname, self.config.address, self.config.city, self.config.state, self.config.zip,self.config.country,self.config.phone, self.config.save_address,self.config.chosen_shipping.shipping_id, self.config.selected_payment.payment_method_id,[totalp stringValue], use_credit, wu, self.config.location, self.config.currency, jsonString, self.config.selected_payment.payment_gateway, self.config.selected_payment.payment_method, self.config.selected_payment.customer_id, self.config.selected_payment.payment_token];
+        myRequestString = [NSString stringWithFormat:@"app_uuid=%@&user_id=%@&access_token=%@&temp_user_id=%@&firstname=%@&lastname=%@&address=%@&city=%@&state=%@&zip=%@&country=%@&phone=%@&save_address=%d&shipping_id=%@&payment_method_id=%@&total_paying=%@&use_store_credit=%d&wholesale_user_id=%@&location=%@&currency=%@&cached_data=%@&payment_gateway=%@&payment_method=%@&payment_customer_id=%@&payment_method_token=%@&coupon=%@", self.config.APP_UUID, uid, self.config.token, tuid, self.config.firstname,self.config.lastname, self.config.address, self.config.city, self.config.state, self.config.zip,self.config.country,self.config.phone, self.config.save_address,self.config.chosen_shipping.shipping_id, self.config.selected_payment.payment_method_id,[totalp stringValue], use_credit, wu, self.config.location, self.config.currency, jsonString, self.config.selected_payment.payment_gateway, self.config.selected_payment.payment_method, self.config.selected_payment.customer_id, self.config.selected_payment.payment_token,coupCode];
     }
     
     NSLog(myRequestString);

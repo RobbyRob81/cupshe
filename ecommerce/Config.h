@@ -115,6 +115,7 @@
 @property UIView *temp_cartnum_view;
 @property NSDecimalNumber *store_credit;
 @property BOOL use_credit;
+@property (nonatomic, strong) NSDictionary *coupon;
 
 //app info
 @property (nonatomic, strong) NSMutableArray *shipping;
