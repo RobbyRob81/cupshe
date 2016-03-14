@@ -25,6 +25,10 @@
 #import "USAePayAddress.h"
 //Braintree
 
+//ApplePay
+@import PassKit;
+#import "BraintreeApplePay.h"
+
 @interface PaymentMethodViewController ()
 
 @end
@@ -130,7 +134,7 @@
 -(void)load_payment_method{
     [NSThread detachNewThreadSelector:@selector(startAnimating) toTarget:self withObject:nil];
     user_payment_method = [[NSMutableArray alloc] init];
-    NSString *myRequestString = [NSString stringWithFormat:@"app_uuid=%@&user_id=%@&access_token=%@&version=1", self.config.APP_UUID, self.config.user_id, self.config.token];
+    NSString *myRequestString = [NSString stringWithFormat:@"app_uuid=%@&user_id=%@&access_token=%@&version=%@", self.config.APP_UUID, self.config.user_id, self.config.token,self.config.app_version];
     
     // Create Data from request
     NSData *myRequestData = [NSData dataWithBytes: [myRequestString UTF8String] length: [myRequestString length]];
@@ -159,7 +163,13 @@
             for (NSDictionary *pay in arr){
                 UserPaymentMethod *upm = [[UserPaymentMethod alloc] init];
                 [upm dictionary_to_method:pay];
-                [user_payment_method addObject:upm];
+                if ([upm.payment_gateway isEqualToString:@"Apple Pay"]){
+                    if ([PKPaymentAuthorizationViewController canMakePaymentsUsingNetworks:@[PKPaymentNetworkVisa, PKPaymentNetworkMasterCard, PKPaymentNetworkAmex]]) {
+                        [user_payment_method addObject:upm];
+                    }
+                } else {
+                    [user_payment_method addObject:upm];
+                }
             }
             [self.config.user_payment_methods removeAllObjects];
             self.config.user_payment_methods = nil;
@@ -532,7 +542,7 @@
 
 -(void)load_payment_method{
     app_payment_method = [[NSMutableArray alloc] init];
-    NSString *myRequestString = [NSString stringWithFormat:@"app_uuid=%@&user_id=%@&access_token=%@&app_version=1", self.config.APP_UUID, self.config.user_id, self.config.token];
+    NSString *myRequestString = [NSString stringWithFormat:@"app_uuid=%@&user_id=%@&access_token=%@&app_version=%@", self.config.APP_UUID, self.config.user_id, self.config.token, self.config.app_version];
     
     // Create Data from request
     NSData *myRequestData = [NSData dataWithBytes: [myRequestString UTF8String] length: [myRequestString length]];
@@ -561,7 +571,13 @@
             for (NSDictionary *pay in arr){
                 AppPaymentMethod *upm = [[AppPaymentMethod alloc] init];
                 [upm dictionary_to_method:pay];
-                [app_payment_method addObject:upm];
+                if ([upm.payment_method isEqualToString:@"apple pay"]){
+                    if ([PKPaymentAuthorizationViewController canMakePaymentsUsingNetworks:@[PKPaymentNetworkVisa, PKPaymentNetworkMasterCard, PKPaymentNetworkAmex]]){
+                        [app_payment_method addObject:upm];
+                    }
+                } else {
+                    [app_payment_method addObject:upm];
+                }
             }
             [self build_payment];
             
@@ -606,6 +622,9 @@
             } else if ([apm.payment_method isEqualToString:@"paypal"]){
                 title = [self.config localisedString:@"Paypal"];
                 icon.text = [NSString fontAwesomeIconStringForIconIdentifier:@"fa-paypal"];
+            } else if ([apm.payment_method isEqualToString:@"apple pay"]){
+                title = [self.config localisedString:@"Apple Pay"];
+                icon.text = [NSString fontAwesomeIconStringForIconIdentifier:@"fa-apple"];
             }
         } else {
             title = apm.payment_method;
@@ -653,6 +672,11 @@
                     cp.allusermethods = self.allusermethods;
                     cp.parent = self.parent;
                     [self.navigationController pushViewController:cp animated:YES];
+                } else if ([apm.payment_method isEqualToString:@"apple pay"]){
+                    UserPaymentMethod *up = [[UserPaymentMethod alloc] init];
+                    up.payment_method = apm.payment_method;
+                    up.payment_gateway = apm.payment_gateway;
+                    [self save_apple_pay:up];
                 }
             } else {
                 CustomePaymentViewController *cp = [[CustomePaymentViewController alloc] init];
@@ -675,6 +699,76 @@
  // Pass the selected object to the new view controller.
  }
  */
+
+
+-(void)save_apple_pay:(UserPaymentMethod *)usermethod{
+    
+    
+    if ((self.config.user_id == nil || self.config.user_id == 0 || self.config.user_id.length == 0) && self.config.guest_checkout){
+        if (self.config.selected_payment == nil)
+            self.config.selected_payment = usermethod;
+        if (usermethod.payment_method_id == nil || usermethod.payment_method_id.length == 0){
+            usermethod.payment_method_id = [NSString stringWithFormat:@"%f", [[NSDate date] timeIntervalSince1970]];
+            [self.config.user_payment_methods addObject:usermethod];
+        }
+        [self.navigationController popToViewController:self.parent animated:YES];
+        return;
+    }
+    
+    int isdef = 1;
+    NSString *myRequestString = [NSString stringWithFormat:@"app_uuid=%@&user_id=%@&access_token=%@&method_id=%@&payment_gateway=%@&customer_id=%@&payment_token=%@&last4=%@&exp_month=%@&exp_year=%@&payment_method=%@&card_type=%@&account_id=%@&billing_firstname=%@&billing_lastname=%@&billing_address=%@&billing_city=%@&billing_state=%@&billing_zip=%@&billing_country=%@&is_default=%d&is_delete=0&card_changed=0", self.config.APP_UUID, self.config.user_id, self.config.token,usermethod.payment_method_id, usermethod.payment_gateway, usermethod.customer_id, usermethod.payment_token, usermethod.last4, usermethod.expmonth, usermethod.expyear, usermethod.payment_method,usermethod.cardtype, usermethod.account_id, usermethod.billingfirstname, usermethod.billinglastname, usermethod.billingaddress, usermethod.billingcity, usermethod.billingstate, usermethod.billingzip, usermethod.billingcountry,isdef];
+    
+    
+    
+    // Create Data from request
+    NSData *myRequestData = [NSData dataWithBytes: [myRequestString UTF8String] length: [myRequestString length]];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL: [NSURL URLWithString: [NSString stringWithFormat:@"%@%@", self.config.API_ROOT, self.config.API_ADD_EDIT_USER_PAYMENTMETHOD]]];
+    
+    
+    NSLog(@"%@", myRequestString);
+    // set Request Type
+    [request setHTTPMethod: @"POST"];
+    // Set content-type
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"content-type"];
+    // Set Request Body
+    [request setHTTPBody: myRequestData];
+    
+    NSURLConnectionBlock *connection = [[NSURLConnectionBlock alloc] initWithRequest:request];
+    connection.completion = ^(id obj, NSError *err) {
+        
+        if (!err) {
+            //It's ok, do domething with the response data (obj)
+            NSMutableData *d = (NSMutableData *)obj;
+            NSString *response = [[NSString alloc] initWithBytes:[d bytes] length:[d length] encoding:NSUTF8StringEncoding];
+            NSLog(@"%@", response);
+            
+            NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:d options:0 error:nil];
+            
+            
+            if ([dic objectForKey:@"success"]!= nil && ![[dic objectForKey:@"success"] isEqualToString:@"1"]){
+                UIAlertView *alert =[[UIAlertView alloc] initWithTitle:[self.config localisedString:@"Failed to save card"] message:@"" delegate:nil cancelButtonTitle:[self.config localisedString:@"Close"] otherButtonTitles: nil];
+                [alert show];
+                [indicator stopAnimating];
+                return;
+            }
+            
+            if (usermethod.payment_method_id == nil || usermethod.payment_method_id.length == 0) {
+                usermethod.payment_method_id = [dic objectForKey:@"payment_method_id"];
+            }
+            
+            if (self.config.user_payment_methods.count == 0) self.config.selected_payment = usermethod;
+            [self.navigationController popToViewController:self.parent animated:YES];
+            
+        } else {
+            //There was an error
+            NSLog(@"%@", err.description);
+        }
+        
+        [indicator stopAnimating];
+        
+    };
+    [connection start];
+}
 
 -(void)back{
     [self.navigationController popToViewController:self.parent animated:YES];

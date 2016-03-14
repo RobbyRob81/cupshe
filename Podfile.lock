@@ -4,6 +4,8 @@ PODS:
     - Braintree/Core (= 4.0.1)
     - Braintree/PayPal (= 4.0.1)
     - Braintree/UI (= 4.0.1)
+  - Braintree/Apple-Pay (4.0.1):
+    - Braintree/Core
   - Braintree/Card (4.0.1):
     - Braintree/Core
   - Braintree/Core (4.0.1)
@@ -18,6 +20,7 @@ PODS:
 
 DEPENDENCIES:
   - Braintree (~> 4.0)
+  - Braintree/Apple-Pay
   - Stripe
 
 SPEC CHECKSUMS:

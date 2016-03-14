@@ -397,6 +397,7 @@
 
 /* Begin PBXFileReference section */
 		04ACC4CF69457E55B21C663E /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		0509F75A1C9654CF00AF7C26 /* CUPSHE.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = CUPSHE.entitlements; sourceTree = "<group>"; };
 		050DB3251B839CD4006D05FC /* CachedDataModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CachedDataModule.h; sourceTree = "<group>"; };
 		050DB3261B839CD4006D05FC /* CachedDataModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CachedDataModule.m; sourceTree = "<group>"; };
 		050DB35C1B83F707006D05FC /* GuestCheckoutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GuestCheckoutViewController.h; path = ecommerce/GuestCheckoutViewController.h; sourceTree = SOURCE_ROOT; };
@@ -1889,6 +1890,7 @@
 		0C4B6CAD19325D8D00EFBD27 = {
 			isa = PBXGroup;
 			children = (
+				0509F75A1C9654CF00AF7C26 /* CUPSHE.entitlements */,
 				05700CC91C0AC5BE006F34BA /* PayPalMobile */,
 				052E86FA1BEBE6FC0052044C /* USAePay */,
 				05B845C81BA1130900A54FE1 /* AuthorizeNet */,
@@ -2250,6 +2252,11 @@
 				TargetAttributes = {
 					0C4B6CB519325D8D00EFBD27 = {
 						DevelopmentTeam = 4LW7EC66TK;
+						SystemCapabilities = {
+							com.apple.OMC = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -2835,8 +2842,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = CUPSHE.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Nanjing Huating Trading Co. Ltd. (4LW7EC66TK)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2871,7 +2879,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.twixxies.cupsheapp;
 				PRODUCT_NAME = CUPSHE;
-				PROVISIONING_PROFILE = "fdd2af39-7b03-4f45-9088-27f11cb3b3a8";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -2883,8 +2891,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = CUPSHE.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Nanjing Huating Trading Co. Ltd. (4LW7EC66TK)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2919,7 +2928,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.twixxies.cupsheapp;
 				PRODUCT_NAME = CUPSHE;
-				PROVISIONING_PROFILE = "fdd2af39-7b03-4f45-9088-27f11cb3b3a8";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

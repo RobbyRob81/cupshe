@@ -8,7 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "Config.h"
-@interface CheckoutViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate, UserPaymentMethodDelegate>{
+//ApplePay
+@import PassKit;
+#import "BraintreeApplePay.h"
+@interface CheckoutViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate, UserPaymentMethodDelegate,PKPaymentAuthorizationViewControllerDelegate>{
     IBOutlet UITableView *table;
     
     NSMutableArray *sections;

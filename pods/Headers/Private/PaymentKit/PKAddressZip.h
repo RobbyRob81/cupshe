@@ -1,1 +1,1 @@
-../../../PaymentKit/PaymentKit/PKAddressZip.h
+../../../PaymentKit/paymentkit/PKAddressZip.h

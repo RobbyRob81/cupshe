@@ -17,6 +17,8 @@
 #import "ShippingMethodViewController.h"
 #import "ShippingViewController.h"
 #import "ViewWithData.h"
+
+
 @interface CheckoutViewController ()
 
 @end
@@ -594,7 +596,13 @@
     }
     
     
-    
+    if ([self.config.selected_payment.payment_method isEqualToString:@"apple pay"]){
+        PKPaymentRequest *paymentRequest = [self applepaymentRequest];
+        PKPaymentAuthorizationViewController *vc = [[PKPaymentAuthorizationViewController alloc] initWithPaymentRequest:paymentRequest];
+        vc.delegate = self;
+        [self presentViewController:vc animated:YES completion:nil];
+        return;
+    }
     
     [self calculate_tax];
     NSDecimalNumber *totalp = nil;
@@ -704,7 +712,66 @@
 }
 
 
+- (PKPaymentRequest *)applepaymentRequest {
+    
+    [self calculate_tax];
+    NSDecimalNumber *totalp = nil;
+    if (shipping == nil) totalp = [self.total decimalNumberByAdding:tax];
+    else totalp = [[self.total decimalNumberByAdding:tax] decimalNumberByAdding:shipping] ;
 
+    
+    PKPaymentRequest *paymentRequest = [[PKPaymentRequest alloc] init];
+    paymentRequest.merchantIdentifier = @"merchant.com.twixxies.cupsheapp";
+    paymentRequest.supportedNetworks = @[PKPaymentNetworkAmex, PKPaymentNetworkVisa, PKPaymentNetworkMasterCard];
+    paymentRequest.merchantCapabilities = PKMerchantCapabilityEMV | PKMerchantCapability3DS;
+    //paymentRequest.merchantCapabilities = PKMerchantCapability3DS;
+    
+    paymentRequest.countryCode = self.config.country; // e.g. US
+    paymentRequest.currencyCode = self.config.currency; // e.g. USD
+    paymentRequest.paymentSummaryItems =
+    @[
+      
+      [PKPaymentSummaryItem summaryItemWithLabel:@"CUSHE" amount:totalp]
+      ];
+    return paymentRequest;
+}
+
+
+- (void)paymentAuthorizationViewController:(PKPaymentAuthorizationViewController *)controller
+                       didAuthorizePayment:(PKPayment *)payment
+                                completion:(void (^)(PKPaymentAuthorizationStatus))completion {
+    
+    // Example: Tokenize the Apple Pay payment
+     NSString *ct = self.config.selected_payment.appmethod.api_token;
+    if (self.config.selected_payment.appmethod.islive == 0) ct = self.config.selected_payment.appmethod.sandbox_api_token;
+    
+    BTAPIClient *braintreeClient = [[BTAPIClient alloc] initWithAuthorization:ct];
+    
+    BTApplePayClient *applePayClient = [[BTApplePayClient alloc]
+                                        initWithAPIClient:braintreeClient];
+    [applePayClient tokenizeApplePayPayment:payment
+                                 completion:^(BTApplePayCardNonce *tokenizedApplePayPayment,
+                                              NSError *error) {
+                                     if (tokenizedApplePayPayment) {
+                                         // On success, send nonce to your server for processing.
+                                         // If applicable, address information is accessible in `payment`.
+                                         NSLog(@"nonce = %@", tokenizedApplePayPayment.nonce);
+                                         
+                                         // Then indicate success or failure via the completion callback, e.g.
+                                         completion(PKPaymentAuthorizationStatusSuccess);
+                                     } else {
+                                         // Tokenization failed. Check `error` for the cause of the failure.
+                                         NSLog(@"%@", error);
+                                         // Indicate failure via the completion callback:
+                                         completion(PKPaymentAuthorizationStatusFailure);
+                                     }
+                                 }];
+}
+
+// Be sure to implement -paymentAuthorizationViewControllerDidFinish:
+- (void)paymentAuthorizationViewControllerDidFinish:(PKPaymentAuthorizationViewController *)controller {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 
 

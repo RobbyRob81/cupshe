@@ -3,7 +3,7 @@
 
 
 pod 'Stripe'
-pod 'Braintree'
+pod 'Braintree', '~> 4.0'
 
 
 

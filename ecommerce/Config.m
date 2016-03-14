@@ -33,7 +33,7 @@
         //self.APP_UUID = @"DDA";
         
         
-        self.app_version = @"1";
+        self.app_version = @"-1";
         
         self.API_ROOT = @"https://www.twixxies.com/";
         self.API_PROMOTION = @"ecommerce/promotions";

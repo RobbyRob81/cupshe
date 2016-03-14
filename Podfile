@@ -4,7 +4,7 @@
 
 pod 'Stripe'
 pod 'Braintree', '~> 4.0'
-
+pod 'Braintree/Apple-Pay'
 
 
 

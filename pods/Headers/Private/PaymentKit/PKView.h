@@ -1,1 +1,1 @@
-../../../PaymentKit/PaymentKit/PKView.h
+../../../PaymentKit/paymentkit/PKView.h

@@ -1,1 +1,1 @@
-../../../PaymentKit/PaymentKit/PKCardType.h
+../../../PaymentKit/paymentkit/PKCardType.h
